@@ -5,6 +5,8 @@ __version__ = '0.0.1'
 # baseline requirements that the core functionality requires
 install_requires = [
     'django==1.4',
+    'slumber==0.4.2',
+    'jsonfield==0.9'
 ]
 
 # in case additional setup needs to be done on different versions of python

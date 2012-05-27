@@ -1,39 +1,53 @@
+from collections import namedtuple
 from django.db import models
 from jsonfield import JSONField
 
 def make_and_insert_card(name):
     from cube_viewer import get_json_card_content
-    return Card(**get_json_card_content(name))
+    fetched_card = Card(**get_json_card_content(name))
+    fetched_card.save()
+    return fetched_card
+
+ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 
 class Card(models.Model):
     """
     A single card, cubes can (should) have many cards
     """
     name = models.CharField(max_length=200)
-    mana_cost = models.CharField(max_length=200)
+    mana_cost = models.CharField(max_length=200, null=True)
     converted_mana_cost = models.CharField(max_length=200)
     types = models.CharField(max_length=200)
-    subtypes = models.CharField(max_length=200)
-    text = models.CharField(max_length=200)
-    flavor_text = models.CharField(max_length=200)
-    flavor_text_attribution = models.CharField(max_length=200)
-    color_indicator = models.CharField(max_length=200)
-    watermark = models.CharField(max_length=200)
-    power = models.CharField(max_length=200)
-    toughness = models.CharField(max_length=200)
-    loyalty = models.CharField(max_length=200)
-    expansion = models.CharField(max_length=200)
-    rarity = models.CharField(max_length=200)
-    number = models.CharField(max_length=200)
-    artist = models.CharField(max_length=200)
+    subtypes = models.CharField(max_length=200, null=True)
+    text = models.CharField(max_length=200, null=True)
+    color_indicator = models.CharField(max_length=200, null=True)
+    watermark = models.CharField(max_length=200, null=True)
+    power = models.CharField(max_length=200, null=True)
+    toughness = models.CharField(max_length=200, null=True)
+    loyalty = models.CharField(max_length=200, null=True)
     gatherer_url = models.CharField(max_length=200)
     versions = JSONField()
-    rulings = models.CharField(max_length=200)
 
     @property
-    def color_identity(self):
-        # this obviously doesn't work, but the stub is here
-        return 'Red'
+    def gatherer_ids(self):
+        return self.versions.keys()
+
+    @property
+    def expansions(self):
+        """
+        :return: expansions by earliest to latest ("latest" as defined by
+            highest "id"). provided as ExpansionTuple(name, rarity)
+        :rtype: list
+        """
+        return [
+            ExpansionTuple(version_dict['expansion'], version_dict['rarity'])
+            for id, version_dict in iter(sorted(self.versions.items(),
+                                                # explicit into cast to avoid
+                                                # lexical sorting
+                                                key=lambda x: int(x[0])))
+        ]
+
+
 
 
 class Cube(models.Model):

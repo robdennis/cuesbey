@@ -6,7 +6,11 @@ def get_json_card_content(name):
     INSTALLATION on localhost:3000
     """
     #Todo: the tutor thread needs to be started alongside cuesby
-    
+
+    # since we are searching by name, we'll get specific formats mapping the
+    # gatherer id number with the expansion information associated with that
+    # card. As a result, concepts like artist, flavor text, don't have meaning
+    # as a result
     comprehensive = dict.fromkeys([
         'name',
         'mana_cost',
@@ -14,24 +18,20 @@ def get_json_card_content(name):
         'types',
         'subtypes',
         'text',
-        'flavor_text',
-        'flavor_text_attribution',
         'color_indicator',
-        'watermark',
         'power',
         'toughness',
         'loyalty',
-        'expansion',
-        'rarity',
-        'number',
-        'artist',
         'gatherer_url',
         'versions',
-        'rulings',
     ])
 
     api = slumber.API('http://localhost:3000')
     actual = api.card(name).get()
-    comprehensive.update(actual)
+
+    for act_key, act_val in actual.iteritems():
+        # limit what's returned to a whitelist of the above
+        if act_key in comprehensive:
+            comprehensive[act_key] = act_val
 
     return comprehensive

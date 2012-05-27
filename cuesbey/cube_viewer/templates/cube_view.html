@@ -1,0 +1,8 @@
+
+{% for cube in cubes %}
+    Cube: {{ cube.id }}<br>
+    cards:<br>
+    {% for card in cube.cards.all %}
+        card: {{ card.name }}<br>
+    {% endfor %}
+{% endfor %}

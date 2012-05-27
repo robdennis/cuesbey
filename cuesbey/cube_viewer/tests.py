@@ -21,3 +21,10 @@ class SimpleTest(TestCase):
             self.assertIsInstance(fetched_card, Card)
             self.assertEqual(fetched_card.expansions[-1].name, expansion)
             self.assertIn(fetched_card, Card.objects.all())
+
+    def test_handle_bad_name(self):
+
+        for name in ('Lanowar Elf',
+                     'Llanowar Elfs',
+                     'Llan O\' War Elves'):
+                make_and_insert_card(name)

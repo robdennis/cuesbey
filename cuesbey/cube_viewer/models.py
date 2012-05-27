@@ -4,7 +4,11 @@ from jsonfield import JSONField
 
 def make_and_insert_card(name):
     from cube_viewer import get_json_card_content
-    fetched_card = Card(**get_json_card_content(name))
+    card_content = get_json_card_content(name)
+    # this may need to be bubbling an exception instead
+    if card_content is None:
+        return None
+    fetched_card = Card(**card_content)
     fetched_card.save()
     return fetched_card
 

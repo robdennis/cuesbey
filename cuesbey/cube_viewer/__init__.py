@@ -1,4 +1,5 @@
 import slumber
+from slumber.exceptions import HttpClientError
 
 def get_json_card_content(name):
     """
@@ -27,7 +28,12 @@ def get_json_card_content(name):
     ])
 
     api = slumber.API('http://localhost:3000')
-    actual = api.card(name).get()
+    try:
+        actual = api.card(name).get()
+    except HttpClientError as e:
+        if e.response.status_code == 404:
+            return None
+
 
     for act_key, act_val in actual.iteritems():
         # limit what's returned to a whitelist of the above

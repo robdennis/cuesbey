@@ -1,8 +1,28 @@
+{% extends "base.html" %}
 
-{% for cube in cubes %}
-    Cube: {{ cube.id }}<br>
-    cards:<br>
-    {% for card in cube.cards.all %}
-        card: {{ card.name }}<br>
+{% block extra_head %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#cubeview").accordion();
+    });
+</script>
+{% endblock %}
+
+{% block body %}
+<div id=cubeview>
+    {% for cube in cubes %}
+    <h3>Cube: {{ cube.id }}</h3>
+    <div>
+        <ul>
+            {% for card in cube.cards.all %}
+            <li>card: {{ card.name }}</li>
+            {% empty %}
+            <li>No cards</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% empty %}
+    <h3>No Cubes</h3>
     {% endfor %}
-{% endfor %}
+</div>
+{% endblock %}

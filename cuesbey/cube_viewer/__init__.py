@@ -1,3 +1,4 @@
+import logging
 import slumber
 from slumber.exceptions import HttpClientError
 
@@ -28,12 +29,15 @@ def get_json_card_content(name):
     ])
 
     api = slumber.API('http://localhost:3000')
+    name = name.strip()
     try:
         actual = api.card(name).get()
     except HttpClientError as e:
         if e.response.status_code == 404:
             return None
-
+        else:
+            logging.exception('problem with cardname: %s', name)
+            raise
 
     for act_key, act_val in actual.iteritems():
         # limit what's returned to a whitelist of the above

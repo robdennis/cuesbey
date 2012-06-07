@@ -2,15 +2,25 @@ from collections import namedtuple
 from django.db import models
 from jsonfield import JSONField
 
+from cube_viewer import get_json_card_content
+
 def make_and_insert_card(name):
-    from cube_viewer import get_json_card_content
-    card_content = get_json_card_content(name)
-    # this may need to be bubbling an exception instead
-    if card_content is None:
-        return None
-    fetched_card = Card(**card_content)
-    fetched_card.save()
-    return fetched_card
+    name = name.strip()
+
+    try:
+        fetched_card = Card.objects.get(pk=name)
+        return fetched_card
+    except Card.DoesNotExist:
+
+        card_content = get_json_card_content(name)
+        # this may need to be bubbling an exception instead
+        if card_content is None:
+            return None
+
+        fetched_card = Card(**card_content)
+        fetched_card.save()
+        return fetched_card
+
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 
@@ -18,7 +28,7 @@ class Card(models.Model):
     """
     A single card, cubes can (should) have many cards
     """
-    name = models.CharField(max_length=200)
+    name = models.CharField(primary_key=True, max_length=200)
     mana_cost = models.CharField(max_length=200, null=True)
     converted_mana_cost = models.CharField(max_length=200)
     types = models.CharField(max_length=200)

@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.utils import unittest
 from models import Card, make_and_insert_card
 
 class SimpleTest(TestCase):
@@ -20,4 +21,16 @@ class SimpleTest(TestCase):
         for name in ('Lanowar Elf',
                      'Llanowar Elfs',
                      'Llan O\' War Elves'):
-                make_and_insert_card(name)
+            self.assertIsNone(make_and_insert_card(name))
+
+    @unittest.expectedFailure
+    def test_unicode_in_weird_spots(self):
+        # weird unicode apostrophes
+        for name in (u'Moment\u2019s Peace',):
+            self.assertEqual(make_and_insert_card(name).name, name)
+
+    def test_handle_apostrophe_names(self):
+
+        for name in ("Moment's Peace",
+                     "Sensei's Divining Top"):
+            self.assertEqual(make_and_insert_card(name).name, name)

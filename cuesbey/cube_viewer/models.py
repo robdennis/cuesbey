@@ -1,11 +1,13 @@
 from collections import namedtuple
+
 from django.db import models
 from jsonfield import JSONField
+from unidecode import unidecode
 
 from cube_viewer import get_json_card_content
 
 def make_and_insert_card(name):
-    name = name.strip()
+    name = _clean_cardname(name)
 
     try:
         fetched_card = Card.objects.get(pk=name)
@@ -21,6 +23,12 @@ def make_and_insert_card(name):
         fetched_card.save()
         return fetched_card
 
+def _clean_cardname(name):
+    """
+    :param name: the card name as unicode
+    :return: the ascii representation as a str
+    """
+    return unidecode(name).strip()
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 

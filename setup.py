@@ -7,6 +7,7 @@ install_requires = [
     'django==1.4',
     'slumber==0.4.2',
     'jsonfield==0.9',
+    'unidecode'
 ]
 
 # in case additional setup needs to be done on different versions of python

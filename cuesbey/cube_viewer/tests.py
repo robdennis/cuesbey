@@ -1,5 +1,5 @@
+# encoding: utf-8
 from django.test import TestCase
-from django.utils import unittest
 from models import Card, make_and_insert_card
 
 class SimpleTest(TestCase):
@@ -23,11 +23,13 @@ class SimpleTest(TestCase):
                      'Llan O\' War Elves'):
             self.assertIsNone(make_and_insert_card(name))
 
-    @unittest.expectedFailure
     def test_unicode_in_weird_spots(self):
         # weird unicode apostrophes
-        for name in (u'Moment\u2019s Peace',):
-            self.assertEqual(make_and_insert_card(name).name, name)
+        for name, fixed_name in ((u'Moment\u2019s Peace', "Moment's Peace"),
+                                 (u'Æther Adept', u'Æther Adept'),
+                                 (u"Gideon’s Lawkeeper", "Gideon's Lawkeeper"),
+                                 (u"Night’s Whisper", "Night's Whisper")):
+            self.assertEqual(make_and_insert_card(name).name, fixed_name)
 
     def test_handle_apostrophe_names(self):
 

@@ -134,16 +134,21 @@ LOGGING = {
     },
 
     'handlers': {
-        'file':{
+        'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': 'lookout.get',
-        }
+            'formatter': 'normal'
+        }, 'console': {
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'normal'
+        },
     },
 
     'loggers': {
-        'root': {
-            'handlers': ['file'],
+        'cube_viewer': {
+            'handlers': ['console'],
             'propagate': True,
             'level': 'DEBUG',
         }

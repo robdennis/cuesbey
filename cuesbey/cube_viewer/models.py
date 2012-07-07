@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from collections import namedtuple
 
 from django.db import models
@@ -5,30 +6,43 @@ from jsonfield import JSONField
 from unidecode import unidecode
 
 from cube_viewer import get_json_card_content
+from cube_viewer.autolog import log
 
 def make_and_insert_card(name):
-    name = _clean_cardname(name)
+    cleaned_name = _clean_cardname(name)
 
     try:
-        fetched_card = Card.objects.get(pk=name)
+        fetched_card = Card.objects.get(pk=cleaned_name)
+        log.debug('successfully fetched %s', fetched_card)
         return fetched_card
     except Card.DoesNotExist:
-
-        card_content = get_json_card_content(name)
+        card_content = get_json_card_content(cleaned_name)
+        log.info('got card content: %s', card_content)
         # this may need to be bubbling an exception instead
         if card_content is None:
             return None
 
-        fetched_card = Card(**card_content)
-        fetched_card.save()
-        return fetched_card
+        try:
+            # we'll try to refetch in case we were able to clean a good name
+            refetched_card = Card.objects.get(pk=card_content['name'])
+        except Card.DoesNotExist:
+            log.debug("creating a new card")
+            created_card= Card(**card_content)
+            created_card.save()
+            log.debug("saved created")
+            return created_card
+        else:
+            log.debug("successfully refetched: %s", refetched_card)
+            return refetched_card
 
 def _clean_cardname(name):
     """
     :param name: the card name as unicode
     :return: the ascii representation as a str
     """
-    return unidecode(name).strip()
+    cleaned_name = unidecode(name).strip()
+    log.debug('%r cleaned as %r', name, cleaned_name)
+    return cleaned_name
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 

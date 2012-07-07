@@ -1,3 +1,4 @@
+#encoding: utf-8
 import sys
 import os
 from django.core.management.base import BaseCommand, CommandError
@@ -28,6 +29,7 @@ class Command(BaseCommand):
                         sys.stderr.write('no card found for {}\n'.format(card_name))
                     else:
                         cards.append(card)
+                #FIXME: django complains if there are too many cards
                 cube.cards = cards
 
             cube.save()

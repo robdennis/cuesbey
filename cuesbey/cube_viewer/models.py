@@ -1,3 +1,4 @@
+# encoding: utf-8
 from __future__ import absolute_import
 from collections import namedtuple
 
@@ -16,7 +17,11 @@ def make_and_insert_card(name):
         log.debug('successfully fetched %s', fetched_card)
         return fetched_card
     except Card.DoesNotExist:
-        card_content = get_json_card_content(cleaned_name)
+        try:
+            card_content = get_json_card_content(cleaned_name)
+        except:
+            card_content = None
+
         log.info('got card content: %s', card_content)
         # this may need to be bubbling an exception instead
         if card_content is None:
@@ -40,8 +45,10 @@ def _clean_cardname(name):
     :param name: the card name as unicode
     :return: the ascii representation as a str
     """
+    if isinstance(name, basestring):
+        name = name.decode('utf-8')
     cleaned_name = unidecode(name).strip()
-    log.debug('%r cleaned as %r', name, cleaned_name)
+    log.debug('%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
     return cleaned_name
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])

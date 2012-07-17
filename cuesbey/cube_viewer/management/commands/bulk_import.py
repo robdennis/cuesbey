@@ -1,6 +1,7 @@
 #encoding: utf-8
 import sys
 import os
+import uuid
 from django.core.management.base import BaseCommand, CommandError
 from cube_viewer.models import Cube, make_and_insert_card
 
@@ -12,12 +13,17 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         for fpath in args:
-            cube = Cube()
-            cube.save()
+
             if not os.path.exists(fpath):
-                cube.delete()
                 raise CommandError('{} does not exist'.format(fpath))
 
+            hash = uuid.uuid5(uuid.UUID('123456781234567812345678123AA1AA'), fpath)
+            try:
+                cube = Cube.objects.get(name=hash)
+            except Cube.DoesNotExist:
+                cube = Cube()
+                cube.save()
+                cube.name = hash
 
             with open(fpath, 'r') as cube_file:
                 cards = []
@@ -30,6 +36,6 @@ class Command(BaseCommand):
                     else:
                         cards.append(card)
                 #FIXME: django complains if there are too many cards
-                cube.cards = cards
+                cube.cards = cards[:500]
 
             cube.save()

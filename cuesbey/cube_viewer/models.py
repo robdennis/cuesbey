@@ -99,6 +99,7 @@ class Cube(models.Model):
     """
     cards = models.ManyToManyField("Card")
     owners = models.ManyToManyField("User")
+    name = models.CharField(max_length=200, unique=True)
 
 
 class User(models.Model):

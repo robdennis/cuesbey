@@ -15,7 +15,7 @@
     <div>
         <ul>
             {% for card in cube.cards.all %}
-            <li>card: {{ card.name }}</li>
+                <li>{{ card.name }}</li>
             {% empty %}
             <li>No cards</li>
             {% endfor %}

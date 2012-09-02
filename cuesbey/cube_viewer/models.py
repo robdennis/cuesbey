@@ -62,7 +62,7 @@ class Card(models.Model):
     converted_mana_cost = models.CharField(max_length=200)
     types = models.CharField(max_length=200)
     subtypes = models.CharField(max_length=200, null=True)
-    text = models.CharField(max_length=200, null=True)
+    text = models.CharField(max_length=1024*8, null=True)
     color_indicator = models.CharField(max_length=200, null=True)
     watermark = models.CharField(max_length=200, null=True)
     power = models.CharField(max_length=200, null=True)

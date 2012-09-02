@@ -7,7 +7,8 @@ install_requires = [
     'django==1.4',
     'slumber==0.4.2',
     'jsonfield==0.9',
-    'unidecode'
+    'unidecode',
+    'psycopg2==2.4.1'
 ]
 
 # in case additional setup needs to be done on different versions of python

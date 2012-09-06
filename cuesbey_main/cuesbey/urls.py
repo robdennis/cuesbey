@@ -1,9 +1,9 @@
-import cuesbey.settings as settings
+import cuesbey_main.cuesbey.settings as settings
 from django.conf.urls import patterns, url, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from cube_viewer.views import CubeView, details
+from cuesbey_main.cube_viewer.views import CubeView, details
 
 admin.autodiscover()
 

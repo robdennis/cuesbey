@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from cube_viewer.autolog import log
+from cuesbey_main.cube_viewer.autolog import log
 import slumber
 from slumber.exceptions import HttpClientError
 

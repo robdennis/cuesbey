@@ -3,7 +3,7 @@ import sys
 import os
 import uuid
 from django.core.management.base import BaseCommand, CommandError
-from cube_viewer.models import Cube, make_and_insert_card
+from cuesbey_main.cube_viewer.models import Cube, make_and_insert_card, CardFetchingError
 
 class Command(BaseCommand):
     args = "[FILENAME]+"
@@ -26,15 +26,13 @@ class Command(BaseCommand):
                 cube.name = hash
 
             with open(fpath, 'r') as cube_file:
-                cards = []
                 for card_name in cube_file:
                     if not card_name:
                         continue
-                    card = make_and_insert_card(card_name)
-                    if not card:
-                        sys.stderr.write('no card found for {}\n'.format(card_name))
-                    else:
-                        cards.append(card)
-                cube.cards = cards
+                    try:
+                        cube.add_card_by_name(card_name)
+                    except CardFetchingError:
+                        continue
+
 
             cube.save()

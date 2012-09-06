@@ -6,8 +6,14 @@ from django.db import models
 from jsonfield import JSONField
 from unidecode import unidecode
 
-from cube_viewer import get_json_card_content
-from cube_viewer.autolog import log
+from cuesbey_main.cube_viewer import get_json_card_content
+from cuesbey_main.cube_viewer.autolog import log
+
+
+class CardFetchingError(Exception):
+    """
+    Unknown error fetching a particular card
+    """
 
 def make_and_insert_card(name):
     cleaned_name = _clean_cardname(name)
@@ -25,7 +31,10 @@ def make_and_insert_card(name):
         log.info('got card content: %s', card_content)
         # this may need to be bubbling an exception instead
         if card_content is None:
-            return None
+            raise CardFetchingError(u'unable to fetch a card with name: {!r}{}'.format(
+                name,
+                u'' if name == cleaned_name else u', cleaned as: {!r}'.format(cleaned_name))
+            )
 
         try:
             # we'll try to refetch in case we were able to clean a good name
@@ -45,10 +54,10 @@ def _clean_cardname(name):
     :param name: the card name as unicode
     :return: the ascii representation as a str
     """
-    if isinstance(name, basestring):
+    if isinstance(name, str):
         name = name.decode('utf-8')
     cleaned_name = unidecode(name).strip()
-    log.debug('%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
+    log.debug(u'%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
     return cleaned_name
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
@@ -100,6 +109,30 @@ class Cube(models.Model):
     cards = models.ManyToManyField("Card")
     owners = models.ManyToManyField("User")
     name = models.CharField(max_length=200, unique=True)
+
+    def sort_by(self, sort_spec):
+        """
+        :var sort_spec: the sort specification to use in yielding this cube's
+            cards
+        :return: list of query sets that support displaying a sorted cube
+        """
+
+        return self.cards
+
+    def add_card_by_name(self, card_name):
+        """
+
+        """
+
+        self.cards.add(make_and_insert_card(card_name))
+
+
+    def add_cards_by_name(self, card_names):
+        """
+
+        """
+        for card_name in card_names:
+            self.add_card_by_name(card_name)
 
 
 class User(models.Model):

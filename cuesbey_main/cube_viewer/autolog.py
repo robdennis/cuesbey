@@ -1,4 +1,8 @@
 from __future__ import absolute_import
+
+from logging_unterpolation import patch_logging
+patch_logging()
+
 import logging
 import inspect
 

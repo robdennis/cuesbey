@@ -8,7 +8,10 @@ install_requires = [
     'slumber==0.4.2',
     'jsonfield==0.9',
     'unidecode',
-    'psycopg2==2.4.1'
+    'psycopg2==2.4.1',
+    'django-orm-extensions',
+    'logging_unterpolation',
+    'django-bitfield,'
 ]
 
 # in case additional setup needs to be done on different versions of python

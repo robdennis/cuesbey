@@ -147,7 +147,7 @@ LOGGING = {
     },
 
     'loggers': {
-        'cube_viewer': {
+        'cuesbey_main': {
             'handlers': ['console'],
             'propagate': True,
             'level': 'DEBUG',

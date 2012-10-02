@@ -1,14 +1,16 @@
 # encoding: utf-8
-from __future__ import absolute_import
 from collections import namedtuple
 
 from django.db import models
 from jsonfield import JSONField
 from unidecode import unidecode
 
+from django_orm.postgresql.fields.arrays import ArrayField
+from django_orm.postgresql.manager import Manager
+from bitfield import BitField
+
 from cuesbey_main.cube_viewer import get_json_card_content
 from cuesbey_main.cube_viewer.autolog import log
-
 
 class CardFetchingError(Exception):
     """
@@ -62,23 +64,37 @@ def _clean_cardname(name):
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 
+color_bitfield_keys = (
+    'white', 'blue', 'black', 'red', 'blue'
+    )
+
 class Card(models.Model):
     """
     A single card, cubes can (should) have many cards
     """
     name = models.CharField(primary_key=True, max_length=200)
-    mana_cost = models.CharField(max_length=200, null=True)
-    converted_mana_cost = models.CharField(max_length=200)
-    types = models.CharField(max_length=200)
-    subtypes = models.CharField(max_length=200, null=True)
+    mana_cost = ArrayField(dbtype='text', null=True)
+    converted_mana_cost = models.IntegerField()
+    types = ArrayField(dbtype='text')
+    subtypes = ArrayField(dbtype='text', null=True)
     text = models.CharField(max_length=1024*8, null=True)
-    color_indicator = models.CharField(max_length=200, null=True)
+    color_indicator = ArrayField(dbtype='text', null=True)
     watermark = models.CharField(max_length=200, null=True)
     power = models.CharField(max_length=200, null=True)
     toughness = models.CharField(max_length=200, null=True)
-    loyalty = models.CharField(max_length=200, null=True)
+    loyalty = models.IntegerField(null=True)
     gatherer_url = models.CharField(max_length=200)
+    _standard_mana_bitfield = BitField(flags=color_bitfield_keys)
+    _phyrexian_mana_bitfield = BitField(flags=color_bitfield_keys)
+    _mono_hybrid_mana_bitfield = BitField(flags=color_bitfield_keys)
+    _hybrid_mana_bitfield = BitField(flags=(
+        'azorius', 'orzhov', 'boros', 'selesnya', 'izzet',
+        'rakdos', 'golgari', 'dmir', 'simic', 'gruul'
+        ))
     versions = JSONField()
+    objects = models.Manager()
+    # this is the django-orm-extensions manager for array-specific queries
+    manager = Manager()
 
     @property
     def gatherer_ids(self):
@@ -99,7 +115,8 @@ class Card(models.Model):
                                                 key=lambda x: int(x[0])))
         ]
 
-
+    def __repr__(self):
+        return '<Card: {!r}>'.format(self.name)
 
 
 class Cube(models.Model):
@@ -109,15 +126,6 @@ class Cube(models.Model):
     cards = models.ManyToManyField("Card")
     owners = models.ManyToManyField("User")
     name = models.CharField(max_length=200, unique=True)
-
-    def sort_by(self, sort_spec):
-        """
-        :var sort_spec: the sort specification to use in yielding this cube's
-            cards
-        :return: list of query sets that support displaying a sorted cube
-        """
-
-        return self.cards
 
     def add_card_by_name(self, card_name):
         """

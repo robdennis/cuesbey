@@ -65,7 +65,7 @@ def _clean_cardname(name):
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 
 color_bitfield_keys = (
-    'white', 'blue', 'black', 'red', 'blue'
+    'white', 'blue', 'black', 'red', 'green'
     )
 
 class Card(models.Model):

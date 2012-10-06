@@ -75,6 +75,35 @@ class BaseCardsTestCase(TestCase):
 
 
 class ImportHelpersTest(BaseCardsTestCase):
+    def assertBitfieldMatches(self, name, color_sets):
+
+        bitfield_names=[
+            '_standard_mana_bitfield',
+            '_mono_hybrid_mana_bitfield',
+            '_phyrexian_mana_bitfield',
+            '_hybrid_mana_bitfield',
+        ]
+
+        mana_cost = make_and_insert_card(name).mana_cost
+
+        expected_bitfield = {}
+
+        for bitfield_name, colors in zip(bitfield_names, color_sets):
+            bitfield_type = getattr(Card, bitfield_name)
+            bitfield = 0
+            for color in colors:
+                bitfield |= getattr(bitfield_type, color.lower())
+            expected_bitfield[bitfield_name] = bitfield
+
+        actual_bitfield = get_mana_symbol_bitfields(mana_cost)
+
+        for idx, bitfield_name in enumerate(bitfield_names):
+            self.assertEqual(actual_bitfield[bitfield_name],
+                             expected_bitfield[bitfield_name],
+                             "card {} is not exactly the colors: {} for type {} ({})".format(name, color_sets[idx], bitfield_name, actual_bitfield[bitfield_name])
+            )
+
+
 
     def test_parse_mana_cost(self):
         self.assertEqual(['5'], parse_mana_cost("{5}"))
@@ -82,6 +111,30 @@ class ImportHelpersTest(BaseCardsTestCase):
         self.assertEqual(['3', 'U/R', 'B'], make_and_insert_card('Slave of Bolas').mana_cost)
         self.assertEqual(['3', 'U/P'], make_and_insert_card('Phyrexian Metamorph').mana_cost)
 
+    def test_mana_bitfields(self):
+        self.assertBitfieldMatches('Batterskull', [
+            [], [], [], []
+        ])
+
+        self.assertBitfieldMatches('Slave of Bolas', [
+            ['Black'], [], [], ['Izzet']
+        ])
+
+        self.assertBitfieldMatches('Tattermunge Maniac', [
+            [], [], [], ['Gruul']
+        ])
+
+        self.assertBitfieldMatches('Sliver Queen', [
+            ['White', 'Blue', 'Black', 'Red', 'Green'], [], [], []
+        ])
+
+        self.assertBitfieldMatches('Spectral Procession', [
+            [], ['White'], [], []
+        ])
+
+        self.assertBitfieldMatches('Phyrexian Metamorph', [
+            [], [], ['Blue'], []
+        ])
 
 class CubeSortingTest(BaseCardsTestCase):
     maxDiff = None

@@ -34,23 +34,30 @@ def parse_mana_cost(mana_cost):
 
 
 def get_mana_symbol_bitfields(parsed_mana_cost):
-    from cuesbey_main.cube_viewer.models import Card, color_bitfield_keys
+    from cuesbey_main.cube_viewer.models import Card
 
-    def _get_color_flags(bitfield, template='{}', keys=color_bitfield_keys, flag_name_map=None):
+    def _get_color_flags(bitfield, template='{}', keys=None, flag_name_map=None):
+
+        if keys is None:
+            keys = color_mappings.keys()
 
         if flag_name_map is None:
-            flag_name_map = {c:c for c in keys}
+            flag_name_map = color_mappings
 
         starting_flag = 0
         for key in keys:
+#            log.debug('checking for {} in {}', template.format(key), parsed_mana_cost)
             if template.format(key) in parsed_mana_cost:
-                starting_flag |= getattr(bitfield, flag_name_map[key])
+                value = flag_name_map[key].lower()
+#                log.debug('found for: {}', value)
+                starting_flag |= getattr(bitfield, value)
+#                log.debug('flag: {}', starting_flag)
 
         return starting_flag
 
     return dict(
         _standard_mana_bitfield = _get_color_flags(Card._standard_mana_bitfield),
-        _mono_hybrid_mana_bitfield = _get_color_flags(Card._mono_hybrid_mana_bitfield, '{}/2'),
+        _mono_hybrid_mana_bitfield = _get_color_flags(Card._mono_hybrid_mana_bitfield, '2/{}'),
         _phyrexian_mana_bitfield = _get_color_flags(Card._phyrexian_mana_bitfield, '{}/P'),
         _hybrid_mana_bitfield = _get_color_flags(
             Card._hybrid_mana_bitfield,

@@ -1,7 +1,7 @@
 from django.db.models import Q
 
 from cuesbey_main.cube_viewer import hybrid_mappings, color_mappings
-from cuesbey_main.cube_viewer.models import Card
+from cuesbey_main.cube_viewer.models import Card, color_bitfield_keys
 
 from cuesbey_main.cube_viewer.autolog import log
 
@@ -49,8 +49,19 @@ class CubeSorter(object):
 
         if pretend:
             return []
+        log.debug("looking for colorless cards")
+        cube_cards = Card.objects.filter(cube=self.cube)
+        not_mc_cards = cube_cards.exclude(name__in=multicolor_cards.values('name'))
+        log.debug("not multicolor: {}", not_mc_cards)
+        colorless_cards = not_mc_cards.filter(Q(mana_cost__contains="Land")|
+                                              (Q(_standard_mana_bitfield=0)&
+                                               Q(_hybrid_mana_bitfield=0)&
+                                               Q(_mono_hybrid_mana_bitfield=0)&
+                                               Q(_phyrexian_mana_bitfield=0))
+        )
+        log.debug("colorless: {}", colorless_cards)
+        return colorless_cards
 
-        raise NotImplementedError
 
     def _get_multicolor_sections(self, multicolor_cards, pretend=False):
 
@@ -61,7 +72,34 @@ class CubeSorter(object):
         if pretend:
             return []
 
-        raise NotImplementedError
+        cube_cards = Card.objects.filter(cube=self.cube)
+        log.debug('all cube cards: {}', cube_cards)
+        # this is going to leverage the assumptions that magic has not
+        # yet combined one color of a "special" mana with a different color
+        # of mana, except in the case of multicolor hybrid, which is being
+        # handled
+        qs = cube_cards.filter(_mono_hybrid_mana_bitfield=0,
+                               _phyrexian_mana_bitfield=0)
+
+        log.debug('cards that don\'t have special stuff: {}', qs)
+
+        for color_name in color_bitfield_keys:
+            color_value = int(getattr(Card._standard_mana_bitfield,
+                                      color_name))
+            # checking against the int values of these flags checks for EXACTLY
+            # those values, e.g. not green AND black
+            qs = qs.exclude(_standard_mana_bitfield=color_value)
+            log.debug('cards after removing {}: {}', color_name, qs)
+        qs = qs.exclude(_standard_mana_bitfield=0)
+
+        hybrid_cards = cube_cards.exclude(_hybrid_mana_bitfield=0)
+
+        log.debug('non-hybrid multicolor cards left: {}', qs)
+
+        return cube_cards.filter(Q(name__in=hybrid_cards.values("name"))|
+                                 Q(name__in=qs.values("name"))).distinct()
+
+
 
     def _get_monocolor_cards(self, multicolor_cards, colorless_cards, pretend):
         """

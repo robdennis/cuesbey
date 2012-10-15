@@ -1,4 +1,7 @@
+import itertools
+from itertools import chain, combinations
 from django.db.models import Q
+from django.db.models.query import QuerySet
 
 from cuesbey_main.cube_viewer import hybrid_mappings, color_mappings
 from cuesbey_main.cube_viewer.models import Card, color_bitfield_keys
@@ -65,12 +68,58 @@ class CubeSorter(object):
 
     def _get_multicolor_sections(self, multicolor_cards, pretend=False):
 
-        return {'Multicolor': multicolor_cards}
+        if not self.sort_spec.get('multicolor_subsections', False):
+            return {'Multicolor': multicolor_cards}
+
+        def _get_qs_for_colors(abbrevs):
+            if pretend:
+                return []
+
+
+            def _get_bf(abs):
+                bf = 0
+                for abbrev in abs:
+                    # FIXME: this is ugly and kind of speaks to the need to more officially tie that together
+                    bf |= getattr(Card._standard_mana_bitfield, color_mappings[abbrev.upper()].lower())
+                return bf
+            # setting the bitfield to int is the analogous to querying for
+            # things that are exactly the colors, not just includes those
+            # colors
+
+            qs = (Q(_standard_mana_bitfield=int(_get_bf(abbrevs)), _hybrid_mana_bitfield=0)|
+                  Q(_hybrid_mana_bitfield=int(_get_bf(abbrevs)), _standard_mana_bitfield=0))
+
+            for sub_abbrevs in chain.from_iterable(combinations(abbrevs, r) for r in range(len(abbrevs)+1)):
+                # this is the "Slave of Bolas" case
+                if len(sub_abbrevs) == 2:
+                    unselected_abbrevs = set(abbrevs) - set(sub_abbrevs)
+                    qs |= Q(_standard_mana_bitfield=int(_get_bf(unselected_abbrevs)),
+                            _hybrid_mana_bitfield=int(_get_bf(sub_abbrevs)))
+
+            return multicolor_cards.filter(qs)
+
+        sym = 'WUBRG'
+        return {
+            'Multicolor': {
+                '/'.join(abbrevs):_get_qs_for_colors(abbrevs)
+                for abbrevs in itertools.chain(
+                    itertools.combinations(sym, 5),
+                    itertools.combinations(sym, 4),
+                    itertools.combinations(sym, 3),
+                    itertools.combinations(sym, 2),
+                )
+            }
+        }
+
+
 
     def _get_multicolor_cards(self, pretend=False):
 
         if pretend:
-            return []
+            if self.sort_spec.get('multicolor_subsections', False):
+                return {}
+            else:
+                return []
 
         cube_cards = Card.objects.filter(cube=self.cube)
         log.debug('all cube cards: {}', cube_cards)

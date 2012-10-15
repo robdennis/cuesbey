@@ -1,6 +1,8 @@
 # encoding: utf-8
+import copy
 import operator
 import collections
+import unittest
 
 from django.test import TestCase
 from cuesbey_main.cube_viewer.models import Card, make_and_insert_card, Cube, CardFetchingError
@@ -9,52 +11,52 @@ from cuesbey_main.cube_viewer import parse_mana_cost, get_mana_symbol_bitfields
 
 from cuesbey_main.cube_viewer.autolog import log
 
-#class SimpleTest(TestCase):
-#    def test_create_cards_given_names(self):
-#
-#        for name, expansion in (('Zealous Conscripts', 'Avacyn Restored'),
-#                                ('Stormbound Geist', 'Dark Ascension'),
-#                                ('Sylvan Library', 'Masters Edition')):
-#
-#            # ensure that the card didn't already exist
-#            self.assertEqual([], list(Card.objects.filter(name=name).all()))
-#            fetched_card = make_and_insert_card(name)
-#            self.assertIsInstance(fetched_card, Card)
-#            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
-#            self.assertIn(fetched_card, Card.objects.all())
-#
-#    def test_handle_bad_name(self):
-#
-#        for name in ('Lanowar Elf',
-#                     'Llanowar Elfs',
-#                     'Llan O\' War Elves'):
-#            with self.assertRaises(CardFetchingError):
-#                make_and_insert_card(name)
-#
-#    def test_unicode_in_weird_spots(self):
-#        # weird unicode apostrophes from copying and pasting a cube list from some random website
-#        for name, fixed_name in ((u'Moment\u2019s Peace', "Moment's Peace"),
-#                                 (u'Æther Adept', u'Æther Adept'),
-#                                 (u"Gideon’s Lawkeeper", "Gideon's Lawkeeper"),
-#                                 (u"Night’s Whisper", "Night's Whisper")):
-#            self.assertEqual(make_and_insert_card(name).name, fixed_name)
-#
-#    def test_handle_apostrophe_names(self):
-#
-#        for name in ("Moment's Peace",
-#                     "Sensei's Divining Top"):
-#            self.assertEqual(make_and_insert_card(name).name, name)
-#
-#    @unittest.expectedFailure
-#    def test_split_cards(self):
-#        for name, expansion in (('Fire//Ice', 'Apocalypse'),
-#                                ('Assault//Battery', 'Invasion'),
-#                                ('Supply//Demand', 'Dissension')):
-#            self.assertEqual([], list(Card.objects.filter(name=name).all()))
-#            fetched_card = make_and_insert_card(name)
-#            self.assertIsInstance(fetched_card, Card)
-#            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
-#            self.assertIn(fetched_card, Card.objects.all())
+class SimpleTest(TestCase):
+    def test_create_cards_given_names(self):
+
+        for name, expansion in (('Zealous Conscripts', 'Avacyn Restored'),
+                                ('Stormbound Geist', 'Dark Ascension'),
+                                ('Sylvan Library', 'Masters Edition')):
+
+            # ensure that the card didn't already exist
+            self.assertEqual([], list(Card.objects.filter(name=name).all()))
+            fetched_card = make_and_insert_card(name)
+            self.assertIsInstance(fetched_card, Card)
+            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
+            self.assertIn(fetched_card, Card.objects.all())
+
+    def test_handle_bad_name(self):
+
+        for name in ('Lanowar Elf',
+                     'Llanowar Elfs',
+                     'Llan O\' War Elves'):
+            with self.assertRaises(CardFetchingError):
+                make_and_insert_card(name)
+
+    def test_unicode_in_weird_spots(self):
+        # weird unicode apostrophes from copying and pasting a cube list from some random website
+        for name, fixed_name in ((u'Moment\u2019s Peace', "Moment's Peace"),
+                                 (u'Æther Adept', u'Æther Adept'),
+                                 (u"Gideon’s Lawkeeper", "Gideon's Lawkeeper"),
+                                 (u"Night’s Whisper", "Night's Whisper")):
+            self.assertEqual(make_and_insert_card(name).name, fixed_name)
+
+    def test_handle_apostrophe_names(self):
+
+        for name in ("Moment's Peace",
+                     "Sensei's Divining Top"):
+            self.assertEqual(make_and_insert_card(name).name, name)
+
+    @unittest.expectedFailure
+    def test_split_cards(self):
+        for name, expansion in (('Fire//Ice', 'Apocalypse'),
+                                ('Assault//Battery', 'Invasion'),
+                                ('Supply//Demand', 'Dissension')):
+            self.assertEqual([], list(Card.objects.filter(name=name).all()))
+            fetched_card = make_and_insert_card(name)
+            self.assertIsInstance(fetched_card, Card)
+            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
+            self.assertIn(fetched_card, Card.objects.all())
 
 
 class BaseCardsTestCase(TestCase):
@@ -122,11 +124,11 @@ class ImportHelpersTest(BaseCardsTestCase):
         ])
 
         self.assertBitfieldMatches('Slave of Bolas', [
-            ['Black'], [], [], ['Izzet']
+            ['Black'], [], [], ['Blue', 'Red']
         ])
 
         self.assertBitfieldMatches('Tattermunge Maniac', [
-            [], [], [], ['Gruul']
+            [], [], [], ['Red', 'Green']
         ])
 
         self.assertBitfieldMatches('Sliver Queen', [
@@ -154,9 +156,36 @@ class ImportHelpersTest(BaseCardsTestCase):
 class CubeSortingTest(BaseCardsTestCase):
     maxDiff = None
 
+    def setUp(self):
+        super(CubeSortingTest, self).setUp()
+
+        self.base_expected = dict(
+            White={
+                '<=1': ['Swords to Plowshares'],
+                '6+': ['Spectral Procession']
+            },
+            Colorless=[
+                'Kessig Wolf Run',
+                'Batterskull',
+                'Crystal Shard',
+                ],
+            Blue={
+                '2': ['Jilt'],
+                '4': ['Phyrexian Metamorph']
+            },
+            Multicolor= [
+                'Tattermunge Maniac',
+                'Slave of Bolas',
+                'Abrupt Decay'
+            ],
+        )
+
+        self.sorter = CubeSorter(self.test_cube)
+
     def create_expected_dictionary(self, expected, sort_spec):
         def update(d, u):
             for k, v in u.iteritems():
+                self.assertEqual(d.__class__, u.__class__)
                 if isinstance(v, collections.Mapping):
                     r = update(d.get(k, {}), v)
                     d[k] = r
@@ -165,12 +194,6 @@ class CubeSortingTest(BaseCardsTestCase):
             return d
 
         return update(self.sorter._get_empty_sort_dict(sort_spec), expected)
-
-    def setUp(self):
-
-        super(CubeSortingTest, self).setUp()
-
-        self.sorter = CubeSorter(self.test_cube)
 
     def _write_card_objects_into_expected(self, expected):
         """
@@ -197,28 +220,21 @@ class CubeSortingTest(BaseCardsTestCase):
 
     def test_no_special_sorting(self):
 
-        expected = dict(
-            White={
-                '<=1': ['Swords to Plowshares'],
-                '6+': ['Spectral Procession']
-            },
-            Colorless=[
-                'Kessig Wolf Run',
-                'Batterskull',
-                'Crystal Shard',
-            ],
-            Blue={
-                '2': ['Jilt'],
-                '4': ['Phyrexian Metamorph']
-            },
-            Multicolor= [
-                'Tattermunge Maniac',
-                'Slave of Bolas',
-                'Abrupt Decay'
-            ],
-        )
+        self.assert_expected_sort({}, self.base_expected)
 
-        self.assert_expected_sort({}, expected)
+    def test_breakout_multicolor_to_subsections_counting_hybrid(self):
+
+        _expected = copy.deepcopy(self.base_expected)
+        _expected['Multicolor'] = {
+            'R/G': ['Tattermunge Maniac'],
+            'U/B/R': ['Slave of Bolas'],
+            'B/G': ['Abrupt Decay']
+        }
+
+        self.assert_expected_sort({
+            'multicolor_subsections': True,
+            }, _expected
+        )
 
     def assert_expected_sort(self, sort_spec, expected):
         """

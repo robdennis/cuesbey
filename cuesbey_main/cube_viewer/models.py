@@ -87,10 +87,7 @@ class Card(models.Model):
     _standard_mana_bitfield = BitField(flags=color_bitfield_keys)
     _phyrexian_mana_bitfield = BitField(flags=color_bitfield_keys)
     _mono_hybrid_mana_bitfield = BitField(flags=color_bitfield_keys)
-    _hybrid_mana_bitfield = BitField(flags=(
-        'azorius', 'orzhov', 'boros', 'selesnya', 'izzet',
-        'rakdos', 'golgari', 'dmir', 'simic', 'gruul'
-        ))
+    _hybrid_mana_bitfield = BitField(flags=color_bitfield_keys)
     versions = JSONField()
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries

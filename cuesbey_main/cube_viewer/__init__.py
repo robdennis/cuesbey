@@ -55,15 +55,25 @@ def get_mana_symbol_bitfields(parsed_mana_cost):
 
         return starting_flag
 
+    def _get_color_flags_from_hybrids():
+        starting_flag = 0
+        for key in hybrid_mappings:
+            if key in parsed_mana_cost:
+                colors = [color_mappings[c].lower() for c in key.split('/')]
+                # this isn't really handling the case where there's
+                # an azorious AND an rakdos hybrid mana in the same card
+                # which does not exist in magic
+                for color in colors:
+                    starting_flag |= getattr(Card._hybrid_mana_bitfield, color)
+
+        return starting_flag
+
+
     return dict(
         _standard_mana_bitfield = _get_color_flags(Card._standard_mana_bitfield),
         _mono_hybrid_mana_bitfield = _get_color_flags(Card._mono_hybrid_mana_bitfield, '2/{}'),
         _phyrexian_mana_bitfield = _get_color_flags(Card._phyrexian_mana_bitfield, '{}/P'),
-        _hybrid_mana_bitfield = _get_color_flags(
-            Card._hybrid_mana_bitfield,
-            keys=hybrid_mappings.keys(),
-            flag_name_map=hybrid_mappings
-        )
+        _hybrid_mana_bitfield = _get_color_flags_from_hybrids()
     )
 
 def get_json_card_content(name):

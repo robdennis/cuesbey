@@ -1,15 +1,9 @@
 # encoding: utf-8
-import copy
-import operator
-import collections
 import unittest
 
 from django.test import TestCase
 from cuesbey_main.cube_viewer.models import Card, make_and_insert_card, Cube, CardFetchingError
-from cuesbey_main.cube_viewer.sorter import CubeSorter
 from cuesbey_main.cube_viewer import parse_mana_cost, get_mana_symbol_bitfields
-
-from cuesbey_main.cube_viewer.autolog import log
 
 class SimpleTest(TestCase):
     def test_create_cards_given_names(self):
@@ -59,13 +53,13 @@ class SimpleTest(TestCase):
             self.assertIn(fetched_card, Card.objects.all())
 
 
-class BaseCardsTestCase(TestCase):
+class CardModelTest(TestCase):
     @classmethod
     def setUpClass(cls):
 
         cls.cards = [make_and_insert_card(name) for name in [
             'Phyrexian Metamorph',
-            'Jilt',
+            'Lingering Souls',
             'Kessig Wolf Run',
             'Tattermunge Maniac',
             'Swords to Plowshares',
@@ -83,7 +77,6 @@ class BaseCardsTestCase(TestCase):
         self.test_cube.cards = self.cards
         self.test_cube.save()
 
-class ImportHelpersTest(BaseCardsTestCase):
     def assertBitfieldMatches(self, name, color_sets):
 
         bitfield_names=[
@@ -152,113 +145,305 @@ class ImportHelpersTest(BaseCardsTestCase):
         self.assertIn('Slave of Bolas', hybrid_card_names)
         self.assertIn('Tattermunge Maniac', hybrid_card_names)
 
+class CardCategoryTest(TestCase):
 
-class CubeSortingTest(BaseCardsTestCase):
-    maxDiff = None
+    def assertHeuristicsMatch(self, name, expected, *keys_that_are_not_present):
+        actual = Card.get(name).heuristics
+        for k in keys_that_are_not_present:
+            self.assertNotIn(k, actual)
+        self.assertEqual(actual, expected)
 
-    def setUp(self):
-        super(CubeSortingTest, self).setUp()
+    @unittest.expectedFailure
+    def test_handle_phyrexian(self):
 
-        self.base_expected = dict(
-            White={
-                '<=1': ['Swords to Plowshares'],
-                '6+': ['Spectral Procession']
-            },
-            Colorless=[
-                'Kessig Wolf Run',
-                'Batterskull',
-                'Crystal Shard',
-                ],
-            Blue={
-                '2': ['Jilt'],
-                '4': ['Phyrexian Metamorph']
-            },
-            Multicolor= [
-                'Tattermunge Maniac',
-                'Slave of Bolas',
-                'Abrupt Decay'
-            ],
-        )
+        self.assertHeuristicsMatch('Phyrexian Metamorph', dict(
+            phyrexian_always_pays_life=dict(
+                mana_cost=['3'],
+                converted_mana_cost=3,
+                colors={}
+            )
+        ))
 
-        self.sorter = CubeSorter(self.test_cube)
+        self.assertHeuristicsMatch('Porcelain Legionnaire', dict(
+            phyrexian_always_pays_life=dict(
+                mana_cost=['2'],
+                converted_mana_cost=2,
+                colors={}
+            )
+        ))
 
-    def create_expected_dictionary(self, expected, sort_spec):
-        def update(d, u):
-            for k, v in u.iteritems():
-                self.assertEqual(d.__class__, u.__class__)
-                if isinstance(v, collections.Mapping):
-                    r = update(d.get(k, {}), v)
-                    d[k] = r
-                else:
-                    d[k] = u[k]
-            return d
+        self.assertHeuristicsMatch('Birthing Pod', dict(
+            phyrexian_always_pays_life=dict(
+                mana_cost=['3'],
+                converted_mana_cost=3,
+                colors={}
+            ),
+            phyrexian_always_pays_life_except_for_abilities=dict(
+                mana_cost=['3'],
+                converted_mana_cost=3,
+                colors={'Green'}
+            )
+        ))
 
-        return update(self.sorter._get_empty_sort_dict(sort_spec), expected)
+    @unittest.expectedFailure
+    def test_handle_off_color_flashback(self):
+        self.assertHeuristicsMatch('Lingering Souls', dict(
+            off_color_flashback_is_gold=dict(
+                colors={'White', 'Black'}
+            )
+        ))
 
-    def _write_card_objects_into_expected(self, expected):
-        """
+    @unittest.expectedFailure
+    def test_handle_off_color_kicker(self):
+        self.assertHeuristicsMatch('Dismantling Blow', dict(
+            off_color_kicker_is_gold=dict(
+                colors={'White', 'Blue'}
+            )
+        ))
 
-        :param expected:
-        :return:
-        """
+        self.assertHeuristicsMatch('Thornscape Battlemage', dict(
+            off_color_kicker_is_gold=dict(
+                colors={'White', 'Red', 'Green'}
+            )
+        ))
 
-        def _recurse_subcategories(mapping):
-            for k, v in mapping.iteritems():
-                if isinstance(v, collections.Mapping):
-                    _recurse_subcategories(v)
-                elif isinstance(v, basestring):
-                    mapping[k] = make_and_insert_card(v)
-                elif isinstance(v, collections.Iterable):
-                    # once it gets down to a list, it's going to be assumed
-                    # it's a list of card names as strings
-                    mapping[k] = [make_and_insert_card(card_name)
-                                         for card_name in v]
+    @unittest.expectedFailure
+    def test_handle_always_paying_kicker(self):
+        self.assertHeuristicsMatch('Gatekeeper of Malakir', dict(
+            always_kick_creatures=dict(
+                mana_cost=['B', 'B', 'B'],
+                converted_mana_cost=3
+            ),
+            always_kick=dict(
+                mana_cost=['B', 'B', 'B'],
+                converted_mana_cost=3
+            ),
+        ))
 
-        _recurse_subcategories(expected)
+        self.assertHeuristicsMatch('Dismantling Blow', dict(
+            always_kick=dict(
+                mana_cost=['4', 'W', 'B'],
+                converted_mana_cost=3,
+                colors={'White', 'Blue'}
+            ),
+        ))
 
-        return expected
+        self.assertHeuristicsMatch('Thornscape Battlemage', dict(
+            always_kick_creatures=dict(
+                mana_cost=['B', 'B', 'B'],
+                converted_mana_cost=5
+            ),
+            always_kick=dict(
+                mana_cost=['2', 'W', 'R', 'G'],
+                converted_mana_cost=5
+            ),
+        ))
 
-    def test_no_special_sorting(self):
+    def test_handle_living_weapon(self):
+        self.assertHeuristicsMatch('Batterskull', dict(
+            living_weapon_means_creature=dict(
+                types=["Artifact", "Creature"]
+            ),
+        ))
 
-        self.assert_expected_sort({}, self.base_expected)
 
-    def test_breakout_multicolor_to_subsections_counting_hybrid(self):
+        self.assertHeuristicsMatch('Lashwrithe', dict(
+            living_weapon_means_creature=dict(
+                types=["Artifact", "Creature"]
+            ),
+        ))
 
-        _expected = copy.deepcopy(self.base_expected)
-        _expected['Multicolor'] = {
-            'R/G': ['Tattermunge Maniac'],
-            'U/B/R': ['Slave of Bolas'],
-            'B/G': ['Abrupt Decay']
-        }
+    @unittest.expectedFailure
+    def test_multikicker_means_x_spell(self):
+        self.assertHeuristicsMatch('Everflowing Chalice', dict(
+            living_weapon_means_creature=dict(
+                mana_cost=['X'],
+                converted_mana_cost=-1
+            ),
+        ))
 
-        self.assert_expected_sort({
-            'multicolor_subsections': True,
-            }, _expected
-        )
+        self.assertHeuristicsMatch('Skitter of Lizards', dict(
+            multikicker_means=dict(
+                mana_cost=['X', 'R'],
+                converted_mana_cost=-1
+            ),
+        ))
 
-    def assert_expected_sort(self, sort_spec, expected):
-        """
-        assert that given a set of things to sort against, that we get the
-        expected result
+    @unittest.expectedFailure
+    def test_morph(self):
+        self.assertHeuristicsMatch('Exalted Angel', dict(
+            morph_cost_as_cmc=dict(
+                converted_mana_cost=3
+            ),
+        ))
 
-        :param sort_spec:
-        :param expected: dictionary of card names as strings
-        :return:
-        """
+        self.assertHeuristicsMatch('Bane of the Living', dict(
+            morph_cost_as_cmc=dict(
+                converted_mana_cost=3
+            ),
+        ))
 
-        def _sort_subcategories(mapping):
-            for k, v in mapping.iteritems():
-                if isinstance(v, collections.Mapping):
-                    _sort_subcategories(v)
-                elif isinstance(v, collections.Iterable):
-                    # once it gets down to a list, it's going to be assumed
-                    # it's a list of card names as strings
-                    mapping[k] = sorted(v, key=operator.attrgetter('name'))
+        # pay 5 life
+        self.assertHeuristicsMatch('Zombie Cutthroat', dict(
+            morph_cost_as_cmc=dict(
+                converted_mana_cost=3
+            ),
+            unmorph_affects_color=dict(
+                colors={}
+            ),
+        ))
 
-            return mapping
+        # discard a card
+        self.assertHeuristicsMatch('Gathan Raiders', dict(
+            morph_cost_as_cmc=dict(
+                converted_mana_cost=3
+            ),
+            unmorph_affects_color=dict(
+                colors={}
+            ),
+        ))
 
-        expected_with_cards = self._write_card_objects_into_expected(expected)
-        actual = self.sorter.sort_by(sort_spec)
-        expected = self.create_expected_dictionary(expected_with_cards, sort_spec)
-        self.assertEqual(_sort_subcategories(actual),
-                         _sort_subcategories(expected))
+        # discard a zombie card
+        self.assertHeuristicsMatch('Putrid Raptor', dict(
+            unmorph_affects_color=dict(
+                colors={}
+            ),
+        ))
+
+    @unittest.expectedFailure
+    def test_token_generators_count_as_creatures(self):
+        self.assertHeuristicsMatch('Lingering Souls', dict(
+            token_spells_are_creatures=dict(
+                types=['Sorcery', 'Creature']
+            )
+        ))
+
+        self.assertHeuristicsMatch('Midnight Haunting', dict(
+            token_spells_are_creatures=dict(
+                types=['Instant', 'Creature']
+            )
+        ))
+
+    def test_cycling_as_mana_cost(self):
+        self.assertHeuristicsMatch('Decree of Pain', dict(
+            use_cycling_cost_as_mana_cost_for_triggered_abilities=dict(
+                converted_mana_cost=5,
+                mana_cost=['3', 'B', 'B']
+            )
+        ))
+
+        self.assertHeuristicsMatch('Decree of Justice', dict(
+            use_cycling_cost_as_mana_cost_for_triggered_abilities=dict(
+                mana_cost=['X', '2', 'W'],
+                converted_mana_cost=None
+            )
+        ))
+
+        # regular cycling cards don't count
+        self.assertHeuristicsMatch('Miscalculation', {},
+            'use_cycling_as_mana_cost_when_there_are_effects')
+
+    @unittest.expectedFailure
+    def test_activated_abilities_affect_color(self):
+
+        self.assertHeuristicsMatch('Kessig Wolf Run', dict(
+            activated_ability_costs_affect_color=dict(
+                colors={'Red', 'Green'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Shelldock Isle', dict(
+            activated_ability_costs_affect_color=dict(
+                colors={'Blue'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Creeping Tar Pit', dict(
+            activated_ability_costs_affect_color=dict(
+                colors={'Blue', 'Black'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Crystal Shard', dict(
+            activated_ability_costs_affect_color=dict(
+                colors={'Blue'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Spellskite', dict(
+            activated_ability_costs_affect_color_do_not_pay_phyrexian=dict(
+                colors={'Blue'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Vedalken Shackles', dict(
+            activated_abilites_caring_about_land_types_affect_color=dict(
+                colors={'Blue'}
+            )
+        ))
+
+    def test_mono_color_hybrids_have_modified_cmc(self):
+        self.assertHeuristicsMatch('Spectral Procession', dict(
+            assume_on_color_cmc_for_mono_color_hybrids=dict(
+                converted_mana_cost=3
+            )
+        ))
+
+        self.assertHeuristicsMatch('Flame Javelin', dict(
+            assume_on_color_cmc_for_mono_color_hybrids=dict(
+                converted_mana_cost=3
+            )
+        ))
+
+    def test_caring_about_land_types_affects_color(self):
+
+        self.assertHeuristicsMatch('Wild Nacatl', dict(
+            caring_about_controlling_land_types_affect_color=dict(
+                colors={'White', 'Red', 'Green'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Crimson Muckwader', dict(
+            caring_about_controlling_land_types_affect_color=dict(
+                colors={'Black', 'Red'}
+            )
+        ))
+
+        self.assertHeuristicsMatch('Kird Ape', dict(
+            caring_about_controlling_land_types_affect_color=dict(
+                colors={'Red', 'Green'}
+            )
+        ))
+
+    def test_affinity_for_basic_land_type(self):
+
+        self.assertHeuristicsMatch('Razor Golem', dict(
+            affinity_for_basic_lands_affect_cmc=dict(
+                converted_mana_cost = 3
+            )
+        ))
+
+        self.assertHeuristicsMatch('Dross Golem', dict(
+            affinity_for_basic_lands_affect_cmc=dict(
+                converted_mana_cost = 3
+            )
+        ))
+
+    @unittest.expectedFailure
+    def test_suspend_as_mana_cost(self):
+
+        self.assertHeuristicsMatch('Greater Gargadon', dict(
+            affinity_for_basic_lands_affect_cmc=dict(
+                converted_mana_cost = 1,
+                mana_cost = ['R']
+            )
+        ))
+
+        self.assertHeuristicsMatch('Ancestral Vision', dict(
+            affinity_for_basic_lands_affect_cmc=dict(
+                converted_mana_cost = 1,
+                mana_cost = ['U']
+            )
+        ))
+
+

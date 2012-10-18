@@ -13,6 +13,17 @@ color_mappings = dict((
     ('R', 'Red'),
     ('G', 'Green'),
     ))
+basic_land_mappings = dict(
+    Plains='W',
+    Islands='U',
+    Island='U',
+    Swamps='B',
+    Swamp='B',
+    Mountains='R',
+    Mountain='R',
+    Forests='G',
+    Forest='G'
+)
 
 hybrid_mappings = {
     'W/U': 'azorious',
@@ -32,6 +43,26 @@ def parse_mana_cost(mana_cost):
     log.debug('parsed_mana_cost {!r} to {!r}', mana_cost, parsed_mc)
     return parsed_mc
 
+def estimate_cmc(parsed_mana_cost):
+    """
+    this is not going to handle non-standard mana symbols that are not
+    1 CMC per symbol. Deal with it.
+    :param parsed_mana_cost:
+    :return: estimated converted mana cost as an integer (None if an X-spell)
+    :rtype: int or None
+    """
+
+    if 'X' in parsed_mana_cost:
+        return None
+
+    count = 0
+    for sym in parsed_mana_cost:
+        if sym.isdigit():
+            count += int(sym)
+        else:
+            count += 1
+
+    return count
 
 def get_mana_symbol_bitfields(parsed_mana_cost):
     from cuesbey_main.cube_viewer.models import Card
@@ -119,7 +150,7 @@ def get_json_card_content(name):
     if comprehensive.get('mana_cost'):
         # a string representing mana cost is converted to an array for the
         # purposes of importing into a postgres text array column
-
+#        comprehensive['mana_cost'] = comprehensive['mana_cost']
         comprehensive['mana_cost'] = parse_mana_cost(comprehensive['mana_cost'])
         # keep multiples
         comprehensive.update(get_mana_symbol_bitfields(comprehensive['mana_cost']))

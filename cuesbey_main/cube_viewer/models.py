@@ -9,7 +9,7 @@ from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 from bitfield import BitField
 
-from cuesbey_main.cube_viewer import get_json_card_content
+from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings
 from cuesbey_main.cube_viewer.autolog import log
 
 class CardFetchingError(Exception):
@@ -73,6 +73,7 @@ class Card(models.Model):
     A single card, cubes can (should) have many cards
     """
     name = models.CharField(primary_key=True, max_length=200)
+    # TODO: actually determine what's easiest here: array or string
     mana_cost = ArrayField(dbtype='text', null=True)
     converted_mana_cost = models.IntegerField()
     types = ArrayField(dbtype='text')
@@ -92,6 +93,43 @@ class Card(models.Model):
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries
     manager = Manager()
+    # possibly premature optimization
+    _heuristics = {}
+
+    @property
+    def mana_cost_text(self):
+
+        if hasattr(self, '_mana_cost_text'):
+            return self._mana_cost_text
+
+        if self.mana_cost:
+            self._mana_cost_text = ''.join(['{%s}' % sym for sym in self.mana_cost])
+        else:
+            self._mana_cost_text = None
+
+        return self._mana_cost_text
+
+    @property
+    def colors(self):
+
+        return {color_name
+            for abbrev, color_name in color_mappings.iteritems()
+            if abbrev in self.mana_cost_text } | set(self.color_indicator or [])
+
+    @property
+    def heuristics(self):
+
+        return Card._heuristics.setdefault(self.name,
+                                           heuristics.get_heuristics(self))
+
+
+
+    @classmethod
+    def get(cls, name):
+        try:
+            return cls.objects.get(name=name)
+        except Card.DoesNotExist:
+            return make_and_insert_card(name)
 
     @property
     def gatherer_ids(self):

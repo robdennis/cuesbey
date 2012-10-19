@@ -112,9 +112,19 @@ class Card(models.Model):
     @property
     def colors(self):
 
-        return {color_name
-            for abbrev, color_name in color_mappings.iteritems()
-            if abbrev in self.mana_cost_text } | set(self.color_indicator or [])
+        return self.estimate_colors(self.mana_cost_text, self.color_indicator)
+
+    def estimate_colors(self, mana_cost_text, color_indicator=None):
+        if color_indicator is None:
+            color_indicator = self.color_indicator
+
+        # the argument could be made that this is "wrong" for the case of
+        # mismatched mana cost and color indicator. But the only example I can
+        # think of "Ghostfire" would probably be Red anyway
+
+        colors_found = [color_name for abbrev, color_name in color_mappings.iteritems()
+                        if abbrev in (mana_cost_text or '')]
+        return set(colors_found) | set(color_indicator or [])
 
     @property
     def heuristics(self):

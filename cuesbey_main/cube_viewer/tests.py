@@ -146,6 +146,7 @@ class CardModelTest(TestCase):
         self.assertIn('Tattermunge Maniac', hybrid_card_names)
 
 class CardCategoryTest(TestCase):
+    maxDiff = None
 
     def assertHeuristicsMatch(self, name, expected, *keys_that_are_not_present):
         actual = Card.get(name).heuristics
@@ -153,14 +154,18 @@ class CardCategoryTest(TestCase):
             self.assertNotIn(k, actual)
         self.assertEqual(actual, expected)
 
-    @unittest.expectedFailure
     def test_handle_phyrexian(self):
 
         self.assertHeuristicsMatch('Phyrexian Metamorph', dict(
             phyrexian_always_pays_life=dict(
                 mana_cost=['3'],
                 converted_mana_cost=3,
-                colors={}
+                colors=set()
+            ),
+            phyrexian_always_pays_life_except_for_abilities=dict(
+                mana_cost=['3'],
+                converted_mana_cost=3,
+                colors=set()
             )
         ))
 
@@ -168,15 +173,27 @@ class CardCategoryTest(TestCase):
             phyrexian_always_pays_life=dict(
                 mana_cost=['2'],
                 converted_mana_cost=2,
-                colors={}
+                colors=set()
+            ),
+            phyrexian_always_pays_life_except_for_abilities=dict(
+                mana_cost=['2'],
+                converted_mana_cost=2,
+                colors=set()
             )
         ))
+
+        # cards that only have phyrexian mana for activated don't count
+        # here
+        self.assertHeuristicsMatch('Spellskite', {},
+            'phyrexian_always_pays_life',
+            'phyrexian_always_pays_life_except_for_abilities',
+        )
 
         self.assertHeuristicsMatch('Birthing Pod', dict(
             phyrexian_always_pays_life=dict(
                 mana_cost=['3'],
                 converted_mana_cost=3,
-                colors={}
+                colors=set()
             ),
             phyrexian_always_pays_life_except_for_abilities=dict(
                 mana_cost=['3'],
@@ -289,7 +306,7 @@ class CardCategoryTest(TestCase):
                 converted_mana_cost=3
             ),
             unmorph_affects_color=dict(
-                colors={}
+                colors=set()
             ),
         ))
 
@@ -299,14 +316,14 @@ class CardCategoryTest(TestCase):
                 converted_mana_cost=3
             ),
             unmorph_affects_color=dict(
-                colors={}
+                colors=set()
             ),
         ))
 
         # discard a zombie card
         self.assertHeuristicsMatch('Putrid Raptor', dict(
             unmorph_affects_color=dict(
-                colors={}
+                colors=set()
             ),
         ))
 

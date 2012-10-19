@@ -66,6 +66,29 @@ def get_heuristics(card):
             colors=modified_colors
         )
 
+    if card._phyrexian_mana_bitfield:
+        # the card has phryxian mana in the cost, which often means designers
+        # will put in on curve as if people will always pay life
+        heur_str = 'phyrexian_always_pays_life'
+        ability_heur_str = heur_str + '_except_for_abilities'
+        modified_cost = [sym for sym in card.mana_cost if '/P' not in sym]
 
+        h[heur_str]=dict(
+            mana_cost=modified_cost,
+            colors=card.estimate_colors(modified_cost)
+        )
+        if card.converted_mana_cost is not None:
+            # phyrexian X spell?
+            num_phyrexian_symbols = len(card.mana_cost) - len(modified_cost)
+            h[heur_str]['converted_mana_cost'] = (card.converted_mana_cost -
+                                                    num_phyrexian_symbols)
+
+        h[ability_heur_str] = deepcopy(h[heur_str])
+
+        phyrexian_ability_match = re.search(r'((?:\{(?:W|U|B|R|G)/P\})).*\:.+', card.text)
+        if phyrexian_ability_match:
+            h[ability_heur_str]['colors'] = (
+                h[heur_str]['colors'] | card.estimate_colors(phyrexian_ability_match.group(1))
+            )
 
     return h

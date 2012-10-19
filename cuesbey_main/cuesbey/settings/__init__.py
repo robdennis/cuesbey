@@ -137,7 +137,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'lookout.get',
+            'filename': 'cuesbey.get',
             'formatter': 'normal'
         }, 'console': {
             'level':'DEBUG',
@@ -151,6 +151,18 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': True,
             'level': 'DEBUG',
+        },
+        'cube_viewer': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'cuesbey': {
+            'handlers': ['console'],
+            'propagate': True,
+            'level': 'DEBUG',
         }
+
+
     },
 }

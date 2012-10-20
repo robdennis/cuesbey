@@ -90,6 +90,18 @@ def stitch_mana_cost(parsed_mana_cost):
     return ''.join('{%s}' % sym for sym in parsed_mana_cost)
 
 
+def estimate_colors(mana_cost):
+    if not isinstance(mana_cost, basestring):
+        mana_cost_text = stitch_mana_cost(mana_cost)
+    else:
+        mana_cost_text = mana_cost
+
+    colors_found = [color_name for abbrev, color_name in color_mappings.iteritems()
+                    if abbrev in (mana_cost_text or '')]
+    log.debug('using: %s, found colors: %s', mana_cost_text, colors_found)
+
+    return set(colors_found)
+
 def estimate_cmc(parsed_mana_cost):
     """
     this is not going to handle non-standard mana symbols that are not

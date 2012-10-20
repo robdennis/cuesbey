@@ -4,7 +4,8 @@ from math import ceil
 
 from cuesbey_main.cube_viewer import (parse_mana_cost, estimate_cmc,
                                       basic_land_mappings, color_mappings,
-                                      merge_mana_costs, stitch_mana_cost)
+                                      merge_mana_costs, stitch_mana_cost,
+                                      estimate_colors)
 
 def _handle_monocolor_hybrid(card, h):
     if not card.mana_cost:
@@ -58,17 +59,30 @@ def _handle_living_weapon(card, h):
         )
 
 def _handle_caring_about_land_types(card, h):
-    land_types_cared_about = re.findall("as long as you control a (Plains|Island|Swamp|Mountain|Forest)", card.text)
-    if land_types_cared_about:
-        land_types_cared_about = set(land_types_cared_about)
-        modified_colors = deepcopy(card.colors)
+    controlled_land_types_cared_about = re.findall("as long as you control a (Plains|Island|Swamp|Mountain|Forest)", card.text)
 
-        for land in land_types_cared_about:
+    def _get_colors_from_lands(lands):
+        _land_colors = set()
+        for land in controlled_land_types_cared_about:
             if land not in basic_land_mappings:
                 continue
-            modified_colors.add(color_mappings[basic_land_mappings[land]])
+            _land_colors.add(color_mappings[basic_land_mappings[land]])
+        return _land_colors
+
+    if controlled_land_types_cared_about:
+        controlled_land_types_cared_about = set(controlled_land_types_cared_about)
+        modified_colors = card.colors | _get_colors_from_lands(controlled_land_types_cared_about)
 
         h['caring_about_controlling_land_types_affect_color'] = dict(
+            colors=modified_colors
+        )
+
+    land_types_cared_about_in_abilities = re.findall(":.+(Plains|Islands|Swamps|Mountains|Forests) you control", card.text)
+    if land_types_cared_about_in_abilities:
+        controlled_land_types_cared_about = set(land_types_cared_about_in_abilities)
+        modified_colors = card.colors | _get_colors_from_lands(land_types_cared_about_in_abilities)
+
+        h['activated_abilites_caring_about_land_types_affect_color'] = dict(
             colors=modified_colors
         )
 
@@ -95,8 +109,9 @@ def _handle_phyrexian(card, h):
 
     h[ability_heur_str] = deepcopy(h[heur_str])
 
-    if card.activated_ability_mana_cost and '/P' in card.activated_ability_mana_cost:
-        h[ability_heur_str]['colors'] |= card.estimate_colors(card.activated_ability_mana_cost)
+    all_costs = stitch_mana_cost(merge_mana_costs(card.activated_ability_mana_costs))
+    if all_costs and '/P' in all_costs:
+        h[ability_heur_str]['colors'] |= estimate_colors(all_costs)
 
 def _handle_off_color_flashback(card, h):
     flashback_cost = re.search(r'Flashback (\{.+\}) \(You', card.text)
@@ -149,6 +164,24 @@ def _handle_token_generators(card, h):
             types = card.types + ['Creature']
         )
 
+def _handle_activated_abilities(card, h):
+
+    merged = merge_mana_costs(*(card.activated_ability_mana_costs or []))
+    phyrexian_activated = stitch_mana_cost([sym for sym in merged if 'P' in sym])
+    non_phyrexian_activated = stitch_mana_cost([sym for sym in merged if 'P' not in sym])
+    activated_colors = estimate_colors(merged)
+
+    if phyrexian_activated:
+        h['activated_ability_costs_affect_color_do_not_pay_phyrexian'] = dict(
+            colors=estimate_colors(non_phyrexian_activated) | card.colors
+        )
+
+    if activated_colors and activated_colors != card.colors:
+        h['activated_ability_costs_affect_color'] = dict(
+            colors=activated_colors
+        )
+
+
 def get_heuristics(card):
 
     h = {}
@@ -162,6 +195,6 @@ def get_heuristics(card):
     _handle_off_color_flashback(card, h)
     _handle_kicker(card, h)
     _handle_token_generators(card, h)
-
+    _handle_activated_abilities(card, h)
 
     return h

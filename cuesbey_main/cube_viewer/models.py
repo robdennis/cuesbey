@@ -1,6 +1,7 @@
 # encoding: utf-8
 import re
 from collections import namedtuple
+from itertools import chain
 
 from django.db import models
 from jsonfield import JSONField
@@ -9,7 +10,7 @@ from unidecode import unidecode
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 
-from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings, parse_mana_cost, stitch_mana_cost, merge_mana_costs
+from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings, parse_mana_cost, stitch_mana_cost, merge_mana_costs, estimate_colors
 from cuesbey_main.cube_viewer.autolog import log
 
 class CardFetchingError(Exception):
@@ -108,9 +109,7 @@ class Card(models.Model):
         # mismatched mana cost and color indicator. But the only example I can
         # think of "Ghostfire" would probably be Red anyway
 
-        colors_found = [color_name for abbrev, color_name in color_mappings.iteritems()
-                        if abbrev in (mana_cost_text or '')]
-        return set(colors_found) | set(color_indicator or [])
+        return estimate_colors(mana_cost_text) | set(color_indicator or [])
 
     @property
     def heuristics(self):
@@ -119,13 +118,16 @@ class Card(models.Model):
                                            heuristics.get_heuristics(self))
 
     @property
-    def activated_ability_mana_cost(self):
+    def activated_ability_mana_costs(self):
 
-        if not hasattr(self, '_ability_mana_cost'):
-            _match = re.search(r'((?:\{(?:W|U|B|R|G)/P\})+).*:.+', self.text)
-            self._ability_mana_cost = _match.group(1) if _match else None
+        if not hasattr(self, '_ability_mana_costs'):
+            group = '(\{[WUBRGP/\d\{\}]+\})'
 
-        return self._ability_mana_cost
+            self._ability_mana_costs = filter(None, chain(
+                *re.findall(r'%s.*?(?:.*or %s)?.*:' % (group, group), self.text) or []
+            )) or None
+
+        return self._ability_mana_costs
 
     @classmethod
     def get(cls, name):

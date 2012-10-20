@@ -1,4 +1,5 @@
 # encoding: utf-8
+import re
 from collections import namedtuple
 
 from django.db import models
@@ -7,9 +8,8 @@ from unidecode import unidecode
 
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
-from bitfield import BitField
 
-from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings
+from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings, parse_mana_cost, stitch_mana_cost, merge_mana_costs
 from cuesbey_main.cube_viewer.autolog import log
 
 class CardFetchingError(Exception):
@@ -74,7 +74,7 @@ class Card(models.Model):
     """
     name = models.CharField(primary_key=True, max_length=200)
     # TODO: actually determine what's easiest here: array or string
-    mana_cost = ArrayField(dbtype='text', null=True)
+    mana_cost = models.CharField(max_length=200, null=True)
     converted_mana_cost = models.IntegerField()
     types = ArrayField(dbtype='text')
     subtypes = ArrayField(dbtype='text', null=True)
@@ -85,10 +85,6 @@ class Card(models.Model):
     toughness = models.CharField(max_length=200, null=True)
     loyalty = models.IntegerField(null=True)
     gatherer_url = models.CharField(max_length=200)
-    _standard_mana_bitfield = BitField(flags=color_bitfield_keys)
-    _phyrexian_mana_bitfield = BitField(flags=color_bitfield_keys)
-    _mono_hybrid_mana_bitfield = BitField(flags=color_bitfield_keys)
-    _hybrid_mana_bitfield = BitField(flags=color_bitfield_keys)
     versions = JSONField()
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries
@@ -97,22 +93,12 @@ class Card(models.Model):
     _heuristics = {}
 
     @property
-    def mana_cost_text(self):
-
-        if hasattr(self, '_mana_cost_text'):
-            return self._mana_cost_text
-
-        if self.mana_cost:
-            self._mana_cost_text = ''.join(['{%s}' % sym for sym in self.mana_cost])
-        else:
-            self._mana_cost_text = None
-
-        return self._mana_cost_text
+    def parsed_mana_cost(self):
+        return parse_mana_cost(self.mana_cost)
 
     @property
     def colors(self):
-
-        return self.estimate_colors(self.mana_cost_text, self.color_indicator)
+        return self.estimate_colors(self.mana_cost, self.color_indicator)
 
     def estimate_colors(self, mana_cost_text, color_indicator=None):
         if color_indicator is None:
@@ -132,7 +118,14 @@ class Card(models.Model):
         return Card._heuristics.setdefault(self.name,
                                            heuristics.get_heuristics(self))
 
+    @property
+    def activated_ability_mana_cost(self):
 
+        if not hasattr(self, '_ability_mana_cost'):
+            _match = re.search(r'((?:\{(?:W|U|B|R|G)/P\})+).*:.+', self.text)
+            self._ability_mana_cost = _match.group(1) if _match else None
+
+        return self._ability_mana_cost
 
     @classmethod
     def get(cls, name):

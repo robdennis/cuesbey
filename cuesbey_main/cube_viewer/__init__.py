@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 import re
 
+from copy import deepcopy
+
 import slumber
 from slumber.exceptions import HttpClientError
 
@@ -38,10 +40,55 @@ hybrid_mappings = {
     'R/G': 'gruul',
 }
 
+def merge_mana_costs(*costs):
+
+    merged_cost = []
+    digit = 0
+    log.debug('pre-merged: %r', costs)
+    for cost in costs:
+        if isinstance(cost, basestring):
+            _cost = parse_mana_cost(cost)
+        else:
+            _cost = deepcopy(cost)
+        log.debug('merging cost: %r', _cost)
+        if _cost is None:
+            continue
+        for sym in _cost:
+            if sym.isdigit():
+                digit += int(sym)
+            else:
+                merged_cost.append(sym)
+
+    if digit:
+        merged_cost.append(str(digit))
+    log.debug('merged: %r', merged_cost)
+
+    def mana_cost_key(symbol):
+        # X < colorless < W < U < B < R < G
+        log.debug('sorting %r', symbol)
+        for idx, res in enumerate([symbol == 'X',
+                                   symbol.isdigit(),
+                                   'W' in symbol,
+                                   'U' in symbol,
+                                   'B' in symbol,
+                                   'R' in symbol,
+                                   'G' in symbol]):
+            if res:
+                return idx
+
+    return sorted(merged_cost, key=mana_cost_key)
+
+
 def parse_mana_cost(mana_cost):
     parsed_mc = re.findall(r'\{(.+?)\}', mana_cost)
     log.debug('parsed_mana_cost {!r} to {!r}', mana_cost, parsed_mc)
     return parsed_mc
+
+def stitch_mana_cost(parsed_mana_cost):
+    if not parsed_mana_cost:
+        return None
+    return ''.join('{%s}' % sym for sym in parsed_mana_cost)
+
 
 def estimate_cmc(parsed_mana_cost):
     """
@@ -146,14 +193,6 @@ def get_json_card_content(name):
         # limit what's returned to a whitelist of the above
         if act_key in comprehensive:
             comprehensive[act_key] = act_val
-
-    if comprehensive.get('mana_cost'):
-        # a string representing mana cost is converted to an array for the
-        # purposes of importing into a postgres text array column
-#        comprehensive['mana_cost'] = comprehensive['mana_cost']
-        comprehensive['mana_cost'] = parse_mana_cost(comprehensive['mana_cost'])
-        # keep multiples
-        comprehensive.update(get_mana_symbol_bitfields(comprehensive['mana_cost']))
 
     color_indicator = comprehensive.get('color_indicator')
     if color_indicator and isinstance(color_indicator, basestring):

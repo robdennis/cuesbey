@@ -6,7 +6,7 @@ from math import ceil
 from cuesbey_main.cube_viewer import (parse_mana_cost, estimate_cmc,
                                       basic_land_mappings, color_mappings,
                                       merge_mana_costs, stitch_mana_cost,
-                                      estimate_colors)
+                                      estimate_colors, estimate_colors_from_lands)
 
 def _handle_monocolor_hybrid(card, h):
     if not card.mana_cost:
@@ -45,9 +45,19 @@ def _handle_affinity_for_basic_land(card, h):
     if affinity_for_basic_land_match:
         # the idea is that for each land you play of the appropriate type
         # you have a mana, and it got cheaper
-        h['affinity_for_basic_lands_affect_cmc'] = dict(
-            converted_mana_cost=ceil(float(card.converted_mana_cost)/2)
+
+        land_cared_about = affinity_for_basic_land_match.group(1)
+
+        land_color = estimate_colors_from_lands([land_cared_about])
+
+        key = 'affinity_for_basic_lands_affects_mana_cost'
+
+        h[key] = dict(
+            converted_mana_cost=int(ceil(float(card.converted_mana_cost)/2))
         )
+
+        if land_color != card.colors:
+            h[key]['colors'] = land_color | card.colors
 
 def _handle_living_weapon(card, h):
     if ('Equipment' in card.subtypes and
@@ -67,11 +77,7 @@ def _handle_caring_about_land_types(card, h):
     )
 
     if any(controlled_lands):
-        _land_colors = set()
-        for land in chain(controlled_lands):
-            if land not in basic_land_mappings:
-                continue
-            _land_colors.add(color_mappings[basic_land_mappings[land]])
+        _land_colors = estimate_colors_from_lands(chain(controlled_lands))
 
         if _land_colors == card.colors:
             return
@@ -177,6 +183,22 @@ def _handle_activated_abilities(card, h):
             colors=activated_colors
         )
 
+def _handle_suspend(card, h):
+
+    has_suspend = re.search(u"Suspend \d+\u2014(\{.+\}) \(", card.text)
+    if not has_suspend:
+        return
+
+    mana_cost = has_suspend.group(1)
+
+    h['suspend_as_cmc'] = dict(
+        mana_cost = mana_cost,
+        converted_mana_cost = estimate_cmc(mana_cost)
+    )
+
+    suspend_colors = estimate_colors(mana_cost)
+    if suspend_colors != card.colors:
+        h['suspend_as_cmc']['colors'] = suspend_colors
 
 def get_heuristics(card):
 
@@ -192,5 +214,6 @@ def get_heuristics(card):
     _handle_kicker(card, h)
     _handle_token_generators(card, h)
     _handle_activated_abilities(card, h)
+    _handle_suspend(card, h)
 
     return h

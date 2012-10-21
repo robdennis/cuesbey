@@ -392,36 +392,37 @@ class CardCategoryTest(TestCase):
             )
         ))
 
+    def test_affinity_for_basic_land_type(self):
 
-def test_affinity_for_basic_land_type(self):
+            self.assertHeuristicsArePresent('Razor Golem', dict(
+                affinity_for_basic_lands_affects_mana_cost=dict(
+                    converted_mana_cost = 3,
+                    colors = {'White'}
+                )
+            ))
 
-        self.assertHeuristicsArePresent('Razor Golem', dict(
-            affinity_for_basic_lands_affect_cmc=dict(
-                converted_mana_cost = 3
+            self.assertHeuristicsArePresent('Dross Golem', dict(
+                affinity_for_basic_lands_affects_mana_cost=dict(
+                    converted_mana_cost = 3,
+                    colors = {'Black'}
+                )
+            ))
+
+    def test_suspend_as_mana_cost(self):
+
+        self.assertHeuristicsArePresent('Greater Gargadon', dict(
+            suspend_as_cmc=dict(
+                converted_mana_cost = 1,
+                mana_cost = '{R}'
             )
         ))
 
-        self.assertHeuristicsArePresent('Dross Golem', dict(
-            affinity_for_basic_lands_affect_cmc=dict(
-                converted_mana_cost = 3
+        self.assertHeuristicsArePresent('Ancestral Vision', dict(
+            suspend_as_cmc=dict(
+                converted_mana_cost = 1,
+                mana_cost = '{U}',
+                colors = {'Blue'}
             )
         ))
-
-@unittest.expectedFailure
-def test_suspend_as_mana_cost(self):
-
-    self.assertHeuristicsArePresent('Greater Gargadon', dict(
-        suspend_as_cmc=dict(
-            converted_mana_cost = 1,
-            mana_cost = '{R}'
-        )
-    ))
-
-    self.assertHeuristicsArePresent('Ancestral Vision', dict(
-        suspend_as_cmc=dict(
-            converted_mana_cost = 1,
-            mana_cost = '{U}'
-        )
-    ))
 
 

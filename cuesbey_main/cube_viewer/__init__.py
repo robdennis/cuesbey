@@ -102,14 +102,31 @@ def estimate_colors(mana_cost):
 
     return set(colors_found)
 
-def estimate_cmc(parsed_mana_cost):
+def estimate_colors_from_lands(lands):
+    _land_colors = set()
+    if isinstance(lands, basestring):
+        lands = [lands]
+
+    for land in lands:
+        if land not in basic_land_mappings:
+            continue
+        _land_colors.add(color_mappings[basic_land_mappings[land]])
+
+    return _land_colors
+
+def estimate_cmc(mana_cost):
     """
     this is not going to handle non-standard mana symbols that are not
     1 CMC per symbol. Deal with it.
-    :param parsed_mana_cost:
+    :param mana_cost:
     :return: estimated converted mana cost as an integer (None if an X-spell)
     :rtype: int or None
     """
+
+    if isinstance(mana_cost, basestring):
+        parsed_mana_cost = parse_mana_cost(mana_cost)
+    else:
+        parsed_mana_cost = mana_cost
 
     if 'X' in parsed_mana_cost:
         return None

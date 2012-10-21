@@ -299,6 +299,26 @@ class CardCategoryTest(TestCase):
             )
         ))
 
+        self.assertHeuristicsArePresent('Sarcomancy', dict(
+            token_spells_are_creatures=dict(
+                types=['Enchantment', 'Creature']
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Eyes in the Skies', dict(
+            token_spells_are_creatures=dict(
+                types=['Instant', 'Creature']
+            )
+        ))
+
+        # things that target don't count
+        self.assertHeuristicsArePresent('Sundering Growth', {},
+            keys_that_are_not_present=['token_spells_are_creatures']
+        )
+        self.assertHeuristicsArePresent('Fists of Ironwood', {},
+            keys_that_are_not_present=['token_spells_are_creatures']
+        )
+
     def test_cycling_as_mana_cost(self):
         self.assertHeuristicsArePresent('Decree of Pain', dict(
             use_cycling_cost_as_mana_cost_for_triggered_abilities=dict(

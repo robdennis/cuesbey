@@ -7,6 +7,7 @@ from cuesbey_main.cube_viewer import (parse_mana_cost, estimate_cmc,
                                       basic_land_mappings, color_mappings,
                                       merge_mana_costs, stitch_mana_cost,
                                       estimate_colors, estimate_colors_from_lands)
+from cuesbey_main.cube_viewer.autolog import log
 
 def _handle_monocolor_hybrid(card, h):
     if not card.mana_cost:
@@ -157,11 +158,15 @@ def _handle_kicker(card, h):
         h['always_kick_creatures'] = full_dict
 
 def _handle_token_generators(card, h):
+    # lands or planeswalkers don't count
+    if not any([_type in card.types for _type in ('Instant', 'Sorcery', 'Enchantment')]):
+        return
 
-    if (any([_type in card.types for _type in ['Instant', 'Sorcery']]) and
-        'target' not in card.text.lower() and
-        re.search('put[^\.]+creature tokens?[^\.]+ onto the battlefield\.', card.text, re.I)):
+    # if the spell is targeted, it's probably too conditional to consider
+    if 'Aura' in card.subtypes or 'target' in card.text.lower():
+        return
 
+    if re.search('put[^\.]+creature tokens?[^\.]+onto the battlefield', card.text, re.I):
         h['token_spells_are_creatures'] = dict(
             types = card.types + ['Creature']
         )

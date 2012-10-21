@@ -1,4 +1,6 @@
-# Create your views here.
+import json
+
+from django.http import HttpResponse
 from django.views.generic import ListView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -19,3 +21,10 @@ def details(request, id):
         cube=cube
     ), context_instance=RequestContext(request))
 
+def cube_contents(request, id):
+
+    cube = get_object_or_404(Cube, pk=id)
+
+    return HttpResponse(json.dumps({
+        card.name: card.as_dict() for card in cube.cards
+    }), mimetype="application/json")

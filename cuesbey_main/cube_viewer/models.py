@@ -92,6 +92,10 @@ class Card(models.Model):
     manager = Manager()
     # possibly premature optimization
     _heuristics = {}
+    _json_keys = (
+        'name', 'mana_cost', 'converted_mana_cost', 'types',
+        'colors', 'gatherer_ids', 'heuristics'
+    )
 
     @property
     def parsed_mana_cost(self):
@@ -154,6 +158,10 @@ class Card(models.Model):
                                                 # lexical sorting
                                                 key=lambda x: int(x[0])))
         ]
+
+    def as_dict(self):
+
+        return {k:getattr(self, k) for k in self._json_keys}
 
     def __repr__(self):
         return '<Card: {!r}>'.format(self.name)

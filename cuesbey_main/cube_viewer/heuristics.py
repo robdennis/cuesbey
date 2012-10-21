@@ -1,5 +1,6 @@
 import re
 from copy import deepcopy
+from itertools import chain
 from math import ceil
 
 from cuesbey_main.cube_viewer import (parse_mana_cost, estimate_cmc,
@@ -59,30 +60,25 @@ def _handle_living_weapon(card, h):
         )
 
 def _handle_caring_about_land_types(card, h):
-    controlled_land_types_cared_about = re.findall("as long as you control a (Plains|Island|Swamp|Mountain|Forest)", card.text)
 
-    def _get_colors_from_lands(lands):
+    controlled_lands = (
+        re.findall("as long as you control a (Plains|Island|Swamp|Mountain|Forest)", card.text) +
+        re.findall("(Plains|Islands|Swamps|Mountains|Forests) you control", card.text)
+    )
+
+    if any(controlled_lands):
         _land_colors = set()
-        for land in controlled_land_types_cared_about:
+        for land in chain(controlled_lands):
             if land not in basic_land_mappings:
                 continue
             _land_colors.add(color_mappings[basic_land_mappings[land]])
-        return _land_colors
 
-    if controlled_land_types_cared_about:
-        controlled_land_types_cared_about = set(controlled_land_types_cared_about)
-        modified_colors = card.colors | _get_colors_from_lands(controlled_land_types_cared_about)
+        if _land_colors == card.colors:
+            return
+
+        modified_colors = card.colors | _land_colors
 
         h['caring_about_controlling_land_types_affect_color'] = dict(
-            colors=modified_colors
-        )
-
-    land_types_cared_about_in_abilities = re.findall(":.+(Plains|Islands|Swamps|Mountains|Forests) you control", card.text)
-    if land_types_cared_about_in_abilities:
-        controlled_land_types_cared_about = set(land_types_cared_about_in_abilities)
-        modified_colors = card.colors | _get_colors_from_lands(land_types_cared_about_in_abilities)
-
-        h['activated_abilites_caring_about_land_types_affect_color'] = dict(
             colors=modified_colors
         )
 

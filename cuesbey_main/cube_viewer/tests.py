@@ -387,7 +387,7 @@ class CardCategoryTest(TestCase):
         ))
 
         self.assertHeuristicsArePresent('Vedalken Shackles', dict(
-            activated_abilites_caring_about_land_types_affect_color=dict(
+            caring_about_controlling_land_types_affect_color=dict(
                 colors={'Blue'}
             )
         ))

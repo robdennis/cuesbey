@@ -28,3 +28,9 @@ def cube_contents(request, id):
     return HttpResponse(json.dumps({
         card.name: card.as_dict() for card in cube.cards
     }), mimetype="application/json")
+
+def run_test(request, unit_test_name='test'):
+
+    return render_to_response('test.html', dict(
+        unit_test_name=unit_test_name
+    ), context_instance=RequestContext(request))

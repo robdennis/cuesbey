@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from cuesbey_main.cube_viewer.views import CubeView, details
+from cuesbey_main.cube_viewer.views import CubeView, details, run_test
 
 admin.autodiscover()
 
@@ -20,3 +20,7 @@ urlpatterns = patterns('',
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += patterns('',
+        url(r'^test/(P<unit_test_name>\w+)/$', run_test),
+        url(r'^test/$', run_test)
+    )

@@ -1,4 +1,5 @@
 # encoding: utf-8
+import json
 import re
 from collections import namedtuple
 from itertools import chain
@@ -14,6 +15,13 @@ from cuesbey_main.cube_viewer import (get_json_card_content, heuristics,
                                       parse_mana_cost, estimate_colors,
                                       CardFetchingError)
 from cuesbey_main.cube_viewer.autolog import log
+
+
+class CubeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, set):
+            return list(obj)
+        return json.JSONEncoder.default(self, obj)
 
 
 def make_and_insert_card(name):
@@ -162,6 +170,9 @@ class Card(models.Model):
     def __repr__(self):
         return '<Card: {!r}>'.format(self.name)
 
+    def __str__(self):
+        return self.__repr__()
+
 
 class Cube(models.Model):
     """
@@ -185,6 +196,15 @@ class Cube(models.Model):
         """
         for card_name in card_names:
             self.add_card_by_name(card_name)
+
+    def serialize(self, fp=None):
+        cards_as_dict = {
+            card.name: card.as_dict() for card in self.cards.all()
+        }
+        if fp is None:
+            return json.dumps(cards_as_dict, cls=CubeEncoder)
+        else:
+            return json.dump(cards_as_dict, fp, cls=CubeEncoder)
 
 
 class User(models.Model):

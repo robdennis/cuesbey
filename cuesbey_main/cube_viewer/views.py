@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.generic import ListView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -21,13 +21,27 @@ def details(request, id):
         cube=cube
     ), context_instance=RequestContext(request))
 
-def cube_contents(request, id):
+def cube_contents(request):
 
-    cube = get_object_or_404(Cube, pk=id)
+    if not request.is_ajax():
+        raise Http404
 
-    return HttpResponse(json.dumps({
-        card.name: card.as_dict() for card in cube.cards
-    }), mimetype="application/json")
+    if request.method == 'GET':
+        message = "This is an XHR GET request"
+    elif request.method == 'POST':
+        message = "This is an XHR POST request"
+        # Here we can access the POST data
+        print request.POST
+    else:
+        message = 'unknown message type'
+
+    return HttpResponse(message)
+
+#    cube = get_object_or_404(Cube, pk=id)
+#
+#    return HttpResponse(json.dumps({
+#        card.name: card.as_dict() for card in cube.cards
+#    }), mimetype="application/json")
 
 def run_test(request, unit_test_name='test'):
 

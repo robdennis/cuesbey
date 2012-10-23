@@ -208,17 +208,23 @@ def _handle_suspend(card, h):
 def get_heuristics(card):
 
     h = {}
-
-    _handle_monocolor_hybrid(card, h)
-    _handling_cycling_with_activated_abilities(card, h)
-    _handle_affinity_for_basic_land(card, h)
-    _handle_living_weapon(card, h)
-    _handle_caring_about_land_types(card, h)
-    _handle_phyrexian(card, h)
-    _handle_off_color_flashback(card, h)
-    _handle_kicker(card, h)
-    _handle_token_generators(card, h)
-    _handle_activated_abilities(card, h)
-    _handle_suspend(card, h)
+    if not card.text:
+        # TODO: this may not be true, but it's definitely mostly true
+        return
+    try:
+        _handle_monocolor_hybrid(card, h)
+        _handling_cycling_with_activated_abilities(card, h)
+        _handle_affinity_for_basic_land(card, h)
+        _handle_living_weapon(card, h)
+        _handle_caring_about_land_types(card, h)
+        _handle_phyrexian(card, h)
+        _handle_off_color_flashback(card, h)
+        _handle_kicker(card, h)
+        _handle_token_generators(card, h)
+        _handle_activated_abilities(card, h)
+        _handle_suspend(card, h)
+    except:
+        log.error('error getting heuristics for card: %r', card)
+        raise
 
     return h

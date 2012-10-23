@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url, include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 
-from cuesbey_main.cube_viewer.views import CubeView, details, run_test
+from cuesbey_main.cube_viewer.views import CubeView, details, run_test, cube_contents
 
 admin.autodiscover()
 
@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^admin/$', include(admin.site.urls)),
     url(r'^cubes/$', CubeView.as_view()),
     url(r'^cube/(?P<id>\w+)/$', details),
+    url(r'^cube_content/$', cube_contents)
 )
 
 if settings.DEBUG:

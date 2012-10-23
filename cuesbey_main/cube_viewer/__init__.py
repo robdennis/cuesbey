@@ -8,6 +8,11 @@ from slumber.exceptions import HttpClientError
 
 from cuesbey_main.cube_viewer.autolog import log
 
+class CardFetchingError(Exception):
+    """
+    Unknown error fetching a particular card
+    """
+
 color_mappings = dict((
     ('W', 'White'),
     ('U', 'Blue'),
@@ -216,16 +221,31 @@ def get_json_card_content(name):
         actual = api.card(name).get()
     except HttpClientError as e:
         log.exception('problem with cardname: %r', name)
-        raise
+        raise CardFetchingError(u'unable to fetch a card with name: {!r}'.format(name))
+
 
     for act_key, act_val in actual.iteritems():
         # limit what's returned to a whitelist of the above
         if act_key in comprehensive:
             comprehensive[act_key] = act_val
 
-    color_indicator = comprehensive.get('color_indicator')
-    if color_indicator and isinstance(color_indicator, basestring):
-        comprehensive['color_indicator'] = comprehensive['color_indicator'].split(', ').sort()
+    # we're renaming this to _color_indicator and have a property for the set
+    # equivalent
+    color_indicator = comprehensive.pop('color_indicator', None)
+    try:
+        if color_indicator and isinstance(color_indicator, basestring):
+            if ',' in color_indicator:
+                comprehensive['_color_indicator'] = color_indicator.split(', ')
+            else:
+                comprehensive['_color_indicator'] = [color_indicator]
+
+            log.debug('found a color indicator: %s -> %r',
+                color_indicator,
+                comprehensive['_color_indicator']
+            )
+    except:
+        log.exception('what happened?')
+        raise
 
 
 

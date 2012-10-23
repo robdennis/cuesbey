@@ -89,6 +89,13 @@ class CardModelTest(TestCase):
         self.assertEqual(['{1}{G/P}'], Card.get('Birthing Pod').activated_ability_mana_costs)
         self.assertEqual(['{3}', '{U}'], Card.get('Crystal Shard').activated_ability_mana_costs)
 
+    def test_handle_color_indicator(self):
+        self.assertEqual({'Blue'}, Card.get('Ancestral Vision').colors)
+        self.assertEqual({'Green'}, Card.get('Dryad Arbor').colors)
+        self.assertEqual({'White', 'Blue', 'Black', 'Red', 'Green'},
+            Card.get('Transguild Courier').colors)
+
+
 class HelpersTest(TestCase):
 
     def test_simple_cost_merge(self):
@@ -440,9 +447,7 @@ class CardCategoryTest(TestCase):
         self.assertHeuristicsArePresent('Ancestral Vision', dict(
             suspend_as_cmc=dict(
                 converted_mana_cost = 1,
-                mana_cost = '{U}',
-                colors = {'Blue'}
-            )
+                mana_cost = '{U}')
         ))
 
 

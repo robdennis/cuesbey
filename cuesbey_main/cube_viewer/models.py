@@ -10,13 +10,11 @@ from unidecode import unidecode
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 
-from cuesbey_main.cube_viewer import get_json_card_content, heuristics, color_mappings, parse_mana_cost, stitch_mana_cost, merge_mana_costs, estimate_colors
+from cuesbey_main.cube_viewer import (get_json_card_content, heuristics,
+                                      parse_mana_cost, estimate_colors,
+                                      CardFetchingError)
 from cuesbey_main.cube_viewer.autolog import log
 
-class CardFetchingError(Exception):
-    """
-    Unknown error fetching a particular card
-    """
 
 def make_and_insert_card(name):
     cleaned_name = _clean_cardname(name)
@@ -26,18 +24,9 @@ def make_and_insert_card(name):
         log.debug('successfully fetched %s', fetched_card)
         return fetched_card
     except Card.DoesNotExist:
-        try:
-            card_content = get_json_card_content(cleaned_name)
-        except:
-            card_content = None
 
+        card_content = get_json_card_content(cleaned_name)
         log.info('got card content: %s', card_content)
-        # this may need to be bubbling an exception instead
-        if card_content is None:
-            raise CardFetchingError(u'unable to fetch a card with name: {!r}{}'.format(
-                name,
-                u'' if name == cleaned_name else u', cleaned as: {!r}'.format(cleaned_name))
-            )
 
         try:
             # we'll try to refetch in case we were able to clean a good name
@@ -80,7 +69,7 @@ class Card(models.Model):
     types = ArrayField(dbtype='text')
     subtypes = ArrayField(dbtype='text', null=True)
     text = models.CharField(max_length=1024*8, null=True)
-    color_indicator = ArrayField(dbtype='text', null=True)
+    _color_indicator = ArrayField(dbtype='text', null=True)
     watermark = models.CharField(max_length=200, null=True)
     power = models.CharField(max_length=200, null=True)
     toughness = models.CharField(max_length=200, null=True)
@@ -96,6 +85,13 @@ class Card(models.Model):
         'name', 'mana_cost', 'converted_mana_cost', 'types',
         'colors', 'gatherer_ids', 'heuristics'
     )
+
+    @property
+    def color_indicator(self):
+        if not hasattr(self, '_color_indicator_set'):
+            self._color_indicator_set = set(self._color_indicator or [])
+
+        return self._color_indicator_set
 
     @property
     def parsed_mana_cost(self):

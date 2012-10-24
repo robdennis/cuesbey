@@ -1,4 +1,4 @@
-import json
+import os
 
 from django.http import HttpResponse, Http404
 from django.views.generic import ListView
@@ -6,6 +6,8 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
 from cube_viewer.models import Cube
+
+__here__ = os.path.abspath(os.path.dirname(__file__))
 
 class CubeView(ListView):
     template_name = "cube_view.html"
@@ -21,7 +23,11 @@ def details(request, id):
         cube=cube
     ), context_instance=RequestContext(request))
 
-def cube_contents(request):
+def cube_contents(request, file_name=None):
+
+    if file_name:
+        with open(os.path.join(__here__, file_name), 'rb') as json:
+            return HttpResponse(json.read(), mimetype="application/json")
 
     if not request.is_ajax():
         raise Http404

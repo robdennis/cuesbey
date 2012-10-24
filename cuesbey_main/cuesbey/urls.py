@@ -23,5 +23,6 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += patterns('',
         url(r'^test/(P<unit_test_name>\w+)/$', run_test),
-        url(r'^test/$', run_test)
+        url(r'^test/$', run_test),
+        url(r'^file_content/(?P<file_name>.+)/$', cube_contents)
     )

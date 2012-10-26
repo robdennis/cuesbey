@@ -5,7 +5,9 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from cube_viewer.models import Cube
+from cuesbey_main.cube_viewer.models import Cube
+
+from cuesbey_main.cube_viewer.autolog import log
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,23 +33,18 @@ def cube_contents(request, file_name=None):
 
     if not request.is_ajax():
         raise Http404
-
+    log.debug(request.method)
     if request.method == 'GET':
-        message = "This is an XHR GET request"
+        id = request.GET['cube_id']
     elif request.method == 'POST':
-        message = "This is an XHR POST request"
-        # Here we can access the POST data
-        print request.POST
+        id = request.POST['cube_id']
     else:
-        message = 'unknown message type'
+        raise Http404
 
-    return HttpResponse(message)
+    cube = get_object_or_404(Cube, pk=id)
 
-#    cube = get_object_or_404(Cube, pk=id)
-#
-#    return HttpResponse(json.dumps({
-#        card.name: card.as_dict() for card in cube.cards
-#    }), mimetype="application/json")
+    return HttpResponse(cube.serialize(),
+        mimetype="application/json")
 
 def run_test(request, unit_test_name='test'):
 

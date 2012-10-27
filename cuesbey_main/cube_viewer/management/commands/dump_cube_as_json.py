@@ -19,4 +19,4 @@ class Command(BaseCommand):
 
             base = os.path.basename(fpath)
             with open('%s_dump.json' % base, 'wb') as out:
-                cube.serialize(out)
+                cube.serialize(out, indent=4)

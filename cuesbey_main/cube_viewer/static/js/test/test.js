@@ -12,7 +12,6 @@ function get_cube_from_server(id) {
             test_cube = data;
         },
         data: {
-            // TODO: ensure this is always the modo cube?
             cube_id: id
         },
         async: false
@@ -36,7 +35,7 @@ function get_cube_from_jstest_runner(id) {
         success: function(data) {
             test_cube = data;
         },
-        error: function(data) {
+        error: function() {
             test_cube = null;
         },
         async: false
@@ -45,14 +44,21 @@ function get_cube_from_jstest_runner(id) {
     return test_cube;
 }
 
+function get_cube(id) {
+    // the jstest runner can't hit the cuesbey server, so try to get the cube from the js test runner server first
+    var test_cube = get_cube_from_jstest_runner(id);
+    if (!test_cube) {
+        test_cube = get_cube_from_server(id);
+    }
+
+    return test_cube;
+}
+
 test( "sorting a cube test", function() {
     var total_cards = 0;
 
-    // the jstest runner can't hit the cuesbey server, so try to get the cube from the js test runner server first
-    var test_cube = get_cube_from_jstest_runner(1);
-    if (!test_cube) {
-        test_cube = get_cube_from_server(1)
-    }
+    // TODO: ensure this is always the modo cube?
+    var test_cube = get_cube(1);
 
     for (i in test_cube) {
         if (test_cube.hasOwnProperty(i)) {
@@ -65,7 +71,7 @@ test( "sorting a cube test", function() {
     // Sanity Check
     deepEqual(test_cube['Elite Vanguard']['colors'], ['White'], "sanity checking");
     // currently just done to trip side effects
-    var sortedCube = sorter(test_cube);
+    sorter(test_cube);
     // do we see the expected number/types of heuristics
     deepEqual(heuristic_names, [
         "activated_ability_costs_affect_color",

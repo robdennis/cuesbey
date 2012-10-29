@@ -11,7 +11,7 @@ install_requires = [
     'psycopg2==2.4.1',
     'django-orm-extensions',
     'logging_unterpolation',
-    'django-bitfield,'
+    'django-bitfield'
 ]
 
 # in case additional setup needs to be done on different versions of python

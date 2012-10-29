@@ -11,7 +11,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'cuesbey.views.home', name='home'),
     # url(r'^cuesbey/', include('cuesbey.foo.urls')),
-
+    url(r'^$', CubeView.as_view()),
     url(r'^admin/doc/$', include('django.contrib.admindocs.urls')),
     url(r'^admin/$', include(admin.site.urls)),
     url(r'^cubes/$', CubeView.as_view()),

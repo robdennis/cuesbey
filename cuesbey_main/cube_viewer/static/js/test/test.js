@@ -188,7 +188,12 @@ test( "category tests", function() {
     deepEqual(meetsCategory(simpleCard, '!Creature'), false, "creatures are not creatures (negation)");
     deepEqual(meetsCategory(simpleCard, 'Colorless'), false, "white cards are not colorless");
     deepEqual(meetsCategory(simpleCard, '!Colorless'), true, "white cards are not colorless (negation)");
-    deepEqual(meetsCategory(testCube['Karn Liberated'], 'Colorless'), true, "colorless");
+    deepEqual(meetsCategory(testCube['Karn Liberated'], 'Colorless'), true, "karn is colorless");
+    deepEqual(meetsCategory(testCube['Karn Liberated'], 'Colorless/Artifact'), false, "karn liberated is not an artifact");
+    deepEqual(meetsCategory(testCube['Karn Liberated'], 'Colorless/!Artifact/!Land'), true, "karn liberated is a colorless non-land/non-artifact");
+    deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless/!Artifact'), false, "colorless");
+    deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless/Artifact'), true, "colorless");
+    deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless'), true, "colorless");
     deepEqual(meetsCategory(simpleCard, 'Land'), false);
 
 });

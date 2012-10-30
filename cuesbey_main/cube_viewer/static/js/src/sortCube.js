@@ -1,7 +1,14 @@
 var heuristicNames = [];
+var colorList = ['White', 'Blue', 'Black', 'Red', 'Green'];
+var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Tribal'];
 
-function isArray(object) {
-    return Object.prototype.toString.call( object ) === '[object Array]';
+//function isArray(object) {
+//    return Object.prototype.toString.call( object ) === '[object Array]';
+//}
+
+function arrayEquals(arr1, arr2) {
+    //http://stackoverflow.com/questions/1773069/using-jquery-to-compare-two-arrays
+    return $(arr1).not(arr2).length == 0 && $(arr2).not(arr1).length == 0;
 }
 
 function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {
@@ -9,7 +16,7 @@ function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {
 
     var sortedCube = {};
 
-    _recurseSpec = function (subSpec, subCube) {
+    var _recurseSpec = function (subSpec, subCube) {
         $.each(subSpec, function(_subName, _subSpec) {
             console.log('looking at:', _subName, _subSpec);
             if (jQuery.isEmptyObject(_subSpec)) {
@@ -39,7 +46,7 @@ function sorter(serializedCube, sortSpec, defaultSort) {
 
     $.each(serializedCube, function(index, value) {
         console.log('sorting card:', index, value);
-        handle_cube_card(value, sortedCube, sortSpec);
+        handleCubeCard(value, sortedCube);
     });
 
     heuristicNames.sort();
@@ -47,7 +54,64 @@ function sorter(serializedCube, sortSpec, defaultSort) {
     return sortedCube;
 }
 
-function handle_cube_card(card, sortedCube) {
+function _checkForExactColor(category, card) {
+    if (category == 'Colorless') {
+        // special case for colorlessness
+        return card['colors'].length == 0;
+    }
+    if ($.inArray(category, colorList) !== -1) {
+        return arrayEquals([category], card['colors']);
+    } else {
+        return undefined;
+    }
+}
+
+function _checkForColorless(category, card) {
+    if ($.inArray(category, colorList) !== -1) {
+        return arrayEquals([category], card['colors']);
+    } else {
+        return undefined;
+    }
+}
+
+function _checkForType(category, card) {
+    if ($.inArray(category, typeList) !== -1) {
+//        console.log('checking if', category, 'is in', card['types'], "=", jQuery.inArray(category, card['types'])!==-1);
+        return jQuery.inArray(category, card['types'])!==-1;
+    } else {
+        return undefined;
+    }
+}
+
+function meetsCategory(card, category) {
+    console.log('checking if ', card, 'meets a category', category);
+
+    var matchesCategory = false;
+    $.each(category.split('/'), function(idx, cat) {
+        var negateCategory = cat.indexOf('!') === 0;
+        if (negateCategory) {
+            // split off the exclamation mark
+            cat = cat.substring(1);
+        }
+
+        $.each([
+            _checkForExactColor,
+            _checkForType
+        ], function(_, checker) {
+            var result =  checker(cat, card);
+            if (result === undefined) {
+                return result;
+            } else {
+                matchesCategory = negateCategory ? !result : result;
+                return matchesCategory
+            }
+        });
+        return matchesCategory
+    });
+    return matchesCategory;
+}
+
+function handleCubeCard(card, sortedCube) {
 
     // if there are heuristics, note what they are
     $.each(card['heuristics'] || {}, function(name, modifications) {
@@ -57,6 +121,8 @@ function handle_cube_card(card, sortedCube) {
     });
 
 
+
+    return sortedCube;
 }
 
 

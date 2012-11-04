@@ -18,13 +18,11 @@ function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {
 
     var _recurseSpec = function (subSpec, subCube) {
         $.each(subSpec, function(_subName, _subSpec) {
-            console.log('looking at:', _subName, _subSpec);
+//            console.log('looking at:', _subName, _subSpec);
             if (jQuery.isEmptyObject(_subSpec)) {
                 // check that we don't have an information key like a "_sort"
-                console.log('empty subspec, making list');
                 subCube[_subName] = [];
             } else {
-                console.log('recursing with:', _subName, _subSpec);
                 var _recurseCube = {};
                 subCube[_subName] = _recurseCube;
                 _recurseSpec(_subSpec, _recurseCube);
@@ -51,6 +49,18 @@ function sorter(serializedCube, sortSpec, defaultSort) {
 
     heuristicNames.sort();
 
+    var _recurseSort = function (subCube) {
+        $.each(subCube, function(_subName, _subCube) {
+            if (jQuery.isArray(_subCube)) {
+                _subCube.sort(defaultSort);
+            } else {
+                _recurseSort(_subCube);
+            }
+        })
+    };
+
+    _recurseSort(sortedCube);
+
     return sortedCube;
 }
 
@@ -58,6 +68,10 @@ function _checkForExactColor(category, card) {
     if (category == 'Colorless') {
         // special case for colorlessness
         return card['colors'].length == 0;
+    }
+    if (category == 'Multicolor') {
+        // special case for multicolored
+        return card['colors'].length > 1;
     }
     if ($.inArray(category, colorList) !== -1) {
         return arrayEquals([category], card['colors']);
@@ -84,7 +98,7 @@ function _checkForType(category, card) {
 }
 
 function meetsCategory(card, category) {
-    console.log('checking if ', card, 'meets a category', category);
+//    console.log('checking if ', card, 'meets a category', category);
 
     var matchesCategory = false;
     $.each(category.split('/'), function(idx, cat) {
@@ -120,7 +134,22 @@ function handleCubeCard(card, sortedCube) {
         }
     });
 
+    var _recurseCube = function (subCube) {
+        $.each(subCube, function(_subName, _subCube) {
+            if (!meetsCategory(card, _subName)) {
+                return;
+            }
 
+            if (jQuery.isArray(_subCube)) {
+                // we're done here
+                _subCube.push(card);
+            } else {
+                _recurseCube(_subCube);
+            }
+        })
+    };
+
+    _recurseCube(sortedCube);
 
     return sortedCube;
 }

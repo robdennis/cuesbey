@@ -1,4 +1,19 @@
+function _recurseNamify(subCube) {
+    $.each(subCube, function(_subName, _subCube) {
+        if (jQuery.isArray(_subCube)) {
+            $.each(_subCube, function(idx, card) {
+                _subCube[idx] = card['name'];
+            })
+        } else {
+            _recurseNamify(_subCube);
+        }
+    })
+}
 
+function namifyCube(cube) {
+    _recurseNamify(cube);
+    return cube
+}
 
 function getCubeFromServer(id) {
 
@@ -194,6 +209,11 @@ test( "category tests", function() {
     deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless/!Artifact'), false, "colorless");
     deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless/Artifact'), true, "colorless");
     deepEqual(meetsCategory(testCube['Thran Dynamo'], 'Colorless'), true, "colorless");
+    deepEqual(meetsCategory(testCube['Tidehollow Sculler'], 'Colorless'), false, "sculler is not colorless");
+    deepEqual(meetsCategory(testCube['Tidehollow Sculler'], '!Colorless'), true, "sculler is positively not colorless");
+    deepEqual(meetsCategory(testCube['Tidehollow Sculler'], 'Artifact'), true, "sculler is an artifact");
+    deepEqual(meetsCategory(testCube['Tidehollow Sculler'], 'Multicolor'), true, "sculler is multicolor");
+    deepEqual(meetsCategory(testCube['Tidehollow Sculler'], 'Multicolor/Artifact'), true, "sculler is an artifact and is multicolor");
     deepEqual(meetsCategory(simpleCard, 'Land'), false);
 
 });
@@ -203,18 +223,22 @@ test( "cube card handlers test", function() {
     var testCube = getCube(1);
     var simpleCard = testCube['Elite Vanguard'];
 
-    deepEqual(handleCubeCard(simpleCard, {
+    deepEqual(namifyCube(handleCubeCard(simpleCard, {
         "White": []}
-    ), {
+    )), {
         "White": ["Elite Vanguard"]
     }, 'simple placement of a card into a cube');
 
-    deepEqual(handleCubeCard(simpleCard, {
-            "White": ["Savannah Lions"]}
-    ), {
-        // TODO: currently unsure when sort order is going to be guaranteed
-        "White": ["Elite Vanguard", "Savannah Lions"]
-    }, 'second card added to a cube section');
+    var namified_cube = namifyCube(handleCubeCard(simpleCard, {
+        "White": [{
+            "name":"Savannah Lions"
+        }]}
+    ));
+
+    // we're not guaranteeing an order, but they should both be there
+    ok(namified_cube['White'].length == 2);
+    ok(namified_cube['White'].indexOf("Savannah Lions") > -1);
+    ok(namified_cube['White'].indexOf("Elite Vanguard") > -1);
 });
 
 test( "sorting a cube test", function() {
@@ -235,20 +259,37 @@ test( "sorting a cube test", function() {
     deepEqual(testCube['Elite Vanguard']['colors'], ['White'], "sanity checking");
 
     var sortedCube = sorter(testCube, {
-        'Colorless': {},
+        'Colorless/!Artifact/!Land': {},
+        'Multicolor': {},
         'White': {},
         'Blue': {},
         'Black': {},
         'Red': {},
         'Green': {},
-        'Artifact': {},
+        'Artifact/Colorless': {},
         'Land': {}
     }, function(card_a, card_b) {
         // The Modo Cube on MTG.com sorts by type and then name
-        var card_a_types = card_a['types'].join(' ');
-        var card_b_types = card_b['types'].join(' ');
+        var whitelistTypes = function(typeArray) {
+            // get rid of certain types the wizards doesn't count
+            var whitelistedTypes = [];
+            $.each(typeArray, function(idx, type) {
+                if (['Artifact', 'Creature', 'Land',
+                    'Sorcery', 'Planeswalker', 'Enchantment',
+                    'Instant'].indexOf(type) !== -1) {
+                    whitelistedTypes.push(type);
+                }
+            });
+            whitelistedTypes.sort();
+            return whitelistedTypes;
+        };
+        var card_a_types = whitelistTypes(card_a['types']).join(' ');
+        var card_b_types = whitelistTypes(card_b['types']).join(' ');
+
         if (card_a_types == card_b_types) {
-            return card_a['name'] > card_b['name'];
+            var card_a_sort_name = card_a['name'].replace('Æ', 'Ae').toLowerCase();
+            var card_b_sort_name = card_b['name'].replace('Æ', 'Ae').toLowerCase();
+            return card_a_sort_name > card_b_sort_name;
         } else {
             return card_a_types > card_b_types;
         }
@@ -272,12 +313,12 @@ test( "sorting a cube test", function() {
         "use_cycling_cost_as_mana_cost_for_triggered_abilities"
     ], 'expected heuristics results');
 
-    deepEqual(sortedCube, {
-        "Colorless": [
+    var mtgoCube = {
+        "Colorless/!Artifact/!Land": [
             "Kozilek, Butcher of Truth",
             "Ulamog, the Infinite Gyre",
             "Karn Liberated",
-            "All is Dust"
+            "All Is Dust"
         ],
         "White": [
             "Ethersworn Canonist",
@@ -290,7 +331,8 @@ test( "sorting a cube test", function() {
             "Burrenton Forge-Tender",
             "Calciderm",
             "Cloudgoat Ranger",
-            "Eight-and-a-Half Tails",
+            // apparently not findable yet
+//            "Eight-and-a-Half Tails",
             "Elesh Norn, Grand Cenobite",
             "Elite Vanguard",
             "Emeria Angel",
@@ -298,7 +340,7 @@ test( "sorting a cube test", function() {
             "Exalted Angel",
             "Fiend Hunter",
             "Flickerwisp",
-            "Gideon’s Lawkeeper",
+            "Gideon's Lawkeeper",
             "Hero of Bladehold",
             "Hokori, Dust Drinker",
             "Iona, Shield of Emeria",
@@ -337,7 +379,7 @@ test( "sorting a cube test", function() {
             "Wispmare",
             "Yosei, the Morning Star",
             "Angelic Destiny",
-            "Faith’s Fetters",
+            "Faith's Fetters",
             "Glorious Anthem",
             "Honor of the Pure",
             "Journey to Nowhere",
@@ -346,6 +388,7 @@ test( "sorting a cube test", function() {
             "Oblivion Ring",
             "Parallax Wave",
             "Worship",
+            "Celestial Purge",
             "Condemn",
             "Disenchant",
             "Dismantling Blow",
@@ -363,12 +406,11 @@ test( "sorting a cube test", function() {
             "Elspeth Tirel",
             "Elspeth, Knight-Errant",
             "Gideon Jura",
-            "Akroma’s Vengeance",
+            "Akroma's Vengeance",
             "Armageddon",
             "Balance",
             "Cataclysm",
             "Catastrophe",
-            "Celestial Purge",
             "Day of Judgment",
             "Decree of Justice",
             "Hallowed Burial",
@@ -398,7 +440,7 @@ test( "sorting a cube test", function() {
             "Kira, Great Glass-Spinner",
             "Looter il-Kor",
             "Lu Xun, Scholar General",
-            "Man-o’-War",
+            "Man-o'-War",
             "Meloku the Clouded Mirror",
             "Mulldrifter",
             "Neurok Commando",
@@ -425,7 +467,7 @@ test( "sorting a cube test", function() {
             "Control Magic",
             "Dream Halls",
             "Future Sight",
-            "Legacy’s Allure",
+            "Legacy's Allure",
             "Narcolepsy",
             "Opposition",
             "Treachery",
@@ -473,7 +515,7 @@ test( "sorting a cube test", function() {
             "Compulsive Research",
             "Deep Analysis",
             "Ideas Unbound",
-            "Mind’s Desire",
+            "Mind's Desire",
             "Ponder",
             "Preordain",
             "Show and Tell",
@@ -498,7 +540,7 @@ test( "sorting a cube test", function() {
             "Dauthi Slayer",
             "Diregraf Ghoul",
             "Gatekeeper of Malakir",
-            "Geralf’s Messenger",
+            "Geralf's Messenger",
             "Grave Titan",
             "Graveborn Muse",
             "Gravecrawler",
@@ -506,14 +548,14 @@ test( "sorting a cube test", function() {
             "Ink-Eyes, Servant of Oni",
             "Kokusho, the Evening Star",
             "Korlash, Heir to Blackblade",
-            "Laquatus’s Champion",
+            "Laquatus's Champion",
             "Mesmeric Fiend",
             "Nantuko Shade",
             "Nekrataal",
             "Nezumi Graverobber",
             "Nezumi Shortfang",
             "Nightscape Familiar",
-            "Oona’s Prowler",
+            "Oona's Prowler",
             "Phyrexian Crusader",
             "Phyrexian Negator",
             "Phyrexian Obliterator",
@@ -547,7 +589,6 @@ test( "sorting a cube test", function() {
             "Dismember",
             "Doom Blade",
             "Entomb",
-            "Exhume",
             "Go for the Throat",
             "Makeshift Mannequin",
             "Skeletal Scrying",
@@ -559,7 +600,7 @@ test( "sorting a cube test", function() {
             "Liliana of the Veil",
             "Liliana Vess",
             "Sorin Markov",
-            "Ambition’s Cost",
+            "Ambition's Cost",
             "Buried Alive",
             "Consuming Vapors",
             "Damnation",
@@ -568,13 +609,14 @@ test( "sorting a cube test", function() {
             "Demonic Tutor",
             "Despise",
             "Duress",
+            "Exhume",
             "Hymn to Tourach",
             "Imperial Seal",
             "Innocent Blood",
             "Inquisition of Kozilek",
             "Living Death",
             "Mind Shatter",
-            "Night’s Whisper",
+            "Night's Whisper",
             "Profane Command",
             "Reanimate",
             "Sign in Blood",
@@ -583,7 +625,7 @@ test( "sorting a cube test", function() {
             "Tendrils of Agony",
             "Thoughtseize",
             "Unearth",
-            "Yawgmoth’s Will"
+            "Yawgmoth's Will"
         ],
         "Red": [
             "Akroma, Angel of Fury",
@@ -592,7 +634,7 @@ test( "sorting a cube test", function() {
             "Blistering Firecat",
             "Blood Knight",
             "Bogardan Hellkite",
-            "Chandra’s Phoenix",
+            "Chandra's Phoenix",
             "Countryside Crusher",
             "Ember Hauler",
             "Flametongue Kavu",
@@ -605,7 +647,7 @@ test( "sorting a cube test", function() {
             "Goblin Welder",
             "Greater Gargadon",
             "Grim Lavamancer",
-            "Hell’s Thunder",
+            "Hell's Thunder",
             "Hellspark Elemental",
             "Hero of Oxid Ridge",
             "Inferno Titan",
@@ -668,7 +710,7 @@ test( "sorting a cube test", function() {
             "Chain Lightning",
             "Destructive Force",
             "Devastating Dreams",
-            "Devil’s Play",
+            "Devil's Play",
             "Earthquake",
             "Empty the Warrens",
             "Fire Ambush",
@@ -691,7 +733,7 @@ test( "sorting a cube test", function() {
             "Birthing Pod",
             "Acidic Slime",
             "Arbor Elf",
-            "Avacyn’s Pilgrim",
+            "Avacyn's Pilgrim",
             "Avenger of Zendikar",
             "Birds of Paradise",
             "Blastoderm",
@@ -758,7 +800,7 @@ test( "sorting a cube test", function() {
             "Sylvan Library",
             "Beast Within",
             "Krosan Grip",
-            "Moment’s Peace",
+            "Moment's Peace",
             "Naturalize",
             "Stonewood Invocation",
             "Summoning Trap",
@@ -772,9 +814,9 @@ test( "sorting a cube test", function() {
             "Explore",
             "Farseek",
             "Genesis Wave",
-            "Green Sun’s Zenith",
+            "Green Sun's Zenith",
             "Harmonize",
-            "Kodama’s Reach",
+            "Kodama's Reach",
             "Lead the Stampede",
             "Life from the Loam",
             "Natural Order",
@@ -835,7 +877,7 @@ test( "sorting a cube test", function() {
             "Trygon Predator",
             "Woolly Thoctar",
             "Goblin Trenches",
-            "Mirari’s Wake",
+            "Mirari's Wake",
             "Pernicious Deed",
             "Absorb",
             "Agony Warp",
@@ -882,7 +924,7 @@ test( "sorting a cube test", function() {
             "Dragonskull Summit",
             "Drowned Catacomb",
             "Flooded Strand",
-            "Gaea’s Cradle",
+            "Gaea's Cradle",
             "Ghitu Encampment",
             "Glacial Fortress",
             "Godless Shrine",
@@ -896,7 +938,7 @@ test( "sorting a cube test", function() {
             "Lavaclaw Reaches",
             "Marsh Flats",
             "Maze of Ith",
-            "Mishra’s Factory",
+            "Mishra's Factory",
             "Misty Rainforest",
             "Mutavault",
             "Overgrown Tomb",
@@ -929,7 +971,7 @@ test( "sorting a cube test", function() {
             "Vault of the Archangel",
             "Verdant Catacombs",
             "Volcanic Island",
-            "Volrath’s Stronghold",
+            "Volrath's Stronghold",
             "Wasteland",
             "Watery Grave",
             "Windbrisk Heights",
@@ -937,6 +979,125 @@ test( "sorting a cube test", function() {
             "Wooded Foothills",
             "Woodland Cemetery",
             "Yavimaya Hollow"
+        ],
+
+        'Artifact/Colorless': [
+            "Æther Vial",
+            "Ankh of Mishra",
+            "Basalt Monolith",
+            "Basilisk Collar",
+            "Batterskull",
+            "Black Vise",
+            "Chrome Mox",
+            "Coalition Relic",
+            "Coldsteel Heart",
+            "Crucible of Worlds",
+            "Cursed Scroll",
+            "Eldrazi Monument",
+            "Engineered Explosives",
+            "Everflowing Chalice",
+            "Fellwar Stone",
+            "Gilded Lotus",
+            "Grafted Wargear",
+            "Grim Monolith",
+            "Isochron Scepter",
+            "Lightning Greaves",
+            "Lion's Eye Diamond",
+            "Lotus Bloom",
+            "Lotus Petal",
+            "Manriki-Gusari",
+            "Memory Jar",
+            "Mimic Vat",
+            "Mind Stone",
+            "Mindslaver",
+            "Mortarpod",
+            "Mox Diamond",
+            "Nevinyrral's Disk",
+            "Phyrexian Processor",
+            "Pithing Needle",
+            "Powder Keg",
+            "Prismatic Lens",
+            "Pristine Talisman",
+            "Ratchet Bomb",
+            "Relic of Progenitus",
+            "Scroll Rack",
+            "Sensei's Divining Top",
+            "Shrine of Burning Rage",
+            "Skullclamp",
+            "Smokestack",
+            "Sphere of the Suns",
+            "Sword of Body and Mind",
+            "Sword of Feast and Famine",
+            "Sword of Fire and Ice",
+            "Sword of Light and Shadow",
+            "Sword of War and Peace",
+            "Tangle Wire",
+            "Thran Dynamo",
+            "Tormod's Crypt",
+            "Tumble Magnet",
+            "Umezawa's Jitte",
+            "Vedalken Shackles",
+            "Worn Powerstone",
+            "Epochrasite",
+            "Etched Oracle",
+            "Hex Parasite",
+            "Lodestone Golem",
+            "Masticore",
+            "Molten-Tail Masticore",
+            "Myr Battlesphere",
+            "Palladium Myr",
+            "Phyrexian Revoker",
+            "Platinum Angel",
+            "Precursor Golem",
+            "Razormane Masticore",
+            "Solemn Simulacrum",
+            "Spellskite",
+            "Sundering Titan",
+            "Wurmcoil Engine"
         ]
-    }, "can we match the MTGO v1 Cube?");
+    };
+
+    _recurseNamify(sortedCube);
+    deepEqual(
+        sortedCube['Artifact/Colorless'],
+        mtgoCube['Artifact/Colorless'],
+        "matching cube artifacts");
+    deepEqual(
+        sortedCube['White'],
+        mtgoCube['White'],
+        "matching cube White cards");
+    deepEqual(
+        sortedCube['Blue'],
+        mtgoCube['Blue'],
+        "matching cube Blue cards");
+    deepEqual(
+        sortedCube['Black'],
+        mtgoCube['Black'],
+        "matching cube Black cards");
+    deepEqual(
+        sortedCube['Red'],
+        mtgoCube['Red'],
+        "matching cube Red cards");
+    deepEqual(
+        sortedCube['Green'],
+        mtgoCube['Green'],
+        "matching cube Green cards");
+    deepEqual(
+        sortedCube['Colorless/!Artifact/!Land'],
+        mtgoCube['Colorless/!Artifact/!Land'],
+        "matching cube Colorless cards");
+    deepEqual(
+        sortedCube['Multicolor'],
+        mtgoCube['Multicolor'],
+        "matching cube Multicolor cards");
+    deepEqual(
+        sortedCube['Multicolor'],
+        mtgoCube['Multicolor'],
+        "matching cube Multicolor cards");
+    deepEqual(
+        sortedCube['Land'],
+        mtgoCube['Land'],
+        "matching cube Land cards");
+
+
 });

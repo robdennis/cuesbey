@@ -2,13 +2,33 @@ var heuristicNames = [];
 var colorList = ['White', 'Blue', 'Black', 'Red', 'Green'];
 var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Tribal'];
 
-//function isArray(object) {
-//    return Object.prototype.toString.call( object ) === '[object Array]';
-//}
-
 function arrayEquals(arr1, arr2) {
     //http://stackoverflow.com/questions/1773069/using-jquery-to-compare-two-arrays
     return $(arr1).not(arr2).length == 0 && $(arr2).not(arr1).length == 0;
+}
+
+function splitCards(_old, _new) {
+    // jsondiff.com
+
+    var both = {};
+    var added = {};
+    var removed = {};
+
+    $.each($.extend({}, _old, _new), function(name, value) {
+        if (name in _old && name in _new) {
+            both[name] = value;
+        } else if (name in _new) {
+            added[name] = value;
+        } else {
+            removed[name] = value;
+        }
+    });
+
+    return {
+        both: both,
+        added: added,
+        removed: removed
+    }
 }
 
 function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {

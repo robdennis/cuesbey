@@ -1099,5 +1099,54 @@ test( "sorting a cube test", function() {
         mtgoCube['Land'],
         "matching cube Land cards");
 
+});
+
+test( "diffing a cube test", function() {
+    var testCube = getCube(1);
+
+    var subCube1 = {
+        'Tundra': testCube['Tundra'],
+        'Taiga': testCube['Taiga'],
+        'Volcanic Island': testCube['Volcanic Island'],
+        'Tropical Island': testCube['Tropical Island']
+    };
+
+    var subCube2 = {
+        'Scrubland': testCube['Scrubland'],
+        'Plateau': testCube['Plateau'],
+        'Volcanic Island': testCube['Volcanic Island'],
+        'Tropical Island': testCube['Tropical Island']
+    };
+
+    deepEqual(splitCards({}, {}), {
+        added: {},
+        removed: {},
+        both: {}
+    }, 'empty case');
+    deepEqual(splitCards(subCube1, {}), {
+        added: {},
+        removed: subCube1,
+        both: {}
+    }, 'all removed');
+    deepEqual(splitCards({}, subCube1), {
+        added: subCube1,
+        removed: {},
+        both: {}
+    }, 'all added');
+    deepEqual(splitCards(subCube1, subCube2), {
+        added: {
+            'Scrubland': testCube['Scrubland'],
+            'Plateau': testCube['Plateau']
+        },
+        removed: {
+            'Tundra': testCube['Tundra'],
+            'Taiga': testCube['Taiga']
+        },
+        both: {
+            'Volcanic Island': testCube['Volcanic Island'],
+            'Tropical Island': testCube['Tropical Island']
+        }
+    }, 'diffed');
+
 
 });

@@ -39,7 +39,7 @@ function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {
     var _recurseSpec = function (subSpec, subCube) {
         $.each(subSpec, function(_subName, _subSpec) {
 //            console.log('looking at:', _subName, _subSpec);
-            if (jQuery.isEmptyObject(_subSpec)) {
+            if ($.isEmptyObject(_subSpec)) {
                 // check that we don't have an information key like a "_sort"
                 subCube[_subName] = [];
             } else {
@@ -55,8 +55,14 @@ function turnSortSpecIntoSortedCubeSkeleton(sortSpec) {
     return sortedCube;
 }
 
-function sorter(serializedCube, sortSpec, defaultSort) {
-    var sortedCube = turnSortSpecIntoSortedCubeSkeleton(sortSpec);
+function sorter(serializedCube, sortSpec, defaultSort, existingCube, infoToAdd) {
+    var sortedCube;
+    if (existingCube) {
+        sortedCube = existingCube;
+    } else {
+        sortedCube = turnSortSpecIntoSortedCubeSkeleton(sortSpec)
+    }
+
 
     defaultSort = defaultSort || function(card_a, card_b) {
         return card_a['name'] > card_b['name']
@@ -64,14 +70,14 @@ function sorter(serializedCube, sortSpec, defaultSort) {
 
     $.each(serializedCube, function(index, value) {
         console.log('sorting card:', index, value);
-        handleCubeCard(value, sortedCube);
+        handleCubeCard(value, sortedCube, infoToAdd);
     });
 
     heuristicNames.sort();
 
     var _recurseSort = function (subCube) {
         $.each(subCube, function(_subName, _subCube) {
-            if (jQuery.isArray(_subCube)) {
+            if ($.isArray(_subCube)) {
                 _subCube.sort(defaultSort);
             } else {
                 _recurseSort(_subCube);
@@ -110,8 +116,8 @@ function _checkForColorless(category, card) {
 
 function _checkForType(category, card) {
     if ($.inArray(category, typeList) !== -1) {
-//        console.log('checking if', category, 'is in', card['types'], "=", jQuery.inArray(category, card['types'])!==-1);
-        return jQuery.inArray(category, card['types'])!==-1;
+//        console.log('checking if', category, 'is in', card['types'], "=", $.inArray(category, card['types'])!==-1);
+        return $.inArray(category, card['types'])!==-1;
     } else {
         return undefined;
     }
@@ -145,24 +151,28 @@ function meetsCategory(card, category) {
     return matchesCategory;
 }
 
-function handleCubeCard(card, sortedCube) {
+function handleCubeCard(card, sortedCube, infoToAdd) {
+    infoToAdd = infoToAdd || {};
+
+    // merge on information
+    var cardToHandle = $.extend({}, card, infoToAdd);
 
     // if there are heuristics, note what they are
-    $.each(card['heuristics'] || {}, function(name, modifications) {
-        if (jQuery.inArray(name, heuristicNames)==-1) {
+    $.each(cardToHandle['heuristics'] || {}, function(name, modifications) {
+        if ($.inArray(name, heuristicNames)==-1) {
             heuristicNames.push(name);
         }
     });
 
     var _recurseCube = function (subCube) {
         $.each(subCube, function(_subName, _subCube) {
-            if (!meetsCategory(card, _subName)) {
+            if (!meetsCategory(cardToHandle, _subName)) {
                 return;
             }
 
-            if (jQuery.isArray(_subCube)) {
+            if ($.isArray(_subCube)) {
                 // we're done here
-                _subCube.push(card);
+                _subCube.push(cardToHandle);
             } else {
                 _recurseCube(_subCube);
             }
@@ -174,4 +184,25 @@ function handleCubeCard(card, sortedCube) {
     return sortedCube;
 }
 
+function getDiffedCube(_old, _new, sortSpec) {
+    var sort_order_diff = {
+        both: 0,
+        added: 1,
+        removed: 2
+    };
 
+    var currentCube = turnSortSpecIntoSortedCubeSkeleton(sortSpec);
+    $.each(splitCards(_old, _new), function(type, value) {
+        currentCube = sorter(value, undefined, function(card_a, card_b) {
+            if (card_a['diff_result'] !== undefined &&
+                card_b['diff_result'] !== undefined) {
+                return ([sort_order_diff[card_a['diff_result']], card_a['name']].join('_') >
+                        [sort_order_diff[card_b['diff_result']], card_b['name']].join('_'));
+            } else {
+                return card_a['name'] > card_b['name'];
+            }
+        }, currentCube, {diff_result:type});
+    });
+
+    return currentCube;
+}

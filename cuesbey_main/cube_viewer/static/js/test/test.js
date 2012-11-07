@@ -1148,5 +1148,15 @@ test( "diffing a cube test", function() {
         }
     }, 'diffed');
 
-
+    deepEqual(namifyCube(getDiffedCube(subCube1, subCube2, {'Land': {}})), {
+        // order guaranteed by putting both -> added -> removed
+        'Land': [
+            'Tropical Island',
+            'Volcanic Island',
+            'Plateau',
+            'Scrubland',
+            'Taiga',
+            'Tundra'
+        ]
+    });
 });

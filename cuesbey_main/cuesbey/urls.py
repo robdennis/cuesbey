@@ -19,10 +19,12 @@ urlpatterns = patterns('',
     url(r'^cube_content/$', cube_contents)
 )
 
+urlpatterns += patterns('django.views.generic.simple',
+    (r'(.+\.html)$', 'direct_to_template')
+)
+
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
     urlpatterns += patterns('',
-        url(r'^test/(P<unit_test_name>\w+)/$', run_test),
-        url(r'^test/$', run_test),
         url(r'^file_content/(?P<file_name>.+)/$', cube_contents)
     )

@@ -197,14 +197,14 @@ class Cube(models.Model):
         for card_name in card_names:
             self.add_card_by_name(card_name)
 
-    def serialize(self, fp=None, indent=None):
+    def serialize(self, fp=None, **kwargs):
         cards_as_dict = {
             card.name: card.as_dict() for card in self.cards.all()
         }
         if fp is None:
-            return json.dumps(cards_as_dict, cls=CubeEncoder, indent=indent)
+            return json.dumps(cards_as_dict, cls=CubeEncoder, **kwargs)
         else:
-            return json.dump(cards_as_dict, fp, cls=CubeEncoder, indent=indent)
+            return json.dump(cards_as_dict, fp, cls=CubeEncoder, **kwargs)
 
 
 class User(models.Model):

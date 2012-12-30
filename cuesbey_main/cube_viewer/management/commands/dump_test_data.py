@@ -1,10 +1,9 @@
-import json
 import os
 from optparse import make_option
 
 from django.core.management.base import BaseCommand, CommandError
 
-from cuesbey_main.cube_viewer.management.commands import _get_uuid, md5_checksum, bulk_import
+from cuesbey_main.cube_viewer.management.commands import bulk_import
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
 

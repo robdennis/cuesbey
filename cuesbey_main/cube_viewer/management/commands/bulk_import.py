@@ -1,22 +1,19 @@
 #encoding: utf-8
-import sys
 import os
-import uuid
 from django.core.management.base import BaseCommand, CommandError
-from cuesbey_main.cube_viewer.models import Cube, make_and_insert_card, CardFetchingError
-from cuesbey_main.cube_viewer.management.commands import _get_uuid, md5_checksum
+from cuesbey_main.cube_viewer.models import Cube, CardFetchingError
 
 def save_cube_from_file_path(fpath):
-    file_hash = _get_uuid(md5_checksum(fpath))
+    file_name = os.path.basename(fpath)
 
     try:
         if not os.path.exists(fpath):
             raise CommandError('{} does not exist'.format(fpath))
-        cube = Cube.objects.get(name=file_hash)
+        cube = Cube.objects.get(name=file_name)
     except Cube.DoesNotExist:
         cube = Cube()
         cube.save()
-        cube.name = file_hash
+        cube.name = file_name
 
         with open(fpath, 'r') as cube_file:
             for card_name in cube_file:

@@ -1,0 +1,297 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1424" measuredH="759" mockupW="1424" mockupH="759">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1424" h="759" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>Cuesbey%0Ahttp%3A//cuesbey.com/cube_diff</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="__group__" x="22" y="425" w="183" h="296" measuredW="183" measuredH="296" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextArea" x="0" y="28" w="183" h="268" measuredW="200" measuredH="140" zOrder="0" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>Absorb%0AAcademy%20Rector%0AAcademy%20Ruins%0AAcidic%20Slime%0AAct%20of%20Aggression%0AAeon%20Chronicler%0AAEther%20Vial%0AAftershock%0AAgony%20Warp%0AAjani%20Goldmane%0AAjani%20Vengeant%0AAkroma%2C%20Angel%20of%20Fury%0AAkroma%2C%20Angel%20of%20Wrath%0AAkroma%27s%20Vengeance%0AAll%20Is%20Dust%0AAll%20Suns%27%20Dawn%0AAncestral%20Vision%0AAncient%20Grudge%0AAncient%20Tomb%0AAngel%20of%20Despair%0AAngelic%20Destiny%0AAnimate%20Dead%0AAnkh%20of%20Mishra%0AArbor%20Elf%0AArc%20Lightning%0AArc%20Trail%0AArid%20Mesa%0AArmageddon%0AAugury%20Adept%0AAvacyn%2C%20Angel%20of%20Hope%0AAvacyn%27s%20Pilgrim%0AAvalanche%20Riders%0AAven%20Mindcensor%0AAvenger%20of%20Zendikar%0AAwakening%20Zone%0ABadlands%0ABalance%0ABall%20Lightning%0ABane%20of%20the%20Living%0ABaneslayer%20Angel%0ABant%20Charm%0ABarbarian%20Ring%0ABasalt%20Monolith%0ABasilisk%20Collar%0ABatterskull%0ABayou%0ABeacon%20of%20Destruction%0ABeast%20Within%0ABirds%20of%20Paradise%0ABirthing%20Pod%0ABitterblossom%0ABituminous%20Blast%0ABlack%20Knight%0ABlack%20Vise%0ABlade%20Splicer%0ABlastoderm%0ABlistering%20Firecat%0ABlood%20Crypt%0ABlood%20Knight%0ABloodbraid%20Elf%0ABloodghast%0ABloodgift%20Demon%0ABloodstained%20Mire%0ABlue%20Elemental%20Blast%0ABogardan%20Hellkite%0ABoggart%20Ram-Gang%0ABone%20Shredder%0ABonfire%20of%20the%20Damned%0ABraids%2C%20Cabal%20Minion%0ABrain%20Freeze%0ABrainstorm%0ABreeding%20Pool%0ABrimstone%20Volley%0ABrine%20Elemental%0ABrooding%20Saurian%0ABroodmate%20Dragon%0ABuried%20Alive%0ABurning%20of%20Xinye%0ABurrenton%20Forge-Tender%0ACabal%20Coffers%0ACalciderm%0ACall%20of%20the%20Herd%0ACall%20the%20Skybreaker%0ACapsize%0ACareful%20Consideration%0ACataclysm%0ACatastrophe%0ACelestial%20Colonnade%0ACelestial%20Purge%0AChain%20Lightning%0AChameleon%20Colossus%0AChandra%20Nalaar%0AChandra%2C%20the%20Firebrand%0AChandra%27s%20Phoenix%0AChannel%0AChaos%20Warp%0AChar%0AChrome%20Mox%0ACity%20of%20Traitors%0AClifftop%20Retreat%0ACloudgoat%20Ranger%0ACloudthresher%0ACoalition%20Relic%0ACold-Eyed%20Selkie%0AColdsteel%20Heart%0ACompulsive%20Research%0ACondemn%0AConsecrated%20Sphinx%0AConsuming%20Vapors%0AControl%20Magic%0ACorpse%20Dance%0ACounterspell%0ACountryside%20Crusher%0ACreakwood%20Liege%0ACreeping%20Tar%20Pit%0ACrucible%20of%20Worlds%0ACruel%20Ultimatum%0ACryptic%20Command%0ACultivate%0ACursecatcher%0ACursed%20Scroll%0ADamnation%0ADark%20Confidant%0ADark%20Ritual%0ADauthi%20Horror%0ADay%20of%20Judgment%0ADaybreak%20Ranger%0ADaze%0ADeathmark%0ADecree%20of%20Justice%0ADecree%20of%20Pain%0ADeep%20Analysis%0ADelver%20of%20Secrets%0ADemonic%20Rising%0ADemonic%20Taskmaster%0ADemonic%20Tutor%0ADeprive%0ADeranged%20Hermit%0ADesertion%0ADesolate%20Lighthouse%0ADespise%0ADevastating%20Dreams%0ADevil%27s%20Play%0ADevoted%20Druid%0ADiabolic%20Edict%0ADiabolic%20Servitude%0ADiregraf%20Ghoul%0ADisenchant%0ADismantling%20Blow%0ADismember%0ADismiss%0ADissipate%0ADoom%20Blade%0ADoran%2C%20the%20Siege%20Tower%0ADragonskull%20Summit%0ADream%20Halls%0ADrogskol%20Reaver%0ADrowned%20Catacomb%0ADungeon%20Geists%0ADuress%0AEarthquake%0AEdric%2C%20Spymaster%20of%20Trest%0AEight-and-a-Half-Tails%0AEldrazi%20Monument%0AElectrolyze%0AElesh%20Norn%2C%20Grand%20Cenobite%0AElite%20Vanguard%0AElspeth%20Tirel%0AElspeth%2C%20Knight-Errant%0AElves%20of%20Deep%20Shadow%0AEmber%20Hauler%0AEmeria%20Angel%0AEmpty%20the%20Warrens%0AEnclave%20Cryptologist%0AEngineered%20Explosives%0AEnlightened%20Tutor%0AEntomb%0AEpochrasite%0AEsper%20Charm%0AEssence%20Scatter%0AEtched%20Oracle%0AEternal%20Dragon%0AEternal%20Witness%0AEthersworn%20Canonist%0AEverflowing%20Chalice%0AExalted%20Angel%0AExhume%0AExplore%0AFact%20or%20Fiction%0AFaith%27s%20Fetters%0AFalkenrath%20Aristocrat%0AFarseek%0AFathom%20Seer%0AFauna%20Shaman%0AFellwar%20Stone%0AFertile%20Ground%0AFettergeist%0AFiend%20Hunter%0AFigure%20of%20Destiny%0AFire%20//%20Ice%0AFireblast%0AFiremane%20Angel%0AFirespout%0AFirestorm%0AFlametongue%20Kavu%0AFlashfreeze%0AFlickerwisp%0AFlooded%20Strand%0AForbid%0AForbidden%20Alchemy%0AForce%20of%20Will%0AForce%20Spike%0AFrantic%20Search%0AFrenzied%20Goblin%0AFrost%20Titan%0AFuture%20Sight%0AFyndhorn%20Elves%0AGaea%27s%20Cradle%0AGamble%0AGarruk%20Relentless%0AGarruk%20Wildspeaker%0AGarruk%2C%20Primal%20Hunter%0AGatekeeper%20of%20Malakir%0AGathan%20Raiders%0AGeist%20of%20Saint%20Traft%0AGenesis%0AGenesis%20Wave%0AGenju%20of%20the%20Spires%0AGeralf%27s%20Messenger%0AGhitu%20Encampment%0AGiant%20Solifuge%0AGideon%20Jura%0AGideon%27s%20Lawkeeper%0AGifts%20Ungiven%0AGilded%20Lotus%0AGlacial%20Fortress%0AGlen%20Elendra%20Archmage%0AGloom%20Surgeon%0AGlorious%20Anthem%0AGo%20for%20the%20Throat%0AGoblin%20Goon%0AGoblin%20Guide%0AGoblin%20Legionnaire%0AGoblin%20Ruinblaster%0AGoblin%20Trenches%0AGoblin%20Welder%0AGodless%20Shrine%0AGrafted%20Wargear%0AGrand%20Arbiter%20Augustin%20IV%0AGrave%20Titan%0AGraveborn%20Muse%0AGravecrawler%0AGreat%20Sable%20Stag%0AGreater%20Gargadon%0AGreen%20Sun%27s%20Zenith%0AGrim%20Lavamancer%0AGrim%20Monolith%0AGrimgrin%2C%20Corpse-Born%0AGriselbrand%0AGuul%20Draz%20Assassin%0AHallowed%20Fountain%0AHarmonize%0AHavengul%20Lich%0AHeadhunter%0AHeartbeat%20of%20Spring%0AHell%27s%20Thunder%0AHellrider%0AHellspark%20Elemental%0AHero%20of%20Bladehold%0AHero%20of%20Oxid%20Ridge%0AHex%20Parasite%0AHinterland%20Harbor%0AHokori%2C%20Dust%20Drinker%0AHonor%20of%20the%20Pure%0AHuntmaster%20of%20the%20Fells%0AHymn%20to%20Tourach%0AHypnotic%20Specter%0AHystrodon%0AIdeas%20Unbound%0AImperial%20Seal%0AImpulse%0AIncinerate%0AIncreasing%20Devotion%0AIndrik%20Stomphowler%0AInferno%20Titan%0AIngot%20Chewer%0AInk-Eyes%2C%20Servant%20of%20Oni%0AInnocent%20Blood%0AInquisition%20of%20Kozilek%0AInto%20the%20Roil%0AIntuition%0AIsamaru%2C%20Hound%20of%20Konda%0AIsochron%20Scepter%0AIsolated%20Chapel%0AJace%20Beleren%0AJace%2C%20the%20Mind%20Sculptor%0AJackal%20Pup%0AJade%20Mage%0AJokulhaups%0AJoraga%20Treespeaker%0AJourney%20to%20Nowhere%0AJushi%20Apprentice%0AKami%20of%20Ancient%20Law%0AKarakas%0AKargan%20Dragonlord%0AKarn%20Liberated%0AKeiga%2C%20the%20Tide%20Star%0AKeldon%20Champion%0AKeldon%20Marauders%0AKira%2C%20Great%20Glass-Spinner%0AKird%20Ape%0AKitchen%20Finks%0AKjeldoran%20Outpost%0AKnight%20of%20the%20Reliquary%0AKodama%27s%20Reach%0AKorlash%2C%20Heir%20to%20Blackblade%0AKoth%20of%20the%20Hammer%0AKozilek%2C%20Butcher%20of%20Truth%0AKrosan%20Grip%0ALake%20of%20the%20Dead%0ALand%20Tax%0ALaquatus%27s%20Champion%0ALavaclaw%20Reaches%0ALead%20the%20Stampede%0ALeatherback%20Baloth%0ALeonin%20Relic-Warder%0ALightning%20Bolt%0ALightning%20Greaves%0ALightning%20Helix%0ALiliana%20of%20the%20Veil%0ALiliana%20Vess%0ALingering%20Souls%0ALion%27s%20Eye%20Diamond%0ALiving%20Death%0ALlanowar%20Elves%0ALoam%20Lion%0ALodestone%20Golem%0ALone%20Revenant%0ALooter%20il-Kor%0ALotus%20Bloom%0ALotus%20Cobra%0ALotus%20Petal%0ALoxodon%20Hierarch%0ALoyal%20Cathar%0ALuminarch%20Ascension%0AMaelstrom%20Pulse%0AMagma%20Jet%0AMakeshift%20Mannequin%0AMan-o%27-War%0AMana%20Leak%0AMana%20Tithe%0AManriki-Gusari%0AMarsh%20Flats%0AMartial%20Coup%0AMassacre%20Wurm%0AMaster%20of%20the%20Wild%20Hunt%0AMasticore%0AMaze%20of%20Ith%0AMeloku%20the%20Clouded%20Mirror%0AMemory%20Jar%0AMemory%20Lapse%0AMentor%20of%20the%20Meek%0AMesmeric%20Fiend%0AMikaeus%2C%20the%20Lunarch%0AMimic%20Vat%0AMind%20Stone%0AMind%27s%20Desire%0AMindslaver%0AMirari%27s%20Wake%0AMirran%20Crusader%0AMirror%20Entity%0AMiscalculation%0AMishra%27s%20Factory%0AMisty%20Rainforest%0AMogg%20War%20Marshal%0AMold%20Shambler%0AMoldervine%20Cloak%0AMolten%20Rain%0AMolten-Tail%20Masticore%0AMoment%27s%20Peace%0AMomentary%20Blink%0AMortarpod%0AMortify%0AMother%20of%20Runes%0AMox%20Diamond%0AMulldrifter%0AMutavault%0AMyr%20Battlesphere%0AMystic%20Snake%0AMystical%20Tutor%0ANantuko%20Vigilante%0ANarcolepsy%0ANatural%20Order%0ANaturalize%0ANecromancy%0ANecropotence%0ANegate%0ANekrataal%0ANevinyrral%27s%20Disk%0ANezumi%20Graverobber%0ANezumi%20Shortfang%0ANicol%20Bolas%2C%20Planeswalker%0ANight%27s%20Whisper%0ANinja%20of%20the%20Deep%20Hours%0ANiv-Mizzet%2C%20the%20Firemind%0ANoble%20Hierarch%0ANostalgic%20Dreams%0ANucklavee%0AObliterate%0AOblivion%20Ring%0AObstinate%20Baloth%0AOhran%20Viper%0AOkiba-Gang%20Shinobi%0AOld%20Man%20of%20the%20Sea%0AOlivia%20Voldaren%0AOona%27s%20Prowler%0AOpposition%0AOpt%0AOracle%20of%20Mul%20Daya%0AOrcish%20Lumberjack%0AOust%0AOvergrown%20Tomb%0AOverrun%0APact%20of%20Negation%0APaladin%20en-Vec%0APalinchron%0APalladium%20Myr%0AParallax%20Wave%0APath%20to%20Exile%0APernicious%20Deed%0APersecute%0APhantasmal%20Bear%0APhantasmal%20Image%0APhantom%20Centaur%0APhyrexian%20Arena%0APhyrexian%20Crusader%0APhyrexian%20Metamorph%0APhyrexian%20Obliterator%0APhyrexian%20Processor%0APhyrexian%20Rager%0APhyrexian%20Revoker%0APillage%0APillar%20of%20Flame%0APithing%20Needle%0APlague%20Sliver%0APlateau%0APlated%20Geopede%0APlatinum%20Angel%0APlow%20Under%0APolluted%20Delta%0APonder%0APorcelain%20Legionnaire%0APowder%20Keg%0APower%20Sink%0APrecursor%20Golem%0APreordain%0APrey%20Upon%0APrice%20of%20Progress%0APriest%20of%20Urabrask%0APrimal%20Command%0APrimeval%20Titan%0APrimordial%20Hydra%0APrismatic%20Lens%0APristine%20Talisman%0AProfane%20Command%0AProphetic%20Bolt%0APsychatog%0APulse%20of%20the%20Fields%0APulse%20of%20the%20Forge%0APuppeteer%20Clique%0APutrefy%0APutrid%20Imp%0APutrid%20Leech%0APyroclasm%0APyrokinesis%0AQasali%20Pridemage%0ARaging%20Ravine%0ARampant%20Growth%0ARancor%0ARanger%20of%20Eos%0ARatchet%20Bomb%0ARavages%20of%20War%0ARavenous%20Baboons%0ARay%20of%20Revelation%0ARazormane%20Masticore%0ARealm%20Razer%0AReanimate%0AReckless%20Charge%0ARecurring%20Nightmare%0ARed%20Elemental%20Blast%0ARegrowth%0ARelic%20of%20Progenitus%0ARemand%0ARenewed%20Faith%0ARepeal%0ARestock%0ARestoration%20Angel%0AReveillark%0ARhox%20War%20Monk%0ARift%20Bolt%0ARiftwing%20Cloudskate%0ARishadan%20Port%0ARite%20of%20Ruin%0ARofellos%2C%20Llanowar%20Emissary%0ARolling%20Earthquake%0ARootbound%20Crag%0ARorix%20Bladewing%0ARout%0ARude%20Awakening%0ARuhan%20of%20the%20Fomori%0ASacred%20Foundry%0ASakura-Tribe%20Elder%0ASarcomancy%0ASarkhan%20the%20Mad%0ASavannah%0ASavannah%20Lions%0AScalding%20Tarn%0AScavenging%20Ooze%0AScorned%20Villager%0AScroll%20Rack%0AScrubland%0ASea%20Gate%20Oracle%0ASeal%20of%20Primordium%0ASearch%20for%20Tomorrow%0ASearing%20Blaze%0ASeething%20Song%0ASensei%27s%20Divining%20Top%0ASerendib%20Efreet%0AShadowmage%20Infiltrator%0AShelldock%20Isle%0ASheoldred%2C%20Whispering%20One%0AShining%20Shoal%0AShow%20and%20Tell%0AShriekmaw%0AShrine%20of%20Burning%20Rage%0ASiege-Gang%20Commander%0ASigarda%2C%20Host%20of%20Herons%0ASilent%20Specter%0ASilver%20Knight%0ASilverblade%20Paladin%0ASimic%20Sky%20Swallower%0ASinkhole%0ASkinrender%0ASkithiryx%2C%20the%20Blight%20Dragon%0ASkittering%20Skirge%0ASkullclamp%0ASlagstorm%0ASlaughter%20Pact%0ASlayers%27%20Stronghold%0ASlith%20Firewalker%0ASmash%20to%20Smithereens%0ASmokestack%0ASnapcaster%20Mage%0ASneak%20Attack%0ASnuff%20Out%0ASolemn%20Simulacrum%0ASoltari%20Champion%0ASoltari%20Monk%0ASoltari%20Priest%0ASomberwald%20Sage%0ASorin%2C%20Lord%20of%20Innistrad%0ASower%20of%20Temptation%0ASpectral%20Lynx%0ASpectral%20Procession%0ASpell%20Pierce%0ASpellskite%0ASphere%20of%20the%20Suns%0ASphinx%20of%20Jwar%20Isle%0ASphinx%20of%20the%20Steel%20Wind%0ASpikeshot%20Elder%0ASpinning%20Darkness%0ASpiritmonger%0ASprouting%20Thrinax%0AStaggershock%0ASteam%20Vents%0ASteppe%20Lynx%0AStifle%0AStillmoon%20Cavalier%0AStirring%20Wildwood%0AStomping%20Ground%0AStonecloaker%0AStoneforge%20Mystic%0AStormblood%20Berserker%0AStrangleroot%20Geist%0AStrip%20Mine%0AStudent%20of%20Warfare%0AStunted%20Growth%0AStupor%0ASulfur%20Falls%0ASulfuric%20Vortex%0ASun%20Titan%0ASundering%20Titan%0ASunpetal%20Grove%0ASurvival%20of%20the%20Fittest%0ASword%20of%20Body%20and%20Mind%0ASword%20of%20Feast%20and%20Famine%0ASword%20of%20Fire%20and%20Ice%0ASword%20of%20Light%20and%20Shadow%0ASword%20of%20War%20and%20Peace%0ASwords%20to%20Plowshares%0ASylvan%20Library%0ATaiga%0ATamiyo%2C%20the%20Moon%20Sage%0ATandem%20Lookout%0ATangle%20Wire%0ATarmogoyf%0ATattermunge%20Maniac%0ATaurean%20Mauler%0ATectonic%20Edge%0ATeetering%20Peaks%0ATemple%20Garden%0ATemporal%20Mastery%0ATendrils%20of%20Agony%0ATerastodon%0ATerminate%0ATerminus%0ATerror%0AThalia%2C%20Guardian%20of%20Thraben%0AThawing%20Glaciers%0AThelonite%20Hermit%0AThirst%20for%20Knowledge%0AThornling%0AThornscape%20Battlemage%0AThoughtseize%0AThran%20Dynamo%0AThroat%20Slitter%0AThrun%2C%20the%20Last%20Troll%0AThunderblust%0AThunderscape%20Battlemage%0ATibalt%2C%20the%20Fiend-Blooded%0ATidehollow%20Sculler%0ATidings%0ATime%20Spiral%0ATin%20Street%20Hooligan%0ATinker%0ATithe%0ATolaria%20West%0ATombstalker%0ATooth%20and%20Nail%0ATorch%20Fiend%0ATormod%27s%20Crypt%0ATradewind%20Rider%0ATragic%20Slip%0ATreachery%0ATreetop%20Village%0ATrinket%20Mage%0ATroll%20Ascetic%0ATropical%20Island%0ATrygon%20Predator%0ATumble%20Magnet%0ATundra%0ATurnabout%0AUlamog%2C%20the%20Infinite%20Gyre%0AUlvenwald%20Tracker%0AUmezawa%27s%20Jitte%0AUnburial%20Rites%0AUnderground%20Sea%0AUndermine%0AUnearth%0AUpheaval%0AUrabrask%20the%20Hidden%0AUrborg%2C%20Tomb%20of%20Yawgmoth%0AVampire%20Hexmage%0AVampire%20Nighthawk%0AVampiric%20Tutor%0AVedalken%20Shackles%0AVendilion%20Clique%0AVengevine%0AVenser%2C%20Shaper%20Savant%0AVenser%2C%20the%20Sojourner%0AVerdant%20Catacombs%0AVesuvan%20Shapeshifter%0AVexing%20Devil%0AVindicate%0AVinelasher%20Kudzu%0AVines%20of%20Vastwood%0AVisara%20the%20Dreadful%0AVoid%0AVoidmage%20Prodigy%0AVoidslime%0AVolcanic%20Fallout%0AVolcanic%20Hammer%0AVolcanic%20Island%0AVulshok%20Refugee%0AWake%20Thrasher%0AWall%20of%20Blossoms%0AWall%20of%20Omens%0AWall%20of%20Reverence%0AWall%20of%20Roots%0AWasteland%0AWatery%20Grave%0AWeathered%20Wayfarer%0AWerebear%0AWheel%20of%20Fortune%0AWhipcorder%0AWhite%20Knight%0AWickerbough%20Elder%0AWild%20Nacatl%0AWildfire%0AWillbender%0AWindbrisk%20Heights%0AWindswept%20Heath%0AWispmare%0AWolfir%20Silverheart%0AWooded%20Foothills%0AWoodfall%20Primus%0AWoodland%20Cemetery%0AWoolly%20Thoctar%0AWorn%20Powerstone%0AWorship%0AWrath%20of%20God%0AWrench%20Mind%0AWurmcoil%20Engine%0AXiahou%20Dun%2C%20the%20One-Eyed%0AYavimaya%20Elder%0AYavimaya%20Hollow%0AYawgmoth%27s%20Will%0AYosei%2C%20the%20Morning%20Star%0AZo-Zu%20the%20Punisher%0AZombie%20Cutthroat</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="29" h="28" measuredW="32" measuredH="21" zOrder="1" locked="false" isInGroup="15">
+          <controlProperties>
+            <text>New</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::TabBar" x="237" y="97" w="1170" h="625" measuredW="418" measuredH="100" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>2</selectedIndex>
+        <tabVPosition>top</tabVPosition>
+        <text>White%2C%20Blue%2C%20Black%2C%20Red%2C%20Green%2C%20Colorless%2C%20Multicolor%2C%20Land</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::TextArea" x="22" y="117" w="183" h="296" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Absorb%0AAbyssal%20Persecutor%0AAcademy%20Rector%0AAcademy%20Ruins%0AAcidic%20Slime%0AAct%20of%20Aggression%0AAeon%20Chronicler%0AAEther%20Adept%0AAEther%20Vial%0AAftershock%0AAgony%20Warp%0AAjani%20Goldmane%0AAjani%20Vengeant%0AAkroma%2C%20Angel%20of%20Fury%0AAkroma%2C%20Angel%20of%20Wrath%0AAkroma%27s%20Vengeance%0AAll%20Is%20Dust%0AAmbition%27s%20Cost%0AAncestral%20Vision%0AAncient%20Grudge%0AAncient%20Tomb%0AAngel%20of%20Despair%0AAngelic%20Destiny%0AAnimate%20Dead%0AAnkh%20of%20Mishra%0AArbor%20Elf%0AArc%20Lightning%0AArc%20Trail%0AArid%20Mesa%0AArmageddon%0AAugury%20Adept%0AAvacyn%27s%20Pilgrim%0AAvalanche%20Riders%0AAven%20Mindcensor%0AAvenger%20of%20Zendikar%0AAwakening%20Zone%0ABadlands%0ABalance%0ABall%20Lightning%0ABane%20of%20the%20Living%0ABanefire%0ABaneslayer%20Angel%0ABant%20Charm%0ABarbarian%20Ring%0ABasalt%20Monolith%0ABasilisk%20Collar%0ABatterskull%0ABayou%0ABeacon%20of%20Destruction%0ABeast%20Within%0ABehemoth%20Sledge%0ABirds%20of%20Paradise%0ABirthing%20Pod%0ABitterblossom%0ABituminous%20Blast%0ABlack%20Knight%0ABlack%20Vise%0ABlade%20Splicer%0ABlastoderm%0ABlistering%20Firecat%0ABlood%20Crypt%0ABlood%20Knight%0ABloodbraid%20Elf%0ABloodghast%0ABloodgift%20Demon%0ABloodstained%20Mire%0ABlue%20Elemental%20Blast%0ABogardan%20Hellkite%0ABoggart%20Ram-Gang%0ABone%20Shredder%0ABraids%2C%20Cabal%20Minion%0ABrainstorm%0ABreeding%20Pool%0ABrimstone%20Volley%0ABrine%20Elemental%0ABrooding%20Saurian%0ABroodmate%20Dragon%0ABuried%20Alive%0ABurning%20of%20Xinye%0ABurrenton%20Forge-Tender%0ACabal%20Coffers%0ACalciderm%0ACall%20of%20the%20Herd%0ACall%20the%20Skybreaker%0ACapsize%0ACareful%20Consideration%0ACarnophage%0ACataclysm%0ACatastrophe%0ACelestial%20Colonnade%0ACelestial%20Purge%0AChain%20Lightning%0AChameleon%20Colossus%0AChandra%20Nalaar%0AChandra%2C%20the%20Firebrand%0AChandra%27s%20Phoenix%0AChannel%0AChaos%20Warp%0AChar%0AChrome%20Mox%0ACity%20of%20Traitors%0AClifftop%20Retreat%0ACloudgoat%20Ranger%0ACloudthresher%0ACoalition%20Relic%0ACold-Eyed%20Selkie%0AColdsteel%20Heart%0ACompulsive%20Research%0ACondemn%0AConsecrated%20Sphinx%0AConsuming%20Vapors%0AControl%20Magic%0ACorpse%20Dance%0ACounterspell%0ACountryside%20Crusher%0ACourt%20Hussar%0ACreakwood%20Liege%0ACreeping%20Tar%20Pit%0ACrucible%20of%20Worlds%0ACruel%20Ultimatum%0ACryptic%20Command%0ACultivate%0ACursecatcher%0ACursed%20Scroll%0ADamnation%0ADark%20Confidant%0ADark%20Ritual%0ADauthi%20Horror%0ADauthi%20Marauder%0ADauthi%20Slayer%0ADay%20of%20Judgment%0ADaybreak%20Ranger%0ADaze%0ADeath%20Cloud%0ADeathmark%0ADecree%20of%20Justice%0ADeep%20Analysis%0ADemonic%20Tutor%0ADeprive%0ADeranged%20Hermit%0ADesertion%0ADespise%0ADestructive%20Force%0ADevastating%20Dreams%0ADevil%27s%20Play%0ADevoted%20Druid%0ADiabolic%20Servitude%0ADiregraf%20Ghoul%0ADisenchant%0ADisfigure%0ADismantling%20Blow%0ADismember%0ADismiss%0ADissipate%0ADoom%20Blade%0ADoran%2C%20the%20Siege%20Tower%0ADragonskull%20Summit%0ADream%20Halls%0ADrogskol%20Reaver%0ADrowned%20Catacomb%0ADuress%0AEarthquake%0AEdric%2C%20Spymaster%20of%20Trest%0AEight-and-a-Half-Tails%0AEldrazi%20Monument%0AElectrolyze%0AElesh%20Norn%2C%20Grand%20Cenobite%0AElite%20Vanguard%0AElspeth%20Tirel%0AElspeth%2C%20Knight-Errant%0AElves%20of%20Deep%20Shadow%0AEmber%20Hauler%0AEmeria%20Angel%0AEmpty%20the%20Warrens%0AEnclave%20Cryptologist%0AEngineered%20Explosives%0AEnlightened%20Tutor%0AEntomb%0AEpochrasite%0AEsper%20Charm%0AEssence%20Scatter%0AEtched%20Oracle%0AEternal%20Dragon%0AEternal%20Witness%0AEthersworn%20Canonist%0AEverflowing%20Chalice%0AExalted%20Angel%0AExhume%0AExplore%0AFact%20or%20Fiction%0AFaith%27s%20Fetters%0AFalkenrath%20Aristocrat%0AFarseek%0AFathom%20Seer%0AFauna%20Shaman%0AFellwar%20Stone%0AFertile%20Ground%0AFiend%20Hunter%0AFigure%20of%20Destiny%0AFire%20//%20Ice%0AFire%20Ambush%0AFireblast%0AFirebolt%0AFiremane%20Angel%0AFirespout%0AFirestorm%0AFlametongue%20Kavu%0AFlashfreeze%0AFlickerwisp%0AFlooded%20Strand%0AForbid%0AForbidden%20Alchemy%0AForce%20of%20Will%0AForce%20Spike%0AFrantic%20Search%0AFrenzied%20Goblin%0AFrost%20Titan%0AFuture%20Sight%0AFyndhorn%20Elves%0AGaea%27s%20Cradle%0AGamble%0AGarruk%20Relentless%0AGarruk%20Wildspeaker%0AGarruk%2C%20Primal%20Hunter%0AGatekeeper%20of%20Malakir%0AGathan%20Raiders%0AGeist%20of%20Saint%20Traft%0AGenesis%0AGenesis%20Wave%0AGenju%20of%20the%20Spires%0AGeralf%27s%20Messenger%0AGhitu%20Encampment%0AGiant%20Solifuge%0AGideon%20Jura%0AGideon%27s%20Lawkeeper%0AGifts%20Ungiven%0AGilded%20Lotus%0AGlacial%20Fortress%0AGlen%20Elendra%20Archmage%0AGlorious%20Anthem%0AGo%20for%20the%20Throat%0AGoblin%20Goon%0AGoblin%20Guide%0AGoblin%20Legionnaire%0AGoblin%20Ruinblaster%0AGoblin%20Trenches%0AGoblin%20Wardriver%0AGoblin%20Welder%0AGodless%20Shrine%0AGrafted%20Wargear%0AGrand%20Arbiter%20Augustin%20IV%0AGrave%20Titan%0AGraveborn%20Muse%0AGravecrawler%0AGreat%20Sable%20Stag%0AGreater%20Gargadon%0AGreen%20Sun%27s%20Zenith%0AGrim%20Backwoods%0AGrim%20Lavamancer%0AGrim%20Monolith%0AGrimgrin%2C%20Corpse-Born%0AHallowed%20Burial%0AHallowed%20Fountain%0AHarmonize%0AHavengul%20Lich%0AHeartbeat%20of%20Spring%0AHell%27s%20Thunder%0AHellspark%20Elemental%0AHero%20of%20Bladehold%0AHero%20of%20Oxid%20Ridge%0AHex%20Parasite%0AHinterland%20Harbor%0AHokori%2C%20Dust%20Drinker%0AHonor%20of%20the%20Pure%0AHuntmaster%20of%20the%20Fells%0AHymn%20to%20Tourach%0AHypnotic%20Specter%0AHystrodon%0AIdeas%20Unbound%0AImperial%20Seal%0AImpulse%0AIncinerate%0AIncreasing%20Devotion%0AIndrik%20Stomphowler%0AInferno%20Titan%0AIngot%20Chewer%0AInk-Eyes%2C%20Servant%20of%20Oni%0AInnocent%20Blood%0AInquisition%20of%20Kozilek%0AInto%20the%20Roil%0AIntuition%0AIona%2C%20Shield%20of%20Emeria%0AIsamaru%2C%20Hound%20of%20Konda%0AIsochron%20Scepter%0AIsolated%20Chapel%0AJace%20Beleren%0AJace%2C%20the%20Mind%20Sculptor%0AJackal%20Pup%0AJokulhaups%0AJoraga%20Treespeaker%0AJourney%20to%20Nowhere%0AJungle%20Lion%0AJushi%20Apprentice%0AKami%20of%20Ancient%20Law%0AKarakas%0AKargan%20Dragonlord%0AKarn%20Liberated%0AKeiga%2C%20the%20Tide%20Star%0AKeldon%20Champion%0AKeldon%20Marauders%0AKira%2C%20Great%20Glass-Spinner%0AKird%20Ape%0AKitchen%20Finks%0AKjeldoran%20Outpost%0AKnight%20of%20the%20Reliquary%0AKodama%27s%20Reach%0AKokusho%2C%20the%20Evening%20Star%0AKorlash%2C%20Heir%20to%20Blackblade%0AKoth%20of%20the%20Hammer%0AKozilek%2C%20Butcher%20of%20Truth%0AKrosan%20Grip%0ALake%20of%20the%20Dead%0ALand%20Tax%0ALaquatus%27s%20Champion%0ALavaclaw%20Reaches%0ALead%20the%20Stampede%0ALeatherback%20Baloth%0ALegacy%27s%20Allure%0ALeonin%20Relic-Warder%0ALife%20from%20the%20Loam%0ALightning%20Bolt%0ALightning%20Greaves%0ALightning%20Helix%0ALiliana%20of%20the%20Veil%0ALiliana%20Vess%0ALingering%20Souls%0ALion%27s%20Eye%20Diamond%0ALiving%20Death%0ALlanowar%20Elves%0ALoam%20Lion%0ALodestone%20Golem%0ALooter%20il-Kor%0ALotus%20Bloom%0ALotus%20Cobra%0ALotus%20Petal%0ALoxodon%20Hierarch%0ALoyal%20Cathar%0ALoyal%20Retainers%0ALu%20Xun%2C%20Scholar%20General%0ALuminarch%20Ascension%0AMaelstrom%20Pulse%0AMagma%20Jet%0AMagus%20of%20the%20Tabernacle%0AMakeshift%20Mannequin%0AMan-o%27-War%0AMana%20Leak%0AMana%20Tithe%0AManriki-Gusari%0AMarsh%20Flats%0AMartial%20Coup%0AMaster%20of%20the%20Wild%20Hunt%0AMasticore%0AMaze%20of%20Ith%0AMeloku%20the%20Clouded%20Mirror%0AMemory%20Jar%0AMemory%20Lapse%0AMentor%20of%20the%20Meek%0AMesmeric%20Fiend%0AMikaeus%2C%20the%20Lunarch%0AMimic%20Vat%0AMind%20Shatter%0AMind%20Stone%0AMind%27s%20Desire%0AMindslaver%0AMirari%27s%20Wake%0AMirran%20Crusader%0AMirror%20Entity%0AMiscalculation%0AMishra%27s%20Factory%0AMisty%20Rainforest%0AMogg%20War%20Marshal%0AMold%20Shambler%0AMoldervine%20Cloak%0AMolten%20Rain%0AMolten-Tail%20Masticore%0AMoment%27s%20Peace%0AMomentary%20Blink%0AMortarpod%0AMortify%0AMother%20of%20Runes%0AMox%20Diamond%0AMulldrifter%0AMutavault%0AMyr%20Battlesphere%0AMystic%20Snake%0AMystical%20Tutor%0ANantuko%20Shade%0ANantuko%20Vigilante%0ANarcolepsy%0ANatural%20Order%0ANaturalize%0ANecromancy%0ANecropotence%0ANegate%0ANekrataal%0ANeurok%20Commando%0ANevinyrral%27s%20Disk%0ANezumi%20Graverobber%0ANezumi%20Shortfang%0ANicol%20Bolas%2C%20Planeswalker%0ANight%27s%20Whisper%0ANightscape%20Familiar%0ANinja%20of%20the%20Deep%20Hours%0ANiv-Mizzet%2C%20the%20Firemind%0ANoble%20Hierarch%0ANostalgic%20Dreams%0ANucklavee%0AObliterate%0AOblivion%20Ring%0AObstinate%20Baloth%0AOhran%20Viper%0AOld%20Man%20of%20the%20Sea%0AOlivia%20Voldaren%0AOona%27s%20Prowler%0AOpportunity%0AOpposition%0AOpt%0AOracle%20of%20Mul%20Daya%0AOrcish%20Lumberjack%0AOust%0AOvergrown%20Battlement%0AOvergrown%20Tomb%0APact%20of%20Negation%0APaladin%20en-Vec%0APalinchron%0APalladium%20Myr%0AParallax%20Wave%0APath%20to%20Exile%0APernicious%20Deed%0APhantasmal%20Bear%0APhantom%20Centaur%0APhyrexian%20Arena%0APhyrexian%20Crusader%0APhyrexian%20Metamorph%0APhyrexian%20Negator%0APhyrexian%20Obliterator%0APhyrexian%20Processor%0APhyrexian%20Rager%0APhyrexian%20Revoker%0APillage%0APithing%20Needle%0APlague%20Sliver%0APlateau%0APlatinum%20Angel%0APlow%20Under%0APolluted%20Delta%0APonder%0APorcelain%20Legionnaire%0APowder%20Keg%0APower%20Sink%0APrecursor%20Golem%0APreordain%0APrice%20of%20Progress%0APriest%20of%20Urabrask%0APrimal%20Command%0APrimeval%20Titan%0APrimordial%20Hydra%0APrismatic%20Lens%0APristine%20Talisman%0AProfane%20Command%0AProphetic%20Bolt%0APsychatog%0APulse%20of%20the%20Fields%0APulse%20of%20the%20Forge%0APuppeteer%20Clique%0APutrefy%0APutrid%20Leech%0APyroclasm%0APyrokinesis%0AQasali%20Pridemage%0AQuirion%20Dryad%0ARaging%20Ravine%0ARampant%20Growth%0ARancor%0ARanger%20of%20Eos%0ARatchet%20Bomb%0ARavages%20of%20War%0ARavenous%20Baboons%0ARay%20of%20Revelation%0ARazormane%20Masticore%0ARealm%20Razer%0AReanimate%0AReckless%20Charge%0ARecurring%20Nightmare%0ARed%20Elemental%20Blast%0ARegrowth%0ARelic%20of%20Progenitus%0ARemand%0ARenewed%20Faith%0ARepeal%0ARestock%0AReveillark%0ARhox%20War%20Monk%0ARift%20Bolt%0ARiftwing%20Cloudskate%0ARishadan%20Port%0ARofellos%2C%20Llanowar%20Emissary%0ARolling%20Earthquake%0ARootbound%20Crag%0ARorix%20Bladewing%0ARout%0ARude%20Awakening%0ARuhan%20of%20the%20Fomori%0ASacred%20Foundry%0ASakura-Tribe%20Elder%0ASarcomancy%0ASarkhan%20the%20Mad%0ASavannah%0ASavannah%20Lions%0AScalding%20Tarn%0AScorned%20Villager%0AScroll%20Rack%0AScrubland%0ASea%20Gate%20Oracle%0ASeal%20of%20Primordium%0ASearch%20for%20Tomorrow%0ASearing%20Blaze%0ASeething%20Song%0ASensei%27s%20Divining%20Top%0ASerendib%20Efreet%0AShadowmage%20Infiltrator%0AShelldock%20Isle%0ASheoldred%2C%20Whispering%20One%0AShining%20Shoal%0AShow%20and%20Tell%0AShriekmaw%0AShrine%20of%20Burning%20Rage%0ASiege-Gang%20Commander%0ASign%20in%20Blood%0ASilent%20Specter%0ASilver%20Knight%0ASimic%20Sky%20Swallower%0ASinkhole%0ASkeletal%20Scrying%0ASkeletal%20Vampire%0ASkinrender%0ASkithiryx%2C%20the%20Blight%20Dragon%0ASkizzik%0ASkullclamp%0ASlagstorm%0ASlaughter%20Pact%0ASlith%20Firewalker%0ASmash%20to%20Smithereens%0ASmokestack%0ASnapcaster%20Mage%0ASneak%20Attack%0ASnuff%20Out%0ASolemn%20Simulacrum%0ASoltari%20Champion%0ASoltari%20Monk%0ASoltari%20Priest%0ASorin%20Markov%0ASorin%2C%20Lord%20of%20Innistrad%0ASower%20of%20Temptation%0ASpectral%20Lynx%0ASpectral%20Procession%0ASpell%20Pierce%0ASpellskite%0ASphere%20of%20the%20Suns%0ASphinx%20of%20Jwar%20Isle%0ASphinx%20of%20the%20Steel%20Wind%0ASpikeshot%20Elder%0ASpiritmonger%0ASprouting%20Thrinax%0AStaggershock%0ASteam%20Vents%0ASteppe%20Lynx%0AStifle%0AStillmoon%20Cavalier%0AStirring%20Wildwood%0AStomping%20Ground%0AStonecloaker%0AStoneforge%20Mystic%0AStonewood%20Invocation%0AStormblood%20Berserker%0AStrangleroot%20Geist%0AStrip%20Mine%0AStromkirk%20Noble%0AStudent%20of%20Warfare%0AStunted%20Growth%0AStupor%0ASulfur%20Falls%0ASulfuric%20Vortex%0ASummoning%20Trap%0ASun%20Titan%0ASundering%20Titan%0ASunpetal%20Grove%0ASurvival%20of%20the%20Fittest%0ASword%20of%20Body%20and%20Mind%0ASword%20of%20Feast%20and%20Famine%0ASword%20of%20Fire%20and%20Ice%0ASword%20of%20Light%20and%20Shadow%0ASword%20of%20War%20and%20Peace%0ASwords%20to%20Plowshares%0ASylvan%20Library%0ATaiga%0ATainted%20Pact%0ATangle%20Wire%0ATarmogoyf%0ATattermunge%20Maniac%0ATaurean%20Mauler%0ATectonic%20Edge%0ATeetering%20Peaks%0ATemple%20Garden%0ATendrils%20of%20Agony%0ATerastodon%0ATerminate%0ATerror%0AThalia%2C%20Guardian%20of%20Thraben%0AThawing%20Glaciers%0AThelonite%20Hermit%0AThieving%20Magpie%0AThirst%20for%20Knowledge%0AThornling%0AThornscape%20Battlemage%0AThoughtseize%0AThran%20Dynamo%0AThrun%2C%20the%20Last%20Troll%0AThunderblust%0AThunderscape%20Battlemage%0ATidehollow%20Sculler%0ATidings%0ATime%20Spiral%0ATime%20Warp%0ATin%20Street%20Hooligan%0ATinker%0ATithe%0ATolaria%20West%0ATombstalker%0ATooth%20and%20Nail%0ATorch%20Fiend%0ATormod%27s%20Crypt%0ATradewind%20Rider%0ATreachery%0ATreetop%20Village%0ATrinket%20Mage%0ATroll%20Ascetic%0ATropical%20Island%0ATrygon%20Predator%0ATumble%20Magnet%0ATundra%0ATurnabout%0AUlamog%2C%20the%20Infinite%20Gyre%0AUmezawa%27s%20Jitte%0AUnderground%20Sea%0AUndermine%0AUnearth%0AUpheaval%0AUrabrask%20the%20Hidden%0AVampire%20Hexmage%0AVampire%20Lacerator%0AVampire%20Nighthawk%0AVampiric%20Tutor%0AVault%20of%20the%20Archangel%0AVedalken%20Shackles%0AVendilion%20Clique%0AVengevine%0AVenser%2C%20Shaper%20Savant%0AVenser%2C%20the%20Sojourner%0AVerdant%20Catacombs%0AVesuvan%20Shapeshifter%0AVindicate%0AVinelasher%20Kudzu%0AVines%20of%20Vastwood%0AVisara%20the%20Dreadful%0AVoid%0AVoidmage%20Prodigy%0AVoidslime%0AVolcanic%20Fallout%0AVolcanic%20Hammer%0AVolcanic%20Island%0AVolrath%27s%20Stronghold%0AVorapede%0AVulshok%20Refugee%0AWake%20Thrasher%0AWall%20of%20Blossoms%0AWall%20of%20Omens%0AWall%20of%20Reverence%0AWall%20of%20Roots%0AWasteland%0AWaterfront%20Bouncer%0AWatery%20Grave%0AWeathered%20Wayfarer%0AWerebear%0AWheel%20of%20Fortune%0AWhipcorder%0AWhite%20Knight%0AWickerbough%20Elder%0AWild%20Nacatl%0AWildfire%0AWillbender%0AWindbrisk%20Heights%0AWindswept%20Heath%0AWispmare%0AWood%20Elves%0AWooded%20Foothills%0AWoodfall%20Primus%0AWoodland%20Cemetery%0AWoolly%20Thoctar%0AWorn%20Powerstone%0AWorship%0AWrath%20of%20God%0AWurmcoil%20Engine%0AXiahou%20Dun%2C%20the%20One-Eyed%0AYavimaya%20Elder%0AYavimaya%20Hollow%0AYawgmoth%27s%20Will%0AYosei%2C%20the%20Morning%20Star%0AZo-Zu%20the%20Punisher%0AZombie%20Cutthroat</text>
+        <value>0</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Label" x="24" y="97" w="46" h="20" measuredW="25" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Old</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::StickyNote" x="144" y="192" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>MTGO%20Cube%20version%201</text>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::StickyNote" x="152" y="432" w="-1" h="-1" measuredW="109" measuredH="123" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>MTGO%20Cube%20version%202%0APost-AVR</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Label" x="255" y="141" w="-1" h="-1" measuredW="65" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Creatures</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Label" x="255" y="545" w="-1" h="-1" measuredW="92" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Non-Creatures</text>
+      </controlProperties>
+    </control>
+    <control controlID="101" controlTypeID="com.balsamiq.mockups::PointyButton" x="159" y="82" w="-1" h="-1" measuredW="46" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <direction>left</direction>
+        <text>Hide</text>
+      </controlProperties>
+    </control>
+    <control controlID="102" controlTypeID="com.balsamiq.mockups::VRule" x="216" y="75" w="-1" h="653" measuredW="10" measuredH="100" zOrder="9" locked="false" isInGroup="-1"/>
+    <control controlID="103" controlTypeID="__group__" x="264" y="173" w="1100" h="354" measuredW="1100" measuredH="354" zOrder="7" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="0" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="170" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="0">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%282%29%0A-%20Diregraf%20Ghoul%0A-%20Gravecrawler%0AAdded%20%282%29%0A-%20Guul%20Draz%20Assassin%0A-%20Putrid%20Imp</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="167" w="185" h="166" measuredW="150" measuredH="159" zOrder="1" locked="false" isInGroup="0">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%282%29%0A-%20Carnophage%0A-%20Vampire%20Lacerator</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="13" measuredH="21" zOrder="1" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>1</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="183" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="2" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="170" measuredW="153" measuredH="213" zOrder="0" locked="false" isInGroup="2">
+              <controlProperties>
+                <selectedIndex>11</selectedIndex>
+                <text>Unchanged%20%2810%29%0A-%20Black%20Knight%0A-%20Bloodghast%0A-%20Dark%20Confidant%0A-%20Dauthi%20Horror%0A-%20Gatekeeper%20of%20Malakir%0A-%20Mesmeric%20Fiend%0A-%20Nezumi%20Graverobber%0A-%20Nezumi%20Shortfang%0A-%20Oona%27s%20Prowler%0A-%20Vampire%20Hexmage%0AAdded%20%283%29%0A-%20Gloom%20Surgeon%0A-%20Headhunter%0A-%20Skittering%20Skirge</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="167" w="185" h="166" measuredW="150" measuredH="186" zOrder="1" locked="false" isInGroup="2">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%283%29%0A-%20Nantuko%20Shade%0A-%20Dauthi%20Slayer%0A-%20Nightscape%20Familiar</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="183" y="0" w="-1" h="-1" measuredW="15" measuredH="21" zOrder="3" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>2</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="__group__" x="366" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="4" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="170" measuredW="150" measuredH="159" zOrder="0" locked="false" isInGroup="4">
+              <controlProperties>
+                <selectedIndex>7</selectedIndex>
+                <text>Unchanged%20%286%29%0A-%20Bone%20Shredder%0A-%20Geralf%27s%20Messenger%0A-%20Hypnotic%20Specter%0A-%20Phyrexian%20Crusader%0A-%20Phyrexian%20Rager%0A-%20Vampire%20Nighthawk%0AAdded%20%281%29%0A-%20Demonic%20Taskmaster</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="167" w="185" h="166" measuredW="150" measuredH="159" zOrder="1" locked="false" isInGroup="4">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%282%29%0A-%20Dauthi%20Marauder%0A-%20Phyrexian%20Negator</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="366" y="0" w="-1" h="-1" measuredW="14" measuredH="21" zOrder="5" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>3</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="__group__" x="549" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="6" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="170" measuredW="175" measuredH="240" zOrder="0" locked="false" isInGroup="6">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Unchanged%20%289%29%0A-%20Bane%20of%20the%20Living%0A-%20Braids%2C%20Cabal%20Minion%0A-%20Graveborn%20Muse%0A-%20Korlash%2C%20Heir%20to%20Blackblade%0AAdded%20%280%29</text>
+                <verticalScrollbar>true</verticalScrollbar>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="167" w="185" h="166" measuredW="150" measuredH="132" zOrder="1" locked="false" isInGroup="6">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%281%29%0A-%20Abyssal%20Persecutor</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="549" y="0" w="-1" h="-1" measuredW="15" measuredH="21" zOrder="7" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>4</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="__group__" x="732" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="8" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="311" measuredW="172" measuredH="186" zOrder="0" locked="false" isInGroup="8">
+              <controlProperties>
+                <selectedIndex>6</selectedIndex>
+                <text>Unchanged%20%285%29%0A-%20Bloodgift%20Demon%0A-%20Puppeteer%20Clique%0A-%20Shriekmaw%0A-%20Skithiryx%2C%20the%20Blight%20Dragon%0A-%20Zombie%20Cutthroat%0AAdded%20%282%29%0A-%20Okiba-Gang%20Shinobi%0A-%20Throat%20Slitter</text>
+                <verticalScrollbar>false</verticalScrollbar>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="304" w="185" h="29" measuredW="150" measuredH="105" zOrder="1" locked="false" isInGroup="8">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%280%29</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="732" y="0" w="-1" h="-1" measuredW="14" measuredH="21" zOrder="9" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>5</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="__group__" x="915" y="21" w="185" h="333" measuredW="185" measuredH="333" zOrder="10" locked="false" isInGroup="103">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="170" measuredW="176" measuredH="186" zOrder="0" locked="false" isInGroup="10">
+              <controlProperties>
+                <selectedIndex>8</selectedIndex>
+                <text>Unchanged%20%287%29%0A-%20Grave%20Titan%0A-%20Ink-Eyes%2C%20Servant%20of%20Oni%0A-%20Laquatus%27s%20Champion%0A-%20Sheoldred%2C%20Whispering%20One%0A-%20Silent%20Specter%0A-%20Tombstalker%0A-%20Visara%20the%20Dreadful%0AAdded%20%282%29%0A-%20Griselbrand%0A-%20Massacre%20Wurm</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="167" w="185" h="166" measuredW="171" measuredH="159" zOrder="1" locked="false" isInGroup="10">
+              <controlProperties>
+                <selectedIndex>0</selectedIndex>
+                <text>Removed%20%282%29%0A-%20Kokusho%2C%20the%20Evening%20Star%0A-%20Skeletal%20Vampire</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="915" y="0" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="11" locked="false" isInGroup="103">
+          <controlProperties>
+            <text>6+</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="104" controlTypeID="__group__" x="265" y="574" w="1095" h="146" measuredW="1095" measuredH="146" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="__group__" x="0" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="0" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="0">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="13" measuredH="21" zOrder="1" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>1</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="183" y="0" w="-1" h="-1" measuredW="15" measuredH="21" zOrder="2" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>2</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="366" y="0" w="-1" h="-1" measuredW="14" measuredH="21" zOrder="3" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>3</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="549" y="0" w="-1" h="-1" measuredW="15" measuredH="21" zOrder="4" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>4</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="732" y="0" w="-1" h="-1" measuredW="14" measuredH="21" zOrder="5" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>5</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="915" y="0" w="-1" h="-1" measuredW="23" measuredH="21" zOrder="6" locked="false" isInGroup="104">
+          <controlProperties>
+            <text>6+</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="__group__" x="182" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="7" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="12">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="13" controlTypeID="__group__" x="364" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="8" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="13">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="14" controlTypeID="__group__" x="546" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="9" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="14">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="15" controlTypeID="__group__" x="728" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="10" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="15">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="16" controlTypeID="__group__" x="910" y="21" w="185" h="125" measuredW="185" measuredH="125" zOrder="11" locked="false" isInGroup="104">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Accordion" x="0" y="0" w="185" h="125" measuredW="150" measuredH="186" zOrder="0" locked="false" isInGroup="16">
+              <controlProperties>
+                <selectedIndex>3</selectedIndex>
+                <text>Unchanged%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum%0AAdded%20%28X%29%0A-%20Lorem%20Ipsum%0A-%20Lorem%20Ipsum</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

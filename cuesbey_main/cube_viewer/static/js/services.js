@@ -64,33 +64,44 @@ angular.module('cubeViewer.services', [])
                 };
 
                 var matchesCategory = true;
-                angular.forEach(category.split('/'), function(cat, idx) {
-                    var negateCategory = cat.indexOf('!') === 0;
-                    if (negateCategory) {
-                        // split off the exclamation mark
-                        cat = cat.substring(1);
-                    }
+                var matchesSubgroup = false;
+                // "/" is an boolean AND operator for this
+                angular.forEach(category.split('/'), function(subgroup) {
+                    matchesSubgroup = false;
 
-                    angular.forEach([
-                        _checkForExactColor,
-                        _checkForType
-                    ], function(checker, _) {
-                        var result =  checker(cat, card);
-                        if (result === undefined) {
-                            return result;
-                        } else {
-                            // make the "matches category" sentinel value be
-                            // something that, once false, can't be turned back
-                            // to true. Ideally this would just short circuit
-                            // out of the loop when made false the first time
-                            matchesCategory = matchesCategory && (negateCategory ? !result : result);
-                            return matchesCategory
+                    angular.forEach(subgroup.split('|'), function(inner_cat) {
+                        var negateCategory = inner_cat.indexOf('!') === 0;
+                        if (negateCategory) {
+                            // split off the exclamation mark
+                            inner_cat = inner_cat.substring(1);
                         }
+
+                        angular.forEach([
+                            _checkForExactColor,
+                            _checkForType
+                        ], function(checker) {
+                            var result = checker(inner_cat, card);
+                            if (result === undefined) {
+                                return result;
+                            } else {
+                                // make the "matches subgroup" sentinel value be
+                                // something that, once true, can't be turned back
+                                // to false. Ideally this would just short circuit
+                                // out of the loop when made true the first time
+                                matchesSubgroup = matchesSubgroup || (negateCategory ? !result : result);
+                                return matchesSubgroup;
+                            }
+                        });
+                        return matchesSubgroup
                     });
 
-                    return matchesCategory
+                    // make the "matches category" sentinel value be
+                    // something that, once false, can't be turned back
+                    // to true. Ideally this would just short circuit
+                    // out of the loop when made false the first time
+                    matchesCategory = matchesCategory && matchesSubgroup;
+                    return matchesCategory;
                 });
-//                matchesCategory = matchesCategory;
                 return matchesCategory;
             }
         }

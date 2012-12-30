@@ -17,9 +17,10 @@ describe('service', function() {
         var karn = cubeContents['Karn Liberated'];
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
+        var damnation = cubeContents['Damnation'];
 
         it('should handle monocolor and negation', function() {
-
+            expect(svc.matchesCategory('White', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('!Blue/!Black', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('!White', eliteVanguard)).toBe(false);
         });
@@ -29,10 +30,23 @@ describe('service', function() {
             expect(svc.matchesCategory('!Creature', eliteVanguard)).toBe(false);
         });
 
-        it('should handle negation of simple color', function() {
-
-            expect(svc.matchesCategory('!White', eliteVanguard)).toBe(false);
+        it('should handle either/or categories intelligently', function() {
+            expect(svc.matchesCategory('Sorcery|Instant', eliteVanguard)).toBe(false);
+            expect(svc.matchesCategory('Artifact|Creature|Planeswalker', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('Colorless/Artifact|Creature|Planeswalker', karn)).toBe(true);
+            expect(svc.matchesCategory('Sorcery|Instant', damnation)).toBe(true);
+            expect(svc.matchesCategory('!Sorcery|!Black', damnation)).toBe(false);
+            // this is an unhelpful category, but a sorcery is not an instant, sooo...
+            expect(svc.matchesCategory('!Sorcery|!Instant', damnation)).toBe(true);
+            // Black "spells"
+            expect(svc.matchesCategory('Black/Sorcery|Instant', damnation)).toBe(true);
+            expect(svc.matchesCategory('Sorcery|Instant/Black', damnation)).toBe(true);
+            expect(svc.matchesCategory('Blue/Sorcery|Instant', damnation)).toBe(false);
+            expect(svc.matchesCategory('Sorcery|Instant/Blue', damnation)).toBe(false);
+            expect(svc.matchesCategory('Sorcery|Creature/Black', damnation)).toBe(true);
+            expect(svc.matchesCategory('Instant|Creature/Black', damnation)).toBe(false);
         });
+
         it('should handle colorless checks', function() {
 
             expect(svc.matchesCategory('!Colorless', eliteVanguard)).toBe(true);

@@ -105,5 +105,153 @@ angular.module('cubeViewer.services', [])
                 return matchesCategory;
             }
         }
+    }).factory('SplitCardsService', function() {
+        return {
+            split: function(_old, _new) {
+                // jsondiff.com
+
+                var both = {};
+                var added = {};
+                var removed = {};
+
+                jQuery.each(jQuery.extend({}, _old, _new), function(name, value) {
+                    if (name in _old && name in _new) {
+                        both[name] = value;
+                    } else if (name in _new) {
+                        added[name] = value;
+                    } else {
+                        removed[name] = value;
+                    }
+                });
+
+                return {
+                    both: both,
+                    added: added,
+                    removed: removed
+                }
+            }
+        }
+    })
+    .factory('SortSpecService', function() {
+        return {
+            getSkeleton : function(sortSpec) {
+                sortSpec = sortSpec || {};
+
+                var sortedCube = {};
+
+                var _recurseSpec = function (subSpec, subCube) {
+                    jQuery.each(subSpec, function(_subName, _subSpec) {
+                        if (jQuery.isEmptyObject(_subSpec)) {
+                            // check that we don't have an information key like a "_sort"
+                            subCube[_subName] = [];
+                        } else {
+                            var _recurseCube = {};
+                            subCube[_subName] = _recurseCube;
+                            _recurseSpec(_subSpec, _recurseCube);
+                        }
+                    })
+                };
+
+                _recurseSpec(sortSpec, sortedCube);
+
+                return sortedCube;
+            }
+        }
+    })
+    .factory('CubeSortService', function(CardCategoryService, SortSpecService) {
+        return {
+            sortCube: function(serializedCube, sortSpec, defaultSort, existingCube, infoToAdd) {
+                var handleCubeCard = function(card, _sortedCube, infoToAdd) {
+                    // merge on information
+                    var cardToHandle = jQuery.extend({}, card, infoToAdd);
+
+//                    // if there are heuristics, note what they are
+//                    jQuery.each(cardToHandle['heuristics'] || {}, function(name, modifications) {
+//                        if (jQuery.inArray(name, heuristicNames)==-1) {
+//                            heuristicNames.push(name);
+//                        }
+//                    });
+
+                    var _recurseCube = function (subCube) {
+                        jQuery.each(subCube, function(_subName, _subCube) {
+                            if (!CardCategoryService.matchesCategory(_subName, cardToHandle)) {
+                                return;
+                            }
+
+                            if (jQuery.isArray(_subCube)) {
+                                // we're done here
+                                _subCube.push(cardToHandle);
+                            } else {
+                                _recurseCube(_subCube);
+                            }
+                        })
+                    };
+
+                    _recurseCube(_sortedCube);
+                    return _sortedCube;
+                };
+
+                var sortedCube;
+                if (existingCube) {
+                    sortedCube = existingCube;
+                } else {
+                    sortedCube = SortSpecService.getSkeleton(sortSpec);
+                }
+
+
+                defaultSort = defaultSort || function(card_a, card_b) {
+                    return card_a['name'] > card_b['name']
+                };
+
+                jQuery.each(serializedCube, function(index, value) {
+                    console.log('sorting card:', index, value);
+                    handleCubeCard(value, sortedCube, infoToAdd);
+                });
+
+                heuristicNames.sort();
+
+                var _recurseSort = function (subCube) {
+                    jQuery.each(subCube, function(_subName, _subCube) {
+                        if (jQuery.isArray(_subCube)) {
+                            _subCube.sort(defaultSort);
+                        } else {
+                            _recurseSort(_subCube);
+                        }
+                    })
+                };
+
+                _recurseSort(sortedCube);
+
+                return sortedCube;
+            }
+        }
+    })
+    .factory('CubeDiffService', function($SortSpecService, $CubeSortService) {
+        return {
+            getDiff : function(_old, _new, sortSpec) {
+                var sort_order_diff = {
+                    both: 0,
+                    added: 1,
+                    removed: 2
+                };
+
+                var currentCube = $SortSpecService.getSkeleton(sortSpec);
+                jQuery.each(splitCards(_old, _new), function(type, value) {
+                    currentCube = $CubeSortService.sortCube(value, undefined, function(card_a, card_b) {
+                        if (card_a['diff_result'] !== undefined &&
+                            card_b['diff_result'] !== undefined) {
+                            return ([sort_order_diff[card_a['diff_result']], card_a['name']].join('_') >
+                                [sort_order_diff[card_b['diff_result']], card_b['name']].join('_'));
+                        } else {
+                            return card_a['name'] > card_b['name'];
+                        }
+                    }, currentCube, {diff_result:type});
+                });
+
+                return currentCube;
+
+            }
+
+        }
     });
 

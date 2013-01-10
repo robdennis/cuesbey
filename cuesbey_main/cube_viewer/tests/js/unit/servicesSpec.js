@@ -1,29 +1,245 @@
 'use strict';
 
+var namify = function(cube) {
+    // it's simpler to write tests that just expect names of
+    // cards instead of listing all the attributes of that card
+    // so dump it out to just the names
+    var _recurseNamify = function(subCube) {
+        jQuery.each(subCube, function(_subName, _subCube) {
+            if (jQuery.isArray(_subCube)) {
+                jQuery.each(_subCube, function(idx, card) {
+                    _subCube[idx] = card['name'];
+                })
+            } else {
+                _recurseNamify(_subCube);
+            }
+        })
+    };
+
+    _recurseNamify(cube);
+    return cube
+};
+
 /* jasmine specs for services go here */
 
 describe('service', function() {
 
     beforeEach(module('cubeViewer.services'));
 
+    describe("cubeDiffServiceTest", function() {
+        var diff_svc, split_svc, cubeContents;
+        beforeEach(inject(function ($injector, CubeDiffService, CubeSplitService) {
+            diff_svc = CubeDiffService;
+            split_svc = CubeSplitService;
+        }));
+
+        cubeContents = modo_cube_og_data;
+
+        var subCube1 = {
+            'Tundra': cubeContents['Tundra'],
+            'Taiga': cubeContents['Taiga'],
+            'Volcanic Island': cubeContents['Volcanic Island'],
+            'Tropical Island': cubeContents['Tropical Island']
+        };
+
+        var subCube2 = {
+            'Scrubland': cubeContents['Scrubland'],
+            'Plateau': cubeContents['Plateau'],
+            'Volcanic Island': cubeContents['Volcanic Island'],
+            'Tropical Island': cubeContents['Tropical Island']
+        };
+
+        it("should be able to split cards up logically", function() {
+            expect(split_svc.splitCards({}, {})).toEqual({
+                added: {},
+                removed: {},
+                both: {}
+            }); //empty case
+
+            expect(split_svc.splitCards(subCube1, {})).toEqual({
+                added: {},
+                removed: subCube1,
+                both: {}
+            }); //all removed
+
+            expect(split_svc.splitCards({}, subCube1)).toEqual({
+                added: subCube1,
+                removed: {},
+                both: {}
+            }); //all added
+
+            expect(split_svc.splitCards(subCube1, subCube2)).toEqual({
+                added: {
+                    'Scrubland': cubeContents['Scrubland'],
+                    'Plateau': cubeContents['Plateau']
+                },
+                removed: {
+                    'Tundra': cubeContents['Tundra'],
+                    'Taiga': cubeContents['Taiga']
+                },
+                both: {
+                    'Volcanic Island': cubeContents['Volcanic Island'],
+                    'Tropical Island': cubeContents['Tropical Island']
+                }
+            }); //diff
+        });
+
+        it("should be able to diff a cube", function() {
+            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Land': {}}))).toEqual({
+                'Land': [
+                'Tropical Island',
+                'Volcanic Island',
+                'Plateau',
+                'Scrubland',
+                'Taiga',
+                'Tundra'
+                ]
+            });
+        })
+    });
+
+    describe("sortSpecServiceTest", function() {
+        var svc;
+        beforeEach(inject(function ($injector, SortSpecService) {
+            svc = SortSpecService;
+        }));
+
+        var specExpect = function(spec, expectation) {
+            expect(svc.getSkeleton(spec)).toEqual(expectation)
+        };
+
+        it('should handle empty specs', function() {
+            specExpect(undefined, {});
+            specExpect(null, {});
+            specExpect({}, {});
+        });
+
+        it('should handle a spec without mana costs', function() {
+            specExpect({
+                'Colorless': {},
+                'White': {},
+                'Blue': {},
+                'Black': {},
+                'Red': {},
+                'Green': {},
+                'Artifact': {},
+                'Land': {}
+            }, {
+                'Colorless': [],
+                'White': [],
+                'Blue': [],
+                'Black': [],
+                'Red': [],
+                'Green': [],
+                'Artifact': [],
+                'Land': []
+            });
+        });
+
+        it('should handle specs with mana costs', function() {
+            specExpect({'Colorless': {
+                'Creature': {
+                    'converted_mana_cost<=1': {},
+                    'converted_mana_cost==2': {},
+                    'converted_mana_cost==3': {},
+                    'converted_mana_cost==4': {},
+                    'converted_mana_cost==5': {},
+                    'converted_mana_cost==6': {},
+                    'converted_mana_cost>=7': {}
+
+                },
+                '!Creature': {
+                    'Instant/Sorcery': {},
+                    'Planeswalker': {},
+                    'Enchantment': {},
+                    'Land': {}
+                }
+            },
+            'White': {
+                'converted_mana_cost<=1': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost==2': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost==3': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost==4': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost==5': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost==6': {
+                    'Creature': {},
+                    '!Creature': {}
+                },
+                'converted_mana_cost>=7': {
+                    'Creature': {},
+                    '!Creature': {}
+                }
+            }
+        }, {
+            "Colorless": {
+                "!Creature": {
+                    "Enchantment": [],
+                    "Instant/Sorcery": [],
+                    "Land": [],
+                    "Planeswalker": []
+                },
+                "Creature": {
+                    "converted_mana_cost<=1": [],
+                    "converted_mana_cost==2": [],
+                    "converted_mana_cost==3": [],
+                    "converted_mana_cost==4": [],
+                    "converted_mana_cost==5": [],
+                    "converted_mana_cost==6": [],
+                    "converted_mana_cost>=7": []
+                }
+            },
+            "White": {
+                "converted_mana_cost<=1": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost==2": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost==3": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost==4": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost==5": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost==6": {
+                    "!Creature": [],
+                    "Creature": []
+                },
+                "converted_mana_cost>=7": {
+                    "!Creature": [],
+                    "Creature": []
+                }
+            }});
+        });
+
+
+    });
+
     describe("cubeSortServiceTest", function() {
 
-        var namify = function(cube) {
-            var _recurseNamify = function(subCube) {
-                jQuery.each(subCube, function(_subName, _subCube) {
-                    if (jQuery.isArray(_subCube)) {
-                        jQuery.each(_subCube, function(idx, card) {
-                            _subCube[idx] = card['name'];
-                        })
-                    } else {
-                        _recurseNamify(_subCube);
-                    }
-                })
-            };
-
-            _recurseNamify(cube);
-            return cube
-        };
         var svc, cubeContents;
 
         cubeContents = modo_cube_og_data;

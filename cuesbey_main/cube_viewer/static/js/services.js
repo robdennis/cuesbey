@@ -226,7 +226,7 @@ angular.module('cubeViewer.services', [])
             }
         }
     })
-    .factory('CubeDiffService', function($SortSpecService, $CubeSortService) {
+    .factory('CubeDiffService', function(SortSpecService, CubeSortService, CubeSplitService) {
         return {
             getDiff : function(_old, _new, sortSpec) {
                 var sort_order_diff = {
@@ -235,15 +235,15 @@ angular.module('cubeViewer.services', [])
                     removed: 2
                 };
 
-                var currentCube = $SortSpecService.getSkeleton(sortSpec);
-                jQuery.each(splitCards(_old, _new), function(type, value) {
-                    currentCube = $CubeSortService.sortCube(value, undefined, function(card_a, card_b) {
+                var currentCube = SortSpecService.getSkeleton(sortSpec);
+                jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, value) {
+                    currentCube = CubeSortService.sortCube(value, undefined, function(card_a, card_b) {
                         if (card_a['diff_result'] !== undefined &&
                             card_b['diff_result'] !== undefined) {
-                            return ([sort_order_diff[card_a['diff_result']], card_a['name']].join('_') >
-                                [sort_order_diff[card_b['diff_result']], card_b['name']].join('_'));
+                            return ([sort_order_diff[card_a['diff_result']], card_a['name']] >
+                                [sort_order_diff[card_b['diff_result']], card_b['name']]) ? 1:-1;
                         } else {
-                            return card_a['name'] > card_b['name'];
+                            return card_a['name'] > card_b['name'] ? 1:-1;
                         }
                     }, currentCube, {diff_result:type});
                 });
@@ -252,6 +252,33 @@ angular.module('cubeViewer.services', [])
 
             }
 
+        }
+    })
+    .factory('CubeSplitService', function() {
+        return {
+            splitCards : function(_old, _new) {
+                // jsondiff.com
+
+                var both = {};
+                var added = {};
+                var removed = {};
+
+                jQuery.each(jQuery.extend({}, _old, _new), function(name, value) {
+                    if (name in _old && name in _new) {
+                        both[name] = value;
+                    } else if (name in _new) {
+                        added[name] = value;
+                    } else {
+                        removed[name] = value;
+                    }
+                });
+
+                return {
+                    both: both,
+                    added: added,
+                    removed: removed
+                }
+            }
         }
     });
 

@@ -22,6 +22,9 @@ function inArray( elem, array, i ) {
     return -1;
 }
 
+var colorList = ['White', 'Blue', 'Black', 'Red', 'Green'];
+var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Tribal'];
+
 angular.module('cubeViewer.services', [])
     .factory('CubeContentsService', function($http) {
         return {getCube : function(request, onSuccess) {
@@ -39,6 +42,7 @@ angular.module('cubeViewer.services', [])
     .factory('CardCategoryService', function() {
         return {
             matchesCategory : function(category, card) {
+
                 var _checkForExactColor = function(category, card) {
                     if (category == 'Colorless') {
                         // special case for colorlessness
@@ -165,13 +169,6 @@ angular.module('cubeViewer.services', [])
                     // merge on information
                     var cardToHandle = jQuery.extend({}, card, infoToAdd);
 
-//                    // if there are heuristics, note what they are
-//                    jQuery.each(cardToHandle['heuristics'] || {}, function(name, modifications) {
-//                        if (jQuery.inArray(name, heuristicNames)==-1) {
-//                            heuristicNames.push(name);
-//                        }
-//                    });
-
                     var _recurseCube = function (subCube) {
                         jQuery.each(subCube, function(_subName, _subCube) {
                             if (!CardCategoryService.matchesCategory(_subName, cardToHandle)) {
@@ -207,8 +204,6 @@ angular.module('cubeViewer.services', [])
                     console.log('sorting card:', index, value);
                     handleCubeCard(value, sortedCube, infoToAdd);
                 });
-
-                heuristicNames.sort();
 
                 var _recurseSort = function (subCube) {
                     jQuery.each(subCube, function(_subName, _subCube) {

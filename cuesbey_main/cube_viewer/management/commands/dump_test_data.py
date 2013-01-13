@@ -32,6 +32,6 @@ class Command(BaseCommand):
 
                 cube = bulk_import.save_cube_from_file_path(fpath)
                 base = os.path.basename(fpath).split('.')[0]
-                content = cube.serialize(indent=4)
 
-                outfile.write('{}_data = {};\n'.format(base, content))
+                outfile.write('{}_data = {};\n'.format(base, cube.serialize(indent=4)))
+                outfile.write('{}_data_array = {};\n'.format(base, cube.serialize(indent=4, array=True)))

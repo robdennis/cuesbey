@@ -23,12 +23,17 @@
 </head>
 <body>
     <div ng-controller="CubeContentsCtrl">
+        <form>
         <textarea name="before" ng-model="beforeCardNames" rows=20>
 
         </textarea>
+        cards: {[{before.length}]}
         <textarea name="after" ng-model="afterCardNames" rows=20>
 
         </textarea>
+        cards:  {[{after.length}]}
+        <button type="submit" class="btn" ng-click="diff()">Diff</button>
+        </form>
     </div>
     <div id="tabs">
         <ul>

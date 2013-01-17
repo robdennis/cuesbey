@@ -35,65 +35,87 @@ describe('service', function() {
 
         cubeContents = modo_cube_og_data;
 
-        var subCube1 = {
-            'Tundra': cubeContents['Tundra'],
-            'Taiga': cubeContents['Taiga'],
-            'Volcanic Island': cubeContents['Volcanic Island'],
-            'Tropical Island': cubeContents['Tropical Island']
-        };
+        var subCube1 = [
+            cubeContents['Tundra'],
+            cubeContents['Taiga'],
+            cubeContents['Volcanic Island'],
+            cubeContents['Tropical Island'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Path to Exile'],
+            cubeContents['Go for the Throat'],
+            cubeContents['Vampiric Tutor']
+        ];
 
-        var subCube2 = {
-            'Scrubland': cubeContents['Scrubland'],
-            'Plateau': cubeContents['Plateau'],
-            'Volcanic Island': cubeContents['Volcanic Island'],
-            'Tropical Island': cubeContents['Tropical Island']
-        };
+        var subCube2 = [
+            cubeContents['Scrubland'],
+            cubeContents['Plateau'],
+            cubeContents['Volcanic Island'],
+            cubeContents['Tropical Island'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Path to Exile'],
+            cubeContents['Brainstorm'],
+            cubeContents['Counterspell']
+        ];
 
-        it("should be able to split cards up logically", function() {
-            expect(split_svc.splitCards({}, {})).toEqual({
-                added: {},
-                removed: {},
-                both: {}
+        it("should handle a couple sanity checks", function() {
+            expect(split_svc.splitCards([], [])).toEqual({
+                added: [],
+                removed: [],
+                both: []
             }); //empty case
 
-            expect(split_svc.splitCards(subCube1, {})).toEqual({
-                added: {},
+            expect(split_svc.splitCards(subCube1, [])).toEqual({
+                added: [],
                 removed: subCube1,
-                both: {}
+                both: []
             }); //all removed
 
-            expect(split_svc.splitCards({}, subCube1)).toEqual({
+            expect(split_svc.splitCards([], subCube1)).toEqual({
                 added: subCube1,
-                removed: {},
-                both: {}
+                removed: [],
+                both: []
             }); //all added
-
-            expect(split_svc.splitCards(subCube1, subCube2)).toEqual({
-                added: {
-                    'Scrubland': cubeContents['Scrubland'],
-                    'Plateau': cubeContents['Plateau']
-                },
-                removed: {
-                    'Tundra': cubeContents['Tundra'],
-                    'Taiga': cubeContents['Taiga']
-                },
-                both: {
-                    'Volcanic Island': cubeContents['Volcanic Island'],
-                    'Tropical Island': cubeContents['Tropical Island']
-                }
+        });
+        it("should be able to split cards up logically", function() {
+            expect(namify(split_svc.splitCards(subCube1, subCube2))).toEqual({
+                added: [
+                    'Scrubland',
+                    'Plateau',
+                    'Brainstorm',
+                    'Counterspell'
+                ],
+                removed: [
+                    'Tundra',
+                    'Taiga',
+                    'Go for the Throat',
+                    'Vampiric Tutor'
+                ],
+                both: [
+                    'Volcanic Island',
+                    'Tropical Island',
+                    'Swords to Plowshares',
+                    'Path to Exile'
+                ]
             }); //diff
         });
 
         it("should be able to diff a cube", function() {
-            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Land': {}}))).toEqual({
-                'Land': [
-                'Tropical Island',
-                'Volcanic Island',
-                'Plateau',
-                'Scrubland',
-                'Taiga',
-                'Tundra'
-                ]
+            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Land': {}, 'Instant': {}}))).toEqual({
+                'Instant': {
+                    // sorted within a category according to the sort function
+                    // default in this case
+                    'both': ['Path to Exile', 'Swords to Plowshares'],
+                    added: ['Brainstorm', 'Counterspell'],
+                    removed: ['Go for the Throat', 'Vampiric Tutor']
+                },
+
+                'Land': {
+                    // sorted within a category according to the sort function
+                    // default in this case
+                    'both': ['Tropical Island', 'Volcanic Island'],
+                    added: ['Plateau', 'Scrubland'],
+                    removed: ['Taiga', 'Tundra']
+                }
             });
         })
     });
@@ -104,16 +126,24 @@ describe('service', function() {
             svc = SortSpecService;
         }));
 
-        var specExpect = function(spec, expectation) {
-            expect(svc.getSkeleton(spec)).toEqual(expectation)
+        var specExpect = function(spec, expectation, handleDiff) {
+            expect(svc.getSkeleton(spec, handleDiff)).toEqual(expectation)
+        };
+
+        var diffSpec = {
+            both: [],
+            removed: [],
+            added: []
         };
 
         it('should handle empty specs', function() {
             specExpect(undefined, {});
             specExpect(null, {});
             specExpect({}, {});
+            specExpect(undefined, diffSpec, true);
+            specExpect(null, diffSpec, true);
+            specExpect({}, diffSpec, true);
         });
-
         it('should handle a spec without mana costs', function() {
             specExpect({
                 'Colorless': {},
@@ -134,8 +164,26 @@ describe('service', function() {
                 'Artifact': [],
                 'Land': []
             });
+            specExpect({
+                'Colorless': {},
+                'White': {},
+                'Blue': {},
+                'Black': {},
+                'Red': {},
+                'Green': {},
+                'Artifact': {},
+                'Land': {}
+            }, {
+                'Colorless': diffSpec,
+                'White': diffSpec,
+                'Blue': diffSpec,
+                'Black': diffSpec,
+                'Red': diffSpec,
+                'Green': diffSpec,
+                'Artifact': diffSpec,
+                'Land': diffSpec
+            }, true);
         });
-
         it('should handle specs with mana costs', function() {
             specExpect({'Colorless': {
                 'Creature': {
@@ -233,6 +281,103 @@ describe('service', function() {
                     "Creature": []
                 }
             }});
+
+            specExpect({'Colorless': {
+                'Creature': {
+                    'converted_mana_cost<=1': {},
+                    'converted_mana_cost==2': {},
+                    'converted_mana_cost==3': {},
+                    'converted_mana_cost==4': {},
+                    'converted_mana_cost==5': {},
+                    'converted_mana_cost==6': {},
+                    'converted_mana_cost>=7': {}
+
+                },
+                '!Creature': {
+                    'Instant/Sorcery': {},
+                    'Planeswalker': {},
+                    'Enchantment': {},
+                    'Land': {}
+                }
+            },
+                'White': {
+                    'converted_mana_cost<=1': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost==2': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost==3': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost==4': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost==5': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost==6': {
+                        'Creature': {},
+                        '!Creature': {}
+                    },
+                    'converted_mana_cost>=7': {
+                        'Creature': {},
+                        '!Creature': {}
+                    }
+                }
+            }, {
+                "Colorless": {
+                    "!Creature": {
+                        "Enchantment": diffSpec,
+                        "Instant/Sorcery": diffSpec,
+                        "Land": diffSpec,
+                        "Planeswalker": diffSpec
+                    },
+                    "Creature": {
+                        "converted_mana_cost<=1": diffSpec,
+                        "converted_mana_cost==2": diffSpec,
+                        "converted_mana_cost==3": diffSpec,
+                        "converted_mana_cost==4": diffSpec,
+                        "converted_mana_cost==5": diffSpec,
+                        "converted_mana_cost==6": diffSpec,
+                        "converted_mana_cost>=7": diffSpec
+                    }
+                },
+                "White": {
+                    "converted_mana_cost<=1": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost==2": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost==3": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost==4": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost==5": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost==6": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    },
+                    "converted_mana_cost>=7": {
+                        "!Creature": diffSpec,
+                        "Creature": diffSpec
+                    }
+                }}, true);
         });
 
 
@@ -242,7 +387,7 @@ describe('service', function() {
 
         var svc, cubeContents;
 
-        cubeContents = modo_cube_og_data;
+        cubeContents = modo_cube_og_data_array;
 
         beforeEach(inject(function ($injector, CubeSortService) {
             svc = CubeSortService;
@@ -1070,6 +1215,16 @@ describe('service', function() {
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
         var damnation = cubeContents['Damnation'];
+
+        it('should handle diff categories', function() {
+            expect(svc.matchesCategory('both', {_diffResult: 'both'})).toBe(true);
+            expect(svc.matchesCategory('added', {_diffResult: 'both'})).toBe(false);
+            expect(svc.matchesCategory('added', {_diffResult: 'added'})).toBe(true);
+            expect(svc.matchesCategory('removed', {_diffResult: 'removed'})).toBe(true);
+            expect(svc.matchesCategory('added', eliteVanguard)).toBe(false);
+            expect(svc.matchesCategory('added', jQuery.extend({}, eliteVanguard, {_diffResult: 'added'}))).toBe(true);
+            expect(svc.matchesCategory('added', jQuery.extend({}, eliteVanguard, {_diffResult: 'both'}))).toBe(false);
+        });
 
         it('should handle monocolor and negation', function() {
             expect(svc.matchesCategory('White', eliteVanguard)).toBe(true);

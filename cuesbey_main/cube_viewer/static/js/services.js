@@ -67,6 +67,14 @@ angular.module('cubeViewer.services', [])
                     }
                 };
 
+                var _checkForDiff = function(category, card) {
+                    if (inArray(category, ['both', 'added', 'removed']) !== -1) {
+                        return card['_diffResult'] === category;
+                    } else {
+                        return undefined;
+                    }
+                };
+
                 var matchesCategory = true;
                 var matchesSubgroup = false;
                 // "/" is an boolean AND operator for this
@@ -81,8 +89,10 @@ angular.module('cubeViewer.services', [])
                         }
 
                         angular.forEach([
+                            //FIXME: after resolving as True/False for one of these, we should short-circuit our
                             _checkForExactColor,
-                            _checkForType
+                            _checkForType,
+                            _checkForDiff
                         ], function(checker) {
                             var result = checker(inner_cat, card);
                             if (result === undefined) {
@@ -109,36 +119,10 @@ angular.module('cubeViewer.services', [])
                 return matchesCategory;
             }
         }
-    }).factory('SplitCardsService', function() {
-        return {
-            split: function(_old, _new) {
-                // jsondiff.com
-
-                var both = {};
-                var added = {};
-                var removed = {};
-
-                jQuery.each(jQuery.extend({}, _old, _new), function(name, value) {
-                    if (name in _old && name in _new) {
-                        both[name] = value;
-                    } else if (name in _new) {
-                        added[name] = value;
-                    } else {
-                        removed[name] = value;
-                    }
-                });
-
-                return {
-                    both: both,
-                    added: added,
-                    removed: removed
-                }
-            }
-        }
     })
     .factory('SortSpecService', function() {
         return {
-            getSkeleton : function(sortSpec) {
+            getSkeleton : function(sortSpec, handleDiffs) {
                 sortSpec = sortSpec || {};
 
                 var sortedCube = {};
@@ -147,7 +131,17 @@ angular.module('cubeViewer.services', [])
                     jQuery.each(subSpec, function(_subName, _subSpec) {
                         if (jQuery.isEmptyObject(_subSpec)) {
                             // check that we don't have an information key like a "_sort"
-                            subCube[_subName] = [];
+                            if (!handleDiffs) {
+                                // relying on the falsiness of undefined
+                                subCube[_subName] = [];
+                            } else {
+                                subCube[_subName] = {
+                                    both: [],
+                                    removed: [],
+                                    added: []
+                                };
+                            }
+
                         } else {
                             var _recurseCube = {};
                             subCube[_subName] = _recurseCube;
@@ -157,6 +151,19 @@ angular.module('cubeViewer.services', [])
                 };
 
                 _recurseSpec(sortSpec, sortedCube);
+
+                if (jQuery.isEmptyObject(sortedCube)) {
+                    if (!handleDiffs) {
+                        return {};
+                    }
+                    else {
+                        return {
+                            both: [],
+                            removed: [],
+                            added: []
+                        };
+                    }
+                }
 
                 return sortedCube;
             }
@@ -197,25 +204,27 @@ angular.module('cubeViewer.services', [])
 
 
                 defaultSort = defaultSort || function(card_a, card_b) {
-                    return card_a['name'] > card_b['name']
+                    dump('sorting', card_a, card_b);
+                    return card_a['name'] > card_b['name'] ? 1:-1;
                 };
 
                 jQuery.each(serializedCube, function(index, value) {
-                    console.log('sorting card:', index, value);
                     handleCubeCard(value, sortedCube, infoToAdd);
                 });
 
-                var _recurseSort = function (subCube) {
-                    jQuery.each(subCube, function(_subName, _subCube) {
-                        if (jQuery.isArray(_subCube)) {
-                            _subCube.sort(defaultSort);
-                        } else {
-                            _recurseSort(_subCube);
-                        }
-                    })
-                };
+                if (defaultSort) {
+                    var _recurseSort = function (subCube) {
+                        jQuery.each(subCube, function(_subName, _subCube) {
+                            if (jQuery.isArray(_subCube)) {
+                                _subCube.sort(defaultSort);
+                            } else {
+                                _recurseSort(_subCube);
+                            }
+                        })
+                    };
 
-                _recurseSort(sortedCube);
+                    _recurseSort(sortedCube);
+                }
 
                 return sortedCube;
             }
@@ -223,24 +232,17 @@ angular.module('cubeViewer.services', [])
     })
     .factory('CubeDiffService', function(SortSpecService, CubeSortService, CubeSplitService) {
         return {
-            getDiff : function(_old, _new, sortSpec) {
+            getDiff : function(_old, _new, sortSpec, sorter) {
                 var sort_order_diff = {
                     both: 0,
                     added: 1,
                     removed: 2
                 };
 
-                var currentCube = SortSpecService.getSkeleton(sortSpec);
-                jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, value) {
-                    currentCube = CubeSortService.sortCube(value, undefined, function(card_a, card_b) {
-                        if (card_a['diff_result'] !== undefined &&
-                            card_b['diff_result'] !== undefined) {
-                            return ([sort_order_diff[card_a['diff_result']], card_a['name']] >
-                                [sort_order_diff[card_b['diff_result']], card_b['name']]) ? 1:-1;
-                        } else {
-                            return card_a['name'] > card_b['name'] ? 1:-1;
-                        }
-                    }, currentCube, {diff_result:type});
+                // we do want to handle diffs
+                var currentCube = SortSpecService.getSkeleton(sortSpec, true);
+                jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, splitSubCube) {
+                    currentCube = CubeSortService.sortCube(splitSubCube, sortSpec, undefined, currentCube, {_diffResult:type});
                 });
 
                 return currentCube;
@@ -254,17 +256,35 @@ angular.module('cubeViewer.services', [])
             splitCards : function(_old, _new) {
                 // jsondiff.com
 
-                var both = {};
-                var added = {};
-                var removed = {};
+                var both = [];
+                var added = [];
+                var removed = [];
+                var nameIsPresentInCardArray = function(_array, name) {
+                    for (var i = 0; i < _array.length; i++ ) {
+                        if (_array[i].name === name) {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
 
-                jQuery.each(jQuery.extend({}, _old, _new), function(name, value) {
-                    if (name in _old && name in _new) {
-                        both[name] = value;
-                    } else if (name in _new) {
-                        added[name] = value;
+                var namesHandled = [];
+                jQuery.each(_old.concat(_new), function(idx, card) {
+                    if (namesHandled.indexOf(card.name) !==-1) {
+                        // we already handled this name
+                        return;
                     } else {
-                        removed[name] = value;
+                        namesHandled.push(card.name);
+                    }
+
+                    var inOld = nameIsPresentInCardArray(_old, card.name);
+                    var inNew = nameIsPresentInCardArray(_new, card.name);
+                    if (inOld && inNew) {
+                        both.push(card);
+                    } else if (inOld) {
+                        removed.push(card);
+                    } else {
+                        added.push(card);
                     }
                 });
 

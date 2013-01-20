@@ -4,17 +4,38 @@ var namify = function(cube) {
     // it's simpler to write tests that just expect names of
     // cards instead of listing all the attributes of that card
     // so dump it out to just the names
-    var _recurseNamify = function(subCube) {
-        jQuery.each(subCube, function(_subName, _subCube) {
-            if (jQuery.isArray(_subCube)) {
-                jQuery.each(_subCube, function(idx, card) {
-                    _subCube[idx] = card['name'];
-                })
-            } else {
-                _recurseNamify(_subCube);
-            }
-        })
-    };
+    var _recurseNamify;
+
+    if (jQuery.isArray(cube)) {
+        _recurseNamify = function(subCube) {
+            jQuery.each(subCube, function(_subName, categoryObject) {
+
+                if (categoryObject.hasOwnProperty('subcategories')) {
+                    _recurseNamify(categoryObject.subcategories);
+                }
+
+                else if (jQuery.isArray(categoryObject.cards)) {
+                    jQuery.each(categoryObject.cards, function(idx, card) {
+                        categoryObject.cards[idx] = card['name'];
+                    })
+                } else {
+                    throw "unexpected cube format in namify"
+                }
+            })
+        };
+    } else {
+
+        _recurseNamify = function(subCube) {
+            jQuery.each(subCube, function(_subName, _subCube) {
+                if (jQuery.isArray(_subCube)) {
+                    jQuery.each(_subCube, function(idx, card) {
+                        _subCube[idx] = card['name'];
+                    })
+                } else {
+                    _recurseNamify(_subCube);
+                }
+            })};
+    }
 
     _recurseNamify(cube);
     return cube
@@ -100,23 +121,27 @@ describe('service', function() {
         });
 
         it("should be able to diff a cube", function() {
-            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Land': {}, 'Instant': {}}))).toEqual({
-                'Instant': {
+            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Instant': {}, 'Land': {}}))).toEqual([
+                {
+                    category: 'Instant',
                     // sorted within a category according to the sort function
                     // default in this case
-                    'both': ['Path to Exile', 'Swords to Plowshares'],
-                    added: ['Brainstorm', 'Counterspell'],
-                    removed: ['Go for the Throat', 'Vampiric Tutor']
-                },
-
-                'Land': {
+                    subcategories: [
+                        {category:'both', cards:['Path to Exile', 'Swords to Plowshares']},
+                        {category:'removed' , cards: ['Go for the Throat', 'Vampiric Tutor']},
+                        {category:'added' , cards: ['Brainstorm', 'Counterspell']}
+                    ]
+                }, {
+                    category: 'Land',
                     // sorted within a category according to the sort function
                     // default in this case
-                    'both': ['Tropical Island', 'Volcanic Island'],
-                    added: ['Plateau', 'Scrubland'],
-                    removed: ['Taiga', 'Tundra']
+                    subcategories: [
+                        {category:'both',  cards: ['Tropical Island', 'Volcanic Island']},
+                        {category:'removed', cards: ['Taiga', 'Tundra']},
+                        {category:'added', cards: ['Plateau', 'Scrubland']}
+                    ]
                 }
-            });
+            ]);
         })
     });
 
@@ -127,14 +152,16 @@ describe('service', function() {
         }));
 
         var specExpect = function(spec, expectation, handleDiff) {
-            expect(svc.getSkeleton(spec, handleDiff)).toEqual(expectation)
+            var actual = svc.getSkeleton(spec, handleDiff);
+            expect(actual.length).toBe(expectation.length)
+            expect(actual).toEqual(expectation)
         };
 
-        var diffSpec = {
-            both: [],
-            removed: [],
-            added: []
-        };
+        var diffSpec = [
+            {category: 'both', cards: []},
+            {category: 'removed', cards: []},
+            {category: 'added', cards: []}
+        ];
 
         it('should handle empty specs', function() {
             specExpect(undefined, {});
@@ -154,16 +181,16 @@ describe('service', function() {
                 'Green': {},
                 'Artifact': {},
                 'Land': {}
-            }, {
-                'Colorless': [],
-                'White': [],
-                'Blue': [],
-                'Black': [],
-                'Red': [],
-                'Green': [],
-                'Artifact': [],
-                'Land': []
-            });
+            }, [
+                {category: 'Colorless', cards:[]},
+                {category: 'White', cards: []},
+                {category: 'Blue', cards: []},
+                {category: 'Black', cards: []},
+                {category: 'Red', cards: []},
+                {category: 'Green', cards: []},
+                {category: 'Artifact', cards: []},
+                {category: 'Land', cards: []}
+            ]);
             specExpect({
                 'Colorless': {},
                 'White': {},
@@ -173,115 +200,18 @@ describe('service', function() {
                 'Green': {},
                 'Artifact': {},
                 'Land': {}
-            }, {
-                'Colorless': diffSpec,
-                'White': diffSpec,
-                'Blue': diffSpec,
-                'Black': diffSpec,
-                'Red': diffSpec,
-                'Green': diffSpec,
-                'Artifact': diffSpec,
-                'Land': diffSpec
-            }, true);
+            }, [
+                {category: 'Colorless', subcategories: diffSpec},
+                {category: 'White', subcategories: diffSpec},
+                {category: 'Blue', subcategories: diffSpec},
+                {category: 'Black', subcategories: diffSpec},
+                {category: 'Red', subcategories: diffSpec},
+                {category: 'Green', subcategories: diffSpec},
+                {category: 'Artifact', subcategories: diffSpec},
+                {category: 'Land', subcategories: diffSpec}
+            ], true);
         });
         it('should handle specs with mana costs', function() {
-            specExpect({'Colorless': {
-                'Creature': {
-                    'converted_mana_cost<=1': {},
-                    'converted_mana_cost==2': {},
-                    'converted_mana_cost==3': {},
-                    'converted_mana_cost==4': {},
-                    'converted_mana_cost==5': {},
-                    'converted_mana_cost==6': {},
-                    'converted_mana_cost>=7': {}
-
-                },
-                '!Creature': {
-                    'Instant/Sorcery': {},
-                    'Planeswalker': {},
-                    'Enchantment': {},
-                    'Land': {}
-                }
-            },
-            'White': {
-                'converted_mana_cost<=1': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost==2': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost==3': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost==4': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost==5': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost==6': {
-                    'Creature': {},
-                    '!Creature': {}
-                },
-                'converted_mana_cost>=7': {
-                    'Creature': {},
-                    '!Creature': {}
-                }
-            }
-        }, {
-            "Colorless": {
-                "!Creature": {
-                    "Enchantment": [],
-                    "Instant/Sorcery": [],
-                    "Land": [],
-                    "Planeswalker": []
-                },
-                "Creature": {
-                    "converted_mana_cost<=1": [],
-                    "converted_mana_cost==2": [],
-                    "converted_mana_cost==3": [],
-                    "converted_mana_cost==4": [],
-                    "converted_mana_cost==5": [],
-                    "converted_mana_cost==6": [],
-                    "converted_mana_cost>=7": []
-                }
-            },
-            "White": {
-                "converted_mana_cost<=1": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost==2": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost==3": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost==4": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost==5": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost==6": {
-                    "!Creature": [],
-                    "Creature": []
-                },
-                "converted_mana_cost>=7": {
-                    "!Creature": [],
-                    "Creature": []
-                }
-            }});
-
             specExpect({'Colorless': {
                 'Creature': {
                     'converted_mana_cost<=1': {},
@@ -330,54 +260,73 @@ describe('service', function() {
                         '!Creature': {}
                     }
                 }
-            }, {
-                "Colorless": {
-                    "!Creature": {
-                        "Enchantment": diffSpec,
-                        "Instant/Sorcery": diffSpec,
-                        "Land": diffSpec,
-                        "Planeswalker": diffSpec
-                    },
-                    "Creature": {
-                        "converted_mana_cost<=1": diffSpec,
-                        "converted_mana_cost==2": diffSpec,
-                        "converted_mana_cost==3": diffSpec,
-                        "converted_mana_cost==4": diffSpec,
-                        "converted_mana_cost==5": diffSpec,
-                        "converted_mana_cost==6": diffSpec,
-                        "converted_mana_cost>=7": diffSpec
-                    }
-                },
-                "White": {
-                    "converted_mana_cost<=1": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost==2": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost==3": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost==4": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost==5": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost==6": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    },
-                    "converted_mana_cost>=7": {
-                        "!Creature": diffSpec,
-                        "Creature": diffSpec
-                    }
-                }}, true);
+            }, [{
+                category: "Colorless",
+                subcategories: [{
+                    category: "Creature",
+                    subcategories: [
+                        {category: "converted_mana_cost<=1", cards: []},
+                        {category: "converted_mana_cost==2", cards: []},
+                        {category: "converted_mana_cost==3", cards: []},
+                        {category: "converted_mana_cost==4", cards: []},
+                        {category: "converted_mana_cost==5", cards: []},
+                        {category: "converted_mana_cost==6", cards: []},
+                        {category: "converted_mana_cost>=7", cards: []}
+                    ]
+                }, {
+                    category:"!Creature",
+                    subcategories: [
+                        {category: "Instant/Sorcery", cards: []},
+                        {category: "Planeswalker", cards: []},
+                        {category: "Enchantment", cards: []},
+                        {category: "Land", cards: []}
+                    ]
+                }]}, {
+                category: "White",
+                subcategories: [{
+                    category: 'converted_mana_cost<=1',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost==2',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost==3',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost==4',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost==5',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost==6',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }, {
+                    category: 'converted_mana_cost>=7',
+                    subcategories: [
+                        {category: "Creature", cards: []},
+                        {category: "!Creature", cards: []}
+                    ]
+                }]
+            }]);
         });
 
 
@@ -1179,8 +1128,8 @@ describe('service', function() {
 
             namify(sortedCube);
 
-            var categoryExpect = function(category) {
-                expect(sortedCube[category]).toEqual(mtgoCube[category]);
+            var categoryExpect = function(index, category) {
+                expect(sortedCube[index].cards).toEqual(mtgoCube[category]);
                 // useful for figuring out which thing is the first out of order
                 // if needed to debug
 //                for (var i=0;i<sortedCube[category].length;i++)
@@ -1189,15 +1138,15 @@ describe('service', function() {
 //                }
             };
 
-            categoryExpect('Artifact/Colorless');
-            categoryExpect('Colorless/!Artifact/!Land');
-            categoryExpect('White');
-            categoryExpect('Blue');
-            categoryExpect('Black');
-            categoryExpect('Red');
-            categoryExpect('Green');
-            categoryExpect('Multicolor');
-            categoryExpect('Land');
+            categoryExpect(0, 'Colorless/!Artifact/!Land');
+            categoryExpect(1, 'Multicolor');
+            categoryExpect(2, 'White');
+            categoryExpect(3, 'Blue');
+            categoryExpect(4, 'Black');
+            categoryExpect(5, 'Red');
+            categoryExpect(6, 'Green');
+            categoryExpect(7, 'Artifact/Colorless');
+            categoryExpect(8, 'Land');
         });
 
     });

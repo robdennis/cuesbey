@@ -125,7 +125,7 @@ angular.module('cubeViewer.services', [])
             getSkeleton : function(sortSpec, handleDiffs) {
                 sortSpec = sortSpec || {};
 
-                var sortedCube = {};
+                var sortedCube = [];
 
                 var _recurseSpec = function (subSpec, subCube) {
                     jQuery.each(subSpec, function(_subName, _subSpec) {
@@ -133,19 +133,20 @@ angular.module('cubeViewer.services', [])
                             // check that we don't have an information key like a "_sort"
                             if (!handleDiffs) {
                                 // relying on the falsiness of undefined
-                                subCube[_subName] = [];
+                                subCube.push({category:_subName, cards: []});
                             } else {
-                                subCube[_subName] = {
-                                    both: [],
-                                    removed: [],
-                                    added: []
-                                };
+                                subCube.push({category:_subName, subcategories: [
+                                    {category: 'both', cards: []},
+                                    {category: 'removed', cards: []},
+                                    {category: 'added', cards: []}
+                                ]});
                             }
 
                         } else {
-                            var _recurseCube = {};
-                            subCube[_subName] = _recurseCube;
-                            _recurseSpec(_subSpec, _recurseCube);
+                            var _subCategories = [];
+                            var _recurseCube = {category:_subName, subcategories: _subCategories};
+                            subCube.push(_recurseCube);
+                            _recurseSpec(_subSpec, _subCategories);
                         }
                     })
                 };
@@ -157,11 +158,11 @@ angular.module('cubeViewer.services', [])
                         return {};
                     }
                     else {
-                        return {
-                            both: [],
-                            removed: [],
-                            added: []
-                        };
+                        return [
+                            {category: 'both', cards: []},
+                            {category: 'removed', cards: []},
+                            {category: 'added', cards: []}
+                        ];
                     }
                 }
 
@@ -177,16 +178,21 @@ angular.module('cubeViewer.services', [])
                     var cardToHandle = jQuery.extend({}, card, infoToAdd);
 
                     var _recurseCube = function (subCube) {
-                        jQuery.each(subCube, function(_subName, _subCube) {
-                            if (!CardCategoryService.matchesCategory(_subName, cardToHandle)) {
+                        jQuery.each(subCube, function(idx, categoryObject) {
+                            if (!CardCategoryService.matchesCategory(categoryObject.category, cardToHandle)) {
                                 return;
                             }
+                            if (categoryObject.hasOwnProperty('subcategories')) {
+                                _recurseCube(categoryObject.subcategories);
+                            }
+                            // no subcategories, so either push it on the
+                            // cards array, or test for diff categories
 
-                            if (jQuery.isArray(_subCube)) {
+                            else if (jQuery.isArray(categoryObject.cards)) {
                                 // we're done here
-                                _subCube.push(cardToHandle);
+                                categoryObject.cards.push(cardToHandle);
                             } else {
-                                _recurseCube(_subCube);
+                                throw "unexpected cube format in binning"
                             }
                         })
                     };
@@ -204,7 +210,6 @@ angular.module('cubeViewer.services', [])
 
 
                 defaultSort = defaultSort || function(card_a, card_b) {
-                    dump('sorting', card_a, card_b);
                     return card_a['name'] > card_b['name'] ? 1:-1;
                 };
 
@@ -214,12 +219,20 @@ angular.module('cubeViewer.services', [])
 
                 if (defaultSort) {
                     var _recurseSort = function (subCube) {
-                        jQuery.each(subCube, function(_subName, _subCube) {
-                            if (jQuery.isArray(_subCube)) {
-                                _subCube.sort(defaultSort);
-                            } else {
-                                _recurseSort(_subCube);
+                        jQuery.each(subCube, function(idx, categoryObject) {
+                            if (categoryObject.hasOwnProperty('subcategories')) {
+                                _recurseSort(categoryObject.subcategories);
                             }
+                            // no subcategories, so either push it on the
+                            // cards array, or test for diff categories
+
+                            else if (jQuery.isArray(categoryObject.cards)) {
+                                // we're done here
+                                categoryObject.cards.sort(defaultSort);
+                            } else {
+                                throw "unexpected cube format in sort"
+                            }
+
                         })
                     };
 

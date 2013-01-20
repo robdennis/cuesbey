@@ -17,6 +17,10 @@ class CubeView(ListView):
     model = Cube
     context_object_name = 'cubes'
 
+def diff(request):
+
+    return render_to_response("diff.html", context_instance=RequestContext(request))
+
 def details(request, id):
 
     cube = get_object_or_404(Cube, pk=id)

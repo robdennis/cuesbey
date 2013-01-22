@@ -4,7 +4,39 @@
 
 angular.module('cubeViewer.controllers', []);
 
-function CubeContentsCtrl($scope) {
+function CubeContentsCtrl($scope, CubeDiffService) {
+    var cmcSlots = {
+        'converted_mana_cost<=1': {},
+        'converted_mana_cost==2': {},
+        'converted_mana_cost==3': {},
+        'converted_mana_cost==4': {},
+        'converted_mana_cost==5': {},
+        'converted_mana_cost==6': {},
+        'converted_mana_cost>=7': {}
+    };
+    var spec = {
+        'White': {
+            'Creature': cmcSlots,
+            '!Creature': cmcSlots
+        },
+        'Blue': {
+            'Creature': cmcSlots,
+            '!Creature': cmcSlots
+        },
+        'Black': {
+            'Creature': cmcSlots,
+            '!Creature': cmcSlots
+        },
+        'Red': {
+            'Creature': cmcSlots,
+            '!Creature': cmcSlots
+        },
+        'Green': {
+            'Creature': cmcSlots,
+            '!Creature': cmcSlots
+        }
+    };
+
     $scope.beforeCardNames = [
         "Absorb",
         "Abyssal Persecutor",
@@ -25518,7 +25550,14 @@ function CubeContentsCtrl($scope) {
                 "converted_mana_cost": 3
             }
         ];
+        var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, spec);
+        var tabs = [];
+        angular.forEach(diffedCube, function(category) {
+            tabs.push(category.category);
+        });
 
-        console.log('got stuff');
+        $scope.diffedCube = diffedCube;
+        $scope.tabs = tabs;
+
     };
 }

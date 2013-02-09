@@ -12,8 +12,7 @@ from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 
 from cuesbey_main.cube_viewer import (get_json_card_content, heuristics,
-                                      parse_mana_cost, estimate_colors,
-                                      CardFetchingError)
+                                      parse_mana_cost, estimate_colors)
 from cuesbey_main.cube_viewer.autolog import log
 
 
@@ -184,30 +183,55 @@ class Cube(models.Model):
 
     def add_card_by_name(self, card_name):
         """
-
+        :param card_name: add a card with this name, to this cube
         """
-
         self.cards.add(make_and_insert_card(card_name))
 
 
     def add_cards_by_name(self, card_names):
         """
-
+        :param card_names: add card with these name, to this cube
         """
         for card_name in card_names:
             self.add_card_by_name(card_name)
 
-    def serialize(self, fp=None, array=False, **kwargs):
-        if not array:
-            cards = {
-                card.name: card.as_dict() for card in self.cards.all()
-            }
-        else:
-            cards = [card.as_dict() for card in self.cards.all()]
+    def as_dict(self):
+        """
+        return a dict representation of this cube
+        """
+
+        return {
+            card.name: card.as_dict() for card in self.cards.all()
+        }
+
+    def as_list(self):
+        """
+        return a list representation of this cube
+        """
+
+        return [card.as_dict() for card in self.cards.all()]
+
+    @classmethod
+    def serialize(cls, cube_cards, fp=None, **kwargs):
+        """
+
+        :rtype : str (if no fp specified) else NoneType
+        :param cube_cards: the container you wish to serialize
+        :param fp: the file-like object you intend to dump to, else dump to
+            string
+        :param array:
+        :param kwargs:
+        :return:
+        """
         if fp is None:
-            return json.dumps(cards, cls=CubeEncoder, **kwargs)
+            return json.dumps(cube_cards, cls=CubeEncoder, **kwargs)
         else:
-            return json.dump(cards, fp, cls=CubeEncoder, **kwargs)
+            return json.dump(cube_cards, fp, cls=CubeEncoder, **kwargs)
+
+    @classmethod
+    def dumps(cls, cube_dict, **kwargs):
+
+        return
 
 
 class User(models.Model):

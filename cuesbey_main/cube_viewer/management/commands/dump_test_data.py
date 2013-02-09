@@ -7,6 +7,7 @@ from cuesbey_main.cube_viewer.management.commands import bulk_import
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
 
+# noinspection PyShadowingBuiltins
 class Command(BaseCommand):
     args = "[FILENAME]+"
 
@@ -25,13 +26,15 @@ class Command(BaseCommand):
             return
 
         with open(options['outfile'], 'wb') as outfile:
-
+            all_cards = {}
             for fpath in args:
                 if not os.path.exists(fpath):
                     raise CommandError('{} does not exist'.format(fpath))
 
                 cube = bulk_import.save_cube_from_file_path(fpath)
+                all_cards.update(cube.as_dict())
                 base = os.path.basename(fpath).split('.')[0]
 
-                outfile.write('{}_data = {};\n'.format(base, cube.serialize(indent=4)))
-                outfile.write('{}_data_array = {};\n'.format(base, cube.serialize(indent=4, array=True)))
+                outfile.write('{}_data = {};\n'.format(base, cube.serialize(cube.as_dict(), indent=4)))
+                outfile.write('{}_data_array = {};\n'.format(base, cube.serialize(cube.as_list(), indent=4)))
+                outfile.write('cuesbey_all_data = {};\n'.format(cube.serialize(all_cards, indent=4)))

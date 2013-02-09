@@ -49,13 +49,13 @@ def merge_mana_costs(*costs):
 
     merged_cost = []
     digit = 0
-    log.debug('pre-merged: %r', costs)
+    # log.debug('pre-merged: %r', costs)
     for cost in costs:
         if isinstance(cost, basestring):
             _cost = parse_mana_cost(cost)
         else:
             _cost = deepcopy(cost)
-        log.debug('merging cost: %r', _cost)
+        # log.debug('merging cost: %r', _cost)
         if _cost is None:
             continue
         for sym in _cost:
@@ -66,11 +66,11 @@ def merge_mana_costs(*costs):
 
     if digit:
         merged_cost.append(str(digit))
-    log.debug('merged: %r', merged_cost)
+    # log.debug('merged: %r', merged_cost)
 
     def mana_cost_key(symbol):
         # X < colorless < W < U < B < R < G
-        log.debug('sorting %r', symbol)
+        # log.debug('sorting %r', symbol)
         for idx, res in enumerate([symbol == 'X',
                                    symbol.isdigit(),
                                    'W' in symbol,
@@ -86,7 +86,7 @@ def merge_mana_costs(*costs):
 
 def parse_mana_cost(mana_cost):
     parsed_mc = re.findall(r'\{(.+?)\}', mana_cost)
-    log.debug('parsed_mana_cost {!r} to {!r}', mana_cost, parsed_mc)
+    # log.debug('parsed_mana_cost {!r} to {!r}', mana_cost, parsed_mc)
     return parsed_mc
 
 def stitch_mana_cost(parsed_mana_cost):
@@ -103,7 +103,7 @@ def estimate_colors(mana_cost):
 
     colors_found = [color_name for abbrev, color_name in color_mappings.iteritems()
                     if abbrev in (mana_cost_text or '')]
-    log.debug('using: %s, found colors: %s', mana_cost_text, colors_found)
+    # log.debug('using: %s, found colors: %s', mana_cost_text, colors_found)
 
     return set(colors_found)
 

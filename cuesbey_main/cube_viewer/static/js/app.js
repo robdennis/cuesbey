@@ -6,7 +6,7 @@ angular.module('cubeViewer', [
     'cubeViewer.controllers',
     'cubeViewer.services',
     'cubeViewer.directives'
-])
+    ])
     .config(function($interpolateProvider) {
         $interpolateProvider.startSymbol('{[{');
         $interpolateProvider.endSymbol('}]}');

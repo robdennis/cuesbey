@@ -1,3 +1,6 @@
+import collections
+import json
+from django.views.decorators.csrf import csrf_protect
 import os
 
 from django.http import HttpResponse, Http404
@@ -5,8 +8,8 @@ from django.views.generic import ListView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 
-from cuesbey_main.cube_viewer.models import Cube
-
+from cuesbey_main.cube_viewer import CardFetchingError
+from cuesbey_main.cube_viewer.models import Cube, make_and_insert_card
 from cuesbey_main.cube_viewer.autolog import log
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
@@ -47,11 +50,45 @@ def cube_contents(request, file_name=None):
 
     cube = get_object_or_404(Cube, pk=id)
 
-    return HttpResponse(cube.serialize(),
+    return HttpResponse(Cube.serialize(cube),
         mimetype="application/json")
 
-def run_test(request, unit_test_name='test'):
+def card_contents(request):
 
-    return render_to_response('test.html', dict(
-        unit_test_name=unit_test_name
-    ), context_instance=RequestContext(request))
+    if not request.is_ajax():
+        return Http404
+
+    if request.method == 'POST':
+        log.debug(request.POST)
+        all_card_names = request.POST.lists()
+
+    else:
+        raise Http404
+
+    if not all_card_names:
+        return Http404
+
+    log.debug("setting up response")
+
+    def append_cards(card_names):
+        cards = []
+        invalid_names = []
+        for card_name in card_names:
+            try:
+                cards.append(make_and_insert_card(card_name).as_dict())
+            except CardFetchingError:
+                invalid_names.append(card_name)
+        return dict(cards=cards, invalid_names=invalid_names)
+
+    if isinstance(all_card_names, collections.Sequence):
+        response = Cube.serialize(append_cards(all_card_names))
+    else:
+        response = {
+            category:append_cards(names) for category,names in all_card_names.iteritems()
+        }
+
+    return HttpResponse(
+        response,
+        mimetype="application/json"
+    )
+

@@ -26,6 +26,17 @@ var colorList = ['White', 'Blue', 'Black', 'Red', 'Green'];
 var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Tribal'];
 
 angular.module('cubeViewer.services', [])
+    .factory('CardContentService', function($http) {
+        return {getCards : function(cardNames, onSuccess) {
+            $http({
+                method: 'POST',
+                url: '/card_contents/',
+                data: $.param({card_names: cardNames})
+            }).success(function (data, status) {
+                    onSuccess(data, status);
+            });
+        }};
+    })
     .factory('CardCategoryService', function() {
         return {
             matchesCategory : function(category, card) {

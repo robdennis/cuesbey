@@ -1483,17 +1483,24 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
     ].join('\n');
 
     $scope.diff = function() {
-        $scope.before = CardContentService.getCards($scope.beforeCardNames.split('\n'), console.log);
-        $scope.after = CardContentService.getCards($scope.afterCardNames.split('\n'), console.log);
+        var logStuff = function (data, status) {
+            console.log(data['cards']);
+            $scope.before = data['before']['cards'];
+            $scope.after = data['after']['cards'];
+            var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, spec);
+            var tabs = [];
+            angular.forEach(diffedCube, function(category) {
+                tabs.push(category.category);
+            });
 
-        var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, spec);
-        var tabs = [];
-        angular.forEach(diffedCube, function(category) {
-            tabs.push(category.category);
-        });
+            $scope.diffedCube = diffedCube;
+            $scope.tabs = tabs;
+        };
 
-        $scope.diffedCube = diffedCube;
-        $scope.tabs = tabs;
-
+        CardContentService.getCards({
+                before: $scope.beforeCardNames.split('\n'),
+                after: $scope.afterCardNames.split('\n')
+            },
+            logStuff);
     };
 }

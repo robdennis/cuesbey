@@ -2,8 +2,11 @@
 import unittest
 
 from django.test import TestCase
-from cuesbey_main.cube_viewer.models import Card, make_and_insert_card, Cube, CardFetchingError
-from cuesbey_main.cube_viewer import parse_mana_cost, merge_mana_costs
+from cuesbey_main.cube_viewer.models import Card, make_and_insert_card, Cube
+
+from cuesbey_main.cube_viewer import (parse_mana_cost, merge_mana_costs,
+                                      CardFetchingError)
+
 
 class SimpleTest(TestCase):
     def test_create_cards_given_names(self):
@@ -232,7 +235,6 @@ class CardCategoryTest(TestCase):
                 types=["Artifact", "Creature"]
             ),
         ))
-
 
         self.assertHeuristicsArePresent('Lashwrithe', dict(
             living_weapon_means_creature=dict(

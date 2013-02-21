@@ -113,7 +113,7 @@ mods.Cube.objects.get(pk=3)
 """
 
 if __name__ == '__main__':
-    from cuesbey_main.cube_viewer.models import Cube
+    from cuesbey_main.cube_diff.models import Cube
 
     for idx, init in enumerate(('W', 'U', 'B', 'R', 'G'), start=1):
         print('<div id="tabs-%d">' % idx)

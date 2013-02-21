@@ -78,7 +78,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'djangular.finders.NamespacedAngularAppDirectoriesFinder'
 )
 
 # Make this unique, and don't share it with anybody.
@@ -99,6 +99,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'djangular.middleware.AngularJsonVulnerabilityMiddleware',
 )
 
 ROOT_URLCONF = 'cuesbey.urls'
@@ -122,7 +123,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.staticfiles',
-    'cube_viewer',
+    'djangular',
+    'cube_diff',
 )
 
 LOGGING = {

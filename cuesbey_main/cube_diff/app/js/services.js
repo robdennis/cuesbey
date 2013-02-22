@@ -28,10 +28,8 @@ var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Plane
 angular.module('cube_diff.services', [])
     .factory('CardContentService', function($http) {
         return {getCards : function(cardNames, onSuccess) {
-            $http({
-                method: 'POST',
-                url: '/card_contents/',
-                data: $.param({card_names: cardNames})
+            $http.post('/card_contents/', {
+                card_names: cardNames
             }).success(function (data, status) {
                     onSuccess(data, status);
             });

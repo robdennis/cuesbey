@@ -54,21 +54,17 @@ def cube_contents(request, file_name=None):
         mimetype="application/json")
 
 def card_contents(request):
-
     if not request.is_ajax():
         return Http404
 
-    if request.method == 'POST':
-        log.debug(request.POST)
-        all_card_names = request.POST.lists()
+    try:
+        all_card_names = json.loads(request.body)['card_names']
+    except ValueError:
+        return HttpResponse(
+            {},
+            mimetype="application/json"
+        )
 
-    else:
-        raise Http404
-
-    if not all_card_names:
-        return Http404
-
-    log.debug("setting up response")
 
     def append_cards(card_names):
         cards = []
@@ -80,12 +76,13 @@ def card_contents(request):
                 invalid_names.append(card_name)
         return dict(cards=cards, invalid_names=invalid_names)
 
-    if isinstance(all_card_names, collections.Sequence):
-        response = Cube.serialize(append_cards(all_card_names))
+    if isinstance(all_card_names, collections.Mapping):
+        response = Cube.serialize({
+            category:append_cards(names)
+            for category,names in all_card_names.iteritems()
+        })
     else:
-        response = {
-            category:append_cards(names) for category,names in all_card_names.iteritems()
-        }
+        response = Cube.serialize(append_cards(all_card_names))
 
     return HttpResponse(
         response,

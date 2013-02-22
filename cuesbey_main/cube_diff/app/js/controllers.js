@@ -1484,7 +1484,6 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
 
     $scope.diff = function() {
         var logStuff = function (data, status) {
-            console.log(data['cards']);
             $scope.before = data['before']['cards'];
             $scope.after = data['after']['cards'];
             var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, spec);
@@ -1495,6 +1494,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
 
             $scope.diffedCube = diffedCube;
             $scope.tabs = tabs;
+            console.log(diffedCube);
         };
 
         CardContentService.getCards({

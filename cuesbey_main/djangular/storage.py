@@ -12,7 +12,6 @@ class NamespacedAngularAppStorage(AppStaticStorage):
         """
         Returns a static file storage if available in the given app.
         """
-        print 'finding an app : %s, %s, %s' % (app, args, kwargs)
         # app is the actual app module
         self.prefix = app
         super(NamespacedAngularAppStorage, self).__init__(app, *args, **kwargs)

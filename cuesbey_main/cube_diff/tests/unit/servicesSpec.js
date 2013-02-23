@@ -153,7 +153,7 @@ describe('service', function() {
 
         var specExpect = function(spec, expectation, handleDiff) {
             var actual = svc.getSkeleton(spec, handleDiff);
-            expect(actual.length).toBe(expectation.length)
+            expect(actual.length).toBe(expectation.length);
             expect(actual).toEqual(expectation)
         };
 
@@ -343,6 +343,7 @@ describe('service', function() {
         }));
 
         it('should sort with a custom sort function', function() {
+            // this tries to sort it like the original MTGO cube announcement
             var mtgoCube = {
                 "Colorless/!Artifact/!Land": [
                     "Kozilek, Butcher of Truth",
@@ -1149,6 +1150,83 @@ describe('service', function() {
             categoryExpect(8, 'Land');
         });
 
+        it('should sort with all the supported categories', function() {
+            // this tries to sort it like the original MTGO cube announcement
+
+            var baseCube = [
+                modo_cube_og_data['Damnation'],
+                modo_cube_og_data['Vampiric Tutor'],
+                modo_cube_og_data['Doom Blade'],
+                modo_cube_og_data['Karn Liberated'],
+                modo_cube_og_data['Thran Dynamo'],
+                modo_cube_og_data['Wasteland'],
+                modo_cube_og_data['Tidehollow Sculler'],
+                modo_cube_og_data['Liliana of the Veil'],
+                modo_cube_og_data['Sorin Markov'],
+                modo_cube_og_data['Sphinx of the Steel Wind']
+            ];
+
+            var sortedCube = svc.sortCube(baseCube, {
+                'Multicolor': {
+                    'converted_mana_cost<4': {},
+                    'converted_mana_cost>=4': {}
+                },
+                'Colorless': {
+                    'Artifact': {},
+                    '!Artifact': {}
+                },
+                'Black': {
+                    'Instant/converted_mana_cost==1': {},
+                    'Instant/converted_mana_cost!=1': {},
+                    'Sorcery': {},
+                    'Planeswalker': {}
+                }
+            });
+
+            namify(sortedCube);
+
+            expect(sortedCube).toEqual([{
+                category: 'Multicolor',
+                subcategories: [{
+                    category: 'converted_mana_cost<4',
+                    cards: ['Tidehollow Sculler']
+                }, {
+                    category: 'converted_mana_cost>=4',
+                    cards: ['Sphinx of the Steel Wind']
+                }]
+            }, {
+                category: 'Colorless',
+                subcategories: [{
+                    category: 'Artifact',
+                    cards: ['Thran Dynamo']
+                }, {
+                    category: '!Artifact',
+                    cards: [
+                        'Karn Liberated',
+                        'Wasteland'
+                    ]
+                }]
+            }, {
+                category: 'Black',
+                subcategories: [{
+                    category: 'Instant/converted_mana_cost==1',
+                    cards: ['Vampiric Tutor']
+                }, {
+                    category: 'Instant/converted_mana_cost!=1',
+                    cards: ['Doom Blade']
+                }, {
+                    category: 'Sorcery',
+                    cards: ['Damnation']
+                }, {
+                    category: 'Planeswalker',
+                    cards: [
+                        'Liliana of the Veil',
+                        'Sorin Markov'
+                    ]
+                }]
+            }]);
+        });
+
     });
 
     describe("cardCategoryServiceTest", function() {
@@ -1164,6 +1242,7 @@ describe('service', function() {
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
         var damnation = cubeContents['Damnation'];
+        var sphinx = cubeContents['Sphinx of the Steel Wind'];
 
         it('should handle diff categories', function() {
             expect(svc.matchesCategory('both', {_diffResult: 'both'})).toBe(true);
@@ -1179,6 +1258,8 @@ describe('service', function() {
             expect(svc.matchesCategory('White', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('!Blue/!Black', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('!White', eliteVanguard)).toBe(false);
+            // a white and black card is white
+            expect(svc.matchesCategory('White', sculler)).toBe(false);
         });
         it('should handle simple types and negation', function() {
 
@@ -1201,6 +1282,10 @@ describe('service', function() {
             expect(svc.matchesCategory('Sorcery|Instant/Blue', damnation)).toBe(false);
             expect(svc.matchesCategory('Sorcery|Creature/Black', damnation)).toBe(true);
             expect(svc.matchesCategory('Instant|Creature/Black', damnation)).toBe(false);
+            // this isn't that helpful, but there it is
+            expect(svc.matchesCategory('converted_mana_cost<3|converted_mana_cost>=0', sculler)).toBe(true);
+            // this isn't possible, but again, there it is
+            expect(svc.matchesCategory('converted_mana_cost>3/converted_mana_cost<=0', sculler)).toBe(false);
         });
 
         it('should handle colorless checks', function() {
@@ -1232,6 +1317,18 @@ describe('service', function() {
             expect(svc.matchesCategory('Colorless/Artifact/Land', dynamo)).toBe(false);
             expect(svc.matchesCategory('Colorless/Land/Artifact', dynamo)).toBe(false);
             expect(svc.matchesCategory('Colorless/Artifact', sculler)).toBe(false);
+        });
+
+        it('should handle converted mana cost', function() {
+            expect(svc.matchesCategory('converted_mana_cost==2', sculler)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost<=2', sculler)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost<=3', sculler)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost<3', sculler)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost<3/converted_mana_cost>=0', sculler)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost==2', dynamo)).toBe(false);
+            expect(svc.matchesCategory('converted_mana_cost<=2', dynamo)).toBe(false);
+            expect(svc.matchesCategory('converted_mana_cost<=3', dynamo)).toBe(false);
+            expect(svc.matchesCategory('converted_mana_cost<3', dynamo)).toBe(false);
         });
     });
 });

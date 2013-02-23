@@ -63,11 +63,22 @@ angular.module('cube_diff.services', [])
                     }
                 };
 
+                var _checkForCMC = function(category, card) {
+                    var cmcRegex = /converted_mana_cost\s*([=><!]+)\s*(\d+)/;
+                    var match = cmcRegex.exec(category);
+                    if (match) {
+                        // I'm personally comfortable with this level of eval'ing
+                        return eval('card.converted_mana_cost'+match[1]+match[2]);
+                    } else {
+                        return undefined
+                    }
+                };
+
                 var _checkForDiff = function(category, card) {
                     if (inArray(category, ['both', 'added', 'removed']) !== -1) {
                         return card['_diffResult'] === category;
                     } else {
-                        return undefined;
+                        return undefined
                     }
                 };
 
@@ -88,6 +99,7 @@ angular.module('cube_diff.services', [])
                             //FIXME: after resolving as True/False for one of these, we should short-circuit our
                             _checkForExactColor,
                             _checkForType,
+                            _checkForCMC,
                             _checkForDiff
                         ], function(checker) {
                             var result = checker(inner_cat, card);

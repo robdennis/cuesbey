@@ -242,16 +242,10 @@ angular.module('cube_diff.services', [])
     .factory('CubeDiffService', function(SortSpecService, CubeSortService, CubeSplitService) {
         return {
             getDiff : function(_old, _new, sortSpec, sorter) {
-                var sort_order_diff = {
-                    both: 0,
-                    added: 1,
-                    removed: 2
-                };
-
                 // we do want to handle diffs
                 var currentCube = SortSpecService.getSkeleton(sortSpec, true);
                 jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, splitSubCube) {
-                    currentCube = CubeSortService.sortCube(splitSubCube, sortSpec, undefined, currentCube, {_diffResult:type});
+                    currentCube = CubeSortService.sortCube(splitSubCube, sortSpec, sorter, currentCube, {_diffResult:type});
                 });
 
                 return currentCube;

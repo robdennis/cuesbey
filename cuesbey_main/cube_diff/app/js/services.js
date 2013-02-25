@@ -84,7 +84,7 @@ angular.module('cube_diff.services', [])
 
                 var matchesCategory = true;
                 var matchesSubgroup = false;
-                // "/" is an boolean AND operator for this
+                // "/" is the boolean AND operator for this category stuff
                 angular.forEach(category.split('/'), function(subgroup) {
                     matchesSubgroup = false;
 

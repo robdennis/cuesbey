@@ -1,5 +1,6 @@
 # encoding: utf-8
 import json
+import itertools
 import re
 from collections import namedtuple
 from itertools import chain
@@ -12,7 +13,7 @@ from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 
 from cuesbey_main.cube_diff import (get_json_card_content, heuristics,
-                                      parse_mana_cost, estimate_colors)
+                                    parse_mana_cost, estimate_colors, CardFetchingError)
 from cuesbey_main.cube_diff.autolog import log
 
 
@@ -23,30 +24,99 @@ class CubeEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def make_and_insert_card(name):
-    cleaned_name = _clean_cardname(name)
+def get_cards_from_names(*names):
+    """
+    :param names: the names of the card objects you want to insert
 
-    try:
-        fetched_card = Card.objects.get(pk=cleaned_name)
-        log.debug('successfully fetched %s', fetched_card)
-        return fetched_card
-    except Card.DoesNotExist:
+    :return: the Card objects corresponding to those names
+    """
 
-        card_content = get_json_card_content(cleaned_name)
-        log.info('got card content: %s', card_content)
+    if not isinstance(names[0], basestring):
+        # someone probably passed a list instead of unrolling args of strings
+        names = names[0]
 
-        try:
-            # we'll try to refetch in case we were able to clean a good name
-            refetched_card = Card.objects.get(pk=card_content['name'])
-        except Card.DoesNotExist:
-            log.debug("creating a new card")
-            created_card= Card(**card_content)
-            created_card.save()
-            log.debug("saved created")
-            return created_card
+    to_fetch = []
+    to_insert = []
+
+    names = map(_clean_cardname, names)
+
+    for name in names:
+        if name in Card.get_all_inserted_names():
+            to_fetch.append(name)
         else:
-            log.debug("successfully refetched: %s", refetched_card)
-            return refetched_card
+            log.debug("%r not yet inserted, will insert", name)
+            to_insert.append(name)
+
+    results_of_insert = insert_cards(*to_insert)
+    all_cards = (list(Card.objects.filter(name__in=to_fetch)) +
+                 results_of_insert['inserted'] +
+                 results_of_insert['refetched'])
+
+    if len(all_cards) + len(results_of_insert['invalid']) != len(names):
+        raise AssertionError("something went missing: %r != %r" % (all_cards,
+                                                                   names))
+
+    return all_cards
+
+def insert_cards(*names):
+    """
+    Search gather for cards with the given name, insert that information into
+    the database. This doesn't check for existing cards that have that name,
+    and the act of inserting them
+    :param names:
+    :return: {
+        'inserted': cards_that_were_inserted,
+        'refetched': cards_that_were_refetched,
+        'invalid': names_that_were_invalid
+    }
+    """
+
+    # not sure what to do with this yet
+    mismatched_name_map = {}
+    all_card_content = []
+    names_to_insert = []
+    invalid_names = []
+    refetched_names = []
+
+    for name in names:
+        try:
+            card_content = get_json_card_content(name)
+        except CardFetchingError:
+            invalid_names.append(name)
+            continue
+
+        fetched_name = card_content['name']
+        if name != fetched_name:
+            assert (name not in mismatched_name_map or
+                    mismatched_name_map[name] == fetched_name)
+            mismatched_name_map[name] = fetched_name
+            if fetched_name in Card.get_all_inserted_names():
+                refetched_names.append(fetched_name)
+                continue
+
+        log.debug('got card content: %s', card_content)
+        all_card_content.append(card_content)
+        names_to_insert.append(fetched_name)
+
+    cards_to_be_inserted = [
+        Card(**card_content) for card_content in all_card_content
+    ]
+
+    Card.objects.bulk_create(cards_to_be_inserted)
+    Card.mark_names_as_inserted(names_to_insert)
+
+    if mismatched_name_map:
+        log.warning("There were actually mismatched names: %s",
+                    mismatched_name_map)
+
+    disposition = {
+        'inserted': cards_to_be_inserted,
+        'refetched': list(Card.objects.filter(name__in=refetched_names)),
+        'invalid': invalid_names
+    }
+
+    return disposition
+
 
 def _clean_cardname(name):
     """
@@ -56,7 +126,7 @@ def _clean_cardname(name):
     if isinstance(name, str):
         name = name.decode('utf-8')
     cleaned_name = unidecode(name).strip()
-    log.debug(u'%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
+    # log.debug(u'%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
     return cleaned_name
 
 ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
@@ -64,6 +134,7 @@ ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 color_bitfield_keys = (
     'white', 'blue', 'black', 'red', 'green'
     )
+
 
 class Card(models.Model):
     """
@@ -92,6 +163,38 @@ class Card(models.Model):
         'name', 'mana_cost', 'converted_mana_cost', 'types',
         'colors', 'gatherer_ids', 'heuristics'
     )
+
+    @classmethod
+    def get_all_inserted_names(cls):
+        """
+        Used to test what names are associated with cards in the database.
+
+        :return: a set of all cards in database, this case needs to be added
+            to after server startup to stay current
+        """
+        if not getattr(cls, '_all_names', set()):
+            cls._all_names = set([c.name for c in cls.objects.all()])
+
+        return cls._all_names
+
+    @classmethod
+    def mark_names_as_inserted(cls, names):
+        """
+        to be called following an insertion of one of more new cards, to keep
+        the in memory set up-to-date
+
+        :param names: an iterable of names (as string/unicode) to were
+            successfully inserted
+        """
+
+        currently_inserted_names = getattr(cls, '_all_names', set())
+        [currently_inserted_names.add(name) for name in names]
+        cls._all_names = currently_inserted_names
+
+    @classmethod
+    def reset_names_inserted(cls):
+
+        cls._all_names = set()
 
     @property
     def color_indicator(self):
@@ -137,11 +240,12 @@ class Card(models.Model):
         return self._ability_mana_costs
 
     @classmethod
+    def get_all(cls, *names):
+        return get_cards_from_names(*names)
+
+    @classmethod
     def get(cls, name):
-        try:
-            return cls.objects.get(name=name)
-        except Card.DoesNotExist:
-            return make_and_insert_card(name)
+        return get_cards_from_names(name)[0]
 
     @property
     def gatherer_ids(self):
@@ -154,12 +258,11 @@ class Card(models.Model):
             highest "id"). provided as ExpansionTuple(name, rarity)
         :rtype: list
         """
+        # explicit int cast to avoid lexical sorting
         return [
             ExpansionTuple(version_dict['expansion'], version_dict['rarity'])
-            for id, version_dict in iter(sorted(self.versions.items(),
-                                                # explicit into cast to avoid
-                                                # lexical sorting
-                                                key=lambda x: int(x[0])))
+            for _, version_dict in iter(sorted(self.versions.items(),
+                                               key=lambda x: int(x[0])))
         ]
 
     def as_dict(self):
@@ -185,7 +288,7 @@ class Cube(models.Model):
         """
         :param card_name: add a card with this name, to this cube
         """
-        self.cards.add(make_and_insert_card(card_name))
+        self.cards.add(Card.get(card_name))
 
 
     def add_cards_by_name(self, card_names):
@@ -214,15 +317,14 @@ class Cube(models.Model):
     @classmethod
     def serialize(cls, cube_cards, fp=None, **kwargs):
         """
-
         :rtype : str (if no fp specified) else NoneType
         :param cube_cards: the container you wish to serialize
         :param fp: the file-like object you intend to dump to, else dump to
             string
-        :param array:
-        :param kwargs:
+        :param kwargs: kwargs to pass to json
         :return:
         """
+
         if fp is None:
             return json.dumps(cube_cards, cls=CubeEncoder, **kwargs)
         else:

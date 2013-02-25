@@ -2,13 +2,22 @@
 import unittest
 
 from django.test import TestCase
-from cuesbey_main.cube_diff.models import Card, make_and_insert_card, Cube
+from cuesbey_main.cube_diff.models import Card, get_cards_from_names, Cube
 
 from cuesbey_main.cube_diff import (parse_mana_cost, merge_mana_costs,
                                       CardFetchingError)
 
+class BaseCardInserter(TestCase):
+    """
+    Used to reset the in-memory list of what was inserted
+    """
 
-class SimpleTest(TestCase):
+    def tearDown(self):
+
+        Card.reset_names_inserted()
+
+
+class SimpleTest(BaseCardInserter):
     def test_create_cards_given_names(self):
 
         for name, expansion in (('Zealous Conscripts', 'Avacyn Restored'),
@@ -17,32 +26,41 @@ class SimpleTest(TestCase):
 
             # ensure that the card didn't already exist
             self.assertEqual([], list(Card.objects.filter(name=name).all()))
-            fetched_card = make_and_insert_card(name)
+            fetched_card = Card.get(name)
             self.assertIsInstance(fetched_card, Card)
-            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
+            self.assertIn(expansion,
+                          [expansion.name
+                           for expansion in fetched_card.expansions]
+            )
             self.assertIn(fetched_card, Card.objects.all())
 
     def test_handle_bad_name(self):
 
-        for name in ('Lanowar Elf',
-                     'Llanowar Elfs',
-                     'Llan O\' War Elves'):
-            with self.assertRaises(CardFetchingError):
-                make_and_insert_card(name)
+        self.assertEqual([], get_cards_from_names('Lanowar Elf',
+                                                  'Llanowar Elfs',
+                                                  'Llan O\' War Elves'))
 
     def test_unicode_in_weird_spots(self):
-        # weird unicode apostrophes from copying and pasting a cube list from some random website
+        # weird unicode apostrophes from copying and pasting a cube list from
+        # some random website
         for name, fixed_name in ((u'Moment\u2019s Peace', "Moment's Peace"),
                                  (u'Æther Adept', u'Æther Adept'),
                                  (u"Gideon’s Lawkeeper", "Gideon's Lawkeeper"),
                                  (u"Night’s Whisper", "Night's Whisper")):
-            self.assertEqual(make_and_insert_card(name).name, fixed_name)
+            self.assertEqual(Card.get(name).name, fixed_name)
+
+    def test_refetching_unicode_names_searched_with_ascii(self):
+        # searches with ascii names sometimes return non-ascii results
+        # and we want to make sure that's not a problem
+        self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
+        self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
+
 
     def test_handle_apostrophe_names(self):
 
         for name in ("Moment's Peace",
                      "Sensei's Divining Top"):
-            self.assertEqual(make_and_insert_card(name).name, name)
+            self.assertEqual(Card.get(name).name, name)
 
     @unittest.expectedFailure
     def test_split_cards(self):
@@ -50,17 +68,17 @@ class SimpleTest(TestCase):
                                 ('Assault//Battery', 'Invasion'),
                                 ('Supply//Demand', 'Dissension')):
             self.assertEqual([], list(Card.objects.filter(name=name).all()))
-            fetched_card = make_and_insert_card(name)
+            fetched_card = Card.get(name)
             self.assertIsInstance(fetched_card, Card)
             self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
             self.assertIn(fetched_card, Card.objects.all())
 
 
-class CardModelTest(TestCase):
+class CardModelTest(BaseCardInserter):
     @classmethod
     def setUpClass(cls):
 
-        cls.cards = [make_and_insert_card(name) for name in [
+        cls.cards = get_cards_from_names(
             'Phyrexian Metamorph',
             'Lingering Souls',
             'Kessig Wolf Run',
@@ -71,20 +89,13 @@ class CardModelTest(TestCase):
             'Crystal Shard',
             'Spectral Procession',
             'Abrupt Decay'
-        ]]
-
-    def setUp(self):
-
-        self.test_cube = Cube()
-        self.test_cube.save()
-        self.test_cube.cards = self.cards
-        self.test_cube.save()
+        )
 
     def test_parse_mana_cost(self):
         self.assertEqual(['5'], parse_mana_cost("{5}"))
-        self.assertEqual(['5'], make_and_insert_card('Batterskull').parsed_mana_cost)
-        self.assertEqual(['3', 'U/R', 'B'], make_and_insert_card('Slave of Bolas').parsed_mana_cost)
-        self.assertEqual(['3', 'U/P'], make_and_insert_card('Phyrexian Metamorph').parsed_mana_cost)
+        self.assertEqual(['5'], Card.get('Batterskull').parsed_mana_cost)
+        self.assertEqual(['3', 'U/R', 'B'], Card.get('Slave of Bolas').parsed_mana_cost)
+        self.assertEqual(['3', 'U/P'], Card.get('Phyrexian Metamorph').parsed_mana_cost)
 
     def test_activated_abilities(self):
         self.assertEqual(['{1}{U}{B}'], Card.get('Creeping Tar Pit').activated_ability_mana_costs)
@@ -113,13 +124,11 @@ class HelpersTest(TestCase):
         self.assertEqual(merge_mana_costs(['X'], ['2', 'W']), ['X', '2', 'W'])
         self.assertEqual(merge_mana_costs('{X}', '{2}{W}'), ['X', '2', 'W'])
 
-class CardCategoryTest(TestCase):
+class CardCategoryTest(BaseCardInserter):
     maxDiff = None
 
-    def assertHeuristicsArePresent(self, name, expected_subset, keys_that_are_not_present=None):
-
-        if not keys_that_are_not_present:
-            keys_that_are_not_present = []
+    def assertHeuristicsArePresent(self, name, expected_subset,
+                                   keys_that_are_not_present=()):
 
         actual = Card.get(name).heuristics
         for k in keys_that_are_not_present:

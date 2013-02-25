@@ -214,7 +214,7 @@ def get_json_card_content(name):
         'versions',
     ])
 
-    log.debug('searching for cardname: %s', name)
+    log.debug('searching for cardname: %r', name)
 
     api = slumber.API('http://localhost:3000')
     try:
@@ -240,8 +240,8 @@ def get_json_card_content(name):
                 comprehensive['_color_indicator'] = [color_indicator]
 
             log.debug('found a color indicator: %s -> %r',
-                color_indicator,
-                comprehensive['_color_indicator']
+                      color_indicator,
+                      comprehensive['_color_indicator']
             )
     except:
         log.exception('what happened?')

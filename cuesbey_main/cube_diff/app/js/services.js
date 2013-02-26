@@ -51,7 +51,7 @@ angular.module('cube_diff.services', [])
                     if (inArray(category, colorList) !== -1) {
                         return angular.equals([category], card['colors']);
                     } else {
-                        return undefined;
+                        return 'na';
                     }
                 };
 
@@ -59,7 +59,7 @@ angular.module('cube_diff.services', [])
                     if (inArray(category, typeList) !== -1) {
                         return inArray(category, card['types'])!==-1;
                     } else {
-                        return undefined;
+                        return 'na';
                     }
                 };
 
@@ -70,7 +70,7 @@ angular.module('cube_diff.services', [])
                         // I'm personally comfortable with this level of eval'ing
                         return eval('card.converted_mana_cost'+match[1]+match[2]);
                     } else {
-                        return undefined
+                        return 'na'
                     }
                 };
 
@@ -78,50 +78,47 @@ angular.module('cube_diff.services', [])
                     if (inArray(category, ['both', 'added', 'removed']) !== -1) {
                         return card['_diffResult'] === category;
                     } else {
-                        return undefined
+                        return 'na'
                     }
                 };
 
                 var matchesCategory = true;
                 var matchesSubgroup = false;
                 // "/" is the boolean AND operator for this category stuff
-                angular.forEach(category.split('/'), function(subgroup) {
+                jQuery.each(category.split('/'), function(and_index, subgroup) {
                     matchesSubgroup = false;
 
-                    angular.forEach(subgroup.split('|'), function(inner_cat) {
+                    jQuery.each(subgroup.split('|'), function(or_index, inner_cat) {
+                        // "|" is the boolean OR operator for this category stuff and binds
+                        // more tightly than and
                         var negateCategory = inner_cat.indexOf('!') === 0;
                         if (negateCategory) {
                             // split off the exclamation mark
                             inner_cat = inner_cat.substring(1);
                         }
 
-                        angular.forEach([
-                            //FIXME: after resolving as True/False for one of these, we should short-circuit our
+                        jQuery.each([
                             _checkForExactColor,
                             _checkForType,
                             _checkForCMC,
                             _checkForDiff
-                        ], function(checker) {
+                            // these either return a known string if the checker isn't applicable
+                            // or True/False if it is applicable and based on the results of
+                            // the check
+                        ], function(checked_index, checker) {
                             var result = checker(inner_cat, card);
-                            if (result === undefined) {
+                            if (result === 'na') {
                                 return result;
                             } else {
-                                // make the "matches subgroup" sentinel value be
-                                // something that, once true, can't be turned back
-                                // to false. Ideally this would just short circuit
-                                // out of the loop when made true the first time
                                 matchesSubgroup = matchesSubgroup || (negateCategory ? !result : result);
-                                return matchesSubgroup;
+                                // short-circuit here since 1 checker weighed-in
+                                return false;
                             }
                         });
-                        return matchesSubgroup
                     });
-
-                    // make the "matches category" sentinel value be
-                    // something that, once false, can't be turned back
-                    // to true. Ideally this would just short circuit
-                    // out of the loop when made false the first time
+                    // category fails to match if
                     matchesCategory = matchesCategory && matchesSubgroup;
+
                     return matchesCategory;
                 });
                 return matchesCategory;

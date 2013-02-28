@@ -47,6 +47,39 @@ describe('service', function() {
 
     beforeEach(module('cube_diff.services'));
 
+    describe("cardContentServiceTest", function() {
+        var $httpBackend, content_svc;
+        beforeEach(inject(function ($injector, CardContentService) {
+            $httpBackend = $injector.get('$httpBackend');
+            content_svc = CardContentService;
+        }));
+
+        afterEach(function() {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        });
+
+        it("should handle a couple sanity checks", function() {
+            var wasCalled = false;
+            $httpBackend.expectPOST('/card_contents/',
+                {card_names: ["Terror"]}, {
+                    "Accept": "application/json, text/plain, */*",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "Content-Type": "application/json;charset=utf-8"
+                }).respond(200, '');
+
+            content_svc.getCards(['Terror'], function() {
+                wasCalled = true;
+            });
+
+            $httpBackend.flush();
+            expect(wasCalled).toBe(true);
+        });
+
+
+    });
+
+
     describe("cubeDiffServiceTest", function() {
         var diff_svc, split_svc, cubeContents;
         beforeEach(inject(function ($injector, CubeDiffService, CubeSplitService) {

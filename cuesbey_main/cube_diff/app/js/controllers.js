@@ -14,7 +14,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         'converted_mana_cost==6': {},
         'converted_mana_cost>=7': {}
     };
-    var spec = {
+    $scope.spec = {
         'White': {
             'Creature': cmcSlots,
             '!Creature': cmcSlots
@@ -1482,25 +1482,28 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         "Zombie Cutthroat"
     ].join('\n');
 
-    $scope.diff = function() {
-        var logStuff = function (data, status) {
-            $scope.before = data['before']['cards'];
-            $scope.after = data['after']['cards'];
-            var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, spec);
-            var tabs = [];
-            angular.forEach(diffedCube, function(category) {
-                tabs.push(category.category);
-            });
 
-            $scope.diffedCube = diffedCube;
-            $scope.tabs = tabs;
-            console.log(diffedCube);
-        };
+    $scope.diffTheCube = function (data, status) {
+        $scope.before = data['before']['cards'];
+        $scope.after = data['after']['cards'];
+        var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, $scope.spec);
+        var tabs = [];
+        angular.forEach(diffedCube, function(category) {
+            tabs.push(category.category);
+        });
+
+        $scope.diffedCube = diffedCube;
+        $scope.tabs = tabs;
+        console.log(diffedCube);
+    };
+
+    $scope.diff = function() {
+
 
         CardContentService.getCards({
                 before: $scope.beforeCardNames.split('\n'),
                 after: $scope.afterCardNames.split('\n')
             },
-            logStuff);
+            $scope.diffTheCube);
     };
 }

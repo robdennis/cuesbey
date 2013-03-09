@@ -154,11 +154,14 @@ describe('service', function() {
         });
 
         it("should be able to diff a cube", function() {
-            expect(namify(diff_svc.getDiff(subCube1, subCube2, {'Instant': {}, 'Land': {}}))).toEqual([
-                {
+            expect(namify(diff_svc.getDiff(subCube1, subCube2, {
+                'Instant': {'appearance': 'table'},
+                'Land': {}}))).toEqual([
+                    {
                     category: 'Instant',
                     // sorted within a category according to the sort function
                     // default in this case
+                    appearance: 'table',
                     subcategories: [
                         {category:'both', cards:['Path to Exile', 'Swords to Plowshares']},
                         {category:'removed' , cards: ['Go for the Throat', 'Vampiric Tutor']},
@@ -362,6 +365,30 @@ describe('service', function() {
             }]);
         });
 
+        it('should handle appearance keys not at the top level', function() {
+
+            specExpect({
+                'Creature': {
+                    'White': {
+                        'appearance': 'div',
+                        'converted_mana_cost>=1': {
+                            'appearance': 'table'
+                        }
+                    }
+                }
+            }, [{
+                'category': 'Creature',
+                'subcategories': [{
+                    'category': 'White',
+                    'appearance': 'div',
+                    'subcategories': [{
+                        category: 'converted_mana_cost>=1',
+                        appearance: 'table',
+                        subcategories: diffSpec
+                    }]
+                }]
+            }], true);
+        });
 
     });
 

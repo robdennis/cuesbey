@@ -130,35 +130,60 @@ angular.module('cube_diff.services', [])
             getSkeleton : function(sortSpec, handleDiffs) {
                 sortSpec = sortSpec || {};
 
-                var sortedCube = [];
+                var resultingSpec = [];
 
-                var _recurseSpec = function (subSpec, subCube) {
-                    jQuery.each(subSpec, function(_subName, _subSpec) {
-                        if (jQuery.isEmptyObject(_subSpec)) {
-                            // check that we don't have an information key like a "_sort"
-                            if (!handleDiffs) {
-                                // relying on the falsiness of undefined
-                                subCube.push({category:_subName, cards: []});
-                            } else {
-                                subCube.push({category:_subName, subcategories: [
-                                    {category: 'both', cards: []},
-                                    {category: 'removed', cards: []},
-                                    {category: 'added', cards: []}
-                                ]});
-                            }
+                var _handleEmptySpec = function(catName, recurseSpec, extraItems) {
+                    extraItems = extraItems || {};
+                    var specToPush = {};
+                    if (!handleDiffs) {
+                        // relying on the falsiness of undefined
+                        specToPush = {category: catName, cards: []};
+                    } else {
+                        specToPush = {category: catName, subcategories: [
+                            {category: 'both', cards: []},
+                            {category: 'removed', cards: []},
+                            {category: 'added', cards: []}
+                        ]};
+                    }
 
-                        } else {
-                            var _subCategories = [];
-                            var _recurseCube = {category:_subName, subcategories: _subCategories};
-                            subCube.push(_recurseCube);
-                            _recurseSpec(_subSpec, _subCategories);
-                        }
-                    })
+                    recurseSpec.push(jQuery.extend({}, specToPush, extraItems))
                 };
 
-                _recurseSpec(sortSpec, sortedCube);
+                var _recurseSpec = function (subInputSpec, recurseSpec) {
+                    jQuery.each(subInputSpec, function(_subName, _subSpec) {
+                        if (jQuery.isEmptyObject(_subSpec)) {
+                            // check that we don't have an information key like a "_sort"
+                            _handleEmptySpec(_subName, recurseSpec);
+                        } else if (Object.prototype.toString.call(_subSpec) == "[object Object]") {
+                            var _specToDescendWith = {};
+                            if (_subSpec['appearance']) {
+                                _specToDescendWith['appearance'] = _subSpec['appearance'];
+                                delete _subSpec['appearance'];
+                            }
 
-                if (jQuery.isEmptyObject(sortedCube)) {
+                            if (jQuery.isEmptyObject(_subSpec)) {
+                                _handleEmptySpec(_subName, recurseSpec, _specToDescendWith);
+                                return;
+                            }
+
+                            var _subCategories = [];
+                            _specToDescendWith = jQuery.extend(
+                                _specToDescendWith, {
+                                    "category":_subName,
+                                    "subcategories": _subCategories
+                            });
+
+                            recurseSpec.push(_specToDescendWith);
+                            _recurseSpec(_subSpec, _subCategories);
+                        } else {
+                            // don't decide, it's some unknown key we don't care about
+                        }
+                    });
+                };
+
+                _recurseSpec(sortSpec, resultingSpec);
+
+                if (jQuery.isEmptyObject(resultingSpec)) {
                     if (!handleDiffs) {
                         return {};
                     }
@@ -171,7 +196,7 @@ angular.module('cube_diff.services', [])
                     }
                 }
 
-                return sortedCube;
+                return resultingSpec;
             }
         }
     })

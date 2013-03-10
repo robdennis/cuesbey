@@ -156,12 +156,21 @@ angular.module('cube_diff.services', [])
                             _handleEmptySpec(_subName, recurseSpec);
                         } else if (Object.prototype.toString.call(_subSpec) == "[object Object]") {
                             var _specToDescendWith = {};
+                            var isLeaf = false;
                             if (_subSpec['appearance']) {
                                 _specToDescendWith['appearance'] = _subSpec['appearance'];
                                 delete _subSpec['appearance'];
                             }
 
                             if (jQuery.isEmptyObject(_subSpec)) {
+                                isLeaf = true;
+                            }
+                            // need to undo the deletion in the event
+                            // there was copying of a reference somewhere in the spec
+                            // HACK
+                            jQuery.extend(_subSpec, _specToDescendWith);
+
+                            if (isLeaf) {
                                 _handleEmptySpec(_subName, recurseSpec, _specToDescendWith);
                                 return;
                             }
@@ -275,9 +284,35 @@ angular.module('cube_diff.services', [])
     })
     .factory('CubeDiffService', function(SortSpecService, CubeSortService, CubeSplitService) {
         return {
-            getDiff : function(_old, _new, sortSpec, sorter) {
-                // we do want to handle diffs
-                var currentCube = SortSpecService.getSkeleton(sortSpec, true);
+            alternateSorter: function(card_a, card_b) {
+                var sortOrderDiff = {
+                    both: 0,
+                    removed: 1,
+                    added: 2
+                };
+
+                if (card_a['_diffResult'] !== undefined &&
+                    card_b['_diffResult'] !== undefined) {
+                    return (
+                        [sortOrderDiff[card_a['_diffResult']], card_a['name']].join('_') >
+                            [sortOrderDiff[card_b['_diffResult']], card_b['name']].join('_')) ? 1:-1;
+                } else {
+                    return card_a['name'] > card_b['name'] ? 1:-1;
+                }
+            },
+            getDiff : function(_old, _new, sortSpec, sorter, diffSubCategories) {
+                if (diffSubCategories === undefined) {
+                    diffSubCategories = true;
+                }
+
+                if (!diffSubCategories) {
+                    // we need some way to show the diff results, so if we aren't
+                    // putting them in categories, at least order by them
+
+                    sorter = sorter || this.alternateSorter;
+                }
+
+                var currentCube = SortSpecService.getSkeleton(sortSpec, diffSubCategories);
                 jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, splitSubCube) {
                     currentCube = CubeSortService.sortCube(splitSubCube, sortSpec, sorter, currentCube, {_diffResult:type});
                 });

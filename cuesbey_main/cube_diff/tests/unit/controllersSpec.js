@@ -19,7 +19,7 @@ describe('service', function() {
 
         var cube_content = modo_cube_og_data;
 
-        var setupExpectGivenNames = function(before, after, numTabs, spec, expectedBefore, expectedAfter) {
+        var setupExpectGivenNames = function(before, after, spec, expectedBefore, expectedAfter) {
             var actualBefore = [];
             var actualAfter = [];
 
@@ -58,9 +58,9 @@ describe('service', function() {
 
             $httpBackend.flush();
 
-            expect(scope.tabs.length).toEqual(numTabs);
             expect(scope.diffedCube).toEqual(
-                diffService.getDiff(expectedBefore, expectedAfter, scope.spec)
+                diffService.getDiff(expectedBefore, expectedAfter, scope.spec,
+                    diffService.alternateSorter, false)
             );
 
             $httpBackend.verifyNoOutstandingExpectation();
@@ -70,8 +70,7 @@ describe('service', function() {
 
         it("should work for the default spec and no diff", function() {
 
-            // the current default is 5 tabs
-            setupExpectGivenNames(['Terror'], ['Terror'], 5, undefined, [
+            setupExpectGivenNames(['Terror'], ['Terror'], undefined, [
                 cube_content['Terror']
             ], [
                 cube_content['Terror']
@@ -80,7 +79,6 @@ describe('service', function() {
 
         it("should work for the default spec and a diff", function() {
 
-            // the current default is 5
             setupExpectGivenNames([
                 'Terror',
                 'Doom Blade',
@@ -89,7 +87,7 @@ describe('service', function() {
                 'Demonic Tutor',
                 'Doom Blade',
                 'Vampiric Tutor'
-            ], 5, undefined, [
+            ], undefined, [
                 cube_content['Doom Blade'],
                 cube_content['Terror'],
                 cube_content['Vampiric Tutor']
@@ -111,7 +109,7 @@ describe('service', function() {
                 'Demonic Tutor',
                 'Doom Blade',
                 'Vampiric Tutor'
-            ], 1, {"Black": {}}, [
+            ], {"Black": {}}, [
                 cube_content['Doom Blade'],
                 cube_content['Terror'],
                 cube_content['Vampiric Tutor']
@@ -128,7 +126,6 @@ describe('service', function() {
             setupExpectGivenNames(
                 ['Terror'],
                 ['Terror'],
-                1,
                 {"Black": {}},
                 [cube_content['Terror']],
                 [cube_content['Terror']]

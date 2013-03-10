@@ -28,3 +28,19 @@
   content: "";
   padding: 0;
 }
+
+.diff-container {
+    border-style: solid;
+}
+
+.diff-name.both {
+    background-color:#a2cffb;
+}
+
+.diff-name.added {
+    background-color:#c9edcd;
+}
+
+.diff-name.removed {
+    background-color:#f1c0bc;
+}

@@ -6,6 +6,7 @@ angular.module('cube_diff.controllers', []);
 
 function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
     var cmcSlots = {
+        appearance: 'table',
         'converted_mana_cost<=1': {},
         'converted_mana_cost==2': {},
         'converted_mana_cost==3': {},
@@ -34,7 +35,9 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         'Green': {
             'Creature': cmcSlots,
             '!Creature': cmcSlots
-        }
+        },
+        'Colorless/!Land': {appearance:'table'},
+        'Land': {appearance:'table'}
     };
 
     $scope.beforeCardNames = [
@@ -237,7 +240,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         "Fertile Ground",
         "Fiend Hunter",
         "Figure of Destiny",
-        "Fire // Ice",
+//        "Fire // Ice",
         "Fire Ambush",
         "Fireblast",
         "Firebolt",
@@ -959,7 +962,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         "Fettergeist",
         "Fiend Hunter",
         "Figure of Destiny",
-        "Fire // Ice",
+//        "Fire // Ice",
         "Fireblast",
         "Firemane Angel",
         "Firespout",
@@ -1486,15 +1489,13 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
     $scope.diffTheCube = function (data, status) {
         $scope.before = data['before']['cards'];
         $scope.after = data['after']['cards'];
-        var diffedCube = CubeDiffService.getDiff($scope.before, $scope.after, $scope.spec);
-        var tabs = [];
-        angular.forEach(diffedCube, function(category) {
-            tabs.push(category.category);
-        });
-
-        $scope.diffedCube = diffedCube;
-        $scope.tabs = tabs;
-        console.log(diffedCube);
+        $scope.diffedCube = CubeDiffService.getDiff(
+            $scope.before,
+            $scope.after,
+            $scope.spec,
+            undefined,
+            false
+        );
     };
 
     $scope.diff = function() {

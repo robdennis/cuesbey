@@ -1302,7 +1302,6 @@ describe('service', function() {
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
         var damnation = cubeContents['Damnation'];
-        var sphinx = cubeContents['Sphinx of the Steel Wind'];
 
         it('should handle diff categories', function() {
             expect(svc.matchesCategory('both', {_diffResult: 'both'})).toBe(true);

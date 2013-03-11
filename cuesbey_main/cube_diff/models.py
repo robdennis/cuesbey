@@ -40,9 +40,14 @@ def get_cards_from_names(*names):
 
     names = map(_clean_cardname, names)
 
+    mismatched_name_map = Card.get_mismatched_names_map()
+
     for name in names:
         if name in Card.get_all_inserted_names():
             to_fetch.append(name)
+        elif name in mismatched_name_map:
+            # apparently we've seen this misspelling before
+            to_fetch.append(mismatched_name_map[name])
         else:
             log.debug("%r not yet inserted, will insert", name)
             to_insert.append(name)
@@ -53,8 +58,13 @@ def get_cards_from_names(*names):
                  results_of_insert['refetched'])
 
     if len(all_cards) + len(results_of_insert['invalid']) != len(names):
-        raise AssertionError("something went missing: %r != %r" % (all_cards,
-                                                                   names))
+        found_names = [c.name for c in all_cards]
+        raise AssertionError(
+            "something went missing: %r (%d) != %r (%d)" % (found_names,
+                                                            len(found_names),
+                                                            names,
+                                                            len(names))
+        )
 
     return all_cards
 
@@ -72,7 +82,7 @@ def insert_cards(*names):
     """
 
     # not sure what to do with this yet
-    mismatched_name_map = {}
+    mismatched_name_map = Card.get_mismatched_names_map()
     all_card_content = []
     names_to_insert = []
     invalid_names = []
@@ -83,6 +93,7 @@ def insert_cards(*names):
             card_content = get_json_card_content(name)
         except CardFetchingError:
             invalid_names.append(name)
+            log.debug('problem fetching card with name: %r', name)
             continue
 
         fetched_name = card_content['name']
@@ -92,6 +103,8 @@ def insert_cards(*names):
             mismatched_name_map[name] = fetched_name
             if fetched_name in Card.get_all_inserted_names():
                 refetched_names.append(fetched_name)
+                log.debug('refetched card with name: %r as card with name: %r',
+                          name, fetched_name)
                 continue
 
         log.debug('got card content: %s', card_content)
@@ -105,13 +118,15 @@ def insert_cards(*names):
     Card.objects.bulk_create(cards_to_be_inserted)
     Card.mark_names_as_inserted(names_to_insert)
 
-    if mismatched_name_map:
-        log.warning("There were actually mismatched names: %s",
-                    mismatched_name_map)
+    refetched_cards = list(Card.objects.filter(name__in=refetched_names))
+
+    assert len(refetched_cards) == len(refetched_names), (
+        "didn't refetch the correct number of cards"
+    )
 
     disposition = {
         'inserted': cards_to_be_inserted,
-        'refetched': list(Card.objects.filter(name__in=refetched_names)),
+        'refetched': refetched_cards,
         'invalid': invalid_names
     }
 
@@ -169,13 +184,29 @@ class Card(models.Model):
         """
         Used to test what names are associated with cards in the database.
 
-        :return: a set of all cards in database, this case needs to be added
+        :return: a set of all cards in database, this needs to be added
             to after server startup to stay current
         """
         if not getattr(cls, '_all_names', set()):
             cls._all_names = set([c.name for c in cls.objects.all()])
 
         return cls._all_names
+
+    @classmethod
+    def get_mismatched_names_map(cls):
+        """
+        Used to correctly fetch cards given a mismatched name that we know
+        maps. This is usually for non-ascii card names that can be searched
+        with ascii strings
+
+        :return: a dict mapping strings to the resulting card name, this needs
+            to be updated
+        """
+        if not getattr(cls, '_mismatched_name_map', {}):
+            cls._mismatched_name_map = {}
+
+        return cls._mismatched_name_map
+
 
     @classmethod
     def mark_names_as_inserted(cls, names):
@@ -195,6 +226,7 @@ class Card(models.Model):
     def reset_names_inserted(cls):
 
         cls._all_names = set()
+        cls._mismatched_name_map = {}
 
     @property
     def color_indicator(self):

@@ -188,6 +188,7 @@ def get_mana_symbol_bitfields(parsed_mana_cost):
         _hybrid_mana_bitfield = _get_color_flags_from_hybrids()
     )
 
+
 def get_json_card_content(name):
     """
     Get the card's json content, DEPENDS ON AN INSTALLED AND RUNNING TUTOR

@@ -12,7 +12,6 @@ __here__ = os.path.abspath(os.path.dirname(__file__))
 def card_contents(request):
     if not request.is_ajax():
         raise Http404
-    print "we're actually inserting stuff"
 
     try:
         all_card_names = json.loads(request.body)['card_names']

@@ -64,7 +64,7 @@ angular.module('cube_diff.services', [])
                 };
 
                 var _checkForCMC = function(category, card) {
-                    var cmcRegex = /converted_mana_cost\s*([=><!]+)\s*(\d+)/;
+                    var cmcRegex = /converted_mana_cost\s*([=><!]{1,2})\s*(\d+)/;
                     var match = cmcRegex.exec(category);
                     if (match) {
                         if (match[1] == '==') {

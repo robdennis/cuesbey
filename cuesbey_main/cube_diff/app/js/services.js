@@ -67,10 +67,24 @@ angular.module('cube_diff.services', [])
                     var cmcRegex = /converted_mana_cost\s*([=><!]+)\s*(\d+)/;
                     var match = cmcRegex.exec(category);
                     if (match) {
-                        // I'm personally comfortable with this level of eval'ing
-                        return eval('card.converted_mana_cost'+match[1]+match[2]);
+                        if (match[1] == '==') {
+                            return card['converted_mana_cost'] == match[2];
+                        } else if (match[1] == '<') {
+                            return card['converted_mana_cost'] < match[2];
+                        } else if (match[1] == '>') {
+                            return card['converted_mana_cost'] > match[2];
+                        } else if (match[1] == '<=') {
+                            return card['converted_mana_cost'] <= match[2];
+                        } else if (match[1] == '>=') {
+                            return card['converted_mana_cost'] >= match[2];
+                        } else if (match[1] == '!=') {
+                            return card['converted_mana_cost'] != match[2];
+                        } else {
+                            // this should probably throw something?
+                            return 'na';
+                        }
                     } else {
-                        return 'na'
+                        return 'na';
                     }
                 };
 

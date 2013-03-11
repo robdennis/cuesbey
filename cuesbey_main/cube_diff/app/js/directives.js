@@ -126,10 +126,24 @@ angular.module('cube_diff.directives', []).
 
                     }
                 } else if (angular.isArray(scope.val.cards) && scope.val.cards.length > 0) {
-
-                    template = "<ul>"+
-                        '<li ng-repeat="card in val.cards" class="diff-name {{val.category}}">{{ card.name }}</li>' +
-                    "</ul>";
+                    console.log('it\'s a top level thing');
+                    if (scope.val['appearance'] !== 'table') {
+                        template = '<div>{{val.category}}'+
+                            '<ul class="diff-list">'+
+                                '<li ng-repeat="card in val.cards" class="diff-name {{card.category}}">{{ card.name }}</li>' +
+                            '</ul>'+
+                        '</div>';
+                    } else {
+                        console.log("and it's a table", scope.val);
+                        template = '<div>'+
+                            '<table class="diff-table">'+
+                                '<tr><th>{{val.category}}</th></tr>'+
+                                '<tr ng-repeat="card in val.cards">'+
+                                    '<td class="diff-name {{card._diffResult}}">{{ card.name }}</td>'+
+                                '</tr>' +
+                            '</table>'+
+                        "</div>";
+                    }
                 }
                 var newElement = angular.element(template);
                 $compile(newElement)(scope);

@@ -14,7 +14,12 @@ class ViewTest(BaseCardInserter):
         response = c.post('/card_contents/', json.dumps(data), "text/json",
                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-    def test_card_contents_everything(self):
+    def card_contents_everything(self):
+        """
+        this takes about 4-5 minutes as of 2013-03-11 - it'd be useful to have
+        a benchmark here for performance, but I don't think this is a good
+        unit test right now
+        """
 
         c = Client()
         data = {'card_names': {

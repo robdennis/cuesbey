@@ -13,7 +13,8 @@ from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 
 from cuesbey_main.cube_diff import (get_json_card_content, heuristics,
-                                    parse_mana_cost, estimate_colors, CardFetchingError)
+                                    parse_mana_cost, estimate_colors,
+                                    CardFetchingError)
 from cuesbey_main.cube_diff.autolog import log
 
 
@@ -167,7 +168,6 @@ class Card(models.Model):
     power = models.CharField(max_length=200, null=True)
     toughness = models.CharField(max_length=200, null=True)
     loyalty = models.IntegerField(null=True)
-    gatherer_url = models.CharField(max_length=200)
     versions = JSONField()
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries
@@ -282,20 +282,6 @@ class Card(models.Model):
     @property
     def gatherer_ids(self):
         return self.versions.keys()
-
-    @property
-    def expansions(self):
-        """
-        :return: expansions by earliest to latest ("latest" as defined by
-            highest "id"). provided as ExpansionTuple(name, rarity)
-        :rtype: list
-        """
-        # explicit int cast to avoid lexical sorting
-        return [
-            ExpansionTuple(version_dict['expansion'], version_dict['rarity'])
-            for _, version_dict in iter(sorted(self.versions.items(),
-                                               key=lambda x: int(x[0])))
-        ]
 
     def as_dict(self):
 

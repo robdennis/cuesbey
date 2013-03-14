@@ -2,10 +2,10 @@
 import unittest
 
 from django.test import TestCase
-from cuesbey_main.cube_diff.models import Card, get_cards_from_names, Cube
+from cuesbey_main.cube_diff.models import Card, get_cards_from_names
 
-from cuesbey_main.cube_diff import (parse_mana_cost, merge_mana_costs,
-                                      CardFetchingError)
+from cuesbey_main.cube_diff import (parse_mana_cost, merge_mana_costs)
+
 
 class BaseCardInserter(TestCase):
     """
@@ -20,18 +20,15 @@ class BaseCardInserter(TestCase):
 class SimpleTest(BaseCardInserter):
     def test_create_cards_given_names(self):
 
-        for name, expansion in (('Zealous Conscripts', 'Avacyn Restored'),
-                                ('Stormbound Geist', 'Dark Ascension'),
-                                ('Sylvan Library', 'Masters Edition')):
+        for name, card_type in (('Zealous Conscripts', 'Creature'),
+                                ('Shelldock Isle', 'Land'),
+                                ('Sylvan Library', 'Enchantment')):
 
             # ensure that the card didn't already exist
             self.assertEqual([], list(Card.objects.filter(name=name).all()))
             fetched_card = Card.get(name)
             self.assertIsInstance(fetched_card, Card)
-            self.assertIn(expansion,
-                          [expansion.name
-                           for expansion in fetched_card.expansions]
-            )
+            self.assertIn(card_type, fetched_card.types)
             self.assertIn(fetched_card, Card.objects.all())
 
     def test_handle_bad_name(self):
@@ -54,7 +51,6 @@ class SimpleTest(BaseCardInserter):
         # and we want to make sure that's not a problem
         self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
         self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
-
 
     def test_handle_apostrophe_names(self):
 

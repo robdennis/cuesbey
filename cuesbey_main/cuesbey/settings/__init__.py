@@ -1,7 +1,12 @@
 # Django settings for cuesbey project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+TUTOR_PATH = os.path.expanduser(
+    os.path.join("~", "development", "tutor_local", "bin", "tutor")
+)
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),

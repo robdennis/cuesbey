@@ -1,12 +1,14 @@
 from __future__ import absolute_import
+import json
 import re
 
 from copy import deepcopy
 
-import slumber
-from slumber.exceptions import HttpClientError
+import sh
+from sh import ErrorReturnCode
 
 from cuesbey_main.cube_diff.autolog import log
+from cuesbey_main.cuesbey.settings import TUTOR_PATH
 
 class CardFetchingError(Exception):
     """
@@ -191,8 +193,7 @@ def get_mana_symbol_bitfields(parsed_mana_cost):
 
 def get_json_card_content(name):
     """
-    Get the card's json content, DEPENDS ON AN INSTALLED AND RUNNING TUTOR
-    INSTALLATION on localhost:3000
+    Get the card's json content. Depends on installation of tutor,
     """
     #Todo: the tutor thread needs to be started alongside cuesbey
 
@@ -211,18 +212,18 @@ def get_json_card_content(name):
         'power',
         'toughness',
         'loyalty',
-        'gatherer_url',
         'versions',
     ])
 
     log.debug('searching for cardname: %r', name)
 
-    api = slumber.API('http://localhost:3000')
+    tutor = sh.Command(TUTOR_PATH)
     try:
-        actual = api.card(name).get()
-    except HttpClientError as e:
+        actual = json.loads(tutor.card('--format', 'json', name).strip())
+    except ErrorReturnCode:
         log.exception('problem with cardname: %r', name)
-        raise CardFetchingError(u'unable to fetch a card with name: {!r}'.format(name))
+        raise CardFetchingError(u'unable to fetch a card '
+                                u'with name: {!r}'.format(name))
 
 
     for act_key, act_val in actual.iteritems():

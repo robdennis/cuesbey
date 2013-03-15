@@ -168,7 +168,6 @@ class Card(models.Model):
     power = models.CharField(max_length=200, null=True)
     toughness = models.CharField(max_length=200, null=True)
     loyalty = models.IntegerField(null=True)
-    versions = JSONField()
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries
     manager = Manager()
@@ -176,7 +175,7 @@ class Card(models.Model):
     _heuristics = {}
     _json_keys = (
         'name', 'mana_cost', 'converted_mana_cost', 'types',
-        'colors', 'gatherer_ids', 'heuristics'
+        'colors', 'heuristics'
     )
 
     @classmethod
@@ -278,10 +277,6 @@ class Card(models.Model):
     @classmethod
     def get(cls, name):
         return get_cards_from_names(name)[0]
-
-    @property
-    def gatherer_ids(self):
-        return self.versions.keys()
 
     def as_dict(self):
 

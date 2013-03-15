@@ -1,11 +1,9 @@
 from __future__ import absolute_import
 import json
 import re
+import subprocess
 
 from copy import deepcopy
-
-import sh
-from sh import ErrorReturnCode
 
 from cuesbey_main.cube_diff.autolog import log
 from cuesbey_main.cuesbey.settings import TUTOR_PATH
@@ -212,15 +210,17 @@ def get_json_card_content(name):
         'power',
         'toughness',
         'loyalty',
-        'versions',
     ])
 
     log.debug('searching for cardname: %r', name)
 
-    tutor = sh.Command(TUTOR_PATH)
     try:
-        actual = json.loads(tutor.card('--format', 'json', name).strip())
-    except ErrorReturnCode:
+        actual = json.loads(subprocess.check_output([TUTOR_PATH,
+                                                     'card',
+                                                     '--format',
+                                                     'json',
+                                                     name]).strip())
+    except subprocess.CalledProcessError:
         log.exception('problem with cardname: %r', name)
         raise CardFetchingError(u'unable to fetch a card '
                                 u'with name: {!r}'.format(name))

@@ -37,7 +37,8 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
             '!Creature': cmcSlots
         },
         'Colorless/!Land': {appearance:'table'},
-        'Land': {appearance:'table'}
+        'Colorless/Land': {appearance:'table'},
+        'Multicolor': {appearance:'table'}
     };
 
     $scope.beforeCardNames = [

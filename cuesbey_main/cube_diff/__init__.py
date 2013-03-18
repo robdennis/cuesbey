@@ -8,18 +8,19 @@ from copy import deepcopy
 from cuesbey_main.cube_diff.autolog import log
 from cuesbey_main.cuesbey.settings import TUTOR_PATH
 
+
 class CardFetchingError(Exception):
     """
     Unknown error fetching a particular card
     """
-
 color_mappings = dict((
     ('W', 'White'),
     ('U', 'Blue'),
     ('B', 'Black'),
     ('R', 'Red'),
-    ('G', 'Green'),
-    ))
+    ('G', 'Green')
+))
+
 basic_land_mappings = dict(
     Plains='W',
     Islands='U',
@@ -44,6 +45,7 @@ hybrid_mappings = {
     'G/U': 'simic',
     'R/G': 'gruul',
 }
+
 
 def merge_mana_costs(*costs):
 
@@ -89,6 +91,7 @@ def parse_mana_cost(mana_cost):
     # log.debug('parsed_mana_cost {!r} to {!r}', mana_cost, parsed_mc)
     return parsed_mc
 
+
 def stitch_mana_cost(parsed_mana_cost):
     if not parsed_mana_cost:
         return None
@@ -101,11 +104,13 @@ def estimate_colors(mana_cost):
     else:
         mana_cost_text = mana_cost
 
-    colors_found = [color_name for abbrev, color_name in color_mappings.iteritems()
+    colors_found = [color_name
+                    for abbrev, color_name in color_mappings.iteritems()
                     if abbrev in (mana_cost_text or '')]
     # log.debug('using: %s, found colors: %s', mana_cost_text, colors_found)
 
     return set(colors_found)
+
 
 def estimate_colors_from_lands(lands):
     _land_colors = set()
@@ -118,6 +123,7 @@ def estimate_colors_from_lands(lands):
         _land_colors.add(color_mappings[basic_land_mappings[land]])
 
     return _land_colors
+
 
 def estimate_cmc(mana_cost):
     """
@@ -144,49 +150,6 @@ def estimate_cmc(mana_cost):
             count += 1
 
     return count
-
-def get_mana_symbol_bitfields(parsed_mana_cost):
-    from cuesbey_main.cube_diff.models import Card
-
-    def _get_color_flags(bitfield, template='{}', keys=None, flag_name_map=None):
-
-        if keys is None:
-            keys = color_mappings.keys()
-
-        if flag_name_map is None:
-            flag_name_map = color_mappings
-
-        starting_flag = 0
-        for key in keys:
-#            log.debug('checking for {} in {}', template.format(key), parsed_mana_cost)
-            if template.format(key) in parsed_mana_cost:
-                value = flag_name_map[key].lower()
-#                log.debug('found for: {}', value)
-                starting_flag |= getattr(bitfield, value)
-#                log.debug('flag: {}', starting_flag)
-
-        return starting_flag
-
-    def _get_color_flags_from_hybrids():
-        starting_flag = 0
-        for key in hybrid_mappings:
-            if key in parsed_mana_cost:
-                colors = [color_mappings[c].lower() for c in key.split('/')]
-                # this isn't really handling the case where there's
-                # an azorious AND an rakdos hybrid mana in the same card
-                # which does not exist in magic
-                for color in colors:
-                    starting_flag |= getattr(Card._hybrid_mana_bitfield, color)
-
-        return starting_flag
-
-
-    return dict(
-        _standard_mana_bitfield = _get_color_flags(Card._standard_mana_bitfield),
-        _mono_hybrid_mana_bitfield = _get_color_flags(Card._mono_hybrid_mana_bitfield, '2/{}'),
-        _phyrexian_mana_bitfield = _get_color_flags(Card._phyrexian_mana_bitfield, '{}/P'),
-        _hybrid_mana_bitfield = _get_color_flags_from_hybrids()
-    )
 
 
 def get_json_card_content(name):
@@ -225,7 +188,6 @@ def get_json_card_content(name):
         raise CardFetchingError(u'unable to fetch a card '
                                 u'with name: {!r}'.format(name))
 
-
     for act_key, act_val in actual.iteritems():
         # limit what's returned to a whitelist of the above
         if act_key in comprehensive:
@@ -243,8 +205,7 @@ def get_json_card_content(name):
 
             log.debug('found a color indicator: %s -> %r',
                       color_indicator,
-                      comprehensive['_color_indicator']
-            )
+                      comprehensive['_color_indicator'])
     except:
         log.exception('what happened?')
         raise

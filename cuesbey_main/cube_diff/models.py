@@ -69,6 +69,7 @@ def get_cards_from_names(*names):
 
     return all_cards
 
+
 def insert_cards(*names):
     """
     Search gather for cards with the given name, insert that information into
@@ -149,7 +150,7 @@ ExpansionTuple = namedtuple('ExpansionTuple', ['name', 'rarity'])
 
 color_bitfield_keys = (
     'white', 'blue', 'black', 'red', 'green'
-    )
+)
 
 
 class Card(models.Model):
@@ -162,7 +163,7 @@ class Card(models.Model):
     converted_mana_cost = models.IntegerField()
     types = ArrayField(dbtype='text')
     subtypes = ArrayField(dbtype='text', null=True)
-    text = models.CharField(max_length=1024*8, null=True)
+    text = models.CharField(max_length=1024 * 8, null=True)
     _color_indicator = ArrayField(dbtype='text', null=True)
     watermark = models.CharField(max_length=200, null=True)
     power = models.CharField(max_length=200, null=True)
@@ -205,7 +206,6 @@ class Card(models.Model):
             cls._mismatched_name_map = {}
 
         return cls._mismatched_name_map
-
 
     @classmethod
     def mark_names_as_inserted(cls, names):
@@ -262,11 +262,12 @@ class Card(models.Model):
     def activated_ability_mana_costs(self):
 
         if not hasattr(self, '_ability_mana_costs'):
-            group = '(\{[WUBRGP/\d\{\}]+\})'
-
-            self._ability_mana_costs = filter(None, chain(
-                *re.findall(r'%s.*?(?:.*or %s)?.*:' % (group, group), self.text) or []
-            )) or None
+            mana_grp = '(\{[WUBRGP/\d\{\}]+\})'
+            activation_regex = r'%s.*?(?:.*or %s)?.*:' % (mana_grp, mana_grp)
+            matches = re.findall(activation_regex, self.text) or []
+            self._ability_mana_costs = [
+                found_cost
+                for found_cost in chain(*matches) if found_cost]
 
         return self._ability_mana_costs
 

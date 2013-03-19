@@ -39,7 +39,7 @@ def get_cards_from_names(*names):
     to_fetch = []
     to_insert = []
 
-    names = map(_clean_cardname, names)
+    names = [_clean_cardname(name) for name in names]
 
     mismatched_name_map = Card.get_mismatched_names_map()
 

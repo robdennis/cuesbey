@@ -975,8 +975,7 @@ describe('service', function() {
                     "Bituminous Blast",
                     "Electrolyze",
                     "Esper Charm",
-                    // Fire/Ice not yet supported
-//            "Fire/Ice",
+                    "Fire // Ice",
                     "Lightning Helix",
                     "Mortify",
                     "Prophetic Bolt",

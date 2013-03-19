@@ -1,7 +1,7 @@
 #encoding: utf-8
 import os
 from django.core.management.base import BaseCommand, CommandError
-from cuesbey_main.cube_diff.models import Cube, CardFetchingError
+from cuesbey_main.cube_diff.models import Cube, get_cards_from_names
 
 def save_cube_from_file_path(fpath):
     file_name = os.path.basename(fpath)
@@ -11,20 +11,16 @@ def save_cube_from_file_path(fpath):
             raise CommandError('{} does not exist'.format(fpath))
         cube = Cube.objects.get(name=file_name)
     except Cube.DoesNotExist:
-        cube = Cube()
+        cube = Cube(name=file_name)
         cube.save()
-        cube.name = file_name
 
-        with open(fpath, 'r') as cube_file:
-            for card_name in cube_file:
-                if not card_name:
-                    continue
-                try:
-                    cube.add_card_by_name(card_name)
-                except CardFetchingError:
-                    continue
+    with open(fpath, 'r') as cube_file:
+        cards = get_cards_from_names(*[
+            line for line in cube_file.read().splitlines() if line
+        ])
 
-        cube.save()
+    cube.cards = cards
+    cube.save()
 
     return cube
 

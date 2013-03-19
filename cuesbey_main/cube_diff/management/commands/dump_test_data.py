@@ -14,10 +14,12 @@ class Command(BaseCommand):
     help = "cube"
 
     option_list = BaseCommand.option_list + (
-        make_option('--outfile',
+        make_option(
+            '--outfile',
             dest='outfile',
-            default=os.path.abspath(os.path.join(__here__, '..', '..', 'tests', 'js', 'unit', 'test_data.js')),
-            help='Delete poll instead of closing it'),
+            default=os.path.abspath(os.path.join(__here__, '..', '..', 'tests',
+                                                 'unit', 'test_data.js')),
+            help='place to dump the resulting file'),
         )
 
     def handle(self, *args, **options):
@@ -37,4 +39,4 @@ class Command(BaseCommand):
 
                 outfile.write('{}_data = {};\n'.format(base, cube.serialize(cube.as_dict(), indent=4)))
                 outfile.write('{}_data_array = {};\n'.format(base, cube.serialize(cube.as_list(), indent=4)))
-                outfile.write('cuesbey_all_data = {};\n'.format(cube.serialize(all_cards, indent=4)))
+            outfile.write('cuesbey_all_data = {};\n'.format(cube.serialize(all_cards, indent=4)))

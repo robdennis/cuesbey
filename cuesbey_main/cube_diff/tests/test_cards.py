@@ -58,16 +58,43 @@ class SimpleTest(BaseCardInserter):
                      "Sensei's Divining Top"):
             self.assertEqual(Card.get(name).name, name)
 
+    def assert_split_card_matches(self, search_name, name, colors):
+        """
+        assert that the expectation matches for a given split card
+
+        :param search_name: the string to search with
+        :param name: the expected card name
+        :param colors: the expected card colors
+        :raise AssertionError: if the card doesn't match expectations
+        """
+
+        self.assertEqual([], list(Card.objects.filter(name=search_name).all()))
+        fetched_card = Card.get(search_name)
+        self.assertIsInstance(fetched_card, Card)
+        self.assertEqual(name, fetched_card.name)
+        self.assertEqual(colors, fetched_card.colors)
+
+    def test_normal_split_card(self):
+
+        self.assert_split_card_matches('Fire//Ice', 'Fire//Ice',
+                                       {'Red', 'Blue'})
+
+    def test_split_card_with_different_separator(self):
+        self.assert_split_card_matches('Assault/Battery', 'Assault//Battery',
+                                       {'Red', 'Green'})
+
     @unittest.expectedFailure
-    def test_split_cards(self):
-        for name, expansion in (('Fire//Ice', 'Apocalypse'),
-                                ('Assault//Battery', 'Invasion'),
-                                ('Supply//Demand', 'Dissension')):
-            self.assertEqual([], list(Card.objects.filter(name=name).all()))
-            fetched_card = Card.get(name)
-            self.assertIsInstance(fetched_card, Card)
-            self.assertIn(expansion, [expansion.name for expansion in fetched_card.expansions])
-            self.assertIn(fetched_card, Card.objects.all())
+    def test_split_card_with_different_order(self):
+        self.assert_split_card_matches('Demand // Supply', 'Supply//Demand',
+                                       {'Green', 'White', 'Blue'})
+
+    @unittest.expectedFailure
+    def test_greater_than_one_split_on_a_card(self):
+        self.assert_split_card_matches(
+            'Who//What// Where // When / Why',
+            'Who//What//Where//When//Why',
+            {'White', 'Blue', 'Black', 'Red', 'Green'}
+        )
 
 
 class CardModelTest(BaseCardInserter):

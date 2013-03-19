@@ -4,6 +4,7 @@ import re
 import subprocess
 
 from copy import deepcopy
+from itertools import chain
 
 from cuesbey_main.cube_diff.autolog import log
 from cuesbey_main.cuesbey.settings import TUTOR_PATH
@@ -152,16 +153,52 @@ def estimate_cmc(mana_cost):
     return count
 
 
+def _merge_split_cards(*split_names):
+    """
+    Merge togther multiple split cards
+
+    :param split_names: an iterable of card names, e.g. ('Fire', 'Ice')
+    :return: a dict representation of the merged card
+    """
+
+    cards = [_query_tutor_for_card_by_name(name)
+                   for name in split_names]
+
+    def _join_on_key(k, delimiter=' // '):
+        return delimiter.join(unicode(card[k]) for card in cards)
+
+    special_cases = dict(
+        name=_join_on_key('name'),
+        mana_cost=_join_on_key('mana_cost'),
+        converted_mana_cost=-1,
+        text=_join_on_key('text', '\n\n-----\n\n'),
+    )
+
+    # just use the foundation of the first card unless you are explicitly
+    # merging
+    return {k: special_cases.get(k, v) for k, v in cards[0].iteritems()}
+
+
 def get_json_card_content(name):
     """
-    Get the card's json content. Depends on installation of tutor,
+    Get the card's json content
     """
-    #Todo: the tutor thread needs to be started alongside cuesbey
 
-    # since we are searching by name, we'll get specific formats mapping the
-    # gatherer id number with the expansion information associated with that
-    # card. As a result, concepts like artist, flavor text, don't have meaning
-    # as a result
+    if '/' in name:
+        return _merge_split_cards(*re.split(r'\s*/+\s*', name))
+    else:
+        return _query_tutor_for_card_by_name(name)
+
+
+def _query_tutor_for_card_by_name(name):
+    """
+    Depends on: installation of the tutor CLI, that path in settings,
+    the path to node in your $PATH environment variable
+
+    :param name: the card's name, which will be passed to tutor's command line
+    :return: dict representation of the card from tutor
+    """
+
     comprehensive = dict.fromkeys([
         'name',
         'mana_cost',
@@ -173,7 +210,7 @@ def get_json_card_content(name):
         'power',
         'toughness',
         'loyalty',
-    ])
+        ])
 
     log.debug('searching for cardname: %r', name)
 
@@ -209,7 +246,5 @@ def get_json_card_content(name):
     except:
         log.exception('what happened?')
         raise
-
-
 
     return comprehensive

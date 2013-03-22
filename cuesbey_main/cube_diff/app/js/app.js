@@ -5,5 +5,6 @@
 angular.module('cube_diff', [
     'cube_diff.controllers',
     'cube_diff.services',
-    'cube_diff.directives'
+    'cube_diff.directives',
+    'ui.bootstrap'
     ]);

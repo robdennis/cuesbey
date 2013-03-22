@@ -17,12 +17,15 @@
 
         </textarea>
         cards:  {{after.length}}
+        <textarea name="spec" ng-model="spec" rows=10>
+
+        </textarea>
         <button type="submit" class="btn" ng-click="diff()">Diff</button>
     </form>
 </div>
 
 <tabs>
-    <pane ng-repeat="cat in diffedCube" title="{{cat.category}}">
+    <pane ng-repeat="cat in diffedCube" heading="{{cat.category}}" active="cat.active">
         <diff-table val="cat"></diff-table>
     </pane>
 </tabs>
@@ -37,6 +40,7 @@
 <script src="js/controllers.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/directives.js"></script>
+<script src="js/ui-bootstrap-tpls-0.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 </body>
 </html>

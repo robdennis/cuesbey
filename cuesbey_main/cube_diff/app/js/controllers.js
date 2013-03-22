@@ -15,7 +15,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         'converted_mana_cost==6': {},
         'converted_mana_cost>=7': {}
     };
-    $scope.spec = {
+    $scope.spec = JSON.stringify({
         'White': {
             'Creature': cmcSlots,
             '!Creature': cmcSlots
@@ -39,7 +39,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         'Colorless/!Land': {appearance:'table'},
         'Colorless/Land': {appearance:'table'},
         'Multicolor': {appearance:'table'}
-    };
+    });
 
     $scope.beforeCardNames = [
         "Absorb",
@@ -1486,21 +1486,20 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         "Zombie Cutthroat"
     ].join('\n');
 
-
     $scope.diffTheCube = function (data, status) {
         $scope.before = data['before']['cards'];
         $scope.after = data['after']['cards'];
         $scope.diffedCube = CubeDiffService.getDiff(
             $scope.before,
             $scope.after,
-            $scope.spec,
+            JSON.parse($scope.spec),
             undefined,
             false
         );
+        $scope.diffedCube[0].active = true;
     };
 
     $scope.diff = function() {
-
 
         CardContentService.getCards({
                 before: $scope.beforeCardNames.split('\n'),

@@ -58,10 +58,17 @@ describe('service', function() {
 
             $httpBackend.flush();
 
-            expect(scope.diffedCube).toEqual(
-                diffService.getDiff(expectedBefore, expectedAfter, scope.spec,
-                    diffService.alternateSorter, false)
+            var actual = diffService.getDiff(
+                expectedBefore,
+                expectedAfter,
+                JSON.parse(scope.spec),
+                diffService.alternateSorter,
+                false
             );
+
+            actual[0].active = true;
+
+            expect(scope.diffedCube).toEqual(actual);
 
             $httpBackend.verifyNoOutstandingExpectation();
             $httpBackend.verifyNoOutstandingRequest();
@@ -109,7 +116,7 @@ describe('service', function() {
                 'Demonic Tutor',
                 'Doom Blade',
                 'Vampiric Tutor'
-            ], {"Black": {}}, [
+            ], JSON.stringify({"Black": {}}), [
                 cube_content['Doom Blade'],
                 cube_content['Terror'],
                 cube_content['Vampiric Tutor']
@@ -126,7 +133,7 @@ describe('service', function() {
             setupExpectGivenNames(
                 ['Terror'],
                 ['Terror'],
-                {"Black": {}},
+                JSON.stringify({"Black": {}}),
                 [cube_content['Terror']],
                 [cube_content['Terror']]
             );

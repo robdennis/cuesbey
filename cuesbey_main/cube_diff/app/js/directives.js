@@ -1,8 +1,6 @@
 'use strict';
 
 /* Directives */
-
-
 angular.module('cube_diff.directives', []).
     directive('diffTable', function ($compile) {
         return {

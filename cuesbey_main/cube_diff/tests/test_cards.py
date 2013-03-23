@@ -76,16 +76,18 @@ class SimpleTest(BaseCardInserter):
 
     def test_normal_split_card(self):
 
-        self.assert_split_card_matches('Fire//Ice', 'Fire//Ice',
+        self.assert_split_card_matches('Fire // Ice', 'Fire // Ice',
                                        {'Red', 'Blue'})
 
     def test_split_card_with_different_separator(self):
-        self.assert_split_card_matches('Assault/Battery', 'Assault//Battery',
+        self.assert_split_card_matches('Assault/Battery', 'Assault // Battery',
                                        {'Red', 'Green'})
+        self.assert_split_card_matches('Fire//Ice', 'Fire // Ice',
+                                       {'Red', 'Blue'})
 
     @unittest.expectedFailure
     def test_split_card_with_different_order(self):
-        self.assert_split_card_matches('Demand // Supply', 'Supply//Demand',
+        self.assert_split_card_matches('Demand // Supply', 'Supply // Demand',
                                        {'Green', 'White', 'Blue'})
 
     @unittest.expectedFailure

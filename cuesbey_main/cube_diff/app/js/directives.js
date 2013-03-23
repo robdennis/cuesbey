@@ -24,7 +24,7 @@ angular.module('cube_diff.directives', []).
 
 
             link: function(scope, element, attrs, diffCtrl) {
-
+                console.log('element', element);
                 var template;
                 if (angular.isArray(scope.val['subcategories']))  {
                     console.log('current stuff', scope.val);
@@ -37,20 +37,12 @@ angular.module('cube_diff.directives', []).
                         '</div>';
                     } else {
                         var all_col_cards = [];
+                        scope.headerRow = [];
                         jQuery.each(scope.val['subcategories'], function(colIndex, subCat) {
                             var col_cards = [];
-                            // we're assuming that there's no diff subcategories
-                            console.log('working with', subCat);
-                            col_cards.push({
-                                'name': subCat['category'],
-                                // HACK: there's a better way to handle
-                                // keeping the title in the same array
-                                '_diffResult': 'title'
-                            });
                             col_cards = col_cards.concat(subCat.cards);
-                            console.log('current column', col_cards);
                             all_col_cards.push(col_cards);
-                            console.log('all_colunns', all_col_cards);
+                            scope.headerRow.push(subCat.category)
 
                         });
 
@@ -61,6 +53,8 @@ angular.module('cube_diff.directives', []).
 
                         template = '<div>{{val.category}}:'+
                             '<table class="diff-table">' +
+                                // the header row
+                                '<tr><th ng-repeat="title in headerRow" class="diff-title">{{title}}</th></tr>'+
                                 '<tr ng-repeat="row in table_content">'+
                                     '<td ng-repeat="card in row" class="diff-name {{card._diffResult}}">'+
                                         '{{card.name}}' +
@@ -73,7 +67,7 @@ angular.module('cube_diff.directives', []).
                 } else if (angular.isArray(scope.val.cards) && scope.val.cards.length > 0) {
                     console.log('it\'s a top level thing');
                     if (scope.val['appearance'] !== 'table') {
-                        template = '<div>{{val.category}}'+
+                        template = '<div class="diff-title">{{val.category}}'+
                             '<ul class="diff-list">'+
                                 '<li ng-repeat="card in val.cards" class="diff-name {{card.category}}">{{ card.name }}</li>' +
                             '</ul>'+
@@ -90,9 +84,15 @@ angular.module('cube_diff.directives', []).
                         "</div>";
                     }
                 }
+                console.log('got template:', template);
                 var newElement = angular.element(template);
+                console.log('new element:', newElement);
                 $compile(newElement)(scope);
+                console.log('new element2:', newElement);
                 element.replaceWith(newElement);
+
+                console.log('replaced:', element);
+
             },
 
             replace: true

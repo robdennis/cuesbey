@@ -9,6 +9,7 @@ from cuesbey_main.cube_diff import (parse_mana_cost, estimate_cmc,
                                       estimate_colors, estimate_colors_from_lands)
 from cuesbey_main.cube_diff.autolog import log
 
+
 def _handle_monocolor_hybrid(card, h):
     if not card.mana_cost:
         return
@@ -20,12 +21,16 @@ def _handle_monocolor_hybrid(card, h):
         # cost
         num_symbols = len(monocolor_hybrid_symbols)
         h['assume_on_color_cmc_for_mono_color_hybrids'] = dict(
-            converted_mana_cost = card.converted_mana_cost - num_symbols
+            converted_mana_cost=card.converted_mana_cost - num_symbols
         )
 
-def _handling_cycling_with_activated_abilities(card, h):
 
-    cycling_match = re.search("\((?P<mana_cost>\{.+\}),\s+Discard this card\: Draw a card\.\)\n\nWhen you cycle %s(?:.+you may pay (?P<extra_cost>\{.+\}))?.+$" % card.name, card.text, re.I)
+def _handling_cycling_with_activated_abilities(card, h):
+    cycling_text = (r"\((?P<mana_cost>\{.+\}),\s+"
+                    r"Discard this card\: Draw a card\.\)\n\n"
+                    r"When you cycle %s(?:.+"
+                    r"you may pay (?P<extra_cost>\{.+\}))?.+$" % card.name)
+    cycling_match = re.search(cycling_text, card.text, re.I)
     if not cycling_match:
         return
 
@@ -33,7 +38,8 @@ def _handling_cycling_with_activated_abilities(card, h):
     parsed_cost = parse_mana_cost(results['mana_cost'])
     if results.get('extra_cost'):
         parsed_cost = merge_mana_costs(parsed_cost, results['extra_cost'])
-    # this card has a triggered ability when cycled that could be considered as the "real" mana cost
+    # this card has a triggered ability when cycled that could be
+    # considered as the "real" mana cost
     _cyc = dict(
         mana_cost=stitch_mana_cost(parsed_cost),
         converted_mana_cost=estimate_cmc(parsed_cost)
@@ -41,8 +47,11 @@ def _handling_cycling_with_activated_abilities(card, h):
 
     h['use_cycling_cost_as_mana_cost_for_triggered_abilities'] = _cyc
 
+
 def _handle_affinity_for_basic_land(card, h):
-    affinity_for_basic_land_match = re.search("Affinity for (Island|Plains|Mountains|Forests|Swamps)", card.text)
+    affinity_for_basic_land_match = re.search(
+        "Affinity for (Island|Plains|Mountains|Forests|Swamps)", card.text
+    )
     if affinity_for_basic_land_match:
         # the idea is that for each land you play of the appropriate type
         # you have a mana, and it got cheaper
@@ -54,27 +63,31 @@ def _handle_affinity_for_basic_land(card, h):
         key = 'affinity_for_basic_lands_affects_mana_cost'
 
         h[key] = dict(
-            converted_mana_cost=int(ceil(float(card.converted_mana_cost)/2))
+            converted_mana_cost=int(ceil(float(card.converted_mana_cost) / 2))
         )
 
         if land_color != card.colors:
             h[key]['colors'] = land_color | card.colors
 
+
 def _handle_living_weapon(card, h):
     if ('Equipment' in card.subtypes and
-        'Living weapon' in card.text and
-        'Creature' not in card.types):
+            'Living weapon' in card.text and
+            'Creature' not in card.types):
         # Living Weapon is a relatively narrow mechanic, but Batterskull
         # is a near 100% play in standard cubes
         h['living_weapon_means_creature'] = dict(
             types=card.types + ['Creature']
         )
 
+
 def _handle_caring_about_land_types(card, h):
 
+    land_names = "(Plains|Island|Swamp|Mountain|Forest)"
+    plural_land_names = "(Plains|Islands|Swamps|Mountains|Forests)"
     controlled_lands = (
-        re.findall("as long as you control a (Plains|Island|Swamp|Mountain|Forest)", card.text) +
-        re.findall("(Plains|Islands|Swamps|Mountains|Forests) you control", card.text)
+        re.findall("as long as you control a %s" % land_names, card.text) +
+        re.findall("%s you control" % plural_land_names, card.text)
     )
 
     if any(controlled_lands):
@@ -89,18 +102,19 @@ def _handle_caring_about_land_types(card, h):
             colors=modified_colors
         )
 
+
 def _handle_phyrexian(card, h):
     if not card.mana_cost or not '/P' in card.mana_cost:
         return
 
-    # the card has phryxian mana in the cost, which often means designers
+    # the card has phyrexian mana in the cost, which often means designers
     # will put in on curve as if people will always pay life
     heur_str = 'phyrexian_always_pays_life'
     ability_heur_str = heur_str + '_except_for_abilities'
     parsed_cost = parse_mana_cost(card.mana_cost)
     modified_cost = [sym for sym in parsed_cost if '/P' not in sym]
 
-    h[heur_str]=dict(
+    h[heur_str] = dict(
         mana_cost=stitch_mana_cost(modified_cost),
         colors=card.estimate_colors(modified_cost)
     )
@@ -112,9 +126,12 @@ def _handle_phyrexian(card, h):
 
     h[ability_heur_str] = deepcopy(h[heur_str])
 
-    all_costs = stitch_mana_cost(merge_mana_costs(card.activated_ability_mana_costs))
+    all_costs = stitch_mana_cost(
+        merge_mana_costs(card.activated_ability_mana_costs)
+    )
     if all_costs and '/P' in all_costs:
         h[ability_heur_str]['colors'] |= estimate_colors(all_costs)
+
 
 def _handle_off_color_flashback(card, h):
     flashback_cost = re.search(r'Flashback (\{.+\}) \(You', card.text)
@@ -126,8 +143,10 @@ def _handle_off_color_flashback(card, h):
             colors=flashback_colors | card.colors
         )
 
+
 def _handle_kicker(card, h):
-    kicker_costs = re.search(r'Kicker (\{.+\})(?:\s+and/or (\{.+\}))* \(You', card.text)
+    kicker_costs = re.search(r'Kicker (\{.+\})(?:\s+and/or (\{.+\}))* \(You',
+                             card.text)
 
     if not kicker_costs:
         return
@@ -157,25 +176,31 @@ def _handle_kicker(card, h):
     if 'Creature' in card.types:
         h['always_kick_creatures'] = full_dict
 
+
 def _handle_token_generators(card, h):
     # lands or planeswalkers don't count
-    if not any([_type in card.types for _type in ('Instant', 'Sorcery', 'Enchantment')]):
+    if not any([_type in card.types
+                for _type in ('Instant', 'Sorcery', 'Enchantment')]):
         return
 
     # if the spell is targeted, it's probably too conditional to consider
     if 'Aura' in card.subtypes or 'target' in card.text.lower():
         return
 
-    if re.search('put[^\.]+creature tokens?[^\.]+onto the battlefield', card.text, re.I):
+    if re.search('put[^\.]+creature tokens?[^\.]+onto the battlefield',
+                 card.text, re.I):
         h['token_spells_are_creatures'] = dict(
-            types = card.types + ['Creature']
+            types=card.types + ['Creature']
         )
+
 
 def _handle_activated_abilities(card, h):
 
     merged = merge_mana_costs(*(card.activated_ability_mana_costs or []))
-    phyrexian_activated = stitch_mana_cost([sym for sym in merged if 'P' in sym])
-    non_phyrexian_activated = stitch_mana_cost([sym for sym in merged if 'P' not in sym])
+    phyrexian_symbols = [sym for sym in merged if 'P' in sym]
+    non_phyrexian_symbols = [sym for sym in merged if 'P' not in sym]
+    phyrexian_activated = stitch_mana_cost(phyrexian_symbols)
+    non_phyrexian_activated = stitch_mana_cost(non_phyrexian_symbols)
     activated_colors = estimate_colors(merged)
 
     if phyrexian_activated:
@@ -188,6 +213,7 @@ def _handle_activated_abilities(card, h):
             colors=activated_colors
         )
 
+
 def _handle_suspend(card, h):
 
     has_suspend = re.search(u"Suspend \d+\u2014(\{.+\}) \(", card.text)
@@ -197,13 +223,14 @@ def _handle_suspend(card, h):
     mana_cost = has_suspend.group(1)
 
     h['suspend_as_cmc'] = dict(
-        mana_cost = mana_cost,
-        converted_mana_cost = estimate_cmc(mana_cost)
+        mana_cost=mana_cost,
+        converted_mana_cost=estimate_cmc(mana_cost)
     )
 
     suspend_colors = estimate_colors(mana_cost)
     if suspend_colors != card.colors:
         h['suspend_as_cmc']['colors'] = suspend_colors
+
 
 def get_heuristics(card):
 

@@ -15,6 +15,7 @@ class BaseCardInserter(TestCase):
     def tearDown(self):
 
         Card.reset_names_inserted()
+        Card.reset_heuristics_available()
 
 
 class SimpleTest(BaseCardInserter):

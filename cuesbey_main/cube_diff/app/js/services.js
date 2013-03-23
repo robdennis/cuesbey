@@ -35,6 +35,13 @@ angular.module('cube_diff.services', [])
             });
         }};
     })
+    .factory('CardHeuristicService', function($http) {
+        return {getHeuristics : function(onSuccess) {
+            $http.get('/heuristics/').success(function (data, status) {
+                    onSuccess(data, status);
+                });
+        }};
+    })
     .factory('CardCategoryService', function() {
         return {
             matchesCategory : function(category, card) {

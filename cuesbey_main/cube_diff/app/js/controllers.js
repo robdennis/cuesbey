@@ -4,7 +4,8 @@
 
 angular.module('cube_diff.controllers', []);
 
-function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
+function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
+                          CardHeuristicService) {
     var cmcSlots = {
         appearance: 'table',
         'converted_mana_cost<=1': {},
@@ -40,6 +41,11 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
         'Colorless/Land': {appearance:'table'},
         'Multicolor': {appearance:'table'}
     });
+
+    CardHeuristicService.getHeuristics(function(data) {
+        $scope.heuristics = data
+    });
+
 
     $scope.beforeCardNames = [
         "Absorb",
@@ -1489,6 +1495,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService) {
     $scope.diffTheCube = function (data, status) {
         $scope.before = data['before']['cards'];
         $scope.after = data['after']['cards'];
+        console.log($scope.heuristics)
         $scope.diffedCube = CubeDiffService.getDiff(
             $scope.before,
             $scope.after,

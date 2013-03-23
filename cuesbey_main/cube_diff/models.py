@@ -190,6 +190,7 @@ class Card(models.Model):
         if not getattr(cls, '_all_names', set()):
             cls._all_names = set([c.name for c in cls.objects.all()])
 
+
         return cls._all_names
 
     @classmethod
@@ -251,6 +252,30 @@ class Card(models.Model):
         # think of "Ghostfire" would probably be Red anyway
 
         return estimate_colors(mana_cost_text) | set(color_indicator or [])
+
+    @classmethod
+    def get_all_heuristics(cls):
+        """
+        Used to easily see what heuristics are set on cards in the database
+        """
+        if not getattr(cls, '_all_heuristics', {}):
+            cls._all_heuristics = {}
+            cls._update_heuristics_available(*cls.get_all_inserted_names())
+
+        return cls._all_heuristics
+
+    @classmethod
+    def _update_heuristics_available(cls, *names):
+        for card in Card.objects.filter(name__in=names):
+            heuristics = card.heuristics
+            for heuristic_name in heuristics:
+                # data that could be associated with heuristics in the future
+                cls._all_heuristics.setdefault(heuristic_name, {})
+
+    @classmethod
+    def reset_heuristics_available(cls):
+
+        del cls._all_heuristics
 
     @property
     def heuristics(self):

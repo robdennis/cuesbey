@@ -20,7 +20,15 @@
         <textarea name="spec" ng-model="spec" rows=10>
 
         </textarea>
+        <div>
+            <label ng-repeat="heuristic in heuristics">
+                <input type="checkbox" ng-model="heuristic.checked">
+                {{heuristic.key}}
+                <br/>
+            </label>
+        </div>
         <button type="submit" class="btn" ng-click="diff()">Diff</button>
+
     </form>
 </div>
 

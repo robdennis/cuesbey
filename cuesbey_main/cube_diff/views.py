@@ -4,7 +4,7 @@ import os
 
 from django.http import HttpResponse, Http404
 
-from cuesbey_main.cube_diff.models import Cube, get_cards_from_names
+from cuesbey_main.cube_diff.models import Cube, Card, get_cards_from_names
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
 
@@ -33,5 +33,14 @@ def card_contents(request):
 
     return HttpResponse(
         response,
+        mimetype="application/json"
+    )
+
+
+def available_heuristics(request):
+
+    return HttpResponse(
+        #TODO: consider how ths actually should be
+        json.dumps([dict(key=k) for k, v in Card.get_all_heuristics().iteritems()]),
         mimetype="application/json"
     )

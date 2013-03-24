@@ -14,6 +14,7 @@ describe('service', function() {
             $httpBackend = $injector.get('$httpBackend');
             diffService = CubeDiffService;
 
+            $httpBackend.expectGET('/heuristics/').respond(200, []);
             ctrl = $controller("CubeContentsCtrl", {$scope: scope});
         }));
 
@@ -47,6 +48,7 @@ describe('service', function() {
                         cards: actualAfter
                     }
                 });
+
             scope.beforeCardNames = before.join('\n');
             scope.afterCardNames = after.join('\n');
             var wasCalled = false;

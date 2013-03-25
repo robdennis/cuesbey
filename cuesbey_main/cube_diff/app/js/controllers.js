@@ -1491,27 +1491,48 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         "Zo-Zu the Punisher",
         "Zombie Cutthroat"
     ].join('\n');
+    $scope.cachedBeforeCardNames = "";
+    $scope.cachedAfterCardNames = "";
 
-    $scope.diffTheCube = function (data, status) {
+    $scope.setDataAndPerform = function (data, status) {
+        $scope.cachedBeforeCardNames = $scope.beforeCardNames;
+        $scope.cachedAfterCardNames = $scope.afterCardNames;
         $scope.before = data['before']['cards'];
         $scope.after = data['after']['cards'];
-        console.log($scope.heuristics)
+        $scope.performDiff();
+    };
+
+    $scope.performDiff = function() {
+
+        var checkedHeuristics = [];
+        jQuery.each($scope.heuristics, function(idx, heuristic) {
+           if (heuristic['checked']) {
+               checkedHeuristics.push(heuristic['key']);
+           }
+        });
+
+        console.log('checked:', checkedHeuristics);
         $scope.diffedCube = CubeDiffService.getDiff(
             $scope.before,
             $scope.after,
             JSON.parse($scope.spec),
             undefined,
-            false
+            false,
+            checkedHeuristics
         );
         $scope.diffedCube[0].active = true;
     };
 
     $scope.diff = function() {
-
+        if ($scope.beforeCardNames != $scope.cachedBeforeCardNames ||
+            $scope.afterCardNames != $scope.cachedAfterCardNames) {
         CardContentService.getCards({
                 before: $scope.beforeCardNames.split('\n'),
                 after: $scope.afterCardNames.split('\n')
             },
-            $scope.diffTheCube);
+            $scope.setDataAndPerform);
+        } else {
+            $scope.performDiff()
+        }
     };
 }

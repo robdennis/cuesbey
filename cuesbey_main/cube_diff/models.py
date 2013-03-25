@@ -190,7 +190,6 @@ class Card(models.Model):
         if not getattr(cls, '_all_names', set()):
             cls._all_names = set([c.name for c in cls.objects.all()])
 
-
         return cls._all_names
 
     @classmethod
@@ -267,15 +266,16 @@ class Card(models.Model):
     @classmethod
     def _update_heuristics_available(cls, *names):
         for card in Card.objects.filter(name__in=names):
-            heuristics = card.heuristics
-            for heuristic_name in heuristics:
+            if not card.heuristics:
+                continue
+            for heuristic_name in card.heuristics:
                 # data that could be associated with heuristics in the future
                 cls._all_heuristics.setdefault(heuristic_name, {})
 
     @classmethod
     def reset_heuristics_available(cls):
-
-        del cls._all_heuristics
+        if hasattr(cls, '_all_heuristics'):
+            del cls._all_heuristics
 
     @property
     def heuristics(self):

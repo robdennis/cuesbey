@@ -44,7 +44,19 @@ angular.module('cube_diff.services', [])
     })
     .factory('CardCategoryService', function() {
         return {
-            matchesCategory : function(category, card) {
+            matchesCategory : function(category, baseCard, checkedHeuristics) {
+                checkedHeuristics = checkedHeuristics || [];
+                var modifiedCard = jQuery.extend({}, baseCard);
+
+                if (baseCard['heuristics']) {
+                    // most cards don't have associated heuristics
+                    jQuery.each(checkedHeuristics, function(idx, heuristicName) {
+                        jQuery.extend(
+                            modifiedCard,
+                            baseCard['heuristics'][heuristicName]
+                        );
+                    });
+                }
 
                 var _checkForExactColor = function(category, card) {
                     if (category == 'Colorless') {
@@ -71,21 +83,32 @@ angular.module('cube_diff.services', [])
                 };
 
                 var _checkForCMC = function(category, card) {
-                    var cmcRegex = /converted_mana_cost\s*([=><!]{1,2})\s*(\d+)/;
+                    var cmcRegex = /converted_mana_cost\s*([=><!]{1,2})\s*(\d+|X)/;
                     var match = cmcRegex.exec(category);
                     if (match) {
+                        var integerCMC;
+                        var cardCMC = card['converted_mana_cost'];
+                        if (cardCMC==-1) {
+                            // -1 is what we're using to represent 'X' spells
+                            cardCMC = Number.POSITIVE_INFINITY;
+                        }
+                        if (match[2]=='X') {
+                            integerCMC = Number.POSITIVE_INFINITY;
+                        } else {
+                            integerCMC = parseInt(match[2]);
+                        }
                         if (match[1] == '==') {
-                            return card['converted_mana_cost'] == match[2];
+                            return cardCMC == integerCMC;
                         } else if (match[1] == '<') {
-                            return card['converted_mana_cost'] < match[2];
+                            return cardCMC < integerCMC;
                         } else if (match[1] == '>') {
-                            return card['converted_mana_cost'] > match[2];
+                            return cardCMC > integerCMC;
                         } else if (match[1] == '<=') {
-                            return card['converted_mana_cost'] <= match[2];
+                            return cardCMC <= integerCMC;
                         } else if (match[1] == '>=') {
-                            return card['converted_mana_cost'] >= match[2];
+                            return cardCMC >= integerCMC;
                         } else if (match[1] == '!=') {
-                            return card['converted_mana_cost'] != match[2];
+                            return cardCMC != integerCMC;
                         } else {
                             // this should probably throw something?
                             return 'na';
@@ -127,7 +150,7 @@ angular.module('cube_diff.services', [])
                             // or True/False if it is applicable and based on the results of
                             // the check
                         ], function(checked_index, checker) {
-                            var result = checker(inner_cat, card);
+                            var result = checker(inner_cat, modifiedCard);
                             if (result === 'na') {
                                 return result;
                             } else {
@@ -232,14 +255,16 @@ angular.module('cube_diff.services', [])
     })
     .factory('CubeSortService', function(CardCategoryService, SortSpecService) {
         return {
-            sortCube: function(serializedCube, sortSpec, defaultSort, existingCube, infoToAdd) {
+            sortCube: function(serializedCube, sortSpec, defaultSort,
+                               existingCube, infoToAdd, checkedHeuristics) {
+                checkedHeuristics = checkedHeuristics || [];
                 var handleCubeCard = function(card, _sortedCube, infoToAdd) {
                     // merge on information
                     var cardToHandle = jQuery.extend({}, card, infoToAdd);
 
                     var _recurseCube = function (subCube) {
                         jQuery.each(subCube, function(idx, categoryObject) {
-                            if (!CardCategoryService.matchesCategory(categoryObject.category, cardToHandle)) {
+                            if (!CardCategoryService.matchesCategory(categoryObject.category, cardToHandle, checkedHeuristics)) {
                                 return;
                             }
                             if (categoryObject.hasOwnProperty('subcategories')) {
@@ -321,10 +346,13 @@ angular.module('cube_diff.services', [])
                     return card_a['name'] > card_b['name'] ? 1:-1;
                 }
             },
-            getDiff : function(_old, _new, sortSpec, sorter, diffSubCategories) {
+            getDiff : function(_old, _new, sortSpec, sorter, diffSubCategories,
+                               checkedHeuristics) {
                 if (diffSubCategories === undefined) {
                     diffSubCategories = true;
                 }
+
+                checkedHeuristics = checkedHeuristics || [];
 
                 if (!diffSubCategories) {
                     // we need some way to show the diff results, so if we aren't
@@ -335,7 +363,10 @@ angular.module('cube_diff.services', [])
 
                 var currentCube = SortSpecService.getSkeleton(sortSpec, diffSubCategories);
                 jQuery.each(CubeSplitService.splitCards(_old, _new), function(type, splitSubCube) {
-                    currentCube = CubeSortService.sortCube(splitSubCube, sortSpec, sorter, currentCube, {_diffResult:type});
+                    currentCube = CubeSortService.sortCube(
+                        splitSubCube, sortSpec, sorter, currentCube,
+                        {_diffResult:type}, checkedHeuristics
+                    );
                 });
 
                 return currentCube;

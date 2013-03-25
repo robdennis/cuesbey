@@ -1301,6 +1301,10 @@ describe('service', function() {
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
         var damnation = cubeContents['Damnation'];
+        var emrakul = modo_cube_rtr_data['Emrakul, the Aeons Torn'];
+        var devilsPlay = cubeContents["Devil's Play"];
+        var souls = cubeContents["Lingering Souls"];
+        var legionnaire = cubeContents["Porcelain Legionnaire"];
 
         it('should handle diff categories', function() {
             expect(svc.matchesCategory('both', {_diffResult: 'both'})).toBe(true);
@@ -1387,6 +1391,55 @@ describe('service', function() {
             expect(svc.matchesCategory('converted_mana_cost<=2', dynamo)).toBe(false);
             expect(svc.matchesCategory('converted_mana_cost<=3', dynamo)).toBe(false);
             expect(svc.matchesCategory('converted_mana_cost<3', dynamo)).toBe(false);
+            // in case there was ever a lexicographical vs numerical sort thing
+            expect(svc.matchesCategory('converted_mana_cost>3', emrakul)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost<3', emrakul)).toBe(false);
+        });
+
+        var assertChanged = function(category, card,
+                                     heuristics, preHeuristic) {
+            heuristics = heuristics || [];
+            expect(svc.matchesCategory(category, card)).toBe(preHeuristic);
+            //it's now different after the heuristic is applied
+            expect(svc.matchesCategory(
+                category, card, heuristics
+            )).toBe(!preHeuristic);
+        };
+
+        var assertUnchanged = function(category, card,
+                                       heuristics, preHeuristic) {
+            heuristics = heuristics || [];
+            expect(svc.matchesCategory(category, card)).toBe(preHeuristic);
+            //it's not different after the heuristic is applied
+            expect(svc.matchesCategory(
+                category, card, heuristics
+            )).toBe(preHeuristic);
+        };
+
+        it('should handle heuristics that override categories', function() {
+
+            assertChanged('!Creature', souls, ['token_spells_are_creatures'], true);
+            // they don't always overwrite
+            assertUnchanged('Sorcery', souls, ['token_spells_are_creatures'], true);
+            assertChanged('Multicolor', souls, ['off_color_flashback_is_gold'], false);
+            assertChanged('converted_mana_cost==3', legionnaire, ['phyrexian_always_pays_life'], true);
+            assertChanged('converted_mana_cost==2', legionnaire, ['phyrexian_always_pays_life'], false);
+            assertChanged('White', legionnaire, ['phyrexian_always_pays_life'], true);
+            assertChanged('Colorless', legionnaire, ['phyrexian_always_pays_life'], false);
+            // they don't always affect things
+            assertUnchanged('Artifact', legionnaire, ['phyrexian_always_pays_life'], true);
+            assertChanged('converted_mana_cost==X', devilsPlay, ['x_spells_are_infinite'], false);
+            assertChanged('converted_mana_cost==1', devilsPlay, ['x_spells_are_infinite'], true);
+            assertChanged('converted_mana_cost>=6', devilsPlay, ['x_spells_are_infinite'], false);
+        });
+
+        it('shouldn\'t mess up if a card has no heuristics', function() {
+            assertUnchanged('White', eliteVanguard, ['token_spells_are_creatures'], true);
+        });
+
+        it('should handle converted mana costs with X', function() {
+            expect(svc.matchesCategory('converted_mana_cost<X', emrakul)).toBe(true);
+            expect(svc.matchesCategory('converted_mana_cost>X', emrakul)).toBe(false);
         });
     });
 });

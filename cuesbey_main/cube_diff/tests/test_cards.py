@@ -150,7 +150,8 @@ class HelpersTest(TestCase):
         self.assertEqual(merge_mana_costs(['X'], ['2', 'W']), ['X', '2', 'W'])
         self.assertEqual(merge_mana_costs('{X}', '{2}{W}'), ['X', '2', 'W'])
 
-class CardCategoryTest(BaseCardInserter):
+
+class CardHeuristicTest(BaseCardInserter):
     maxDiff = None
 
     def assertHeuristicsArePresent(self, name, expected_subset,
@@ -160,6 +161,20 @@ class CardCategoryTest(BaseCardInserter):
         for k in keys_that_are_not_present:
             self.assertNotIn(k, actual)
         self.assertDictContainsSubset(expected_subset, actual)
+
+    def test_handle_x_spells(self):
+
+        self.assertHeuristicsArePresent("Devil's Play", dict(
+            x_spells_are_infinite=dict(
+                converted_mana_cost=-1,
+            )
+        ))
+
+        self.assertHeuristicsArePresent("Fireball", dict(
+            x_spells_are_infinite=dict(
+                converted_mana_cost=-1,
+                )
+        ))
 
     def test_handle_phyrexian(self):
 

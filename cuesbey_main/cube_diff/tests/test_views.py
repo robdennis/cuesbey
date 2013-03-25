@@ -2,7 +2,9 @@ import json
 from django.test import TestCase, Client
 from test_cards import BaseCardInserter
 
-from cuesbey_main.cube_diff.models import insert_cards
+from cuesbey_main.cube_diff.models import get_cards_from_names
+
+
 class ViewTest(BaseCardInserter):
 
     @property
@@ -1454,8 +1456,8 @@ class ViewTest(BaseCardInserter):
         ]
 
     def test_card_heuristics(self):
-
-        insert_cards('Lingering Souls')
+        # this inserts if and only if it's needed
+        get_cards_from_names('Lingering Souls')
         c = Client()
         response = c.post('/heuristics/', None, "text/json",
                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')

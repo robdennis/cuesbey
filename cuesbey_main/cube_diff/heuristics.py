@@ -4,10 +4,14 @@ from itertools import chain
 from math import ceil
 
 from cuesbey_main.cube_diff import (parse_mana_cost, estimate_cmc,
-                                      basic_land_mappings, color_mappings,
-                                      merge_mana_costs, stitch_mana_cost,
-                                      estimate_colors, estimate_colors_from_lands)
+                                    merge_mana_costs, stitch_mana_cost,
+                                    estimate_colors, estimate_colors_from_lands)
 from cuesbey_main.cube_diff.autolog import log
+
+
+def _handle_x_spells_are_infinite_mana(card, h):
+    if card.mana_cost and 'X' in card.mana_cost:
+        h['x_spells_are_infinite'] = dict(converted_mana_cost=-1)
 
 
 def _handle_monocolor_hybrid(card, h):
@@ -239,6 +243,7 @@ def get_heuristics(card):
         # TODO: this may not be true, but it's definitely mostly true
         return
     try:
+        _handle_x_spells_are_infinite_mana(card, h)
         _handle_monocolor_hybrid(card, h)
         _handling_cycling_with_activated_abilities(card, h)
         _handle_affinity_for_basic_land(card, h)

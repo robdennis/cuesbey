@@ -90,25 +90,53 @@ describe('service', function() {
         cubeContents = modo_cube_og_data;
 
         var subCube1 = [
-            cubeContents['Tundra'],
-            cubeContents['Taiga'],
-            cubeContents['Volcanic Island'],
-            cubeContents['Tropical Island'],
-            cubeContents['Swords to Plowshares'],
-            cubeContents['Path to Exile'],
             cubeContents['Go for the Throat'],
-            cubeContents['Vampiric Tutor']
+            cubeContents['Path to Exile'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Taiga'],
+            cubeContents['Tropical Island'],
+            cubeContents['Tundra'],
+            cubeContents['Vampiric Tutor'],
+            cubeContents['Volcanic Island']
         ];
 
         var subCube2 = [
-            cubeContents['Scrubland'],
-            cubeContents['Plateau'],
-            cubeContents['Volcanic Island'],
-            cubeContents['Tropical Island'],
-            cubeContents['Swords to Plowshares'],
-            cubeContents['Path to Exile'],
             cubeContents['Brainstorm'],
-            cubeContents['Counterspell']
+            cubeContents['Counterspell'],
+            cubeContents['Path to Exile'],
+            cubeContents['Plateau'],
+            cubeContents['Scrubland'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Tropical Island'],
+            cubeContents['Volcanic Island']
+        ];
+
+        var subCube1WithDuplicates = [
+            cubeContents['Terror'],
+            cubeContents['Terror'],
+            cubeContents['Path to Exile'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Taiga'],
+            cubeContents['Taiga'],
+            cubeContents['Tropical Island'],
+            cubeContents['Tropical Island'],
+            cubeContents['Tundra'],
+            cubeContents['Plateau'],
+            cubeContents['Vampiric Tutor'],
+            cubeContents['Volcanic Island']
+        ];
+
+        var subCube2WithDuplicates = [
+            cubeContents['Brainstorm'],
+            cubeContents['Counterspell'],
+            cubeContents['Path to Exile'],
+            cubeContents['Plateau'],
+            cubeContents['Plateau'],
+            cubeContents['Scrubland'],
+            cubeContents['Scrubland'],
+            cubeContents['Swords to Plowshares'],
+            cubeContents['Tropical Island'],
+            cubeContents['Volcanic Island']
         ];
 
         it("should handle a couple sanity checks", function() {
@@ -133,28 +161,56 @@ describe('service', function() {
         it("should be able to split cards up logically", function() {
             expect(namify(split_svc.splitCards(subCube1, subCube2))).toEqual({
                 added: [
-                    'Scrubland',
-                    'Plateau',
                     'Brainstorm',
-                    'Counterspell'
+                    'Counterspell',
+                    'Plateau',
+                    'Scrubland'
                 ],
                 removed: [
-                    'Tundra',
-                    'Taiga',
                     'Go for the Throat',
+                    'Taiga',
+                    'Tundra',
                     'Vampiric Tutor'
                 ],
                 both: [
-                    'Volcanic Island',
-                    'Tropical Island',
+                    'Path to Exile',
                     'Swords to Plowshares',
-                    'Path to Exile'
+                    'Tropical Island',
+                    'Volcanic Island'
+                ]
+            }); //diff
+        });
+        it("should be able to handle duplicates", function() {
+            expect(namify(split_svc.splitCards(subCube1WithDuplicates, subCube2WithDuplicates))).toEqual({
+                added: [
+                    'Brainstorm',
+                    'Counterspell',
+                    'Plateau',
+                    'Scrubland',
+                    'Scrubland'
+                ],
+                removed: [
+                    'Taiga',
+                    'Taiga',
+                    'Terror',
+                    'Terror',
+                    'Tropical Island',
+                    'Tundra',
+                    'Vampiric Tutor'
+                ],
+                both: [
+                    'Path to Exile',
+                    'Plateau',
+                    'Swords to Plowshares',
+                    'Tropical Island',
+                    'Volcanic Island'
                 ]
             }); //diff
         });
 
-        it("should be able to diff a cube", function() {
-            expect(namify(diff_svc.getDiff(subCube1, subCube2, {
+
+        it("should be able to diff a cube with duplicates", function() {
+            expect(namify(diff_svc.getDiff(subCube1WithDuplicates, subCube2WithDuplicates, {
                 'Instant': {'appearance': 'table'},
                 'Land': {}}))).toEqual([
                     {
@@ -164,7 +220,7 @@ describe('service', function() {
                     appearance: 'table',
                     subcategories: [
                         {category:'both', cards:['Path to Exile', 'Swords to Plowshares']},
-                        {category:'removed' , cards: ['Go for the Throat', 'Vampiric Tutor']},
+                        {category:'removed' , cards: ['Terror', 'Terror', 'Vampiric Tutor']},
                         {category:'added' , cards: ['Brainstorm', 'Counterspell']}
                     ]
                 }, {
@@ -172,13 +228,58 @@ describe('service', function() {
                     // sorted within a category according to the sort function
                     // default in this case
                     subcategories: [
-                        {category:'both',  cards: ['Tropical Island', 'Volcanic Island']},
-                        {category:'removed', cards: ['Taiga', 'Tundra']},
-                        {category:'added', cards: ['Plateau', 'Scrubland']}
+                        {category:'both',  cards: ['Plateau', 'Tropical Island', 'Volcanic Island']},
+                        {category:'removed', cards: ['Taiga', 'Taiga', 'Tropical Island', 'Tundra']},
+                        {category:'added', cards: ['Plateau', 'Scrubland', 'Scrubland']}
                     ]
                 }
             ]);
-        })
+        });
+
+        it('should not have that weird terror bug', function() {
+            var before = [
+                cubeContents['Damnation'],
+                cubeContents['Imperial Seal'],
+                cubeContents['Dark Ritual'],
+                cubeContents['Doom Blade'],
+                cubeContents['Living Death']
+            ];
+
+            var after = [
+                cubeContents['Damnation'],
+                cubeContents['Duress'],
+                cubeContents['Dark Ritual'],
+                cubeContents['Terror'],
+                cubeContents['Living Death']
+            ];
+
+            var spec = {
+                'Black': {
+                    appearance:'table',
+                    'Instant': {},
+                    'Sorcery': {}
+                }
+            };
+
+            expect(namify(split_svc.splitCards(before, after))).toEqual({
+                    both: ['Damnation', 'Dark Ritual', 'Living Death'],
+                    added: ['Duress', 'Terror'],
+                    removed: ['Doom Blade', 'Imperial Seal']
+                });
+
+            expect(namify(diff_svc.getDiff(before, after, spec,
+                undefined, false))).toEqual([{
+                    appearance : 'table',
+                    category : 'Black',
+                    subcategories : [{
+                        category : 'Instant',
+                        cards : ['Dark Ritual', 'Doom Blade', 'Terror']
+                    }, {
+                        category : 'Sorcery',
+                        cards : ['Damnation', 'Living Death', 'Imperial Seal', 'Duress']
+                    }]
+                }]);
+        });
     });
 
     describe("sortSpecServiceTest", function() {

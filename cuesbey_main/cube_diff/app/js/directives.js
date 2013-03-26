@@ -24,10 +24,8 @@ angular.module('cube_diff.directives', []).
 
 
             link: function(scope, element, attrs, diffCtrl) {
-                console.log('element', element);
                 var template;
                 if (angular.isArray(scope.val['subcategories']))  {
-                    console.log('current stuff', scope.val);
                     if (scope.val.appearance != "table") {
                         template = '<div class="diff-container">' +
                             scope.val.category+
@@ -65,7 +63,6 @@ angular.module('cube_diff.directives', []).
 
                     }
                 } else if (angular.isArray(scope.val.cards) && scope.val.cards.length > 0) {
-                    console.log('it\'s a top level thing');
                     if (scope.val['appearance'] !== 'table') {
                         template = '<div class="diff-title">{{val.category}}'+
                             '<ul class="diff-list">'+
@@ -73,7 +70,6 @@ angular.module('cube_diff.directives', []).
                             '</ul>'+
                         '</div>';
                     } else {
-                        console.log("and it's a table", scope.val);
                         template = '<div>'+
                             '<table class="diff-table">'+
                                 '<tr><th>{{val.category}}</th></tr>'+
@@ -84,15 +80,9 @@ angular.module('cube_diff.directives', []).
                         "</div>";
                     }
                 }
-                console.log('got template:', template);
                 var newElement = angular.element(template);
-                console.log('new element:', newElement);
                 $compile(newElement)(scope);
-                console.log('new element2:', newElement);
                 element.replaceWith(newElement);
-
-                console.log('replaced:', element);
-
             },
 
             replace: true

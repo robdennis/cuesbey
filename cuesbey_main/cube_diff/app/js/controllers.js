@@ -1511,7 +1511,6 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
            }
         });
 
-        console.log('checked:', checkedHeuristics);
         $scope.diffedCube = CubeDiffService.getDiff(
             $scope.before,
             $scope.after,

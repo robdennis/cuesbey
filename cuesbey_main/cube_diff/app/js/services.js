@@ -377,41 +377,59 @@ angular.module('cube_diff.services', [])
     })
     .factory('CubeSplitService', function() {
         return {
-            splitCards : function(_old, _new) {
-                // jsondiff.com
-
+            splitCards : function(old, _new) {
                 var both = [];
                 var added = [];
                 var removed = [];
-                var nameIsPresentInCardArray = function(_array, name) {
-                    for (var i = 0; i < _array.length; i++ ) {
-                        if (_array[i].name === name) {
-                            return true;
-                        }
-                    }
-                    return false;
+
+                var sortFunction = function(a, b) {
+                    return a['name'] < b['name'] ? -1:1;
                 };
 
-                var namesHandled = [];
-                jQuery.each(_old.concat(_new), function(idx, card) {
-                    if (namesHandled.indexOf(card.name) !==-1) {
-                        // we already handled this name
-                        return;
-                    } else {
-                        namesHandled.push(card.name);
-                    }
+                old.sort(sortFunction);
+                _new.sort(sortFunction);
 
-                    var inOld = nameIsPresentInCardArray(_old, card.name);
-                    var inNew = nameIsPresentInCardArray(_new, card.name);
-                    if (inOld && inNew) {
-                        both.push(card);
-                    } else if (inOld) {
-                        removed.push(card);
-                    } else {
-                        added.push(card);
-                    }
-                });
+                var old_length = old.length;
+                var new_length = _new.length;
 
+                if (old_length == 0) {
+                    return {
+                        both: [],
+                        added: _new,
+                        removed: []
+                    }
+                } else if (new_length == 0) {
+                    return {
+                        both: [],
+                        added: [],
+                        removed: old
+                    }
+                }
+
+                var old_idx=0, new_idx=0;
+
+                while((new_idx < new_length) || (old_idx < old_length)) {
+                    // if we go past the end either side, we want to avoid
+                    // messing with undefined values
+                    var old_name = (old[old_idx] || {})['name'];
+                    var new_name = (_new[new_idx] || {})['name'];
+                    if (new_idx >= new_length || (old_name < new_name)) {
+                        removed.push(old[old_idx]);
+                        old_idx++;
+                    } else if (old_idx >= old_length || (old_name > new_name)) {
+                        added.push(_new[new_idx]);
+                        new_idx++;
+                    } else {
+                        both.push(old[old_idx]);
+                        old_idx++;
+                        new_idx++;
+                    }
+                }
+
+                if (old_length + new_length !=
+                    both.length * 2 + added.length + removed.length) {
+                    throw 'mismatch following card splitting'
+                }
                 return {
                     both: both,
                     added: added,

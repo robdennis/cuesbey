@@ -1,12 +1,10 @@
 # encoding: utf-8
 import json
-import itertools
 import re
-from collections import namedtuple
+from collections import namedtuple, Counter
 from itertools import chain
 
 from django.db import models
-from jsonfield import JSONField
 from unidecode import unidecode
 
 from django_orm.postgresql.fields.arrays import ArrayField
@@ -38,32 +36,55 @@ def get_cards_from_names(*names):
 
     to_fetch = []
     to_insert = []
-
-    names = [_clean_cardname(name) for name in names]
-
     mismatched_name_map = Card.get_mismatched_names_map()
+    # names are cleaned of things like unicode smart quotes, and if it's a
+    # misspelling we've seen before and handled, use that
+    cleaned_names = [
+        mismatched_name_map.get(name, _clean_cardname(name))
+        for name in names
+    ]
 
-    for name in names:
+    unique_names = Counter(cleaned_names)
+
+    # don't want to risk re-inserting and multiples get handled later
+    for name in unique_names:
         if name in Card.get_all_inserted_names():
             to_fetch.append(name)
-        elif name in mismatched_name_map:
-            # apparently we've seen this misspelling before
-            to_fetch.append(mismatched_name_map[name])
         else:
             log.debug("%r not yet inserted, will insert", name)
             to_insert.append(name)
 
     results_of_insert = insert_cards(*to_insert)
-    all_cards = (list(Card.objects.filter(name__in=to_fetch)) +
-                 results_of_insert['inserted'] +
-                 results_of_insert['refetched'])
+    unique_cards = set(chain(
+        Card.objects.filter(name__in=to_fetch),
+        results_of_insert['inserted'],
+        results_of_insert['refetched'],
+    ))
+
+    def _multiply_count_by_count(card):
+        card_name = card.name
+        keys_that_mismatched_to_this_name = [
+            k for k, v in results_of_insert['new_mismatches'].iteritems()
+            if v == card_name
+        ]
+
+        return [card] * sum(
+            # it's it not in the original map we're dealing the actual card
+            # name that we're seeing for the very first time
+            unique_names.get(name, 0)
+            for name in [card_name] + keys_that_mismatched_to_this_name
+        )
+
+    all_cards = list(chain(*[
+        _multiply_count_by_count(card) for card in unique_cards
+    ]))
 
     if len(all_cards) + len(results_of_insert['invalid']) != len(names):
         found_names = [c.name for c in all_cards]
         raise AssertionError(
             "something went missing: %r (%d) != %r (%d)" % (found_names,
                                                             len(found_names),
-                                                            names,
+                                                            cleaned_names,
                                                             len(names))
         )
 
@@ -79,16 +100,17 @@ def insert_cards(*names):
     :return: {
         'inserted': cards_that_were_inserted,
         'refetched': cards_that_were_refetched,
-        'invalid': names_that_were_invalid
+        'invalid': names_that_were_invalid,
+        'new_mismatches': dict of new mismatches
     }
     """
 
     # not sure what to do with this yet
     mismatched_name_map = Card.get_mismatched_names_map()
-    all_card_content = []
-    names_to_insert = []
     invalid_names = []
     refetched_names = []
+    new_mismatches = {}
+    content_map = {}
 
     for name in names:
         try:
@@ -103,33 +125,30 @@ def insert_cards(*names):
             assert (name not in mismatched_name_map or
                     mismatched_name_map[name] == fetched_name)
             mismatched_name_map[name] = fetched_name
+            new_mismatches[name] = fetched_name
             if fetched_name in Card.get_all_inserted_names():
                 refetched_names.append(fetched_name)
                 log.debug('refetched card with name: %r as card with name: %r',
                           name, fetched_name)
                 continue
 
-        log.debug('got card content: %s', card_content)
-        all_card_content.append(card_content)
-        names_to_insert.append(fetched_name)
+        if fetched_name not in content_map:
+            content_map[fetched_name] = card_content
 
     cards_to_be_inserted = [
-        Card(**card_content) for card_content in all_card_content
+        Card(**card_content) for card_content in content_map.values()
     ]
 
     Card.objects.bulk_create(cards_to_be_inserted)
-    Card.mark_names_as_inserted(names_to_insert)
+    Card.mark_names_as_inserted(content_map.keys())
 
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
-
-    assert len(refetched_cards) == len(refetched_names), (
-        "didn't refetch the correct number of cards"
-    )
 
     disposition = {
         'inserted': cards_to_be_inserted,
         'refetched': refetched_cards,
-        'invalid': invalid_names
+        'invalid': invalid_names,
+        'new_mismatches': new_mismatches
     }
 
     return disposition

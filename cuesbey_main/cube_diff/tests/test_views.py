@@ -1,11 +1,41 @@
+import copy
 import json
-from django.test import TestCase, Client
+from django.test import Client
 from test_cards import BaseCardInserter
 
 from cuesbey_main.cube_diff.models import get_cards_from_names
 
 
 class ViewTest(BaseCardInserter):
+
+    def post_to_card_contents(self, data, client=None):
+        """
+        utility method of posting data to card contents
+        :param data: the data that will be interpreted as json
+        :param client: if provided, a Django test client that should be used,
+            else, a new one will be created
+        :return: the results of the POST
+        """
+        client = client or Client()
+
+        return client.post('/card_contents/', json.dumps(data), "text/json",
+                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+    def make_diff_data(self, before, after=None):
+        """
+        utility method for constructing a dictionary in the form expected from
+        the cube_diff app
+
+        :param before: list of string card names
+        :param after: list of string card names, defaults to before
+        :return: dict in the expected form
+        """
+
+        return {
+            "card_names": {
+                "before": before,
+                "after": after or copy.deepcopy(before)}
+        }
 
     @property
     def mtgo_og_cube(self):
@@ -1459,21 +1489,40 @@ class ViewTest(BaseCardInserter):
         # this inserts if and only if it's needed
         get_cards_from_names('Lingering Souls')
         c = Client()
-        response = c.post('/heuristics/', None, "text/json",
-                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = c.get('/heuristics/', {}, "text/json",
+                         HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         content = response.content
         self.assertIn('token_spells_are_creatures', content)
         self.assertIn('off_color_flashback_is_gold', content)
 
-    def test_card_contents(self):
+    def test_contents_handling_reinserts(self):
 
         c = Client()
-        data = {"card_names":{"before": ["AEther Adept"], "after": ["AEther Adept"]}}
-        response = c.post('/card_contents/', json.dumps(data), "text/json",
-                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        data = self.make_diff_data(['AEther Adept'])
+        self.post_to_card_contents(data, c)
         # there shouldn't be problems reinserting
-        response = c.post('/card_contents/', json.dumps(data), "text/json",
-                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.post_to_card_contents(data, c)
+
+    def test_contents_handling_duplicates_on_new_insert(self):
+
+        self.post_to_card_contents(self.make_diff_data(['Gravecrawler'] * 3))
+
+    def test_contents_handling_duplicates_on_new_insert_with_mismatches(self):
+
+        self.post_to_card_contents(self.make_diff_data(['AEther Adept',
+                                                        'Aether Adept',
+                                                        'aether adept']))
+
+    def test_contents_handling_duplicates_on_fetch(self):
+        get_cards_from_names('Gravecrawler')
+        self.post_to_card_contents(self.make_diff_data(['Gravecrawler'] * 3))
+
+    def test_contents_handling_duplicates_on_fetch_with_mismatches(self):
+        get_cards_from_names('AEther Adept')
+        self.post_to_card_contents(self.make_diff_data(['AEther Adept',
+                                                        'AEther Adept',
+                                                        'Aether Adept',
+                                                        'aether adept']))
 
     def card_contents_everything(self):
         """

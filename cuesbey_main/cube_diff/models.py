@@ -250,7 +250,6 @@ class Card(models.Model):
     A single card, cubes can (should) have many cards
     """
     name = models.CharField(primary_key=True, max_length=200)
-    # TODO: actually determine what's easiest here: array or string
     mana_cost = models.CharField(max_length=200, null=True)
     converted_mana_cost = models.IntegerField()
     types = ArrayField(dbtype='text')

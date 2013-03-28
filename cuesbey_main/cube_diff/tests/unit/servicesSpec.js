@@ -68,7 +68,7 @@ describe('service', function() {
                     "Content-Type": "application/json;charset=utf-8"
                 }).respond(200, '');
 
-            content_svc.getCards(['Terror'], function() {
+            content_svc.getAllCards(['Terror'], function() {
                 wasCalled = true;
             });
 

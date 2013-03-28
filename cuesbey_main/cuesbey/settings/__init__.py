@@ -1,8 +1,12 @@
 # Django settings for cuesbey project.
 import os
+import djcelery
+djcelery.setup_loader()
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
 TUTOR_PATH = os.path.expanduser(
     os.path.join("~", "development", "tutor_local", "bin", "tutor")
@@ -130,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'djangular',
     'cube_diff',
+    'djcelery',
 )
 
 LOGGING = {

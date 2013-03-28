@@ -23,72 +23,135 @@ class CubeEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def get_cards_from_names(*names):
+def clean_and_rematch_names(*names):
     """
     :param names: the names of the card objects you want to insert
 
-    :return: the Card objects corresponding to those names
+    :return:
     """
 
     if not isinstance(names[0], basestring):
         # someone probably passed a list instead of unrolling args of strings
         names = names[0]
 
-    to_fetch = []
-    to_insert = []
     mismatched_name_map = Card.get_mismatched_names_map()
     # names are cleaned of things like unicode smart quotes, and if it's a
     # misspelling we've seen before and handled, use that
-    cleaned_names = [
+    return [
         mismatched_name_map.get(name, _clean_cardname(name))
         for name in names
     ]
 
+
+def multiply_cards_by_count(cards, card_counter, alias_mapping=None):
+    """
+    It's useful to return the same number of serialized card objects as there
+    were card names requested, this method takes in a card, and information
+    that helps answer how many instances of the card should be returned
+
+    :param cards: the cards to be multiplied
+    :param card_counter: the collections.Counter object mapping str requested
+        card name with the count in the original list
+    :param alias_mapping: optional dict mapping names from the original list
+        to card names that they correspond to (some of which might be the
+        provided cards)
+    :return: a list containing the appropriate number of card objects repeated
+    """
+    return list(chain(*[
+        multiply_card_by_count(card, card_counter, alias_mapping)
+        for card in cards
+    ]))
+
+
+def multiply_card_by_count(card, card_counter, alias_mapping=None):
+    """
+    It's useful to return the same number of serialized card objects as there
+    were card names requested, this method takes in a card, and information
+    that helps answer how many instances of the card should be returned
+
+    :param card: the card to be multiplied
+    :param card_counter: the collections.Counter object mapping str requested
+        card name with the count in the original list
+    :param alias_mapping: optional dict mapping names from the original list
+        to card names that they correspond to (some of which might be the
+        provided card)
+    :return: a list containing the appropriate number of card objects repeated
+    """
+
+    alias_mapping = alias_mapping or {}
+    card_name = card.name
+    aliases_to_this_name = [
+        k for k, v in alias_mapping.iteritems()
+        if v == card_name
+    ]
+
+    return [card] * sum(
+        # if it's not in the original map we're dealing the actual card
+        # name that we're seeing for the very first time
+        card_counter.get(name, 0)
+        for name in [card_name] + aliases_to_this_name
+    )
+
+
+def get_cards_from_names(*names):
+    """
+    Returns a list of Card objects
+
+    :param names: the names of card objects you want to retrieve and insert if
+        necessary
+    :return: [Card objects based on names provided]
+    """
+
+    results_of_retrieval = retrieve_cards_from_names(*names)
+    results_of_insertion = insert_cards(*results_of_retrieval['to_insert'])
+
+    return (
+        results_of_retrieval['cards'] +
+        results_of_insertion['inserted'] +
+        results_of_insertion['refetched']
+    )
+
+
+def retrieve_cards_from_names(*names):
+    """
+    :param names: the names of the card objects you want to retrieve
+
+    :return: {
+        'cards': [Card cards], # we were able to retrieve from the cache
+        'to_insert': [str names], # names of cards we need to insert,
+        # duplicate names will be inserted once but return the right # of cards
+    }
+    """
+
+    to_fetch = []
+    names_to_insert = []
+
+    cleaned_names = clean_and_rematch_names(*names)
     unique_names = Counter(cleaned_names)
 
     # don't want to risk re-inserting and multiples get handled later
-    for name in unique_names:
+    for name in cleaned_names:
         if name in Card.get_all_inserted_names():
             to_fetch.append(name)
         else:
-            log.debug("%r not yet inserted, will insert", name)
-            to_insert.append(name)
+            names_to_insert.append(name)
 
-    results_of_insert = insert_cards(*to_insert)
-    unique_cards = set(chain(
-        Card.objects.filter(name__in=to_fetch),
-        results_of_insert['inserted'],
-        results_of_insert['refetched'],
-    ))
+    fetched_cards = multiply_cards_by_count(
+        list(Card.objects.filter(name__in=to_fetch)),
+        unique_names
+    )
 
-    def _multiply_count_by_count(card):
-        card_name = card.name
-        keys_that_mismatched_to_this_name = [
-            k for k, v in results_of_insert['new_mismatches'].iteritems()
-            if v == card_name
-        ]
-
-        return [card] * sum(
-            # it's it not in the original map we're dealing the actual card
-            # name that we're seeing for the very first time
-            unique_names.get(name, 0)
-            for name in [card_name] + keys_that_mismatched_to_this_name
-        )
-
-    all_cards = list(chain(*[
-        _multiply_count_by_count(card) for card in unique_cards
-    ]))
-
-    if len(all_cards) + len(results_of_insert['invalid']) != len(names):
-        found_names = [c.name for c in all_cards]
+    if len(fetched_cards) + len(names_to_insert) != len(cleaned_names):
         raise AssertionError(
-            "something went missing: %r (%d) != %r (%d)" % (found_names,
-                                                            len(found_names),
-                                                            cleaned_names,
-                                                            len(names))
+            "something went missing on retrieve! given %d names, but have "
+            "only accounted for %d" % (len(names),
+                                       len(fetched_cards) + len(names_to_insert))
         )
 
-    return all_cards
+    return {
+        'cards': fetched_cards,
+        'to_insert': names_to_insert
+    }
 
 
 def insert_cards(*names):
@@ -100,8 +163,7 @@ def insert_cards(*names):
     :return: {
         'inserted': cards_that_were_inserted,
         'refetched': cards_that_were_refetched,
-        'invalid': names_that_were_invalid,
-        'new_mismatches': dict of new mismatches
+        'invalid': names_that_were_invalid
     }
     """
 
@@ -111,8 +173,9 @@ def insert_cards(*names):
     refetched_names = []
     new_mismatches = {}
     content_map = {}
+    unique_names = Counter(names)
 
-    for name in names:
+    for name in unique_names:
         try:
             card_content = get_json_card_content(name)
         except CardFetchingError:
@@ -135,21 +198,31 @@ def insert_cards(*names):
         if fetched_name not in content_map:
             content_map[fetched_name] = card_content
 
-    cards_to_be_inserted = [
+    cards_to_insert = [
         Card(**card_content) for card_content in content_map.values()
     ]
 
-    Card.objects.bulk_create(cards_to_be_inserted)
+    Card.objects.bulk_create(cards_to_insert)
     Card.mark_names_as_inserted(content_map.keys())
 
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
 
     disposition = {
-        'inserted': cards_to_be_inserted,
-        'refetched': refetched_cards,
+        'inserted': multiply_cards_by_count(cards_to_insert, unique_names,
+                                            new_mismatches),
+        'refetched': multiply_cards_by_count(refetched_cards, unique_names,
+                                             new_mismatches),
         'invalid': invalid_names,
-        'new_mismatches': new_mismatches
     }
+    accounted_for = (len(disposition['inserted']) +
+                     len(disposition['refetched']) +
+                     len(invalid_names))
+
+    if accounted_for != len(names):
+        raise AssertionError(
+            "something went missing! given %d names, but have only "
+            "accounted for %d" % (len(names), accounted_for)
+        )
 
     return disposition
 
@@ -325,7 +398,7 @@ class Card(models.Model):
 
     def as_dict(self):
 
-        return {k:getattr(self, k) for k in self._json_keys}
+        return {k: getattr(self, k) for k in self._json_keys}
 
     def __repr__(self):
         return '<Card: {!r}>'.format(self.name)
@@ -347,7 +420,6 @@ class Cube(models.Model):
         :param card_name: add a card with this name, to this cube
         """
         self.cards.add(Card.get(card_name))
-
 
     def add_cards_by_name(self, card_names):
         """
@@ -399,4 +471,3 @@ class User(models.Model):
     Someone who's using the site, and has cubes
     """
     name = models.CharField(max_length=200)
-

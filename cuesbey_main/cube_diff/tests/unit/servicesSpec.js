@@ -68,15 +68,13 @@ describe('service', function() {
                     "Content-Type": "application/json;charset=utf-8"
                 }).respond(200, '');
 
-            content_svc.getAllCards(['Terror'], function() {
+            content_svc.cacheAllCards(['Terror'], function() {
                 wasCalled = true;
             });
 
             $httpBackend.flush();
             expect(wasCalled).toBe(true);
         });
-
-
     });
 
 

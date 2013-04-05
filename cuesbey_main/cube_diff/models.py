@@ -20,6 +20,8 @@ class CubeEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, set):
             return list(obj)
+        if isinstance(obj, Card):
+            return obj.as_dict()
         return json.JSONEncoder.default(self, obj)
 
 
@@ -161,7 +163,7 @@ def insert_cards(*names):
     :return: if names were provided: {
         'inserted': cards_to_insert,
         'refetched': refetched_cards,
-        'relevant_mismatches': relevant_mismatches,
+        'mismatches': relevant_mismatches,
         'invalid': invalid_names,
     }
 
@@ -218,7 +220,7 @@ def insert_cards(*names):
     disposition = {
         'inserted': cards_to_insert,
         'refetched': refetched_cards,
-        'relevant_mismatches': relevant_mismatches,
+        'mismatches': relevant_mismatches,
         'invalid': invalid_names,
     }
     accounted_for = (len(disposition['inserted']) +
@@ -288,11 +290,20 @@ class Card(models.Model):
         :return: a set of all cards in database, this needs to be added
             to after server startup to stay current
         """
+
         if not getattr(cls, '_all_names', set()):
-            cls._all_names = set([c.name for c in cls.objects.all()])
+            cls.update_all_inserted_names()
+
 
         return cls._all_names
 
+    @classmethod
+    def update_all_inserted_names(cls):
+        #Celery tasks mean this didn't get updated like before
+        #need a better way to do this this
+        cls._all_names = set([c.name for c in cls.objects.all()])
+
+    # FIXME: these don't work correctly now that celery is being used
     @classmethod
     def get_mismatched_names_map(cls):
         """

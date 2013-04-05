@@ -40,9 +40,15 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         return checkedHeuristics;
     };
 
-    $scope.setDataAndPerform = function (data, status) {
-        $scope.before = data['before']['cards'];
-        $scope.after = data['after']['cards'];
+    $scope.setDataAndPerform = function (insertJob) {
+        $scope.before = CardContentService.getCachedCards($scope.beforeCardNames.split('\n'));
+        $scope.after = CardContentService.getCachedCards($scope.afterCardNames.split('\n'));
+        if (insertJob) {
+            CardContentService.consumeInserts(
+                insertJob,
+                $scope.setDataAndPerform
+            );
+        }
         $scope.performDiff();
     };
 
@@ -75,10 +81,10 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         });
 
         if (hasChangedSinceDiff(names)) {
-            CardContentService.getAllCards({
-                before: $scope.beforeCardNames.split('\n'),
-                after: $scope.afterCardNames.split('\n')
-            },
+            CardContentService.cacheAllCards(
+                $scope.beforeCardNames.split('\n').concat(
+                    $scope.afterCardNames.split('\n')
+                ),
             $scope.setDataAndPerform);
         } else {
             $scope.performDiff()

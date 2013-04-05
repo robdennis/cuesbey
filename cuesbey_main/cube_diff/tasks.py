@@ -10,7 +10,10 @@ def async_get_cards(names_to_insert):
     """
 
     results = insert_cards(*names_to_insert)
-    results['cards'] = results['inserted'] + results['refetched']
+    results['cards'] = {
+        c.name: c for c in results.get('inserted', []) +
+                           results.get('refetched', [])
+    }
 
     return results
 

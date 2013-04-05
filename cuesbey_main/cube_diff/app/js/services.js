@@ -41,28 +41,36 @@ angular.module('cube_diff.services', [])
                 };
                 return {
                     'White': {
-                    'Creature': cmcSlots,
+                        'Creature': cmcSlots,
                         '!Creature': cmcSlots
-                },
+                    },
                     'Blue': {
-                    'Creature': cmcSlots,
+                        'Creature': cmcSlots,
                         '!Creature': cmcSlots
-                },
+                    },
                     'Black': {
-                    'Creature': cmcSlots,
+                        'Creature': cmcSlots,
                         '!Creature': cmcSlots
-                },
+                    },
                     'Red': {
-                    'Creature': cmcSlots,
+                        'Creature': cmcSlots,
                         '!Creature': cmcSlots
-                },
+                    },
                     'Green': {
-                    'Creature': cmcSlots,
+                        'Creature': cmcSlots,
                         '!Creature': cmcSlots
-                },
-                    'Colorless/!Land': {appearance:'table'},
-                    'Colorless/Land': {appearance:'table'},
-                    'Multicolor': {appearance:'table'}
+                    },
+                    'Colorless/!Land': {
+                        'Creature': cmcSlots,
+                        '!Creature': cmcSlots
+                    },
+
+                    'Colorless/Land': {
+                        appearance:'table'
+                    },
+                    'Multicolor': {
+                        appearance:'table'
+                    }
                 };
             },
             beforeNames: function() {
@@ -1515,19 +1523,89 @@ angular.module('cube_diff.services', [])
             }
         }
     })
-    .factory('CardContentService', function($http) {
-        return {
-            getAllCards : function(cardNames, onSuccess) {
-                $http.post('/card_contents/', {
-                    card_names: cardNames
-                }).success(function (data, status) {
-                        onSuccess(data, status);
-                    });
-            },
-            pollCardProgress : function(id, onSuccess) {
-                $http.get('/poll_state/', id).success(function (data, status) {
+    .factory('CardContentService', function($http, $cacheFactory, $timeout) {
+        var cache = $cacheFactory('cardContents');
+        var missingNames = function(cardNames) {
+            var missingNames = [];
+            jQuery.each(cardNames || [], function(idx, name) {
+                if (!cache.get(name)) {
+                    missingNames.push(name)
+                }
+            });
+            return missingNames;
+        };
+
+        var getCachedCards = function(cardNames) {
+            var cachedCards = [];
+            var card;
+            jQuery.each(cardNames || [], function(idx, name) {
+                card = cache.get(name);
+                if (card) {
+                    cachedCards.push(card)
+                }
+            });
+            return cachedCards;
+        };
+
+        var pollCardProgress = function(id, onSuccess) {
+            $http({
+                url: '/poll_state/',
+                method: 'GET',
+                params: {job: id}
+            }).success(function (data, status) {
                     onSuccess(data, status);
-                })
+            });
+        };
+
+        var cacheIncomingData = function(data) {
+            jQuery.each(data['cards'] || {}, function(name, card) {
+                cache.put(name, card)
+            });
+            jQuery.each(data['mismatches'] || {}, function(name, correctName) {
+                if (cache.get(correctName)) {
+                    // TODO: future optimization, store other name instead of content?
+                    cache.put(name, cache.get(correctName))
+                }
+            });
+        };
+
+        return {
+            missingNames: missingNames,
+            getCachedCards: getCachedCards,
+            cacheAllCards: function(cardNames, onSuccess) {
+                var toSearch = missingNames(cardNames);
+                if (toSearch.length == 0) {
+                    onSuccess(null);
+                    return;
+                }
+                $http.post('/card_contents/', {
+                    card_names: toSearch
+                }).success(function (data) {
+                    cacheIncomingData(data);
+                    onSuccess(
+                        data['insert_job']
+                    );
+                });
+            },
+            pollCardProgress : pollCardProgress,
+            consumeInserts : function(jobId, onFinish, onHeartbeat) {
+                var tick = function() {
+                    console.log('about to poll with', jobId);
+                    pollCardProgress(jobId, function(data, status) {
+                        console.log('got data', data);
+                        console.log('got status', status);
+                        // TODO: handle incrementally updated cards
+                        if (data=='"PENDING"') {
+                            $timeout(tick, 500);
+                        } else {
+                            cacheIncomingData(data);
+                            onFinish();
+                        }
+
+                    })
+                };
+
+                tick();
             }
         };
     })

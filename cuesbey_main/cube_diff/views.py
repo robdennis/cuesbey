@@ -30,6 +30,9 @@ def card_contents(request):
     except ValueError:
         raise ValueError("problem with %r" % request.body)
 
+    #Celery tasks mean this didn't get updated like before
+    #need a better way to do this this
+    Card.update_all_inserted_names()
     fetched_cards, names_to_insert = retrieve_cards_from_names(all_card_names)
 
     insert_job = async_get_cards.delay(names_to_insert)

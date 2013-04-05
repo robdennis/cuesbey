@@ -10,5 +10,5 @@ urlpatterns = patterns('',
                        url(r'^djangular/', include('djangular.urls')),
                        url(r'^card_contents/?$', card_contents),
                        url(r'^heuristics/?$', available_heuristics),
-                       url(r'^poll_state$', poll_state, name="poll_state"),
+                       url(r'^poll_state/$', poll_state, name="poll_state"),
 )

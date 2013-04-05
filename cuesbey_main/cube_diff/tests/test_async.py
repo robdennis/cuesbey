@@ -35,7 +35,7 @@ class AsyncTest(BaseCardInserter):
                               expected_insert)
         self.assertItemsEqual([c.name for c in actual['refetched']],
                               expected_refetched)
-        self.assertEqual(actual['relevant_mismatches'],
+        self.assertEqual(actual['mismatches'],
                          expected_mismatches)
 
     def test_handle_reinsert(self):

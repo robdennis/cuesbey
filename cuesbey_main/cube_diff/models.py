@@ -102,13 +102,13 @@ def get_cards_from_names(*names):
     :return: [Card objects based on names provided]
     """
 
-    results_of_retrieval = retrieve_cards_from_names(*names)
-    results_of_insertion = insert_cards(*results_of_retrieval['to_insert'])
+    fetched, names_to_insert = retrieve_cards_from_names(*names)
+    results_of_insertion = insert_cards(*names_to_insert)
 
     return (
-        results_of_retrieval['cards'] +
-        results_of_insertion['inserted'] +
-        results_of_insertion['refetched']
+        fetched +
+        results_of_insertion.get('inserted', []) +
+        results_of_insertion.get('refetched', [])
     )
 
 
@@ -116,11 +116,8 @@ def retrieve_cards_from_names(*names):
     """
     :param names: the names of the card objects you want to retrieve
 
-    :return: {
-        'cards': [Card cards], # we were able to retrieve from the cache
-        'to_insert': [str names], # names of cards we need to insert,
-        # duplicate names will be inserted once but return the right # of cards
-    }
+    :return: [Card cards], [str names] (a 2-tuple of the Cards retrieve and
+        the names of cards that need to be inserted
     """
 
     to_fetch = []
@@ -129,11 +126,11 @@ def retrieve_cards_from_names(*names):
     cleaned_names = clean_and_rematch_names(*names)
     unique_names = Counter(cleaned_names)
 
-    # don't want to risk re-inserting and multiples get handled later
     for name in cleaned_names:
         if name in Card.get_all_inserted_names():
             to_fetch.append(name)
         else:
+            # it's intentional we're listing duplicate names to to insert
             names_to_insert.append(name)
 
     fetched_cards = multiply_cards_by_count(
@@ -144,14 +141,15 @@ def retrieve_cards_from_names(*names):
     if len(fetched_cards) + len(names_to_insert) != len(cleaned_names):
         raise AssertionError(
             "something went missing on retrieve! given %d names, but have "
-            "only accounted for %d" % (len(names),
-                                       len(fetched_cards) + len(names_to_insert))
+            "only accounted for %d" % (
+                len(names),
+                len(fetched_cards) + len(names_to_insert)
+            )
         )
 
-    return {
-        'cards': fetched_cards,
-        'to_insert': names_to_insert
-    }
+    log.debug('%r, %r', fetched_cards, names_to_insert)
+
+    return fetched_cards, names_to_insert
 
 
 def insert_cards(*names):
@@ -160,20 +158,30 @@ def insert_cards(*names):
     the database. This doesn't check for existing cards that have that name,
     and the act of inserting them
     :param names:
-    :return: {
-        'inserted': cards_that_were_inserted,
-        'refetched': cards_that_were_refetched,
-        'invalid': names_that_were_invalid
+    :return: if names were provided: {
+        'inserted': cards_to_insert,
+        'refetched': refetched_cards,
+        'relevant_mismatches': relevant_mismatches,
+        'invalid': invalid_names,
     }
+
+    else, empty dict
     """
+    if not names:
+        return {}
+
+    if not isinstance(names[0], basestring):
+        # someone probably passed a list instead of unrolling args of strings
+        names = names[0]
 
     # not sure what to do with this yet
     mismatched_name_map = Card.get_mismatched_names_map()
     invalid_names = []
     refetched_names = []
-    new_mismatches = {}
+    relevant_mismatches = {}
     content_map = {}
     unique_names = Counter(names)
+    duplicate_insert_count = 0
 
     for name in unique_names:
         try:
@@ -188,15 +196,15 @@ def insert_cards(*names):
             assert (name not in mismatched_name_map or
                     mismatched_name_map[name] == fetched_name)
             mismatched_name_map[name] = fetched_name
-            new_mismatches[name] = fetched_name
+            relevant_mismatches[name] = fetched_name
             if fetched_name in Card.get_all_inserted_names():
                 refetched_names.append(fetched_name)
-                log.debug('refetched card with name: %r as card with name: %r',
-                          name, fetched_name)
                 continue
 
         if fetched_name not in content_map:
             content_map[fetched_name] = card_content
+        else:
+            duplicate_insert_count += 1
 
     cards_to_insert = [
         Card(**card_content) for card_content in content_map.values()
@@ -208,17 +216,19 @@ def insert_cards(*names):
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
 
     disposition = {
-        'inserted': multiply_cards_by_count(cards_to_insert, unique_names,
-                                            new_mismatches),
-        'refetched': multiply_cards_by_count(refetched_cards, unique_names,
-                                             new_mismatches),
+        'inserted': cards_to_insert,
+        'refetched': refetched_cards,
+        'relevant_mismatches': relevant_mismatches,
         'invalid': invalid_names,
     }
     accounted_for = (len(disposition['inserted']) +
-                     len(disposition['refetched']) +
-                     len(invalid_names))
+                     len(refetched_names) +
+                     # sum(unique_names[name] for name in relevant_mismatches) +
+                     len(invalid_names) +
+                     duplicate_insert_count
+    )
 
-    if accounted_for != len(names):
+    if accounted_for != len(unique_names):
         raise AssertionError(
             "something went missing! given %d names, but have only "
             "accounted for %d" % (len(names), accounted_for)
@@ -443,6 +453,17 @@ class Cube(models.Model):
 
         return [card.as_dict() for card in self.cards.all()]
 
+    def as_json(self, **kwargs):
+        """
+        return a serialized-json representation of this cube
+        calls serialize
+
+        :param kwargs: additional kwargs to pass to Cube.serialize()
+        :return: string json-representation
+        """
+
+        return Cube.serialize(self.as_list(), **kwargs)
+
     @classmethod
     def serialize(cls, cube_cards, fp=None, **kwargs):
         """
@@ -458,11 +479,6 @@ class Cube(models.Model):
             return json.dumps(cube_cards, cls=CubeEncoder, **kwargs)
         else:
             return json.dump(cube_cards, fp, cls=CubeEncoder, **kwargs)
-
-    @classmethod
-    def dumps(cls, cube_dict, **kwargs):
-
-        return
 
 
 class User(models.Model):

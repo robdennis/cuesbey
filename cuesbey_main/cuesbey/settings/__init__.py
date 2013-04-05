@@ -7,9 +7,10 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+CELERY_RESULT_BACKEND = 'amqp'
 
 TUTOR_PATH = os.path.expanduser(
-    os.path.join("~", "development", "tutor_local", "bin", "tutor")
+    os.path.join("~", "development", "tutor", "bin", "tutor")
 )
 
 ADMINS = (

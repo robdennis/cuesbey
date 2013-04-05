@@ -1,9 +1,11 @@
-import copy
 import json
+import time
+import unittest
 from django.test import Client
 from test_cards import BaseCardInserter
 
 from cuesbey_main.cube_diff.models import get_cards_from_names
+from cuesbey_main.cuesbey import settings
 
 
 class ViewTest(BaseCardInserter):
@@ -11,7 +13,8 @@ class ViewTest(BaseCardInserter):
     def post_to_card_contents(self, data, client=None):
         """
         utility method of posting data to card contents
-        :param data: the data that will be interpreted as json
+        :param data: the data that will be interpreted as an object that will
+            be json dumped
         :param client: if provided, a Django test client that should be used,
             else, a new one will be created
         :return: the results of the POST
@@ -21,21 +24,20 @@ class ViewTest(BaseCardInserter):
         return client.post('/card_contents/', json.dumps(data), "text/json",
                            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-    def make_diff_data(self, before, after=None):
-        """
-        utility method for constructing a dictionary in the form expected from
-        the cube_diff app
-
-        :param before: list of string card names
-        :param after: list of string card names, defaults to before
-        :return: dict in the expected form
+    def poll_job(self, job_id, client=None):
         """
 
-        return {
-            "card_names": {
-                "before": before,
-                "after": after or copy.deepcopy(before)}
-        }
+        :param job_id: str job id suitable for checking job status
+        :param client: if provided, a Django test client that should be used,
+            else, a new one will be created
+        :return: de-serialized response data
+        """
+        client = client or Client()
+
+        return self.get_json_from_response(
+            client.get('/poll_state', dict(job=job_id), "text/json",
+                       HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        )
 
     @property
     def mtgo_og_cube(self):
@@ -1485,44 +1487,103 @@ class ViewTest(BaseCardInserter):
             'Zombie Cutthroat'
         ]
 
+    def get_json_from_response(self, response):
+        """
+        Given the string content of a view returning serialized
+        JSON, deserialize and return the object
+        :return: deserialized object from JSON content
+        """
+        # FIXME: I have a hard time believing this is what's necessary.
+        # but googling has been fruitless
+        json_content = response.content
+        return json.loads(json_content.split(')]}\',\n')[-1])
+
     def test_card_heuristics(self):
         # this inserts if and only if it's needed
         get_cards_from_names('Lingering Souls')
         c = Client()
         response = c.get('/heuristics/', {}, "text/json",
                          HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        content = response.content
+        content = [h['key'] for h in self.get_json_from_response(response)]
+
         self.assertIn('token_spells_are_creatures', content)
         self.assertIn('off_color_flashback_is_gold', content)
 
+    def assert_card_contents(self, data, fetched=(), inserted=(), invalid=()):
+        """
+        :param data: the json data sent to card_contents
+        :raise AssertionError: if the actual results don't match
+        """
+
+        response = self.get_json_from_response(
+            self.post_to_card_contents(dict(card_names=data))
+        )
+
+        insert_job = response['insert_job']
+        self.assertSequenceEqual([c['name'] for c in response['cards']],
+                                 fetched)
+
+        polled = {}
+        times = 0
+        while isinstance(polled, basestring) or 'cards' not in polled:
+            polled = self.poll_job(insert_job)
+            times += 1
+            time.sleep(.1)
+
+        self.assertSequenceEqual([c['name'] for c in polled['cards']],
+                                 inserted)
+        self.assertSequenceEqual(polled['invalid'], invalid)
+
+    @unittest.skip("celery needs to use the test DB")
     def test_contents_handling_reinserts(self):
 
-        c = Client()
-        data = self.make_diff_data(['AEther Adept'])
-        self.post_to_card_contents(data, c)
+        data = ['AEther Adept']
+        self.assert_card_contents(data, inserted=[u'\xc6ther Adept'])
         # there shouldn't be problems reinserting
-        self.post_to_card_contents(data, c)
+        self.assert_card_contents(data, fetched=[u'\xc6ther Adept'])
 
+    @unittest.skip("celery needs to use the test DB")
     def test_contents_handling_duplicates_on_new_insert(self):
 
-        self.post_to_card_contents(self.make_diff_data(['Gravecrawler'] * 3))
+        self.assert_card_contents(['Gravecrawler'] * 3, inserted=[
+            'Gravecrawler', 'Gravecrawler', 'Gravecrawler'
+        ])
 
+    @unittest.skip("celery needs to use the test DB")
     def test_contents_handling_duplicates_on_new_insert_with_mismatches(self):
 
-        self.post_to_card_contents(self.make_diff_data(['AEther Adept',
-                                                        'Aether Adept',
-                                                        'aether adept']))
+        self.assert_card_contents(
+            ['AEther Adept', 'Aether Adept', 'aether adept'],
+            inserted=[
+                u'\xc6ther Adept', u'\xc6ther Adept', u'\xc6ther Adept'
+            ])
 
+    @unittest.skip("celery needs to use the test DB")
     def test_contents_handling_duplicates_on_fetch(self):
         get_cards_from_names('Gravecrawler')
-        self.post_to_card_contents(self.make_diff_data(['Gravecrawler'] * 3))
 
+        self.assert_card_contents(['Gravecrawler'] * 3, fetched=[
+            'Gravecrawler', 'Gravecrawler', 'Gravecrawler'
+        ])
+
+    @unittest.skip("celery needs to use the test DB")
     def test_contents_handling_duplicates_on_fetch_with_mismatches(self):
         get_cards_from_names('AEther Adept')
-        self.post_to_card_contents(self.make_diff_data(['AEther Adept',
-                                                        'AEther Adept',
-                                                        'Aether Adept',
-                                                        'aether adept']))
+        self.assert_card_contents(
+            ['AEther Adept', 'Aether Adept', 'aether adept'],
+            # as of now there's on one being fetched, since we haven't
+            # answer any external questions about mismatches
+            fetched=[u'\xc6ther Adept'])
+        get_cards_from_names('Aether Adept', 'aether adept')
+        self.assert_card_contents(
+            ['AEther Adept', 'Aether Adept', 'aether adept'],
+            # as of now there's on one being fetched, since we haven't
+            # answer any external questions about mismatches
+            fetched=[
+                u'\xc6ther Adept',
+                u'\xc6ther Adept',
+                u'\xc6ther Adept'
+            ])
 
     def card_contents_everything(self):
         """
@@ -1536,9 +1597,9 @@ class ViewTest(BaseCardInserter):
             'after': self.mtgo_avr_cube,
             'before': self.mtgo_og_cube}
         }
-        response = c.post('/card_contents/', json.dumps(data), "text/json",
+        c.post('/card_contents/', json.dumps(data), "text/json",
                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         # there shouldn't be problems reinserting
-        response = c.post('/card_contents/', json.dumps(data), "text/json",
+        c.post('/card_contents/', json.dumps(data), "text/json",
                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 

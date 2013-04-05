@@ -2,19 +2,26 @@ import collections
 import json
 import os
 
-from time import sleep
-
 from django.http import HttpResponse, Http404
 
-from celery import task, current_task
 from celery.result import AsyncResult
 
-from cuesbey_main.cube_diff.models import Cube, Card, get_cards_from_names
+from cuesbey_main.cube_diff.models import Cube, Card, retrieve_cards_from_names
+from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
 
-
 def card_contents(request):
+    """
+    The expect contents of this request is = {
+        'card_names': ['card_name', 'card_name'*] # duplicates allowed
+    }
+
+    response = {
+        'cards': [{serialized card}, {serialized card}*], # duplicates allowed
+        'insert_job': 'job_id' # to get the results of async insert
+    }
+    """
     if not request.is_ajax():
         raise Http404
 
@@ -23,38 +30,19 @@ def card_contents(request):
     except ValueError:
         raise ValueError("problem with %r" % request.body)
 
+    fetched_cards, names_to_insert = retrieve_cards_from_names(all_card_names)
 
-
-    def append_cards(card_names):
-        invalid_names = []
-        cards = [c.as_dict() for c in get_cards_from_names(card_names)]
-        return dict(cards=cards, invalid_names=invalid_names)
-
-    if isinstance(all_card_names, collections.Mapping):
-        response = Cube.serialize({
-            category: append_cards(names)
-            for category, names in all_card_names.iteritems()
-        })
-    else:
-        response = Cube.serialize(append_cards(all_card_names))
-
-    job = async_get_cards.delay(all_card_names)
+    insert_job = async_get_cards.delay(names_to_insert)
+    response = {
+        'cards': {c.name: c.as_dict() for c in fetched_cards},
+        'mismatches': Card.get_mismatched_names_map(),
+        'insert_job': insert_job.id
+    }
 
     return HttpResponse(
-        response,
+        Cube.serialize(response),
         mimetype="application/json"
     )
-
-# noinspection PyCallingNonCallable
-@task()
-def async_get_cards(all_card_names):
-    """
-    perform the asynchronous task of getting cards given names
-    """
-    for i in range(100):
-        sleep(0.1)
-        current_task.update_state(state='PROGRESS',
-                                  meta={'current': i, 'total': 100})
 
 
 def poll_state(request):
@@ -69,7 +57,7 @@ def poll_state(request):
 
     job = AsyncResult(job_id)
     data = job.result or job.state
-    return HttpResponse(json.dumps(data), mimetype='application/json')
+    return HttpResponse(Cube.serialize(data), mimetype='application/json')
 
 def available_heuristics(request):
 

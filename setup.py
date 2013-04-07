@@ -12,6 +12,8 @@ install_requires = [
     'logging_unterpolation',
     'django-bitfield',
     'django-celery',
+    'django-celery-with-redis',
+    'redis',
 ]
 
 # in case additional setup needs to be done on different versions of python

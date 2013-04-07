@@ -1,9 +1,11 @@
 # encoding: utf-8
 import unittest
 
+import redis
 from django.test import TestCase
-from cuesbey_main.cube_diff.models import Card, get_cards_from_names
 
+import cuesbey_main.cuesbey.settings as settings
+from cuesbey_main.cube_diff.models import Card, get_cards_from_names
 from cuesbey_main.cube_diff import (parse_mana_cost, merge_mana_costs)
 
 
@@ -13,9 +15,11 @@ class BaseCardInserter(TestCase):
     """
 
     def tearDown(self):
+        """
+        needs to reset the caches of what's inserted and what's mismatched
+        """
 
         Card.reset_names_inserted()
-        Card.reset_heuristics_available()
 
 
 class SimpleTest(BaseCardInserter):
@@ -183,11 +187,6 @@ class CardHeuristicTest(BaseCardInserter):
                 mana_cost='{3}',
                 converted_mana_cost=3,
                 colors=set()
-            ),
-            phyrexian_always_pays_life_except_for_abilities=dict(
-                mana_cost='{3}',
-                converted_mana_cost=3,
-                colors=set()
             )
         ))
 
@@ -196,22 +195,8 @@ class CardHeuristicTest(BaseCardInserter):
                 mana_cost='{2}',
                 converted_mana_cost=2,
                 colors=set()
-            ),
-            phyrexian_always_pays_life_except_for_abilities=dict(
-                mana_cost='{2}',
-                converted_mana_cost=2,
-                colors=set()
             )
         ))
-
-        # cards that only have phyrexian mana for activated don't count
-        # here
-        self.assertHeuristicsArePresent('Spellskite', {},
-            keys_that_are_not_present=[
-                'phyrexian_always_pays_life',
-                'phyrexian_always_pays_life_except_for_abilities',
-            ]
-        )
 
         self.assertHeuristicsArePresent('Birthing Pod', dict(
             phyrexian_always_pays_life=dict(
@@ -398,8 +383,10 @@ class CardHeuristicTest(BaseCardInserter):
         ))
 
         # regular cycling cards don't count
-        self.assertHeuristicsArePresent('Miscalculation', {},
-            'use_cycling_as_mana_cost_when_there_are_effects')
+        self.assertHeuristicsArePresent(
+            'Miscalculation', {},
+            'use_cycling_as_mana_cost_when_there_are_effects'
+        )
 
     def test_activated_abilities_affect_color(self):
 
@@ -427,14 +414,17 @@ class CardHeuristicTest(BaseCardInserter):
             )
         ))
 
-        self.assertHeuristicsArePresent('Spellskite', dict(
-            activated_ability_costs_affect_color_do_not_pay_phyrexian=dict(
-                colors=set()
-            ),
-            activated_ability_costs_affect_color=dict(
+        expected = dict(
+            phyrexian_always_pays_life_except_for_abilities=dict(
                 colors={'Blue'}
             )
-        ))
+        )
+        self.assertHeuristicsArePresent(
+            'Spellskite', expected, [
+                'activated_ability_costs_affect_color',
+                'phyrexian_always_pays_life'
+            ]
+        )
 
     def test_mono_color_hybrids_have_modified_cmc(self):
         self.assertHeuristicsArePresent('Spectral Procession', dict(

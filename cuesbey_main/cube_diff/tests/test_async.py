@@ -1,4 +1,6 @@
-from cuesbey_main.cuesbey import settings
+import redis
+
+import cuesbey_main.cuesbey.settings as settings
 from cuesbey_main.cube_diff.tasks import async_get_cards
 from django.db import IntegrityError
 from django.test.utils import override_settings
@@ -25,8 +27,8 @@ class AsyncTest(BaseCardInserter):
 
         if expected_mismatches is None:
             expected_mismatches = {}
-
-        actual = async_get_cards.delay(names).result
+        actual = async_get_cards.delay(names,
+                                       settings.REDIS_INFORMATION).result
 
         self.assertEqual(len(actual), 5, repr(actual.keys()))
 
@@ -40,11 +42,11 @@ class AsyncTest(BaseCardInserter):
 
     def test_handle_reinsert(self):
 
-        self.assert_expected_get(['Gravecrawler'], expected_insert=['Gravecrawler'])
-        # we're just going to insert it despite it being there
-        with self.assertRaises(IntegrityError):
-            self.assert_expected_get(['Gravecrawler'],
-                                     expected_refetched=['Gravecrawler'])
+        self.assert_expected_get(['Gravecrawler'],
+                                 expected_insert=['Gravecrawler'])
+        # we're just going to insert it despite it being there, and no error
+        self.assert_expected_get(['Gravecrawler'],
+                                 expected_insert=['Gravecrawler'])
 
     def test_insert_duplicates(self):
         to_insert = ['Gravecrawler']*3

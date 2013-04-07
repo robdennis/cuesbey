@@ -4,11 +4,13 @@ import re
 from collections import namedtuple, Counter
 from itertools import chain
 
-from django.db import models
-from unidecode import unidecode
-
+import redis
+from django.db import models, IntegrityError
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
+from unidecode import unidecode
+
+import cuesbey_main.cuesbey.settings as settings
 
 from cuesbey_main.cube_diff import (get_json_card_content, heuristics,
                                     parse_mana_cost, estimate_colors,
@@ -23,26 +25,6 @@ class CubeEncoder(json.JSONEncoder):
         if isinstance(obj, Card):
             return obj.as_dict()
         return json.JSONEncoder.default(self, obj)
-
-
-def clean_and_rematch_names(*names):
-    """
-    :param names: the names of the card objects you want to insert
-
-    :return:
-    """
-
-    if not isinstance(names[0], basestring):
-        # someone probably passed a list instead of unrolling args of strings
-        names = names[0]
-
-    mismatched_name_map = Card.get_mismatched_names_map()
-    # names are cleaned of things like unicode smart quotes, and if it's a
-    # misspelling we've seen before and handled, use that
-    return [
-        mismatched_name_map.get(name, _clean_cardname(name))
-        for name in names
-    ]
 
 
 def multiply_cards_by_count(cards, card_counter, alias_mapping=None):
@@ -104,8 +86,13 @@ def get_cards_from_names(*names):
     :return: [Card objects based on names provided]
     """
 
-    fetched, names_to_insert = retrieve_cards_from_names(*names)
-    results_of_insertion = insert_cards(*names_to_insert)
+    if not isinstance(names[0], basestring):
+        # someone probably passed a list instead of unrolling args of strings
+        names = names[0]
+
+    redis_conn = redis.StrictRedis(**settings.REDIS_INFORMATION)
+    fetched, names_to_insert = retrieve_cards_from_names(names)
+    results_of_insertion = insert_cards(names_to_insert, redis_conn)
 
     return (
         fetched +
@@ -114,7 +101,7 @@ def get_cards_from_names(*names):
     )
 
 
-def retrieve_cards_from_names(*names):
+def retrieve_cards_from_names(names):
     """
     :param names: the names of the card objects you want to retrieve
 
@@ -125,41 +112,47 @@ def retrieve_cards_from_names(*names):
     to_fetch = []
     names_to_insert = []
 
-    cleaned_names = clean_and_rematch_names(*names)
-    unique_names = Counter(cleaned_names)
+    # names are cleaned of things like unicode smart quotes, and if it's a
+    # misspelling we've seen before and handled, use that
+    cleaned_names = []
 
-    for name in cleaned_names:
-        if name in Card.get_all_inserted_names():
-            to_fetch.append(name)
+    mismatched_name_map = Card.get_mismatched_names_map()
+    all_inserted_names = Card.get_all_inserted_names()
+    for name in (_clean_cardname(name) for name in set(names)):
+        if name not in mismatched_name_map:
+            cleaned_name = name
         else:
-            # it's intentional we're listing duplicate names to to insert
-            names_to_insert.append(name)
+            # we actually do want to utf8-decoded representation of this name
+            cleaned_name = mismatched_name_map[name]
 
-    fetched_cards = multiply_cards_by_count(
-        list(Card.objects.filter(name__in=to_fetch)),
-        unique_names
-    )
+        # if _inserted could be guaranteed to be a set, use sismember
+        # and if it was a string we could use get
+        if cleaned_name in all_inserted_names:
+            to_fetch.append(cleaned_name)
+        else:
+            names_to_insert.append(cleaned_name)
 
-    if len(fetched_cards) + len(names_to_insert) != len(cleaned_names):
+    fetched_cards = list(Card.objects.filter(name__in=to_fetch).all())
+
+    if len(fetched_cards) + len(names_to_insert) != len(set(names)):
         raise AssertionError(
             "something went missing on retrieve! given %d names, but have "
             "only accounted for %d" % (
-                len(names),
+                len(set(names)),
                 len(fetched_cards) + len(names_to_insert)
             )
         )
 
-    log.debug('%r, %r', fetched_cards, names_to_insert)
-
     return fetched_cards, names_to_insert
 
 
-def insert_cards(*names):
+def insert_cards(names, redis_conn):
     """
     Search gather for cards with the given name, insert that information into
     the database. This doesn't check for existing cards that have that name,
     and the act of inserting them
-    :param names:
+    :param names: the names of the cards to insert
+    :param redis_connection: used to cache information about the cards
     :return: if names were provided: {
         'inserted': cards_to_insert,
         'refetched': refetched_cards,
@@ -172,12 +165,6 @@ def insert_cards(*names):
     if not names:
         return {}
 
-    if not isinstance(names[0], basestring):
-        # someone probably passed a list instead of unrolling args of strings
-        names = names[0]
-
-    # not sure what to do with this yet
-    mismatched_name_map = Card.get_mismatched_names_map()
     invalid_names = []
     refetched_names = []
     relevant_mismatches = {}
@@ -195,16 +182,18 @@ def insert_cards(*names):
 
         fetched_name = card_content['name']
         if name != fetched_name:
-            assert (name not in mismatched_name_map or
-                    mismatched_name_map[name] == fetched_name)
-            mismatched_name_map[name] = fetched_name
+            redis_conn.hset('_mismatched', name.encode('utf-8'),
+                            fetched_name.encode('utf-8'))
             relevant_mismatches[name] = fetched_name
-            if fetched_name in Card.get_all_inserted_names():
+            inserted = redis_conn.lrange('_inserted', 0, -1)
+            log.debug('{} in inserted: {}', fetched_name, inserted)
+            if fetched_name.encode('utf8') in (redis_conn.lrange('_inserted', 0, -1) or []):
                 refetched_names.append(fetched_name)
                 continue
 
-        if fetched_name not in content_map:
-            content_map[fetched_name] = card_content
+        if fetched_name.encode('utf8') not in content_map:
+            # redis only stores bytestrings
+            content_map[fetched_name.encode('utf8')] = card_content
         else:
             duplicate_insert_count += 1
 
@@ -212,8 +201,16 @@ def insert_cards(*names):
         Card(**card_content) for card_content in content_map.values()
     ]
 
-    Card.objects.bulk_create(cards_to_insert)
-    Card.mark_names_as_inserted(content_map.keys())
+    for card_content in content_map.values():
+        try:
+            Card(**card_content).save()
+        except IntegrityError:
+            pass  # assume a different thread inserted it
+
+
+    #it's fine if there's duplicates for name insert
+    if content_map:
+        redis_conn.lpush('_inserted', *content_map.keys())
 
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
 
@@ -223,17 +220,16 @@ def insert_cards(*names):
         'mismatches': relevant_mismatches,
         'invalid': invalid_names,
     }
-    accounted_for = (len(disposition['inserted']) +
+    accounted_for = (len(cards_to_insert) +
                      len(refetched_names) +
-                     # sum(unique_names[name] for name in relevant_mismatches) +
                      len(invalid_names) +
                      duplicate_insert_count
     )
 
     if accounted_for != len(unique_names):
         raise AssertionError(
-            "something went missing! given %d names, but have only "
-            "accounted for %d" % (len(names), accounted_for)
+            "something went missing on insert! given %d names, but have only "
+            "accounted for %d" % (len(unique_names), accounted_for)
         )
 
     return disposition
@@ -283,6 +279,15 @@ class Card(models.Model):
     )
 
     @classmethod
+    def _get_redis(cls):
+        """
+        :return: an initialized connection to the normal redis db
+        """
+        #TODO: figure out if this needs to be more efficiently closed.
+        #(.e.g context manager)
+        return redis.StrictRedis(**settings.REDIS_INFORMATION)
+
+    @classmethod
     def get_all_inserted_names(cls):
         """
         Used to test what names are associated with cards in the database.
@@ -291,19 +296,20 @@ class Card(models.Model):
             to after server startup to stay current
         """
 
-        if not getattr(cls, '_all_names', set()):
+        redis_conn = cls._get_redis()
+        if not redis_conn.llen('_inserted'):
+            log.debug('reupdating the list of inserted names')
             cls.update_all_inserted_names()
 
-
-        return cls._all_names
+        return [name.decode('utf8')
+                for name in (redis_conn.lrange('_inserted', 0, -1) or [])]
 
     @classmethod
     def update_all_inserted_names(cls):
-        #Celery tasks mean this didn't get updated like before
-        #need a better way to do this this
-        cls._all_names = set([c.name for c in cls.objects.all()])
+        all_inserted_names = [c.name for c in cls.objects.all()]
+        if all_inserted_names:
+            cls._get_redis().lpush('_inserted', *all_inserted_names)
 
-    # FIXME: these don't work correctly now that celery is being used
     @classmethod
     def get_mismatched_names_map(cls):
         """
@@ -314,30 +320,15 @@ class Card(models.Model):
         :return: a dict mapping strings to the resulting card name, this needs
             to be updated
         """
-        if not getattr(cls, '_mismatched_name_map', {}):
-            cls._mismatched_name_map = {}
 
-        return cls._mismatched_name_map
-
-    @classmethod
-    def mark_names_as_inserted(cls, names):
-        """
-        to be called following an insertion of one of more new cards, to keep
-        the in memory set up-to-date
-
-        :param names: an iterable of names (as string/unicode) to were
-            successfully inserted
-        """
-
-        currently_inserted_names = getattr(cls, '_all_names', set())
-        [currently_inserted_names.add(name) for name in names]
-        cls._all_names = currently_inserted_names
+        return {
+            k.decode('utf8'): v.decode('utf8')
+            for k, v in cls._get_redis().hgetall('_mismatched').iteritems()
+        }
 
     @classmethod
     def reset_names_inserted(cls):
-
-        cls._all_names = set()
-        cls._mismatched_name_map = {}
+        cls._get_redis().flushdb()
 
     @property
     def color_indicator(self):
@@ -369,25 +360,9 @@ class Card(models.Model):
         """
         Used to easily see what heuristics are set on cards in the database
         """
-        if not getattr(cls, '_all_heuristics', {}):
-            cls._all_heuristics = {}
-            cls._update_heuristics_available(*cls.get_all_inserted_names())
 
-        return cls._all_heuristics
+        return heuristics.get_available_heuristics()
 
-    @classmethod
-    def _update_heuristics_available(cls, *names):
-        for card in Card.objects.filter(name__in=names):
-            if not card.heuristics:
-                continue
-            for heuristic_name in card.heuristics:
-                # data that could be associated with heuristics in the future
-                cls._all_heuristics.setdefault(heuristic_name, {})
-
-    @classmethod
-    def reset_heuristics_available(cls):
-        if hasattr(cls, '_all_heuristics'):
-            del cls._all_heuristics
 
     @property
     def heuristics(self):

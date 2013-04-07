@@ -1498,6 +1498,7 @@ class ViewTest(BaseCardInserter):
         json_content = response.content
         return json.loads(json_content.split(')]}\',\n')[-1])
 
+    # @unittest.skip("celery needs to use the test DB")
     def test_card_heuristics(self):
         # this inserts if and only if it's needed
         get_cards_from_names('Lingering Souls')

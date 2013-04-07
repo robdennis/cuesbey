@@ -6,8 +6,10 @@ djcelery.setup_loader()
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-BROKER_URL = 'amqp://guest:guest@localhost:5672/'
-CELERY_RESULT_BACKEND = 'amqp'
+REDIS_INFORMATION = dict(host='localhost', port=6379, db=0)
+_redis = 'redis://{host}:{port}/{db}'.format(**REDIS_INFORMATION)
+BROKER_URL = _redis
+CELERY_RESULT_BACKEND = _redis
 
 TUTOR_PATH = os.path.expanduser(
     os.path.join("~", "development", "tutor", "bin", "tutor")

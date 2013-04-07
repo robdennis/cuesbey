@@ -1,15 +1,14 @@
-import collections
 import json
 import os
 
 from django.http import HttpResponse, Http404
-
 from celery.result import AsyncResult
 
 from cuesbey_main.cube_diff.models import Cube, Card, retrieve_cards_from_names
 from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
+
 
 def card_contents(request):
     """
@@ -30,9 +29,6 @@ def card_contents(request):
     except ValueError:
         raise ValueError("problem with %r" % request.body)
 
-    #Celery tasks mean this didn't get updated like before
-    #need a better way to do this this
-    Card.update_all_inserted_names()
     fetched_cards, names_to_insert = retrieve_cards_from_names(all_card_names)
 
     insert_job = async_get_cards.delay(names_to_insert)
@@ -66,6 +62,6 @@ def available_heuristics(request):
 
     return HttpResponse(
         #TODO: consider how ths actually should be
-        json.dumps([dict(key=k) for k, v in Card.get_all_heuristics().iteritems()]),
+        json.dumps([dict(key=k) for k in Card.get_all_heuristics()]),
         mimetype="application/json"
     )

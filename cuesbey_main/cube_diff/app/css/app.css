@@ -44,3 +44,11 @@
 .diff-name.removed {
     background-color:#f1c0bc;
 }
+
+table.diff-table {
+    table-layout:fixed;
+}
+table.diff-table td {
+    overflow: hidden;
+    width:200px; /* this needs to be better about respecting screen resolution */
+}

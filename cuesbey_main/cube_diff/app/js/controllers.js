@@ -7,7 +7,7 @@ angular.module('cube_diff.controllers', []);
 function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
                           CardHeuristicService, DefaultsService, $cacheFactory) {
 
-    $scope.spec = JSON.stringify(DefaultsService.spec());
+    $scope.spec = JSON.stringify(DefaultsService.spec(), null, 2);
 
     CardHeuristicService.getHeuristics(function(data) {
         $scope.heuristics = data

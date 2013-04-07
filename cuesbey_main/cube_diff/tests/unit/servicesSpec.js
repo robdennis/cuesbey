@@ -349,13 +349,13 @@ describe('service', function() {
         it('should handle specs with mana costs', function() {
             specExpect({'Colorless': {
                 'Creature': {
-                    'converted_mana_cost<=1': {},
-                    'converted_mana_cost==2': {},
-                    'converted_mana_cost==3': {},
-                    'converted_mana_cost==4': {},
-                    'converted_mana_cost==5': {},
-                    'converted_mana_cost==6': {},
-                    'converted_mana_cost>=7': {}
+                    'cmc<=1': {},
+                    'cmc==2': {},
+                    'cmc==3': {},
+                    'cmc==4': {},
+                    'cmc==5': {},
+                    'cmc==6': {},
+                    'cmc>=7': {}
 
                 },
                 '!Creature': {
@@ -366,31 +366,31 @@ describe('service', function() {
                 }
             },
                 'White': {
-                    'converted_mana_cost<=1': {
+                    'cmc<=1': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost==2': {
+                    'cmc==2': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost==3': {
+                    'cmc==3': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost==4': {
+                    'cmc==4': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost==5': {
+                    'cmc==5': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost==6': {
+                    'cmc==6': {
                         'Creature': {},
                         '!Creature': {}
                     },
-                    'converted_mana_cost>=7': {
+                    'cmc>=7': {
                         'Creature': {},
                         '!Creature': {}
                     }
@@ -400,13 +400,13 @@ describe('service', function() {
                 subcategories: [{
                     category: "Creature",
                     subcategories: [
-                        {category: "converted_mana_cost<=1", cards: []},
-                        {category: "converted_mana_cost==2", cards: []},
-                        {category: "converted_mana_cost==3", cards: []},
-                        {category: "converted_mana_cost==4", cards: []},
-                        {category: "converted_mana_cost==5", cards: []},
-                        {category: "converted_mana_cost==6", cards: []},
-                        {category: "converted_mana_cost>=7", cards: []}
+                        {category: "cmc<=1", cards: []},
+                        {category: "cmc==2", cards: []},
+                        {category: "cmc==3", cards: []},
+                        {category: "cmc==4", cards: []},
+                        {category: "cmc==5", cards: []},
+                        {category: "cmc==6", cards: []},
+                        {category: "cmc>=7", cards: []}
                     ]
                 }, {
                     category:"!Creature",
@@ -419,43 +419,43 @@ describe('service', function() {
                 }]}, {
                 category: "White",
                 subcategories: [{
-                    category: 'converted_mana_cost<=1',
+                    category: 'cmc<=1',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost==2',
+                    category: 'cmc==2',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost==3',
+                    category: 'cmc==3',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost==4',
+                    category: 'cmc==4',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost==5',
+                    category: 'cmc==5',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost==6',
+                    category: 'cmc==6',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
                     ]
                 }, {
-                    category: 'converted_mana_cost>=7',
+                    category: 'cmc>=7',
                     subcategories: [
                         {category: "Creature", cards: []},
                         {category: "!Creature", cards: []}
@@ -1481,18 +1481,22 @@ describe('service', function() {
         });
 
         it('should handle converted mana cost', function() {
-            expect(svc.matchesCategory('converted_mana_cost==2', sculler)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost<=2', sculler)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost<=3', sculler)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost<3', sculler)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost<3/converted_mana_cost>=0', sculler)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost==2', dynamo)).toBe(false);
-            expect(svc.matchesCategory('converted_mana_cost<=2', dynamo)).toBe(false);
-            expect(svc.matchesCategory('converted_mana_cost<=3', dynamo)).toBe(false);
-            expect(svc.matchesCategory('converted_mana_cost<3', dynamo)).toBe(false);
-            // in case there was ever a lexicographical vs numerical sort thing
-            expect(svc.matchesCategory('converted_mana_cost>3', emrakul)).toBe(true);
-            expect(svc.matchesCategory('converted_mana_cost<3', emrakul)).toBe(false);
+            jQuery.each(['cmc', 'converted_mana_cost'], function(idx, cmc) {
+                // support a short a long form
+                expect(svc.matchesCategory(cmc + '==2', sculler)).toBe(true);
+                expect(svc.matchesCategory(cmc + '<=2', sculler)).toBe(true);
+                expect(svc.matchesCategory(cmc + '<=3', sculler)).toBe(true);
+                expect(svc.matchesCategory(cmc + '<3', sculler)).toBe(true);
+                expect(svc.matchesCategory(cmc + '<3/' + cmc + '>=0', sculler)).toBe(true);
+                expect(svc.matchesCategory(cmc + '==2', dynamo)).toBe(false);
+                expect(svc.matchesCategory(cmc + '<=2', dynamo)).toBe(false);
+                expect(svc.matchesCategory(cmc + '<=3', dynamo)).toBe(false);
+                expect(svc.matchesCategory(cmc + '<3', dynamo)).toBe(false);
+                // in case there was ever a lexicographical vs numerical sort thing
+                expect(svc.matchesCategory(cmc + '>3', emrakul)).toBe(true);
+                expect(svc.matchesCategory(cmc + '<3', emrakul)).toBe(false);
+            })
+            
         });
 
         var assertChanged = function(category, card,

@@ -31,13 +31,13 @@ angular.module('cube_diff.services', [])
             spec: function() {
                 var cmcSlots = {
                     'appearance': 'table',
-                    'converted_mana_cost<=1': {},
-                    'converted_mana_cost==2': {},
-                    'converted_mana_cost==3': {},
-                    'converted_mana_cost==4': {},
-                    'converted_mana_cost==5': {},
-                    'converted_mana_cost==6': {},
-                    'converted_mana_cost>=7': {}
+                    'cmc<=1': {},
+                    'cmc==2': {},
+                    'cmc==3': {},
+                    'cmc==4': {},
+                    'cmc==5': {},
+                    'cmc==6': {},
+                    'cmc>=7': {}
                 };
                 return {
                     'White': {
@@ -1657,7 +1657,8 @@ angular.module('cube_diff.services', [])
                 };
 
                 var _checkForCMC = function(category, card) {
-                    var cmcRegex = /converted_mana_cost\s*([=><!]{1,2})\s*(\d+|X)/;
+                    // support a short version as well
+                    var cmcRegex = /(?:converted_mana_cost|cmc)\s*([=><!]{1,3})\s*(\d+|X)/;
                     var match = cmcRegex.exec(category);
                     if (match) {
                         var integerCMC;

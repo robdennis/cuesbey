@@ -46,6 +46,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         if (insertJob) {
             CardContentService.consumeInserts(
                 insertJob,
+                $scope.setDataAndPerform,
                 $scope.setDataAndPerform
             );
         }

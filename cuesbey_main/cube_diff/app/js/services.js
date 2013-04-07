@@ -1594,8 +1594,13 @@ angular.module('cube_diff.services', [])
                     pollCardProgress(jobId, function(data, status) {
                         console.log('got data', data);
                         console.log('got status', status);
-                        // TODO: handle incrementally updated cards
+                        // TODO: branching via a different isn't great
                         if (data=='"PENDING"') {
+                           $timeout(tick, 500);
+                        } else if (data['inserted_cards']) {
+                            data['cards'] = data['inserted_cards'];
+                            cacheIncomingData(data);
+                            onHeartbeat();
                             $timeout(tick, 500);
                         } else {
                             cacheIncomingData(data);

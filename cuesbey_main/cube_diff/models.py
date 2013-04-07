@@ -134,25 +134,28 @@ def retrieve_cards_from_names(names):
 
     fetched_cards = list(Card.objects.filter(name__in=to_fetch).all())
 
-    if len(fetched_cards) + len(names_to_insert) != len(set(names)):
-        raise AssertionError(
-            "something went missing on retrieve! given %d names, but have "
-            "only accounted for %d" % (
-                len(set(names)),
-                len(fetched_cards) + len(names_to_insert)
+    if settings.DEBUG:
+        if len(fetched_cards) + len(names_to_insert) != len(set(names)):
+            raise AssertionError(
+                "something went missing on retrieve! given %d names, but have "
+                "only accounted for %d" % (
+                    len(set(names)),
+                    len(fetched_cards) + len(names_to_insert)
+                )
             )
-        )
 
     return fetched_cards, names_to_insert
 
 
-def insert_cards(names, redis_conn):
+def insert_cards(names, redis_conn, post_insert_hook=None):
     """
     Search gather for cards with the given name, insert that information into
     the database. This doesn't check for existing cards that have that name,
     and the act of inserting them
     :param names: the names of the cards to insert
-    :param redis_connection: used to cache information about the cards
+    :param redis_conn: used to cache information about the cards
+    :param post_insert_hook: this callable will be invoked with the card that
+        was just inserted
     :return: if names were provided: {
         'inserted': cards_to_insert,
         'refetched': refetched_cards,
@@ -167,10 +170,15 @@ def insert_cards(names, redis_conn):
 
     invalid_names = []
     refetched_names = []
+    inserted_cards = []
     relevant_mismatches = {}
     content_map = {}
     unique_names = Counter(names)
     duplicate_insert_count = 0
+    inserted_names = Card.get_all_inserted_names()
+
+    if post_insert_hook is None:
+        post_insert_hook = lambda c: log.debug('inserted: {.name}', c)
 
     for name in unique_names:
         try:
@@ -182,55 +190,54 @@ def insert_cards(names, redis_conn):
 
         fetched_name = card_content['name']
         if name != fetched_name:
-            redis_conn.hset('_mismatched', name.encode('utf-8'),
-                            fetched_name.encode('utf-8'))
+            Card.add_new_mismatch_mapping(name, fetched_name, redis_conn)
             relevant_mismatches[name] = fetched_name
-            inserted = redis_conn.lrange('_inserted', 0, -1)
-            log.debug('{} in inserted: {}', fetched_name, inserted)
-            if fetched_name.encode('utf8') in (redis_conn.lrange('_inserted', 0, -1) or []):
+            if fetched_name in inserted_names:
                 refetched_names.append(fetched_name)
                 continue
 
-        if fetched_name.encode('utf8') not in content_map:
-            # redis only stores bytestrings
-            content_map[fetched_name.encode('utf8')] = card_content
+        if fetched_name not in content_map:
+            content_map[fetched_name] = card_content
+            card = Card(**card_content)
+            try:
+                card.save()
+            except IntegrityError:
+                # assume a different thread inserted it
+                duplicate_insert_count+=1
+                card = None
+            except:
+                log.exception('unknown error inserting %r', card)
+                card = None
+            else:
+                Card.mark_card_as_inserted(card, redis_conn)
+                inserted_cards.append(card)
+            finally:
+                post_insert_hook(card)
         else:
             duplicate_insert_count += 1
-
-    cards_to_insert = [
-        Card(**card_content) for card_content in content_map.values()
-    ]
-
-    for card_content in content_map.values():
-        try:
-            Card(**card_content).save()
-        except IntegrityError:
-            pass  # assume a different thread inserted it
-
-
-    #it's fine if there's duplicates for name insert
-    if content_map:
-        redis_conn.lpush('_inserted', *content_map.keys())
 
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
 
     disposition = {
-        'inserted': cards_to_insert,
+        'inserted': inserted_cards,
         'refetched': refetched_cards,
         'mismatches': relevant_mismatches,
         'invalid': invalid_names,
     }
-    accounted_for = (len(cards_to_insert) +
-                     len(refetched_names) +
-                     len(invalid_names) +
-                     duplicate_insert_count
-    )
 
-    if accounted_for != len(unique_names):
-        raise AssertionError(
-            "something went missing on insert! given %d names, but have only "
-            "accounted for %d" % (len(unique_names), accounted_for)
+    if settings.DEBUG:
+        accounted_for = (len(inserted_cards) +
+                         len(refetched_names) +
+                         len(invalid_names) +
+                         duplicate_insert_count
         )
+
+        if accounted_for != len(unique_names):
+            raise AssertionError(
+                "something went missing on insert! given %d names, but "
+                "have only accounted for %d" % (len(unique_names),
+                                                accounted_for)
+            )
 
     return disposition
 
@@ -288,7 +295,7 @@ class Card(models.Model):
         return redis.StrictRedis(**settings.REDIS_INFORMATION)
 
     @classmethod
-    def get_all_inserted_names(cls):
+    def get_all_inserted_names(cls, redis_conn=None):
         """
         Used to test what names are associated with cards in the database.
 
@@ -296,22 +303,33 @@ class Card(models.Model):
             to after server startup to stay current
         """
 
-        redis_conn = cls._get_redis()
+        if redis_conn is None:
+            redis_conn = cls._get_redis()
+
         if not redis_conn.llen('_inserted'):
             log.debug('reupdating the list of inserted names')
-            cls.update_all_inserted_names()
+            cls.update_all_inserted_names(redis_conn)
 
         return [name.decode('utf8')
                 for name in (redis_conn.lrange('_inserted', 0, -1) or [])]
 
     @classmethod
-    def update_all_inserted_names(cls):
+    def update_all_inserted_names(cls, redis_conn=None):
+        if redis_conn is None:
+            redis_conn = cls._get_redis()
         all_inserted_names = [c.name for c in cls.objects.all()]
         if all_inserted_names:
-            cls._get_redis().lpush('_inserted', *all_inserted_names)
+            redis_conn.lpush('_inserted', *all_inserted_names)
 
     @classmethod
-    def get_mismatched_names_map(cls):
+    def mark_card_as_inserted(cls, card, redis_conn=None):
+        if redis_conn is None:
+            redis_conn = cls._get_redis()
+
+        redis_conn.lpush('_inserted', card.name.encode('utf8'))
+
+    @classmethod
+    def get_mismatched_names_map(cls, redis_conn=None):
         """
         Used to correctly fetch cards given a mismatched name that we know
         maps. This is usually for non-ascii card names that can be searched
@@ -320,11 +338,22 @@ class Card(models.Model):
         :return: a dict mapping strings to the resulting card name, this needs
             to be updated
         """
-
-        return {
+        if redis_conn is None:
+            redis_conn = cls._get_redis()
+        mapping = {
             k.decode('utf8'): v.decode('utf8')
-            for k, v in cls._get_redis().hgetall('_mismatched').iteritems()
+            for k, v in redis_conn.hgetall('_mismatched').iteritems()
         }
+        print('mapping: {!r}'.format(mapping))
+        return mapping
+
+    @classmethod
+    def add_new_mismatch_mapping(cls, bad_name, correct_name, redis_conn=None):
+        if redis_conn is None:
+            redis_conn = cls._get_redis()
+        redis_conn.hset('_mismatched', bad_name.encode('utf-8'),
+                        correct_name.encode('utf-8'))
+        cls.get_mismatched_names_map(redis_conn)
 
     @classmethod
     def reset_names_inserted(cls):

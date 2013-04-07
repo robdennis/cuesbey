@@ -5,6 +5,7 @@ from django.http import HttpResponse, Http404
 from celery.result import AsyncResult
 
 from cuesbey_main.cube_diff.models import Cube, Card, retrieve_cards_from_names
+import cuesbey_main.cuesbey.settings as settings
 from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
@@ -31,12 +32,16 @@ def card_contents(request):
 
     fetched_cards, names_to_insert = retrieve_cards_from_names(all_card_names)
 
-    insert_job = async_get_cards.delay(names_to_insert)
     response = {
         'cards': {c.name: c.as_dict() for c in fetched_cards},
-        'mismatches': Card.get_mismatched_names_map(),
-        'insert_job': insert_job.id
+        'mismatches': Card.get_mismatched_names_map()
     }
+
+    if names_to_insert:
+        insert_job = async_get_cards.delay(names_to_insert,
+                                           settings.REDIS_INFORMATION)
+        response['insert_job'] = insert_job.id
+
 
     return HttpResponse(
         Cube.serialize(response),

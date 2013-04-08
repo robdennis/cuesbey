@@ -1496,7 +1496,18 @@ describe('service', function() {
                 expect(svc.matchesCategory(cmc + '>3', emrakul)).toBe(true);
                 expect(svc.matchesCategory(cmc + '<3', emrakul)).toBe(false);
             })
-            
+        });
+
+        it('should handle the "any" case', function() {
+            // support a short a long form
+            expect(svc.matchesCategory('Any', sculler)).toBe(true);
+            expect(svc.matchesCategory('!Any', sculler)).toBe(false);
+            expect(svc.matchesCategory('Any|Artifact', sculler)).toBe(true);
+            expect(svc.matchesCategory('Any/Artifact', sculler)).toBe(true);
+            expect(svc.matchesCategory('Any/!Artifact', sculler)).toBe(false);
+            expect(svc.matchesCategory('!Any', sculler)).toBe(false);
+            expect(svc.matchesCategory('!Any/Artifact', sculler)).toBe(false);
+            expect(svc.matchesCategory('!Any|Artifact', sculler)).toBe(true);
         });
 
         var assertChanged = function(category, card,

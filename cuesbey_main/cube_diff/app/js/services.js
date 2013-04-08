@@ -1713,6 +1713,14 @@ angular.module('cube_diff.services', [])
                     }
                 };
 
+                var _checkForAny = function(category, card) {
+                    if (category == 'Any') {
+                        return true;
+                    } else {
+                        return 'na'
+                    }
+                };
+
                 var matchesCategory = true;
                 var matchesSubgroup = false;
                 // "/" is the boolean AND operator for this category stuff
@@ -1732,7 +1740,8 @@ angular.module('cube_diff.services', [])
                             _checkForExactColor,
                             _checkForType,
                             _checkForCMC,
-                            _checkForDiff
+                            _checkForDiff,
+                            _checkForAny
                             // these either return a known string if the checker isn't applicable
                             // or True/False if it is applicable and based on the results of
                             // the check

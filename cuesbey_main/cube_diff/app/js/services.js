@@ -1591,6 +1591,7 @@ angular.module('cube_diff.services', [])
             consumeInserts : function(jobId, onFinish, onHeartbeat) {
                 var tick = function() {
                     console.log('about to poll with', jobId);
+                    var lastProgressCount = 0;
                     pollCardProgress(jobId, function(data, status) {
                         console.log('got data', data);
                         console.log('got status', status);
@@ -1599,9 +1600,15 @@ angular.module('cube_diff.services', [])
                            $timeout(tick, 500);
                         } else if (data['inserted_cards']) {
                             data['cards'] = data['inserted_cards'];
-                            cacheIncomingData(data);
-                            onHeartbeat();
-                            $timeout(tick, 500);
+                            var currentlyInserted = data['cards'].length;
+                            if (lastProgressCount + 10 < currentlyInserted) {
+                                cacheIncomingData(data);
+                                // don't heartbeat unless we've gotten enough
+                                lastProgressCount = currentlyInserted;
+                                onHeartbeat();
+                            }
+
+                            $timeout(tick, 3000);
                         } else {
                             cacheIncomingData(data);
                             onFinish();

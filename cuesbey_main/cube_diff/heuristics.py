@@ -18,6 +18,8 @@ class HeuristicsHandler(object):
     """
     __meta__ = abc.ABCMeta
 
+    checked = True
+
     @abc.abstractproperty
     @property
     def key(self):
@@ -192,6 +194,8 @@ class _handle_caring_about_land_types(HeuristicsHandler):
 class _handle_phyrexian(HeuristicsHandler):
     key = 'phyrexian_always_pays_life'
 
+    checked = False  # don't default to this being on
+
     @classmethod
     def get(cls, card):
         """
@@ -349,6 +353,7 @@ class _handle_always_kicking(HeuristicsHandler, kicker_mixin):
 
 class _handle_always_kicking_creatures(HeuristicsHandler, kicker_mixin):
     key = 'always_kick_creatures'
+    checked = False  # always kick probably takes precedence
 
     @classmethod
     def get(cls, card):
@@ -480,4 +485,4 @@ def get_heuristics(card):
 
 def get_available_heuristics():
     
-    return [h.key for h in _all_handlers]
+    return {h.key: h for h in _all_handlers}

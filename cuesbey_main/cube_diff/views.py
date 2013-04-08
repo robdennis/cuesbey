@@ -68,7 +68,10 @@ def available_heuristics(request):
 
     return HttpResponse(
         #TODO: consider how ths actually should be
-        json.dumps([dict(key=k) for k in Card.get_all_heuristics()]),
+        json.dumps([
+            dict(key=k, checked=v.checked)
+            for k, v in Card.get_all_heuristics().iteritems()
+        ]),
         mimetype="application/json"
     )
 

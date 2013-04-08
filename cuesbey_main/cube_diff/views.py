@@ -63,10 +63,21 @@ def poll_state(request):
     data = job.result or job.state
     return HttpResponse(Cube.serialize(data), mimetype='application/json')
 
+
 def available_heuristics(request):
 
     return HttpResponse(
         #TODO: consider how ths actually should be
         json.dumps([dict(key=k) for k in Card.get_all_heuristics()]),
         mimetype="application/json"
+    )
+
+
+def blindly_return_cube_diff(request):
+
+    return HttpResponse(
+        open(os.path.normpath(
+            os.path.join(__here__, 'app', 'index.html'))
+        ).read(),
+        mimetype='text/html'
     )

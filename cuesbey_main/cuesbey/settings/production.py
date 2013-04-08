@@ -3,6 +3,7 @@ from cuesbey.settings import *
 DEBUG = False 
 TEMPLATE_DEBUG = False
 STATIC_ROOT = '/home/ubuntu/static'
+TUTOR_PATH = '/home/ubuntu/tutor/bin'
 
 DATABASES = {
     'default': {

@@ -4,7 +4,6 @@ import unittest
 import redis
 from django.test import TestCase
 
-import cuesbey_main.cuesbey.settings as settings
 from cuesbey_main.cube_diff.models import Card, get_cards_from_names
 from cuesbey_main.cube_diff import (parse_mana_cost, merge_mana_costs)
 

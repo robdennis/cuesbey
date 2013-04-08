@@ -1,6 +1,6 @@
 import redis
 
-import cuesbey_main.cuesbey.settings as settings
+from django.conf import settings
 from cuesbey_main.cube_diff.tasks import async_get_cards
 from django.db import IntegrityError
 from django.test.utils import override_settings

@@ -10,7 +10,7 @@ from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
 from unidecode import unidecode
 
-import cuesbey_main.cuesbey.settings as settings
+from django.conf import settings
 
 from cuesbey_main.cube_diff import (get_json_card_content, heuristics,
                                     parse_mana_cost, estimate_colors,

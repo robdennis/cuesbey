@@ -6,8 +6,9 @@ import subprocess
 from copy import deepcopy
 from itertools import chain
 
+from django.conf import settings
+
 from cuesbey_main.cube_diff.autolog import log
-from cuesbey_main.cuesbey.settings import TUTOR_PATH
 
 
 class CardFetchingError(Exception):
@@ -215,7 +216,7 @@ def _query_tutor_for_card_by_name(name):
     log.debug('searching for cardname: %r', name)
 
     try:
-        actual = json.loads(subprocess.check_output([TUTOR_PATH,
+        actual = json.loads(subprocess.check_output([settings.TUTOR_PATH,
                                                      'card',
                                                      '--format',
                                                      'json',

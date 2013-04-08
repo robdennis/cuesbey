@@ -1,11 +1,11 @@
 import json
 import os
 
+from django.conf import settings
 from django.http import HttpResponse, Http404
 from celery.result import AsyncResult
 
 from cuesbey_main.cube_diff.models import Cube, Card, retrieve_cards_from_names
-import cuesbey_main.cuesbey.settings as settings
 from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))

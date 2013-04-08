@@ -5,7 +5,6 @@ from django.test import Client
 from test_cards import BaseCardInserter
 
 from cuesbey_main.cube_diff.models import get_cards_from_names
-from cuesbey_main.cuesbey import settings
 
 
 class ViewTest(BaseCardInserter):

@@ -1387,6 +1387,34 @@ describe('service', function() {
 
     });
 
+    describe("namesFromTextTest", function() {
+        var svc;
+        var expected = [
+            'Elite Vanguard',
+            'Wrath of God',
+            'Wrath of God'
+        ];
+        beforeEach(inject(function ($injector, NamesFromTextService) {
+            svc = NamesFromTextService;
+        }));
+
+        it('should handle one valid card per line', function() {
+            expect(svc.getNames(
+                    'Elite Vanguard\n'+
+                    'Wrath of God\n' +
+                    'Wrath of God\n'
+            )).toEqual(expected);
+        });
+
+        it('should handle one card per line and handle extra space', function() {
+            expect(svc.getNames(
+                    'Elite Vanguard \n'+
+                    'Wrath of God \n' +
+                    ' Wrath of God\n'
+            )).toEqual(expected);
+        });
+    });
+
     describe("cardCategoryServiceTest", function() {
         var svc, cubeContents;
         cubeContents = modo_cube_og_data;

@@ -5,7 +5,8 @@
 angular.module('cube_diff.controllers', []);
 
 function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
-                          CardHeuristicService, DefaultsService, $cacheFactory) {
+                          CardHeuristicService, DefaultsService,
+                          NamesFromTextService, $cacheFactory) {
 
     $scope.spec = JSON.stringify(DefaultsService.spec(), null, 2);
 
@@ -40,9 +41,18 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         return checkedHeuristics;
     };
 
-    $scope.setDataAndPerform = function (insertJob) {
-        $scope.before = CardContentService.getCachedCards($scope.beforeCardNames.split('\n'));
-        $scope.after = CardContentService.getCachedCards($scope.afterCardNames.split('\n'));
+    $scope.setDataAndPerform = function (data, insertJob) {
+        $scope.before = CardContentService.getCachedCards(
+            NamesFromTextService.getNames($scope.beforeCardNames)
+        );
+        $scope.after = CardContentService.getCachedCards(
+            NamesFromTextService.getNames($scope.afterCardNames)
+        );
+
+        if (data) {
+            $scope.invalid = data['invalid'];
+        }
+
         if (insertJob) {
             CardContentService.consumeInserts(
                 insertJob,
@@ -83,8 +93,8 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
 
         if (hasChangedSinceDiff(names)) {
             CardContentService.cacheAllCards(
-                $scope.beforeCardNames.split('\n').concat(
-                    $scope.afterCardNames.split('\n')
+                NamesFromTextService.getNames($scope.beforeCardNames).concat(
+                    NamesFromTextService.getNames($scope.afterCardNames)
                 ),
             $scope.setDataAndPerform);
         } else {

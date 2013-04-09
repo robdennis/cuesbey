@@ -21,6 +21,12 @@
 
         </textarea>
         <div>
+            invalid names (if any)<br>
+            <ul>
+                <li ng-repeat="name in invalid">{{ name }}</li>
+            </ul>
+        </div>
+        <div>
             <label ng-repeat="heuristic in heuristics">
                 <input type="checkbox" ng-model="heuristic.checked">
                 {{heuristic.key}}

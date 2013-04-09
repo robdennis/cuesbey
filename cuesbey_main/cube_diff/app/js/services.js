@@ -1523,6 +1523,20 @@ angular.module('cube_diff.services', [])
             }
         }
     })
+    .factory('NamesFromTextService', function() {
+        return {
+            getNames: function(text) {
+                var names = [];
+                jQuery.each(text.split('\n'), function(idx, line) {
+                    if (line) {
+                        names.push(jQuery.trim(line));
+                    }
+                });
+
+                return names;
+            }
+        }
+    })
     .factory('CardContentService', function($http, $cacheFactory, $timeout) {
         var cache = $cacheFactory('cardContents');
         var missingNames = function(cardNames) {
@@ -1583,6 +1597,7 @@ angular.module('cube_diff.services', [])
                 }).success(function (data) {
                     cacheIncomingData(data);
                     onSuccess(
+                        data,
                         data['insert_job']
                     );
                 });
@@ -1605,13 +1620,13 @@ angular.module('cube_diff.services', [])
                                 cacheIncomingData(data);
                                 // don't heartbeat unless we've gotten enough
                                 lastProgressCount = currentlyInserted;
-                                onHeartbeat();
+                                onHeartbeat(data);
                             }
 
                             $timeout(tick, 3000);
                         } else {
                             cacheIncomingData(data);
-                            onFinish();
+                            onFinish(data);
                         }
 
                     })

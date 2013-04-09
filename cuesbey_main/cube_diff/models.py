@@ -3,6 +3,7 @@ import json
 import re
 from collections import namedtuple, Counter
 from itertools import chain
+from unittest.util import sorted_list_difference, safe_repr
 
 import redis
 from django.db import models, IntegrityError
@@ -26,6 +27,28 @@ class CubeEncoder(json.JSONEncoder):
             return obj.as_dict()
         return json.JSONEncoder.default(self, obj)
 
+
+def assertExpectatations(actual, expected):
+
+    def handle_card_card_or_name(seq):
+        return [
+            c.name if isinstance(c, Card) else c for c in seq
+        ]
+
+    missing, unexpected = sorted_list_difference(
+        handle_card_card_or_name(expected),
+        handle_card_card_or_name(actual)
+    )
+    errors = []
+    if missing:
+        errors.append('Expected, but missing:\n    %s' %
+                       safe_repr(missing))
+    if unexpected:
+        errors.append('Unexpected, but present:\n    %s' %
+                       safe_repr(unexpected))
+    if errors:
+        message = '\n'.join(errors)
+        raise AssertionError(message)
 
 def multiply_cards_by_count(cards, card_counter, alias_mapping=None):
     """
@@ -136,13 +159,9 @@ def retrieve_cards_from_names(names):
 
     if settings.DEBUG:
         if len(fetched_cards) + len(names_to_insert) != len(set(names)):
-            raise AssertionError(
-                "something went missing on retrieve! given %d names, but have "
-                "only accounted for %d" % (
-                    len(set(names)),
-                    len(fetched_cards) + len(names_to_insert)
-                )
-            )
+            assertExpectatations(fetched_cards+names_to_insert,
+                                 list(set(names)))
+
 
     return fetched_cards, names_to_insert
 
@@ -174,7 +193,7 @@ def insert_cards(names, redis_conn, post_insert_hook=None):
     relevant_mismatches = {}
     content_map = {}
     unique_names = Counter(names)
-    duplicate_insert_count = 0
+    duplicate_inserts = []
     inserted_names = Card.get_all_inserted_names()
 
     if post_insert_hook is None:
@@ -203,7 +222,7 @@ def insert_cards(names, redis_conn, post_insert_hook=None):
                 card.save()
             except IntegrityError:
                 # assume a different thread inserted it
-                duplicate_insert_count+=1
+                duplicate_inserts.append(card.name)
                 card = None
             except:
                 log.exception('unknown error inserting %r', card)
@@ -214,7 +233,7 @@ def insert_cards(names, redis_conn, post_insert_hook=None):
             finally:
                 post_insert_hook(card)
         else:
-            duplicate_insert_count += 1
+            duplicate_inserts.append(fetched_name)
 
     refetched_cards = list(Card.objects.filter(name__in=refetched_names))
 
@@ -226,18 +245,9 @@ def insert_cards(names, redis_conn, post_insert_hook=None):
     }
 
     if settings.DEBUG:
-        accounted_for = (len(inserted_cards) +
-                         len(refetched_names) +
-                         len(invalid_names) +
-                         duplicate_insert_count
-        )
-
-        if accounted_for != len(unique_names):
-            raise AssertionError(
-                "something went missing on insert! given %d names, but "
-                "have only accounted for %d" % (len(unique_names),
-                                                accounted_for)
-            )
+        assertExpectatations(inserted_cards + refetched_cards +
+                             invalid_names + duplicate_inserts,
+                             unique_names)
 
     return disposition
 

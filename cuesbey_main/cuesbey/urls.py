@@ -10,6 +10,7 @@ admin.autodiscover()
 
 # http://stackoverflow.com/questions/1797046/correct-place-to-put-extra-startup-code-in-django
 Card.reset_names_inserted()
+Card.make_standard_mismatches()
 
 urlpatterns = patterns('',
                        url(r'^djangular/', include('djangular.urls')),

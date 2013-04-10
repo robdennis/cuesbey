@@ -1574,7 +1574,13 @@ angular.module('cube_diff.services', [])
             jQuery.each(cardNames || [], function(idx, name) {
                 card = cache.get(name);
                 if (card) {
-                    cachedCards.push(card)
+                    cachedCards.push(card);
+                    return
+                }
+                // addresses issue #9
+                card = cache.get(name.toLowerCase());
+                if (card) {
+                    cachedCards.push(card);
                 }
             });
             return cachedCards;
@@ -1625,7 +1631,6 @@ angular.module('cube_diff.services', [])
             consumeInserts : function(jobId, onFinish, onHeartbeat) {
                 var tick = function() {
                     console.log('about to poll with', jobId);
-                    var lastProgressCount = 0;
                     pollCardProgress(jobId, function(data, status) {
                         console.log('got data', data);
                         console.log('got status', status);
@@ -1634,13 +1639,8 @@ angular.module('cube_diff.services', [])
                            $timeout(tick, 500);
                         } else if (data['inserted_cards']) {
                             data['cards'] = data['inserted_cards'];
-                            var currentlyInserted = data['cards'].length;
-                            if (lastProgressCount + 10 < currentlyInserted) {
-                                cacheIncomingData(data);
-                                // don't heartbeat unless we've gotten enough
-                                lastProgressCount = currentlyInserted;
-                                onHeartbeat(data);
-                            }
+                            cacheIncomingData(data);
+                            onHeartbeat(data);
 
                             $timeout(tick, 3000);
                         } else {

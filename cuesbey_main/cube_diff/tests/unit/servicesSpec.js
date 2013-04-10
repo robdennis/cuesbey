@@ -1404,6 +1404,12 @@ describe('service', function() {
                     'Wrath of God\n' +
                     'Wrath of God\n'
             )).toEqual(expected);
+                expect(svc.getNames(
+                    'Elite Vanguard\n'+
+                    '\n'+
+                    'Wrath of God\n' +
+                    'Wrath of God'
+            )).toEqual(expected);
         });
 
         it('should handle one card per line and handle extra space', function() {
@@ -1411,6 +1417,18 @@ describe('service', function() {
                     'Elite Vanguard \n'+
                     'Wrath of God \n' +
                     ' Wrath of God\n'
+            )).toEqual(expected);
+        });
+
+        it('should handle tapped-out style formatting', function() {
+            expect(svc.getNames(
+                    '1x Elite Vanguard \n'+
+                    '2x Wrath of God\n'
+            )).toEqual(expected);
+            expect(svc.getNames(
+                    '1x Elite Vanguard *F*\n'+
+                    'Wrath of God [M10]\n'+
+                    '1x Wrath of God [ZEN] *GE*\n'
             )).toEqual(expected);
         });
     });

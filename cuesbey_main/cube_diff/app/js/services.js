@@ -1529,7 +1529,26 @@ angular.module('cube_diff.services', [])
                 var names = [];
                 jQuery.each(text.split('\n'), function(idx, line) {
                     if (line) {
-                        names.push(jQuery.trim(line));
+                        var name, match;
+                        name = jQuery.trim(line);
+                        // this is the tappedout.net formatting string:
+                        //3x Llanowar Elves
+                        //3x Llanowar Elves [M10] (specific printing)
+                        //3x Llanowar Elves *F* (foil)
+                        //3x Llanowar Elves *GE* (German language card)
+                        //3x Llanowar Elves [M10] *F* (see a pattern?)
+                        match = /^(?:(\d+)\s*(?:x|-)\s*)?(.*?)(?:(?:\[|\*).*)?$/.exec(name);
+                        if (match) {
+                            // there are potentially multiples in match[1]
+                            // assume that's the case
+                            for (var i=0;i<parseInt(match[1] || "1");i++) {
+                                names.push(jQuery.trim(match[2]))
+                            }
+                        } else {
+                            // forget it, no special handling other than the
+                            // original trimming
+                            names.push(name);
+                        }
                     }
                 });
 

@@ -64,6 +64,13 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
     };
 
     $scope.performDiff = function() {
+        diffCache.put('pane', 0);
+        jQuery.each($scope.diffedCube || {}, function(index, pane) {
+            if (pane.active) {
+                diffCache.put('pane', index);
+            }
+        });
+
         $scope.diffedCube = CubeDiffService.getDiff(
             $scope.before,
             $scope.after,
@@ -72,6 +79,7 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
             false,
             getCheckedHeuristics()
         );
+
         if (hasChangedSinceDiff({spec: $scope.spec})) {
             $scope.diffedCube[0].active = true;
         } else {
@@ -84,12 +92,6 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
             before: $scope.beforeCardNames,
             after: $scope.afterCardNames
         };
-        diffCache.put('pane', 0);
-        jQuery.each($scope.diffedCube || {}, function(index, pane) {
-            if (pane.active) {
-                diffCache.put('pane', index);
-            }
-        });
 
         if (hasChangedSinceDiff(names)) {
             CardContentService.cacheAllCards(

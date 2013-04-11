@@ -1,4 +1,4 @@
-modo_cube_avr_data = {
+mtgo_cube_avr_data = {
     "Snuff Out": {
         "heuristics": {}, 
         "name": "Snuff Out", 
@@ -9031,7 +9031,7 @@ modo_cube_avr_data = {
         "converted_mana_cost": 2
     }
 };
-modo_cube_avr_data_array = [
+mtgo_cube_avr_data_array = [
     {
         "heuristics": {}, 
         "name": "Aven Mindcensor", 
@@ -18064,7 +18064,7 @@ modo_cube_avr_data_array = [
         "converted_mana_cost": 2
     }
 ];
-modo_cube_m13_data = {
+mtgo_cube_m13_data = {
     "Palinchron": {
         "heuristics": {}, 
         "name": "Palinchron", 
@@ -27079,7 +27079,7 @@ modo_cube_m13_data = {
         "converted_mana_cost": 2
     }
 };
-modo_cube_m13_data_array = [
+mtgo_cube_m13_data_array = [
     {
         "heuristics": {}, 
         "name": "Aven Mindcensor", 
@@ -36094,7 +36094,7 @@ modo_cube_m13_data_array = [
         "converted_mana_cost": 2
     }
 ];
-modo_cube_og_data = {
+mtgo_cube_og_data = {
     "Snuff Out": {
         "heuristics": {}, 
         "name": "Snuff Out", 
@@ -45135,7 +45135,7 @@ modo_cube_og_data = {
         "converted_mana_cost": 2
     }
 };
-modo_cube_og_data_array = [
+mtgo_cube_og_data_array = [
     {
         "heuristics": {}, 
         "name": "Snuff Out", 
@@ -54176,7 +54176,7 @@ modo_cube_og_data_array = [
         "converted_mana_cost": 2
     }
 ];
-modo_cube_rtr_data = {
+mtgo_cube_rtr_data = {
     "Polluted Delta": {
         "heuristics": {}, 
         "name": "Polluted Delta", 
@@ -60780,7 +60780,7 @@ modo_cube_rtr_data = {
         "converted_mana_cost": 2
     }
 };
-modo_cube_rtr_data_array = [
+mtgo_cube_rtr_data_array = [
     {
         "heuristics": {}, 
         "name": "Fauna Shaman", 

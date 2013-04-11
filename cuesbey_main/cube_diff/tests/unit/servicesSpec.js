@@ -85,7 +85,7 @@ describe('service', function() {
             split_svc = CubeSplitService;
         }));
 
-        cubeContents = modo_cube_og_data;
+        cubeContents = mtgo_cube_og_data;
 
         var subCube1 = [
             cubeContents['Go for the Throat'],
@@ -495,7 +495,7 @@ describe('service', function() {
 
         var svc, cubeContents;
 
-        cubeContents = modo_cube_og_data_array;
+        cubeContents = mtgo_cube_og_data_array;
 
         beforeEach(inject(function ($injector, CubeSortService) {
             svc = CubeSortService;
@@ -1312,16 +1312,16 @@ describe('service', function() {
             // this tries to sort it like the original MTGO cube announcement
 
             var baseCube = [
-                modo_cube_og_data['Damnation'],
-                modo_cube_og_data['Vampiric Tutor'],
-                modo_cube_og_data['Doom Blade'],
-                modo_cube_og_data['Karn Liberated'],
-                modo_cube_og_data['Thran Dynamo'],
-                modo_cube_og_data['Wasteland'],
-                modo_cube_og_data['Tidehollow Sculler'],
-                modo_cube_og_data['Liliana of the Veil'],
-                modo_cube_og_data['Sorin Markov'],
-                modo_cube_og_data['Sphinx of the Steel Wind']
+                mtgo_cube_og_data['Damnation'],
+                mtgo_cube_og_data['Vampiric Tutor'],
+                mtgo_cube_og_data['Doom Blade'],
+                mtgo_cube_og_data['Karn Liberated'],
+                mtgo_cube_og_data['Thran Dynamo'],
+                mtgo_cube_og_data['Wasteland'],
+                mtgo_cube_og_data['Tidehollow Sculler'],
+                mtgo_cube_og_data['Liliana of the Veil'],
+                mtgo_cube_og_data['Sorin Markov'],
+                mtgo_cube_og_data['Sphinx of the Steel Wind']
             ];
 
             var sortedCube = svc.sortCube(baseCube, {
@@ -1435,7 +1435,7 @@ describe('service', function() {
 
     describe("cardCategoryServiceTest", function() {
         var svc, cubeContents;
-        cubeContents = modo_cube_og_data;
+        cubeContents = mtgo_cube_og_data;
 
         beforeEach(inject(function ($injector, CardCategoryService) {
             svc = CardCategoryService;
@@ -1446,7 +1446,7 @@ describe('service', function() {
         var dynamo = cubeContents['Thran Dynamo'];
         var sculler = cubeContents['Tidehollow Sculler'];
         var damnation = cubeContents['Damnation'];
-        var emrakul = modo_cube_rtr_data['Emrakul, the Aeons Torn'];
+        var emrakul = mtgo_cube_rtr_data['Emrakul, the Aeons Torn'];
         var devilsPlay = cubeContents["Devil's Play"];
         var souls = cubeContents["Lingering Souls"];
         var legionnaire = cubeContents["Porcelain Legionnaire"];

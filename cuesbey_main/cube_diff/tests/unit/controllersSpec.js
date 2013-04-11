@@ -18,7 +18,7 @@
 //            ctrl = $controller("CubeContentsCtrl", {$scope: scope});
 //        }));
 //
-//        var cube_content = modo_cube_og_data;
+//        var cube_content = mtgo_cube_og_data;
 //
 //        var setupExpectGivenNames = function(before, after, spec, expectedBefore, expectedAfter) {
 //            var actualBefore = [];

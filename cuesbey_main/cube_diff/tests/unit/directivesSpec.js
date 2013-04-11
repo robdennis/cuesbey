@@ -17,13 +17,13 @@ describe('directives', function() {
     });
     describe('diff-table', function() {
         var elm, scope, diffService, compile, cube;
-        var damnation = modo_cube_og_data['Damnation'];
-        var doomBlade = modo_cube_og_data['Doom Blade'];
-        var terror = modo_cube_og_data['Terror'];
-        var seal = modo_cube_og_data['Imperial Seal'];
-        var ritual = modo_cube_og_data['Dark Ritual'];
-        var duress = modo_cube_og_data['Duress'];
-        var livingDeath = modo_cube_og_data['Living Death'];
+        var damnation = mtgo_cube_og_data['Damnation'];
+        var doomBlade = mtgo_cube_og_data['Doom Blade'];
+        var terror = mtgo_cube_og_data['Terror'];
+        var seal = mtgo_cube_og_data['Imperial Seal'];
+        var ritual = mtgo_cube_og_data['Dark Ritual'];
+        var duress = mtgo_cube_og_data['Duress'];
+        var livingDeath = mtgo_cube_og_data['Living Death'];
 
         beforeEach(inject(function($rootScope, $compile, CubeDiffService) {
             diffService = CubeDiffService;

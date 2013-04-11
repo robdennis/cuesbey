@@ -156,6 +156,7 @@ class HelpersTest(TestCase):
 
 class CardHeuristicTest(BaseCardInserter):
     maxDiff = None
+    fixtures = ['mtgo_cube_og.json', 'test_names.json']
 
     def assertHeuristicsArePresent(self, name, expected_subset,
                                    keys_that_are_not_present=()):

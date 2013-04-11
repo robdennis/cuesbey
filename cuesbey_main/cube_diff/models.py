@@ -6,6 +6,8 @@ from itertools import chain
 from unittest.util import sorted_list_difference, safe_repr
 
 import redis
+from django.core.serializers.python import Serializer as PythonSerializer
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models, IntegrityError
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
@@ -42,10 +44,10 @@ def assertExpectatations(actual, expected):
     errors = []
     if missing:
         errors.append('Expected, but missing:\n    %s' %
-                       safe_repr(missing))
+                      safe_repr(missing))
     if unexpected:
         errors.append('Unexpected, but present:\n    %s' %
-                       safe_repr(unexpected))
+                      safe_repr(unexpected))
     if errors:
         message = '\n'.join(errors)
         raise AssertionError(message)
@@ -356,7 +358,6 @@ class Card(models.Model):
             k.decode('utf8'): v.decode('utf8')
             for k, v in redis_conn.hgetall('_mismatched').iteritems()
         }
-        print('mapping: {!r}'.format(mapping))
         return mapping
 
     @classmethod

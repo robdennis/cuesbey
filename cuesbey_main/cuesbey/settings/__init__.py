@@ -19,6 +19,10 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+SERIALIZATION_MODULES = {
+    'card_json': 'cuesbey_main.cube_diff.models'
+}
+
 MANAGERS = ADMINS
 
 DATABASES = {

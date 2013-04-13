@@ -14,26 +14,26 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         $scope.heuristics = data
     });
 
-    var diffCache = $cacheFactory('diffCache', {});
+    $scope.diffCache = $cacheFactory('diffCache', {});
 
     var hasChangedSinceDiff = function(toCheck) {
         var wasChanged = false;
         jQuery.each(toCheck, function(name, value) {
-            var cachedValue = diffCache.get(name);
+            var cachedValue = $scope.diffCache.get(name);
             if (!cachedValue || cachedValue!==value) {
-                diffCache.put(name, value);
+                $scope.diffCache.put(name, value);
                 wasChanged = true;
             }
         });
         return wasChanged;
     };
 
-    $scope.beforeCardNames = DefaultsService.beforeNames();
-    $scope.afterCardNames = DefaultsService.afterNames();
+    $scope.beforeTextArea = DefaultsService.beforeNames();
+    $scope.afterTextArea = DefaultsService.afterNames();
 
     var getCheckedHeuristics = function() {
         var checkedHeuristics = [];
-        jQuery.each($scope.heuristics, function(idx, heuristic) {
+        jQuery.each($scope.heuristics || [], function(idx, heuristic) {
             if (heuristic['checked']) {
                 checkedHeuristics.push(heuristic['key']);
             }
@@ -43,10 +43,10 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
 
     $scope.setDataAndPerform = function (data, insertJob) {
         $scope.before = CardContentService.getCachedCards(
-            NamesFromTextService.getNames($scope.beforeCardNames)
+            NamesFromTextService.getNames($scope.beforeTextArea)
         );
         $scope.after = CardContentService.getCachedCards(
-            NamesFromTextService.getNames($scope.afterCardNames)
+            NamesFromTextService.getNames($scope.afterTextArea)
         );
 
         if (data) {
@@ -64,10 +64,10 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
     };
 
     $scope.performDiff = function() {
-        diffCache.put('pane', 0);
+        $scope.diffCache.put('pane', 0);
         jQuery.each($scope.diffedCube || {}, function(index, pane) {
             if (pane.active) {
-                diffCache.put('pane', index);
+                $scope.diffCache.put('pane', index);
             }
         });
 
@@ -83,20 +83,22 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         if (hasChangedSinceDiff({spec: $scope.spec})) {
             $scope.diffedCube[0].active = true;
         } else {
-            $scope.diffedCube[diffCache.get('pane')].active = true;
+            $scope.diffedCube[$scope.diffCache.get('pane')].active = true;
         }
     };
 
+
+
     $scope.diff = function() {
         var names = {
-            before: $scope.beforeCardNames,
-            after: $scope.afterCardNames
+            before: $scope.beforeTextArea,
+            after: $scope.afterTextArea
         };
 
         if (hasChangedSinceDiff(names)) {
             CardContentService.cacheAllCards(
-                NamesFromTextService.getNames($scope.beforeCardNames).concat(
-                    NamesFromTextService.getNames($scope.afterCardNames)
+                NamesFromTextService.getNames($scope.beforeTextArea).concat(
+                    NamesFromTextService.getNames($scope.afterTextArea)
                 ),
             $scope.setDataAndPerform);
         } else {

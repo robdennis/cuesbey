@@ -31,12 +31,12 @@ angular.module('cube_diff.services', [])
             spec: function() {
                 var cmcSlots = {
                     'appearance': 'table',
-                    'cmc<=1/2-color': {},
-                    'cmc==2/2-color': {},
-                    'cmc==3/2-color': {},
-                    'cmc==4/2-color': {},
-                    'cmc==5/2-color': {},
-                    'cmc==6/2-color': {},
+                    'cmc<=1': {},
+                    'cmc==2': {},
+                    'cmc==3': {},
+                    'cmc==4': {},
+                    'cmc==5': {},
+                    'cmc==6': {},
                     'cmc>=7': {}
                 };
                 return {

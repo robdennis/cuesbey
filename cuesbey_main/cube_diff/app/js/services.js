@@ -31,32 +31,32 @@ angular.module('cube_diff.services', [])
             spec: function() {
                 var cmcSlots = {
                     'appearance': 'table',
-                    'cmc<=1': {},
-                    'cmc==2': {},
-                    'cmc==3': {},
-                    'cmc==4': {},
-                    'cmc==5': {},
-                    'cmc==6': {},
+                    'cmc<=1/2-color': {},
+                    'cmc==2/2-color': {},
+                    'cmc==3/2-color': {},
+                    'cmc==4/2-color': {},
+                    'cmc==5/2-color': {},
+                    'cmc==6/2-color': {},
                     'cmc>=7': {}
                 };
                 return {
-                    'White': {
+                    'MonoWhite': {
                         'Creature': cmcSlots,
                         '!Creature': cmcSlots
                     },
-                    'Blue': {
+                    'MonoBlue': {
                         'Creature': cmcSlots,
                         '!Creature': cmcSlots
                     },
-                    'Black': {
+                    'MonoBlack': {
                         'Creature': cmcSlots,
                         '!Creature': cmcSlots
                     },
-                    'Red': {
+                    'MonoRed': {
                         'Creature': cmcSlots,
                         '!Creature': cmcSlots
                     },
-                    'Green': {
+                    'MonoGreen': {
                         'Creature': cmcSlots,
                         '!Creature': cmcSlots
                     },
@@ -69,7 +69,18 @@ angular.module('cube_diff.services', [])
                         appearance:'table'
                     },
                     'Multicolor': {
-                        appearance:'table'
+                        appearance:'table',
+                        'White/Blue/2-color': {},
+                        'White/Black/2-color': {},
+                        'White/Red/2-color': {},
+                        'White/Green/2-color': {},
+                        'Blue/Black/2-color': {},
+                        'Blue/Red/2-color': {},
+                        'Blue/Green/2-color': {},
+                        'Black/Red/2-color': {},
+                        'Black/Green/2-color': {},
+                        '3+ Color': {}
+
                     }
                 };
             },
@@ -1678,17 +1689,62 @@ angular.module('cube_diff.services', [])
                     });
                 }
 
-                var _checkForExactColor = function(category, card) {
+                var _checkForColor = function(category, card) {
+
                     if (category == 'Colorless') {
                         // special case for colorlessness
                         return card['colors'].length == 0;
                     }
-                    if (category == 'Multicolor') {
-                        // special case for multicolored
-                        return card['colors'].length > 1;
+
+                    var mcMatch = /(.+?)(?:-|\s)*color/i.exec(category);
+                    if (mcMatch) {
+                        var colorMap = {
+                            '0': 0,
+                            'zero': 0,
+                            '2': 2,
+                            'two': 2,
+                            '3': 3,
+                            'tri': 3,
+                            'three': 3,
+                            '4': 4,
+                            'quad': 4,
+                            'four': 4,
+                            '5': 5,
+                            'five': 5,
+                            'multi': 2
+                        };
+                        var numCats = mcMatch[1].toLowerCase();
+                        var expectGreaterOrEqual = false;
+                        if (numCats.indexOf('+', numCats.length - 1) !== -1) {
+                            // somone wanted to say 3+-color apparently
+                            expectGreaterOrEqual = true;
+                            numCats = numCats.substring(0, numCats.length - 1);
+                        } else if (numCats == 'multi') {
+                            expectGreaterOrEqual = true;
+                        }
+                        var expectedLength = colorMap[numCats];
+                        if (!(expectedLength === undefined)) {
+                            if (expectGreaterOrEqual) {
+                                return card['colors'].length >= expectedLength;
+                            } else {
+                                return card['colors'].length == expectedLength;
+                            }
+                        }
                     }
+
+                    var isMono = false;
+
+                    if (category.indexOf('Mono') === 0) {
+                        isMono = true;
+                        category = category.substring(4);
+                    }
+
                     if (inArray(category, colorList) !== -1) {
-                        return angular.equals([category], card['colors']);
+                        if (isMono) {
+                            return angular.equals([category], card['colors']);
+                        } else {
+                            return inArray(category, card['colors']) !== -1;
+                        }
                     } else {
                         return 'na';
                     }
@@ -1771,7 +1827,7 @@ angular.module('cube_diff.services', [])
                         }
 
                         jQuery.each([
-                            _checkForExactColor,
+                            _checkForColor,
                             _checkForType,
                             _checkForCMC,
                             _checkForDiff,

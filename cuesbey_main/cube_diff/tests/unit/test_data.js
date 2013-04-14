@@ -36569,9 +36569,9 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Overgrown Tomb": {
+    "Cathedral of War": {
         "heuristics": {}, 
-        "name": "Overgrown Tomb", 
+        "name": "Cathedral of War", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -36810,17 +36810,18 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 8
     }, 
-    "Blade Splicer": {
+    "Prophetic Bolt": {
         "heuristics": {}, 
-        "name": "Blade Splicer", 
+        "name": "Prophetic Bolt", 
         "colors": [
-            "White"
+            "Blue", 
+            "Red"
         ], 
-        "mana_cost": "{2}{W}", 
+        "mana_cost": "{3}{U}{R}", 
         "types": [
-            "Creature"
+            "Instant"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 5
     }, 
     "Buried Alive": {
         "heuristics": {}, 
@@ -37491,18 +37492,17 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 0
     }, 
-    "Prophetic Bolt": {
+    "Blade Splicer": {
         "heuristics": {}, 
-        "name": "Prophetic Bolt", 
+        "name": "Blade Splicer", 
         "colors": [
-            "Blue", 
-            "Red"
+            "White"
         ], 
-        "mana_cost": "{3}{U}{R}", 
+        "mana_cost": "{2}{W}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 3
     }, 
     "Vampire Hexmage": {
         "heuristics": {}, 
@@ -37895,15 +37895,22 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Sulfurous Springs": {
-        "heuristics": {}, 
-        "name": "Sulfurous Springs", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
+    "Renewed Faith": {
+        "heuristics": {
+            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
+                "mana_cost": "{1}{W}", 
+                "converted_mana_cost": 2
+            }
+        }, 
+        "name": "Renewed Faith", 
+        "colors": [
+            "White"
         ], 
-        "converted_mana_cost": 0
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Grand Arbiter Augustin IV": {
         "heuristics": {}, 
@@ -38655,9 +38662,9 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Cathedral of War": {
+    "Overgrown Tomb": {
         "heuristics": {}, 
-        "name": "Cathedral of War", 
+        "name": "Overgrown Tomb", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -38894,32 +38901,27 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Isolated Chapel": {
+    "Aven Mindcensor": {
         "heuristics": {}, 
-        "name": "Isolated Chapel", 
+        "name": "Aven Mindcensor", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    "Sulfurous Springs": {
+        "heuristics": {}, 
+        "name": "Sulfurous Springs", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
             "Land"
         ], 
         "converted_mana_cost": 0
-    }, 
-    "Renewed Faith": {
-        "heuristics": {
-            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
-                "mana_cost": "{1}{W}", 
-                "converted_mana_cost": 2
-            }
-        }, 
-        "name": "Renewed Faith", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
     }, 
     "Tragic Slip": {
         "heuristics": {}, 
@@ -44673,17 +44675,15 @@ mtgo_cube_m13_data = {
         ], 
         "converted_mana_cost": 7
     }, 
-    "Aven Mindcensor": {
+    "Isolated Chapel": {
         "heuristics": {}, 
-        "name": "Aven Mindcensor", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
+        "name": "Isolated Chapel", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Creature"
+            "Land"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 0
     }, 
     "Desolate Lighthouse": {
         "heuristics": {
@@ -45093,710 +45093,6 @@ mtgo_cube_m13_data = {
     }
 };
 mtgo_cube_m13_data_array = [
-    {
-        "heuristics": {}, 
-        "name": "Wolfir Silverheart", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Scrubland", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Grim Lavamancer", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Deathmark", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Powder Keg", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Precursor Golem", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cloudgoat Ranger", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Absorb", 
-        "colors": [
-            "Blue", 
-            "White"
-        ], 
-        "mana_cost": "{W}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dismiss", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Elspeth Tirel", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Enchantment", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Sarcomancy", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tinker", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Burrenton Forge-Tender", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Opposition", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rishadan Port", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Siege-Gang Commander", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "always_kick": {
-                "colors": [
-                    "Black", 
-                    "Green", 
-                    "Red"
-                ], 
-                "mana_cost": "{3}{B}{R}{G}", 
-                "converted_mana_cost": 6
-            }, 
-            "off_color_kicker_is_gold": {
-                "colors": [
-                    "Black", 
-                    "Green", 
-                    "Red"
-                ]
-            }, 
-            "always_kick_creatures": {
-                "colors": [
-                    "Green", 
-                    "Black", 
-                    "Red"
-                ], 
-                "mana_cost": "{3}{B}{R}{G}", 
-                "converted_mana_cost": 6
-            }
-        }, 
-        "name": "Thunderscape Battlemage", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "phyrexian_always_pays_life_except_for_abilities": {
-                "colors": [
-                    "Blue"
-                ]
-            }
-        }, 
-        "name": "Spellskite", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Badlands", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dream Halls", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nostalgic Dreams", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nezumi Graverobber", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Plague Sliver", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Avenger of Zendikar", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{5}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Searing Blaze", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Serendib Efreet", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Putrefy", 
-        "colors": [
-            "Black", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{B}{G}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ethersworn Canonist", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Eternal Witness", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Devoted Druid", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cathedral of War", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "phyrexian_always_pays_life_except_for_abilities": {
-                "colors": [
-                    "Black"
-                ]
-            }
-        }, 
-        "name": "Hex Parasite", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Slith Firewalker", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Savannah", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Brain Freeze", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Price of Progress", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Living Death", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Miscalculation", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Steam Vents", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Deprive", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Persecute", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Koth of the Hammer", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{R}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Basilisk Collar", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Preordain", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Scalding Tarn", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }, 
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }, 
-            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
-                "mana_cost": "{X}{2}{W}", 
-                "converted_mana_cost": null
-            }
-        }, 
-        "name": "Decree of Justice", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{X}{X}{2}{W}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Diabolic Servitude", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Kitchen Finks", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G/W}{G/W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Falkenrath Aristocrat", 
-        "colors": [
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{B}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dungeon Geists", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Isolated Chapel", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
-                "mana_cost": "{1}{W}", 
-                "converted_mana_cost": 2
-            }
-        }, 
-        "name": "Renewed Faith", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tragic Slip", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Braids, Cabal Minion", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Underground Sea", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
     {
         "heuristics": {}, 
         "name": "Aven Mindcensor", 
@@ -47971,6 +47267,710 @@ mtgo_cube_m13_data_array = [
     {
         "heuristics": {}, 
         "name": "Karakas", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Wolfir Silverheart", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Scrubland", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Grim Lavamancer", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Deathmark", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Powder Keg", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Precursor Golem", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cloudgoat Ranger", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Absorb", 
+        "colors": [
+            "Blue", 
+            "White"
+        ], 
+        "mana_cost": "{W}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dismiss", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Elspeth Tirel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Enchantment", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Sarcomancy", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tinker", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Burrenton Forge-Tender", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Opposition", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rishadan Port", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Siege-Gang Commander", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "colors": [
+                    "Black", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{3}{B}{R}{G}", 
+                "converted_mana_cost": 6
+            }, 
+            "off_color_kicker_is_gold": {
+                "colors": [
+                    "Black", 
+                    "Green", 
+                    "Red"
+                ]
+            }, 
+            "always_kick_creatures": {
+                "colors": [
+                    "Green", 
+                    "Black", 
+                    "Red"
+                ], 
+                "mana_cost": "{3}{B}{R}{G}", 
+                "converted_mana_cost": 6
+            }
+        }, 
+        "name": "Thunderscape Battlemage", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life_except_for_abilities": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Spellskite", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Badlands", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dream Halls", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nostalgic Dreams", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nezumi Graverobber", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Plague Sliver", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Avenger of Zendikar", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{5}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Searing Blaze", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Serendib Efreet", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Putrefy", 
+        "colors": [
+            "Black", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{B}{G}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ethersworn Canonist", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Eternal Witness", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Devoted Druid", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cathedral of War", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life_except_for_abilities": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
+        "name": "Hex Parasite", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Slith Firewalker", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Savannah", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Brain Freeze", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Price of Progress", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Living Death", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Miscalculation", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Steam Vents", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Deprive", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Persecute", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Koth of the Hammer", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{R}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Basilisk Collar", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Preordain", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Scalding Tarn", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }, 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }, 
+            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
+                "mana_cost": "{X}{2}{W}", 
+                "converted_mana_cost": null
+            }
+        }, 
+        "name": "Decree of Justice", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{X}{X}{2}{W}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Diabolic Servitude", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Kitchen Finks", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G/W}{G/W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Falkenrath Aristocrat", 
+        "colors": [
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{B}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dungeon Geists", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Isolated Chapel", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
+                "mana_cost": "{1}{W}", 
+                "converted_mana_cost": 2
+            }
+        }, 
+        "name": "Renewed Faith", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tragic Slip", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Braids, Cabal Minion", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Underground Sea", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -54174,18 +54174,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Vindicate": {
+    "Survival of the Fittest": {
         "heuristics": {}, 
-        "name": "Vindicate", 
+        "name": "Survival of the Fittest", 
         "colors": [
-            "White", 
-            "Black"
+            "Green"
         ], 
-        "mana_cost": "{1}{W}{B}", 
+        "mana_cost": "{1}{G}", 
         "types": [
-            "Sorcery"
+            "Enchantment"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 2
     }, 
     "Avacyn's Pilgrim": {
         "heuristics": {}, 
@@ -54231,15 +54230,15 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 0
     }, 
-    "Nevinyrral's Disk": {
+    "Simic Growth Chamber": {
         "heuristics": {}, 
-        "name": "Nevinyrral's Disk", 
+        "name": "Simic Growth Chamber", 
         "colors": [], 
-        "mana_cost": "{4}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact"
+            "Land"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 0
     }, 
     "Caves of Koilos": {
         "heuristics": {}, 
@@ -54284,6 +54283,27 @@ mtgo_cube_rtr_data = {
             "Creature"
         ], 
         "converted_mana_cost": 1
+    }, 
+    "Into the Roil": {
+        "heuristics": {
+            "always_kick": {
+                "mana_cost": "{2}{U}{U}", 
+                "converted_mana_cost": 4
+            }, 
+            "always_kick_creatures": {
+                "mana_cost": "{2}{U}{U}", 
+                "converted_mana_cost": 4
+            }
+        }, 
+        "name": "Into the Roil", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
     }, 
     "Meloku the Clouded Mirror": {
         "heuristics": {}, 
@@ -54355,6 +54375,18 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 0
     }, 
+    "Torch Fiend": {
+        "heuristics": {}, 
+        "name": "Torch Fiend", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
     "Overgrown Tomb": {
         "heuristics": {}, 
         "name": "Overgrown Tomb", 
@@ -54423,23 +54455,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Batterskull": {
-        "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Batterskull", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 5
-    }, 
     "Glen Elendra Archmage": {
         "heuristics": {}, 
         "name": "Glen Elendra Archmage", 
@@ -54452,17 +54467,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Vendilion Clique": {
+    "Reanimate": {
         "heuristics": {}, 
-        "name": "Vendilion Clique", 
+        "name": "Reanimate", 
         "colors": [
-            "Blue"
+            "Black"
         ], 
-        "mana_cost": "{1}{U}{U}", 
+        "mana_cost": "{B}", 
         "types": [
-            "Creature"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 1
     }, 
     "Hellspark Elemental": {
         "heuristics": {}, 
@@ -54488,17 +54503,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 6
     }, 
-    "Memory Lapse": {
+    "Stunted Growth": {
         "heuristics": {}, 
-        "name": "Memory Lapse", 
+        "name": "Stunted Growth", 
         "colors": [
-            "Blue"
+            "Green"
         ], 
-        "mana_cost": "{1}{U}", 
+        "mana_cost": "{3}{G}{G}", 
         "types": [
-            "Instant"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 5
     }, 
     "Weathered Wayfarer": {
         "heuristics": {}, 
@@ -54511,16 +54526,6 @@ mtgo_cube_rtr_data = {
             "Creature"
         ], 
         "converted_mana_cost": 1
-    }, 
-    "Mox Diamond": {
-        "heuristics": {}, 
-        "name": "Mox Diamond", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
     }, 
     "Kird Ape": {
         "heuristics": {
@@ -54709,17 +54714,18 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Survival of the Fittest": {
+    "Vindicate": {
         "heuristics": {}, 
-        "name": "Survival of the Fittest", 
+        "name": "Vindicate", 
         "colors": [
-            "Green"
+            "White", 
+            "Black"
         ], 
-        "mana_cost": "{1}{G}", 
+        "mana_cost": "{1}{W}{B}", 
         "types": [
-            "Enchantment"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 3
     }, 
     "Counterspell": {
         "heuristics": {}, 
@@ -54768,18 +54774,6 @@ mtgo_cube_rtr_data = {
         "mana_cost": "{B/R}", 
         "types": [
             "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    "Preordain": {
-        "heuristics": {}, 
-        "name": "Preordain", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Sorcery"
         ], 
         "converted_mana_cost": 1
     }, 
@@ -55116,29 +55110,27 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 3
     }, 
-    "Stunted Growth": {
+    "Memory Lapse": {
         "heuristics": {}, 
-        "name": "Stunted Growth", 
+        "name": "Memory Lapse", 
         "colors": [
-            "Green"
+            "Blue"
         ], 
-        "mana_cost": "{3}{G}{G}", 
+        "mana_cost": "{1}{U}", 
         "types": [
-            "Sorcery"
+            "Instant"
         ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 2
     }, 
-    "Indrik Stomphowler": {
+    "Mox Diamond": {
         "heuristics": {}, 
-        "name": "Indrik Stomphowler", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{4}{G}", 
+        "name": "Mox Diamond", 
+        "colors": [], 
+        "mana_cost": "{0}", 
         "types": [
-            "Creature"
+            "Artifact"
         ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 0
     }, 
     "Blade Splicer": {
         "heuristics": {}, 
@@ -55409,6 +55401,25 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 1
     }, 
+    "Empty the Warrens": {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Empty the Warrens", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
     "Ranger of Eos": {
         "heuristics": {}, 
         "name": "Ranger of Eos", 
@@ -55516,14 +55527,13 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 0
     }, 
-    "Venser, Shaper Savant": {
+    "Masticore": {
         "heuristics": {}, 
-        "name": "Venser, Shaper Savant", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
+        "name": "Masticore", 
+        "colors": [], 
+        "mana_cost": "{4}", 
         "types": [
+            "Artifact", 
             "Creature"
         ], 
         "converted_mana_cost": 4
@@ -55568,6 +55578,18 @@ mtgo_cube_rtr_data = {
             "Enchantment"
         ], 
         "converted_mana_cost": 3
+    }, 
+    "Venser, Shaper Savant": {
+        "heuristics": {}, 
+        "name": "Venser, Shaper Savant", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
     }, 
     "Gruul Signet": {
         "heuristics": {}, 
@@ -55638,6 +55660,18 @@ mtgo_cube_rtr_data = {
             "Sorcery"
         ], 
         "converted_mana_cost": 2
+    }, 
+    "Spikeshot Elder": {
+        "heuristics": {}, 
+        "name": "Spikeshot Elder", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
     }, 
     "Mana Leak": {
         "heuristics": {}, 
@@ -55773,17 +55807,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Tinker": {
+    "Hero of Bladehold": {
         "heuristics": {}, 
-        "name": "Tinker", 
+        "name": "Hero of Bladehold", 
         "colors": [
-            "Blue"
+            "White"
         ], 
-        "mana_cost": "{2}{U}", 
+        "mana_cost": "{2}{W}{W}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 4
     }, 
     "Opposition": {
         "heuristics": {}, 
@@ -56122,15 +56156,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 1
     }, 
-    "Mox Sapphire": {
+    "Garruk Relentless": {
         "heuristics": {}, 
-        "name": "Mox Sapphire", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
+        "name": "Garruk Relentless", 
+        "colors": [
+            "Green"
         ], 
-        "converted_mana_cost": 0
+        "mana_cost": "{3}{G}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
     }, 
     "Kitchen Finks": {
         "heuristics": {}, 
@@ -56252,15 +56288,15 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 3
     }, 
-    "Simic Growth Chamber": {
+    "Nevinyrral's Disk": {
         "heuristics": {}, 
-        "name": "Simic Growth Chamber", 
+        "name": "Nevinyrral's Disk", 
         "colors": [], 
-        "mana_cost": null, 
+        "mana_cost": "{4}", 
         "types": [
-            "Land"
+            "Artifact"
         ], 
-        "converted_mana_cost": 0
+        "converted_mana_cost": 4
     }, 
     "Plated Geopede": {
         "heuristics": {}, 
@@ -56310,15 +56346,19 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 7
     }, 
-    "Teetering Peaks": {
+    "Broodmate Dragon": {
         "heuristics": {}, 
-        "name": "Teetering Peaks", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
+        "name": "Broodmate Dragon", 
+        "colors": [
+            "Black", 
+            "Green", 
+            "Red"
         ], 
-        "converted_mana_cost": 0
+        "mana_cost": "{3}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
     }, 
     "Rift Bolt": {
         "heuristics": {
@@ -56417,24 +56457,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 3
     }, 
-    "Momentary Blink": {
-        "heuristics": {
-            "off_color_flashback_is_gold": {
-                "colors": [
-                    "Blue", 
-                    "White"
-                ]
-            }
-        }, 
-        "name": "Momentary Blink", 
+    "Goblin Welder": {
+        "heuristics": {}, 
+        "name": "Goblin Welder", 
         "colors": [
-            "White"
+            "Red"
         ], 
-        "mana_cost": "{1}{W}", 
+        "mana_cost": "{R}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 1
     }, 
     "Dark Ritual": {
         "heuristics": {}, 
@@ -56470,6 +56503,25 @@ mtgo_cube_rtr_data = {
             "Creature"
         ], 
         "converted_mana_cost": 4
+    }, 
+    "Momentary Blink": {
+        "heuristics": {
+            "off_color_flashback_is_gold": {
+                "colors": [
+                    "Blue", 
+                    "White"
+                ]
+            }
+        }, 
+        "name": "Momentary Blink", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
     }, 
     "Liliana of the Veil": {
         "heuristics": {}, 
@@ -56706,18 +56758,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Goblin Welder": {
-        "heuristics": {}, 
-        "name": "Goblin Welder", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
     "Rakdos Signet": {
         "heuristics": {}, 
         "name": "Rakdos Signet", 
@@ -56778,17 +56818,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Reanimate": {
+    "Vendilion Clique": {
         "heuristics": {}, 
-        "name": "Reanimate", 
+        "name": "Vendilion Clique", 
         "colors": [
-            "Black"
+            "Blue"
         ], 
-        "mana_cost": "{B}", 
+        "mana_cost": "{1}{U}{U}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 3
     }, 
     "Ultimate Price": {
         "heuristics": {}, 
@@ -56831,17 +56871,33 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 3
     }, 
-    "Vengevine": {
+    "Slaughter Pact": {
         "heuristics": {}, 
-        "name": "Vengevine", 
+        "name": "Slaughter Pact", 
         "colors": [
-            "Green"
+            "Black"
         ], 
-        "mana_cost": "{2}{G}{G}", 
+        "mana_cost": "{0}", 
         "types": [
-            "Creature"
+            "Instant"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 0
+    }, 
+    "Earthquake": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Earthquake", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
     }, 
     "Necromancy": {
         "heuristics": {}, 
@@ -57130,6 +57186,25 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
+    "Porcelain Legionnaire": {
+        "heuristics": {
+            "phyrexian_always_pays_life": {
+                "colors": [], 
+                "mana_cost": "{2}", 
+                "converted_mana_cost": 2
+            }
+        }, 
+        "name": "Porcelain Legionnaire", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W/P}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
     "Land Tax": {
         "heuristics": {}, 
         "name": "Land Tax", 
@@ -57403,21 +57478,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Earthquake": {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Earthquake", 
+    "Indrik Stomphowler": {
+        "heuristics": {}, 
+        "name": "Indrik Stomphowler", 
         "colors": [
-            "Red"
+            "Green"
         ], 
-        "mana_cost": "{X}{R}", 
+        "mana_cost": "{4}{G}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 5
     }, 
     "Fyndhorn Elves": {
         "heuristics": {}, 
@@ -57591,6 +57662,18 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
+    "Vengevine": {
+        "heuristics": {}, 
+        "name": "Vengevine", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
     "Upheaval": {
         "heuristics": {}, 
         "name": "Upheaval", 
@@ -57637,24 +57720,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Porcelain Legionnaire": {
-        "heuristics": {
-            "phyrexian_always_pays_life": {
-                "colors": [], 
-                "mana_cost": "{2}", 
-                "converted_mana_cost": 2
-            }
-        }, 
-        "name": "Porcelain Legionnaire", 
+    "Magma Jet": {
+        "heuristics": {}, 
+        "name": "Magma Jet", 
         "colors": [
-            "White"
+            "Red"
         ], 
-        "mana_cost": "{2}{W/P}", 
+        "mana_cost": "{1}{R}", 
         "types": [
-            "Artifact", 
-            "Creature"
+            "Instant"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 2
     }, 
     "Phyrexian Obliterator": {
         "heuristics": {}, 
@@ -57692,17 +57768,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 1
     }, 
-    "Slaughter Pact": {
+    "Preordain": {
         "heuristics": {}, 
-        "name": "Slaughter Pact", 
+        "name": "Preordain", 
         "colors": [
-            "Black"
+            "Blue"
         ], 
-        "mana_cost": "{0}", 
+        "mana_cost": "{U}", 
         "types": [
-            "Instant"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 0
+        "converted_mana_cost": 1
     }, 
     "Consecrated Sphinx": {
         "heuristics": {}, 
@@ -57753,6 +57829,16 @@ mtgo_cube_rtr_data = {
             "Creature"
         ], 
         "converted_mana_cost": 3
+    }, 
+    "Teetering Peaks": {
+        "heuristics": {}, 
+        "name": "Teetering Peaks", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
     }, 
     "Moat": {
         "heuristics": {}, 
@@ -58012,15 +58098,22 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Basalt Monolith": {
-        "heuristics": {}, 
-        "name": "Basalt Monolith", 
+    "Batterskull": {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Batterskull", 
         "colors": [], 
-        "mana_cost": "{3}", 
+        "mana_cost": "{5}", 
         "types": [
             "Artifact"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 5
     }, 
     "Ancient Grudge": {
         "heuristics": {
@@ -58149,6 +58242,18 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 0
     }, 
+    "Tinker": {
+        "heuristics": {}, 
+        "name": "Tinker", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
     "The Abyss": {
         "heuristics": {}, 
         "name": "The Abyss", 
@@ -58242,18 +58347,6 @@ mtgo_cube_rtr_data = {
             "Sorcery"
         ], 
         "converted_mana_cost": 1
-    }, 
-    "Magma Jet": {
-        "heuristics": {}, 
-        "name": "Magma Jet", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
     }, 
     "Unburial Rites": {
         "heuristics": {
@@ -58490,18 +58583,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 3
     }, 
-    "Garruk Relentless": {
-        "heuristics": {}, 
-        "name": "Garruk Relentless", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
     "Boros Signet": {
         "heuristics": {}, 
         "name": "Boros Signet", 
@@ -58572,24 +58653,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Empty the Warrens": {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Empty the Warrens", 
+    "Elesh Norn, Grand Cenobite": {
+        "heuristics": {}, 
+        "name": "Elesh Norn, Grand Cenobite", 
         "colors": [
-            "Red"
+            "White"
         ], 
-        "mana_cost": "{3}{R}", 
+        "mana_cost": "{5}{W}{W}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 7
     }, 
     "Winter Orb": {
         "heuristics": {}, 
@@ -58626,26 +58700,15 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Into the Roil": {
-        "heuristics": {
-            "always_kick": {
-                "mana_cost": "{2}{U}{U}", 
-                "converted_mana_cost": 4
-            }, 
-            "always_kick_creatures": {
-                "mana_cost": "{2}{U}{U}", 
-                "converted_mana_cost": 4
-            }
-        }, 
-        "name": "Into the Roil", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
+    "Basalt Monolith": {
+        "heuristics": {}, 
+        "name": "Basalt Monolith", 
+        "colors": [], 
+        "mana_cost": "{3}", 
         "types": [
-            "Instant"
+            "Artifact"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 3
     }, 
     "Cloudgoat Ranger": {
         "heuristics": {}, 
@@ -58659,17 +58722,15 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Hero of Bladehold": {
+    "Flooded Strand": {
         "heuristics": {}, 
-        "name": "Hero of Bladehold", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
+        "name": "Flooded Strand", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Creature"
+            "Land"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 0
     }, 
     "Pernicious Deed": {
         "heuristics": {}, 
@@ -58875,16 +58936,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 1
     }, 
-    "Flooded Strand": {
-        "heuristics": {}, 
-        "name": "Flooded Strand", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
     "Sword of Feast and Famine": {
         "heuristics": {}, 
         "name": "Sword of Feast and Famine", 
@@ -59007,20 +59058,6 @@ mtgo_cube_rtr_data = {
             "Creature"
         ], 
         "converted_mana_cost": 2
-    }, 
-    "Broodmate Dragon": {
-        "heuristics": {}, 
-        "name": "Broodmate Dragon", 
-        "colors": [
-            "Black", 
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{3}{B}{R}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
     }, 
     "Palinchron": {
         "heuristics": {}, 
@@ -59521,17 +59558,17 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Torch Fiend": {
-        "heuristics": {}, 
-        "name": "Torch Fiend", 
+    "Savannah Lions": {
+        "heuristics": null, 
+        "name": "Savannah Lions", 
         "colors": [
-            "Red"
+            "White"
         ], 
-        "mana_cost": "{1}{R}", 
+        "mana_cost": "{W}", 
         "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 1
     }, 
     "Sorin, Lord of Innistrad": {
         "heuristics": {}, 
@@ -60120,17 +60157,15 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Spikeshot Elder": {
+    "Mox Sapphire": {
         "heuristics": {}, 
-        "name": "Spikeshot Elder", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
+        "name": "Mox Sapphire", 
+        "colors": [], 
+        "mana_cost": "{0}", 
         "types": [
-            "Creature"
+            "Artifact"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 0
     }, 
     "Vraska the Unseen": {
         "heuristics": {}, 
@@ -60144,18 +60179,6 @@ mtgo_cube_rtr_data = {
             "Planeswalker"
         ], 
         "converted_mana_cost": 5
-    }, 
-    "Savannah Lions": {
-        "heuristics": null, 
-        "name": "Savannah Lions", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
     }, 
     "Jace, the Mind Sculptor": {
         "heuristics": {}, 
@@ -60375,18 +60398,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 5
     }, 
-    "Elesh Norn, Grand Cenobite": {
-        "heuristics": {}, 
-        "name": "Elesh Norn, Grand Cenobite", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{5}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
     "Birds of Paradise": {
         "heuristics": {}, 
         "name": "Birds of Paradise", 
@@ -60566,17 +60577,6 @@ mtgo_cube_rtr_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Masticore": {
-        "heuristics": {}, 
-        "name": "Masticore", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
     "Thrun, the Last Troll": {
         "heuristics": {}, 
         "name": "Thrun, the Last Troll", 
@@ -60686,629 +60686,6 @@ mtgo_cube_rtr_data = {
 mtgo_cube_rtr_data_array = [
     {
         "heuristics": {}, 
-        "name": "Polluted Delta", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Regrowth", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rout", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Plateau", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Razormane Masticore", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Frantic Search", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bloodgift Demon", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vindicate", 
-        "colors": [
-            "White", 
-            "Black"
-        ], 
-        "mana_cost": "{1}{W}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Avacyn's Pilgrim", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Willbender", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Temple Garden", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Adarkar Wastes", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nevinyrral's Disk", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Caves of Koilos", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wurmcoil Engine", 
-        "colors": [], 
-        "mana_cost": "{6}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Diabolic Edict", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tattermunge Maniac", 
-        "colors": [
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{R/G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Meloku the Clouded Mirror", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Snapcaster Mage", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nantuko Vigilante", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Day of Judgment", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Eternal Dragon", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{5}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lion's Eye Diamond", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Overgrown Tomb", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "All Is Dust", 
-        "colors": [], 
-        "mana_cost": "{7}", 
-        "types": [
-            "Tribal", 
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Watery Grave", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mesmeric Fiend", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Akroma, Angel of Wrath", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{5}{W}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Supreme Verdict", 
-        "colors": [
-            "Blue", 
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{W}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Glen Elendra Archmage", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vendilion Clique", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hellspark Elemental", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Terminus", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{4}{W}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Memory Lapse", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Weathered Wayfarer", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mox Diamond", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "Green", 
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Kird Ape", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Prophetic Bolt", 
-        "colors": [
-            "Blue", 
-            "Red"
-        ], 
-        "mana_cost": "{3}{U}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Buried Alive", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Urabrask the Hidden", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wake Thrasher", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chandra Nalaar", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}{R}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Armada Wurm", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Umezawa's Jitte", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vampiric Tutor", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Garruk, Primal Hunter", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}{G}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Silent Specter", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Oona's Prowler", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Leonin Relic-Warder", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Scavenging Ooze", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Control Magic", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Survival of the Fittest", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Counterspell", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
         "name": "Abrupt Decay", 
         "colors": [
             "Black", 
@@ -61319,162 +60696,6 @@ mtgo_cube_rtr_data_array = [
             "Instant"
         ], 
         "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Reveillark", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{4}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mox Sapphire", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rakdos Cackler", 
-        "colors": [
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{B/R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Remand", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rofellos, Llanowar Emissary", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Breeding Pool", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Izzet Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Burning of Xinye", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{4}{R}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Emeria Angel", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Inquisition of Kozilek", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Frenzied Goblin", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Mind Twist", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{X}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Niv-Mizzet, Dracogenius", 
-        "colors": [
-            "Blue", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{U}{U}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
     }, 
     {
         "heuristics": {}, 
@@ -61490,38 +60711,13 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Natural Order", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Woodfall Primus", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{5}{G}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Molten-Tail Masticore", 
+        "name": "Adarkar Wastes", 
         "colors": [], 
-        "mana_cost": "{4}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact", 
-            "Creature"
+            "Land"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
@@ -61537,246 +60733,92 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Graveborn Muse", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {
-            "suspend_as_cmc": {
-                "mana_cost": "{0}", 
-                "converted_mana_cost": 0
-            }
-        }, 
-        "name": "Lotus Bloom", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Baleful Strix", 
+        "name": "Agony Warp", 
         "colors": [
             "Blue", 
             "Black"
         ], 
         "mana_cost": "{U}{B}", 
         "types": [
-            "Artifact", 
-            "Creature"
+            "Instant"
         ], 
         "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Oust", 
+        "name": "Ajani Goldmane", 
         "colors": [
             "White"
         ], 
-        "mana_cost": "{W}", 
+        "mana_cost": "{2}{W}{W}", 
         "types": [
-            "Sorcery"
+            "Planeswalker"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
-        "name": "Sulfuric Vortex", 
+        "name": "Ajani Vengeant", 
         "colors": [
+            "White", 
             "Red"
         ], 
-        "mana_cost": "{1}{R}{R}", 
+        "mana_cost": "{2}{R}{W}", 
         "types": [
-            "Enchantment"
+            "Planeswalker"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
-        "name": "Taurean Mauler", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Boros Garrison", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tangle Wire", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Simic Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ember Hauler", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mox Pearl", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Strip Mine", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Old Man of the Sea", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Stunted Growth", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Earthquake", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{X}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Blade Splicer", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Recurring Nightmare", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nezumi Shortfang", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mirran Crusader", 
+        "name": "Ajani, Caller of the Pride", 
         "colors": [
             "White"
         ], 
         "mana_cost": "{1}{W}{W}", 
         "types": [
-            "Creature"
+            "Planeswalker"
         ], 
         "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
-        "name": "Bone Shredder", 
+        "name": "Akroma's Vengeance", 
         "colors": [
-            "Black"
+            "White"
         ], 
-        "mana_cost": "{2}{B}", 
+        "mana_cost": "{4}{W}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Akroma, Angel of Wrath", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{5}{W}{W}{W}", 
         "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 8
     }, 
     {
         "heuristics": {}, 
-        "name": "Rude Awakening", 
+        "name": "All Is Dust", 
+        "colors": [], 
+        "mana_cost": "{7}", 
+        "types": [
+            "Tribal", 
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "All Suns' Dawn", 
         "colors": [
             "Green"
         ], 
@@ -61788,171 +60830,15 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Basalt Monolith", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Restoration Angel", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mishra's Workshop", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Geist of Saint Traft", 
-        "colors": [
-            "Blue", 
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Liliana Vess", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}{B}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Daze", 
+        "name": "Ancestral Recall", 
         "colors": [
             "Blue"
         ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Enlightened Tutor", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
+        "mana_cost": "{U}", 
         "types": [
             "Instant"
         ], 
         "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sword of War and Peace", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Huntmaster of the Fells", 
-        "colors": [
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Putrid Imp", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Green Sun's Zenith", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{X}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ohran Viper", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chandra's Phoenix", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Beast Within", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
     }, 
     {
         "heuristics": {
@@ -61972,6 +60858,1397 @@ mtgo_cube_rtr_data_array = [
         "converted_mana_cost": 0
     }, 
     {
+        "heuristics": {
+            "off_color_flashback_is_gold": {
+                "colors": [
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Ancient Grudge", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ancient Tomb", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Angel of Despair", 
+        "colors": [
+            "White", 
+            "Black"
+        ], 
+        "mana_cost": "{3}{W}{W}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Animate Dead", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Arbor Elf", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Arc Trail", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Arid Mesa", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Armada Wurm", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Armageddon", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Avacyn's Pilgrim", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Avalanche Riders", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Avenger of Zendikar", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{5}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Enchantment", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Awakening Zone", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Azorius Chancery", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Azorius Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Badlands", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Balance", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Baleful Strix", 
+        "colors": [
+            "Blue", 
+            "Black"
+        ], 
+        "mana_cost": "{U}{B}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ball Lightning", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bane of the Living", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Baneslayer Angel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Basalt Monolith", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Batterskull", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Battlefield Forge", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Bayou", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Beast Within", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Birds of Paradise", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life": {
+                "colors": [], 
+                "mana_cost": "{3}", 
+                "converted_mana_cost": 3
+            }, 
+            "phyrexian_always_pays_life_except_for_abilities": {
+                "colors": [
+                    "Green"
+                ], 
+                "mana_cost": "{3}", 
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Birthing Pod", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G/P}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Tribal", 
+                    "Enchantment", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Bitterblossom", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Tribal", 
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Black Knight", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Black Lotus", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Blade Splicer", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Blightsteel Colossus", 
+        "colors": [], 
+        "mana_cost": "{12}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 12
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Blood Crypt", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bloodbraid Elf", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bloodghast", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bloodgift Demon", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bloodstained Mire", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Boggart Ram-Gang", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{R/G}{R/G}{R/G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bone Shredder", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bonesplitter", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Bonfire of the Damned", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Boros Garrison", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Boros Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Braids, Cabal Minion", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Brain Freeze", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Brainstorm", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Breeding Pool", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Bribery", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Brimstone Volley", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Broodmate Dragon", 
+        "colors": [
+            "Black", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Brushland", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Buried Alive", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Burning of Xinye", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{4}{R}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Call of the Herd", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Careful Consideration", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Catastrophe", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{4}{W}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Caves of Koilos", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chain Lightning", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chandra Nalaar", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}{R}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chandra's Phoenix", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chandra, the Firebrand", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Channel", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chaos Warp", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Char", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Chrome Mox", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cloudgoat Ranger", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Coalition Relic", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cold-Eyed Selkie", 
+        "colors": [
+            "Blue", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G/U}{G/U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Compulsive Research", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Consecrated Sphinx", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Consuming Vapors", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Control Magic", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Corpse Dance", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Counterspell", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Crucible of Worlds", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cryptic Command", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Cursed Scroll", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Damnation", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dark Confidant", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dark Ritual", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Day of Judgment", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Daze", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Delver of Secrets", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Demonic Tutor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Deranged Hermit", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Devil's Play", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Diabolic Edict", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dimir Aqueduct", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dimir Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Diregraf Ghoul", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Disenchant", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life": {
+                "colors": [], 
+                "mana_cost": "{1}", 
+                "converted_mana_cost": 1
+            }
+        }, 
+        "name": "Dismember", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B/P}{B/P}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dreadbore", 
+        "colors": [
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{B}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dream Halls", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dreg Mangler", 
+        "colors": [
+            "Black", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{B}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dungeon Geists", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Duress", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Dust Bowl", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Earthquake", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Edric, Spymaster of Trest", 
+        "colors": [
+            "Blue", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Electrolyze", 
+        "colors": [
+            "Blue", 
+            "Red"
+        ], 
+        "mana_cost": "{1}{U}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Elesh Norn, Grand Cenobite", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{5}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Elite Vanguard", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Elspeth Tirel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Elspeth, Knight-Errant", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Elves of Deep Shadow", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ember Hauler", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Emeria Angel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Empty the Warrens", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Emrakul, the Aeons Torn", 
+        "colors": [], 
+        "mana_cost": "{15}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 15
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Enlightened Tutor", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Entomb", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
         "heuristics": {}, 
         "name": "Epochrasite", 
         "colors": [], 
@@ -61984,35 +62261,117 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Show and Tell", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
+        "name": "Etched Oracle", 
+        "colors": [], 
+        "mana_cost": "{4}", 
         "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ranger of Eos", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
+            "Artifact", 
             "Creature"
         ], 
         "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
-        "name": "Turnabout", 
+        "name": "Eternal Dragon", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{5}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Eternal Witness", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ethersworn Canonist", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Eureka", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Everflowing Chalice", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Exalted Angel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{4}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Exhume", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Exploration", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fact or Fiction", 
         "colors": [
             "Blue"
         ], 
-        "mana_cost": "{2}{U}{U}", 
+        "mana_cost": "{3}{U}", 
         "types": [
             "Instant"
         ], 
@@ -62020,7 +62379,193 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Sulfurous Springs", 
+        "name": "Faith's Fetters", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Faithless Looting", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Falkenrath Aristocrat", 
+        "colors": [
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{B}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fauna Shaman", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Figure of Destiny", 
+        "colors": [
+            "White", 
+            "Red"
+        ], 
+        "mana_cost": "{R/W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fire // Ice", 
+        "colors": [
+            "Blue", 
+            "Red"
+        ], 
+        "mana_cost": "{1}{R} // {1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": -1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fireblast", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{4}{R}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Firebolt", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Firemane Angel", 
+        "colors": [
+            "White", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Firespout", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{R/G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Firestorm", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Flametongue Kavu", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Flickerwisp", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green", 
+                    "Red"
+                ]
+            }, 
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Flinthoof Boar", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Flooded Strand", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -62030,11 +62575,163 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Trinket Mage", 
+        "name": "Forbid", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Force Spike", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Force of Will", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Frantic Search", 
         "colors": [
             "Blue"
         ], 
         "mana_cost": "{2}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Frenzied Goblin", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Frost Titan", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fyndhorn Elves", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gaea's Cradle", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Garruk Relentless", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Garruk Wildspeaker", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Garruk, Primal Hunter", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}{G}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "mana_cost": "{B}{B}{B}", 
+                "converted_mana_cost": 3
+            }, 
+            "always_kick_creatures": {
+                "mana_cost": "{B}{B}{B}", 
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Gatekeeper of Malakir", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Geist of Saint Traft", 
+        "colors": [
+            "Blue", 
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{U}", 
         "types": [
             "Creature"
         ], 
@@ -62042,7 +62739,222 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Null Rod", 
+        "name": "Genesis", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{4}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Genesis Wave", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{X}{G}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Ghitu Encampment", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gideon Jura", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}{W}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gideon's Lawkeeper", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gifts Ungiven", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gilded Lotus", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Glen Elendra Archmage", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gloom Surgeon", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Glorious Anthem", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Go for the Throat", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Goblin Guide", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "mana_cost": "{2}{R}{R}", 
+                "converted_mana_cost": 4
+            }, 
+            "always_kick_creatures": {
+                "mana_cost": "{2}{R}{R}", 
+                "converted_mana_cost": 4
+            }
+        }, 
+        "name": "Goblin Ruinblaster", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Goblin Vandal", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Goblin Welder", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Godless Shrine", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Golgari Rot Farm", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Golgari Signet", 
         "colors": [], 
         "mana_cost": "{2}", 
         "types": [
@@ -62065,7 +62977,120 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Yavimaya Coast", 
+        "name": "Grave Titan", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Graveborn Muse", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gravecrawler", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "suspend_as_cmc": {
+                "mana_cost": "{R}", 
+                "converted_mana_cost": 1
+            }
+        }, 
+        "name": "Greater Gargadon", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{9}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 10
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Green Sun's Zenith", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{X}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Grim Lavamancer", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Grim Monolith", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Griselbrand", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gruul Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Gruul Turf", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -62075,7 +63100,280 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Steppe Lynx", 
+        "name": "Guul Draz Assassin", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hallowed Fountain", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Harmonize", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Headhunter", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Heartbeat of Spring", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hellrider", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hellspark Elemental", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hero of Bladehold", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hero of Oxid Ridge", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Honor of the Pure", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Huntmaster of the Fells", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hymn to Tourach", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Hypnotic Specter", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Impulse", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Incinerate", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Indrik Stomphowler", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{4}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Inferno Titan", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{4}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ink-Eyes, Servant of Oni", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Inkwell Leviathan", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{7}{U}{U}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 9
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Inquisition of Kozilek", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "mana_cost": "{2}{U}{U}", 
+                "converted_mana_cost": 4
+            }, 
+            "always_kick_creatures": {
+                "mana_cost": "{2}{U}{U}", 
+                "converted_mana_cost": 4
+            }
+        }, 
+        "name": "Into the Roil", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Intuition", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Isamaru, Hound of Konda", 
         "colors": [
             "White"
         ], 
@@ -62086,14 +63384,8 @@ mtgo_cube_rtr_data_array = [
         "converted_mana_cost": 1
     }, 
     {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Blue"
-                ]
-            }
-        }, 
-        "name": "Shelldock Isle", 
+        "heuristics": {}, 
+        "name": "Izzet Boilerworks", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -62103,15 +63395,1903 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Venser, Shaper Savant", 
+        "name": "Izzet Charm", 
+        "colors": [
+            "Blue", 
+            "Red"
+        ], 
+        "mana_cost": "{U}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Izzet Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Jace Beleren", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}{U}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Jace, the Mind Sculptor", 
         "colors": [
             "Blue"
         ], 
         "mana_cost": "{2}{U}{U}", 
         "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Jackal Pup", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Joraga Treespeaker", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Journey to Nowhere", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Jushi Apprentice", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Kami of Ancient Law", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Karakas", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Kargan Dragonlord", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Karn Liberated", 
+        "colors": [], 
+        "mana_cost": "{7}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Karplusan Forest", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Keldon Marauders", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Kird Ape", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Kitchen Finks", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G/W}{G/W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Knight of Glory", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Knight of the Reliquary", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Koth of the Hammer", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}{R}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Kozilek, Butcher of Truth", 
+        "colors": [], 
+        "mana_cost": "{10}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 10
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lake of the Dead", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Land Tax", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Leonin Relic-Warder", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Library of Alexandria", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lightning Bolt", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lightning Greaves", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lightning Helix", 
+        "colors": [
+            "White", 
+            "Red"
+        ], 
+        "mana_cost": "{R}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lightning Mauler", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Liliana Vess", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}{B}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Liliana of the Veil", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}{B}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }, 
+            "off_color_flashback_is_gold": {
+                "colors": [
+                    "White", 
+                    "Black"
+                ]
+            }
+        }, 
+        "name": "Lingering Souls", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lion's Eye Diamond", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Living Death", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Llanowar Elves", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Llanowar Wastes", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White", 
+                    "Green"
+                ]
+            }
+        }, 
+        "name": "Loam Lion", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lodestone Golem", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
             "Creature"
         ], 
         "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Looter il-Kor", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "suspend_as_cmc": {
+                "mana_cost": "{0}", 
+                "converted_mana_cost": 0
+            }
+        }, 
+        "name": "Lotus Bloom", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Lotus Cobra", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Maelstrom Pulse", 
+        "colors": [
+            "Black", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{B}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Magma Jet", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Man-o'-War", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mana Crypt", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mana Drain", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mana Leak", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mana Tithe", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mana Vault", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Manriki-Gusari", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Marsh Flats", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Master of the Wild Hunt", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Masticore", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Maze of Ith", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Meloku the Clouded Mirror", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Memory Jar", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Memory Lapse", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mesmeric Fiend", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Metalworker", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mind Stone", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Mind Twist", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{X}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mind's Desire", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mirari's Wake", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mirran Crusader", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mirror Entity", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Miscalculation", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mishra's Factory", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mishra's Workshop", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Misty Rainforest", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mizzium Mortars", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Moat", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mogg War Marshal", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Molten Rain", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Molten-Tail Masticore", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "off_color_flashback_is_gold": {
+                "colors": [
+                    "Blue", 
+                    "White"
+                ]
+            }
+        }, 
+        "name": "Momentary Blink", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mother of Runes", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Diamond", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Emerald", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Jet", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Pearl", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Ruby", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mox Sapphire", 
+        "colors": [], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mulldrifter", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Myr Battlesphere", 
+        "colors": [], 
+        "mana_cost": "{7}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mystic Snake", 
+        "colors": [
+            "Blue", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Mystical Tutor", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nantuko Vigilante", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Natural Order", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Naturalize", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nearheath Pilgrim", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Necromancy", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Necropotence", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nekrataal", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nether Void", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nevinyrral's Disk", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nezumi Graverobber", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nezumi Shortfang", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nicol Bolas, Planeswalker", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{4}{U}{B}{B}{R}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Niv-Mizzet, Dracogenius", 
+        "colors": [
+            "Blue", 
+            "Red"
+        ], 
+        "mana_cost": "{2}{U}{U}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Noble Hierarch", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Nostalgic Dreams", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Null Rod", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Oblivion Ring", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Obstinate Baloth", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ohran Viper", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Okiba-Gang Shinobi", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Old Man of the Sea", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Oona's Prowler", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Opposition", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Oracle of Mul Daya", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Orcish Lumberjack", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Orzhov Basilica", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Orzhov Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Oust", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Overgrown Tomb", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Paladin en-Vec", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Palinchron", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{5}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Parallax Wave", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Path to Exile", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Pernicious Deed", 
+        "colors": [
+            "Black", 
+            "Green"
+        ], 
+        "mana_cost": "{1}{B}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Phantasmal Image", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Phyrexian Arena", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life": {
+                "colors": [], 
+                "mana_cost": "{3}", 
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Phyrexian Metamorph", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U/P}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Phyrexian Obliterator", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}{B}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Phyrexian Rager", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Phyrexian Revoker", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Plague Sliver", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Plateau", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Plated Geopede", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Plow Under", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Polluted Delta", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life": {
+                "colors": [], 
+                "mana_cost": "{2}", 
+                "converted_mana_cost": 2
+            }
+        }, 
+        "name": "Porcelain Legionnaire", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W/P}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Precursor Golem", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Preordain", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Price of Progress", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Primal Command", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Primeval Titan", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{4}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Pristine Talisman", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Prophetic Bolt", 
+        "colors": [
+            "Blue", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{U}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Putrid Imp", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Pyroclasm", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Qasali Pridemage", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rakdos Cackler", 
+        "colors": [
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{B/R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rakdos Carnarium", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rakdos Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rancor", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ranger of Eos", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ratchet Bomb", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ravages of War", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ravenous Baboons", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Razormane Masticore", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Reanimate", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Reckless Charge", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Recurring Nightmare", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Regrowth", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Remand", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Restock", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Restoration Angel", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Reveillark", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{4}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {
+            "suspend_as_cmc": {
+                "mana_cost": "{R}", 
+                "converted_mana_cost": 1
+            }
+        }, 
+        "name": "Rift Bolt", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
     }, 
     {
         "heuristics": {
@@ -62132,7 +65312,7 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Orzhov Basilica", 
+        "name": "Rishadan Port", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -62142,203 +65322,49 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Entomb", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Parallax Wave", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Boggart Ram-Gang", 
-        "colors": [
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{R/G}{R/G}{R/G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ajani, Caller of the Pride", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{W}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hero of Oxid Ridge", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Exalted Angel", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{4}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Time Walk", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Spikeshot Elder", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mana Leak", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Faithless Looting", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mulldrifter", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Karakas", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wolfir Silverheart", 
+        "name": "Rofellos, Llanowar Emissary", 
         "colors": [
             "Green"
         ], 
-        "mana_cost": "{3}{G}{G}", 
+        "mana_cost": "{G}{G}", 
         "types": [
             "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Grim Lavamancer", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Precursor Golem", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Azorius Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
         ], 
         "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Elspeth Tirel", 
+        "name": "Rout", 
         "colors": [
             "White"
         ], 
         "mana_cost": "{3}{W}{W}", 
         "types": [
-            "Planeswalker"
+            "Sorcery"
         ], 
         "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Rude Awakening", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{4}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sacred Foundry", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {
@@ -62360,20 +65386,189 @@ mtgo_cube_rtr_data_array = [
         "converted_mana_cost": 1
     }, 
     {
-        "heuristics": {}, 
-        "name": "Mizzium Mortars", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
+        "heuristics": null, 
+        "name": "Savannah", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Sorcery"
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Savannah Lions", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Scalding Tarn", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Scavenging Ooze", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
         ], 
         "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Tinker", 
+        "name": "Scroll Rack", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Scrubland", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Searing Blaze", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Seething Song", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Selesnya Sanctuary", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Selesnya Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sensei's Divining Top", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Serendib Efreet", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Shadowmage Infiltrator", 
+        "colors": [
+            "Blue", 
+            "Black"
+        ], 
+        "mana_cost": "{1}{U}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Shelldock Isle", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sheoldred, Whispering One", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{5}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Shivan Reef", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Show and Tell", 
         "colors": [
             "Blue"
         ], 
@@ -62385,19 +65580,65 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Opposition", 
+        "name": "Shriekmaw", 
         "colors": [
-            "Blue"
+            "Black"
         ], 
-        "mana_cost": "{2}{U}{U}", 
+        "mana_cost": "{4}{B}", 
         "types": [
-            "Enchantment"
+            "Creature"
         ], 
-        "converted_mana_cost": 4
+        "converted_mana_cost": 5
     }, 
     {
         "heuristics": {}, 
-        "name": "Rishadan Port", 
+        "name": "Shrine of Burning Rage", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Siege-Gang Commander", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Silent Specter", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Silverblade Paladin", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Simic Growth Chamber", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -62407,7 +65648,785 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Siege-Gang Commander", 
+        "name": "Simic Signet", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Simic Sky Swallower", 
+        "colors": [
+            "Blue", 
+            "Green"
+        ], 
+        "mana_cost": "{5}{G}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Skinrender", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Skullclamp", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Slaughter Pact", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{0}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Smash to Smithereens", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Smokestack", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Snapcaster Mage", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{1}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sneak Attack", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sol Ring", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Solemn Simulacrum", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Soltari Champion", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sorin, Lord of Innistrad", 
+        "colors": [
+            "White", 
+            "Black"
+        ], 
+        "mana_cost": "{2}{W}{B}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sower of Temptation", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "assume_on_color_cmc_for_mono_color_hybrids": {
+                "converted_mana_cost": 3
+            }, 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Spectral Procession", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2/W}{2/W}{2/W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sphinx of Jwar Isle", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{4}{U}{U}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sphinx of the Steel Wind", 
+        "colors": [
+            "Blue", 
+            "White", 
+            "Black"
+        ], 
+        "mana_cost": "{5}{W}{U}{B}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Sphinx's Revelation", 
+        "colors": [
+            "Blue", 
+            "White"
+        ], 
+        "mana_cost": "{X}{W}{U}{U}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Spikeshot Elder", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Steam Vents", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Steppe Lynx", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stillmoon Cavalier", 
+        "colors": [
+            "White", 
+            "Black"
+        ], 
+        "mana_cost": "{1}{W/B}{W/B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stomping Ground", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stoneforge Mystic", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stormblood Berserker", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Strangleroot Geist", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Strip Mine", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Student of Warfare", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stunted Growth", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Stupor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sulfuric Vortex", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}{R}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sulfurous Springs", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sun Titan", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{4}{W}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sundering Titan", 
+        "colors": [], 
+        "mana_cost": "{8}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Supreme Verdict", 
+        "colors": [
+            "Blue", 
+            "White"
+        ], 
+        "mana_cost": "{1}{W}{W}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Survival of the Fittest", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sword of Body and Mind", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sword of Feast and Famine", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sword of Fire and Ice", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sword of Light and Shadow", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sword of War and Peace", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Swords to Plowshares", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sylvan Library", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Taiga", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tamiyo, the Moon Sage", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tangle Wire", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tarmogoyf", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tattermunge Maniac", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{R/G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Taurean Mauler", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Teetering Peaks", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Temple Garden", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tendrils of Agony", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Terastodon", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{6}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Terminus", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{4}{W}{W}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Tezzeret, Agent of Bolas", 
+        "colors": [
+            "Blue", 
+            "Black"
+        ], 
+        "mana_cost": "{2}{U}{B}", 
+        "types": [
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thalia, Guardian of Thraben", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{1}{W}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thawing Glaciers", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "The Abyss", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{3}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thelonite Hermit", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{3}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }, 
+            "off_color_kicker_is_gold": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ]
+            }, 
+            "always_kick_creatures": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }
+        }, 
+        "name": "Thornscape Battlemage", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thoughtseize", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thragtusk", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{4}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thran Dynamo", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thrun, the Last Troll", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Thundermaw Hellkite", 
         "colors": [
             "Red"
         ], 
@@ -62457,321 +66476,6 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Mox Jet", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Badlands", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dream Halls", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nostalgic Dreams", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nezumi Graverobber", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Plague Sliver", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Eureka", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Avenger of Zendikar", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{5}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ancestral Recall", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Searing Blaze", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Serendib Efreet", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ethersworn Canonist", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Eternal Witness", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Savannah", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Brain Freeze", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Price of Progress", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Living Death", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Miscalculation", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Steam Vents", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Scrubland", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Koth of the Hammer", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{R}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Scalding Tarn", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Firebolt", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Garruk Relentless", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Kitchen Finks", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G/W}{G/W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Falkenrath Aristocrat", 
-        "colors": [
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{B}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dungeon Geists", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
         "name": "Tidehollow Sculler", 
         "colors": [
             "White", 
@@ -62786,71 +66490,43 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Smokestack", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mana Vault", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Braids, Cabal Minion", 
+        "name": "Time Spiral", 
         "colors": [
-            "Black"
+            "Blue"
         ], 
-        "mana_cost": "{2}{B}{B}", 
+        "mana_cost": "{4}{U}{U}", 
         "types": [
-            "Creature"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Underground Sea", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
+        "converted_mana_cost": 6
     }, 
     {
         "heuristics": {}, 
-        "name": "Genesis", 
+        "name": "Time Walk", 
         "colors": [
-            "Green"
+            "Blue"
         ], 
-        "mana_cost": "{4}{G}", 
+        "mana_cost": "{1}{U}", 
         "types": [
-            "Creature"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Simic Growth Chamber", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
+        "name": "Timetwister", 
+        "colors": [
+            "Blue"
         ], 
-        "converted_mana_cost": 0
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
-        "name": "Plated Geopede", 
+        "name": "Tin Street Hooligan", 
         "colors": [
             "Red"
         ], 
@@ -62862,527 +66538,144 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Maze of Ith", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Silverblade Paladin", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Plow Under", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Teetering Peaks", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "suspend_as_cmc": {
-                "mana_cost": "{R}", 
-                "converted_mana_cost": 1
-            }
-        }, 
-        "name": "Rift Bolt", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Shrine of Burning Rage", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gifts Ungiven", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Primal Command", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Elite Vanguard", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Soltari Champion", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bloodstained Mire", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Intuition", 
+        "name": "Tinker", 
         "colors": [
             "Blue"
         ], 
         "mana_cost": "{2}{U}", 
         "types": [
-            "Instant"
+            "Sorcery"
         ], 
         "converted_mana_cost": 3
     }, 
     {
-        "heuristics": {
-            "off_color_flashback_is_gold": {
-                "colors": [
-                    "Blue", 
-                    "White"
-                ]
-            }
-        }, 
-        "name": "Momentary Blink", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
         "heuristics": {}, 
-        "name": "Dark Ritual", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Scroll Rack", 
+        "name": "Tolarian Academy", 
         "colors": [], 
-        "mana_cost": "{2}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact"
+            "Land"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Char", 
+        "name": "Tooth and Nail", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{5}{G}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 7
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Torch Fiend", 
         "colors": [
             "Red"
         ], 
-        "mana_cost": "{2}{R}", 
+        "mana_cost": "{1}{R}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Delver of Secrets", 
+        "name": "Treachery", 
         "colors": [
             "Blue"
         ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Liliana of the Veil", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}{B}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "phyrexian_always_pays_life": {
-                "colors": [], 
-                "mana_cost": "{3}", 
-                "converted_mana_cost": 3
-            }, 
-            "phyrexian_always_pays_life_except_for_abilities": {
-                "colors": [
-                    "Green"
-                ], 
-                "mana_cost": "{3}", 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Birthing Pod", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G/P}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ajani Vengeant", 
-        "colors": [
-            "White", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{W}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Battlefield Forge", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ball Lightning", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dimir Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Paladin en-Vec", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Phyrexian Revoker", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Disenchant", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lotus Cobra", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Guul Draz Assassin", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Verdant Catacombs", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Grave Titan", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chandra, the Firebrand", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Etched Oracle", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Heartbeat of Spring", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mirror Entity", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Solemn Simulacrum", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mirari's Wake", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{W}", 
+        "mana_cost": "{3}{U}{U}", 
         "types": [
             "Enchantment"
         ], 
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
-        "name": "Goblin Welder", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rakdos Signet", 
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
+        "name": "Treetop Village", 
         "colors": [], 
-        "mana_cost": "{2}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact"
+            "Land"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Nicol Bolas, Planeswalker", 
-        "colors": [
-            "Blue", 
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{4}{U}{B}{B}{R}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ulvenwald Tracker", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Phantasmal Image", 
+        "name": "Trinket Mage", 
         "colors": [
             "Blue"
         ], 
-        "mana_cost": "{1}{U}", 
+        "mana_cost": "{2}{U}", 
         "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Tropical Island", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Honor of the Pure", 
+        "name": "Trygon Predator", 
         "colors": [
-            "White"
+            "Blue", 
+            "Green"
         ], 
-        "mana_cost": "{1}{W}", 
+        "mana_cost": "{1}{G}{U}", 
         "types": [
-            "Enchantment"
+            "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Tundra", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Reanimate", 
+        "name": "Turnabout", 
         "colors": [
-            "Black"
+            "Blue"
         ], 
-        "mana_cost": "{B}", 
+        "mana_cost": "{2}{U}{U}", 
         "types": [
-            "Sorcery"
+            "Instant"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ulamog, the Infinite Gyre", 
+        "colors": [], 
+        "mana_cost": "{11}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 11
     }, 
     {
         "heuristics": {}, 
@@ -63398,74 +66691,28 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Edric, Spymaster of Trest", 
-        "colors": [
-            "Blue", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Genesis Wave", 
+        "name": "Ulvenwald Tracker", 
         "colors": [
             "Green"
         ], 
-        "mana_cost": "{X}{G}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "always_kick": {
-                "mana_cost": "{2}{R}{R}", 
-                "converted_mana_cost": 4
-            }, 
-            "always_kick_creatures": {
-                "mana_cost": "{2}{R}{R}", 
-                "converted_mana_cost": 4
-            }
-        }, 
-        "name": "Goblin Ruinblaster", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
+        "mana_cost": "{G}", 
         "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 1
     }, 
     {
         "heuristics": {}, 
-        "name": "Necromancy", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
+        "name": "Umezawa's Jitte", 
+        "colors": [], 
+        "mana_cost": "{2}", 
         "types": [
-            "Enchantment"
+            "Artifact"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 2
     }, 
     {
         "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }, 
             "off_color_flashback_is_gold": {
                 "colors": [
                     "White", 
@@ -63473,127 +66720,29 @@ mtgo_cube_rtr_data_array = [
                 ]
             }
         }, 
-        "name": "Lingering Souls", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sensei's Divining Top", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cryptic Command", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Jushi Apprentice", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dust Bowl", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Bonfire of the Damned", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{X}{X}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Necropotence", 
+        "name": "Unburial Rites", 
         "colors": [
             "Black"
         ], 
-        "mana_cost": "{B}{B}{B}", 
+        "mana_cost": "{4}{B}", 
         "types": [
-            "Enchantment"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 5
     }, 
     {
         "heuristics": {}, 
-        "name": "Flickerwisp", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}{W}", 
+        "name": "Underground River", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Creature"
+            "Land"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 0
     }, 
     {
-        "heuristics": {}, 
-        "name": "Terastodon", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{6}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Inferno Titan", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{4}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Blood Crypt", 
+        "heuristics": null, 
+        "name": "Underground Sea", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -63603,30 +66752,7 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Wasteland", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mystic Snake", 
-        "colors": [
-            "Blue", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mind's Desire", 
+        "name": "Upheaval", 
         "colors": [
             "Blue"
         ], 
@@ -63635,6 +66761,42 @@ mtgo_cube_rtr_data_array = [
             "Sorcery"
         ], 
         "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Urabrask the Hidden", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{3}{R}{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Vampire Nighthawk", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{1}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Vampiric Tutor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{B}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 1
     }, 
     {
         "heuristics": {
@@ -63654,198 +66816,39 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Maelstrom Pulse", 
+        "name": "Vendilion Clique", 
         "colors": [
-            "Black", 
-            "Green"
+            "Blue"
         ], 
-        "mana_cost": "{1}{B}{G}", 
+        "mana_cost": "{1}{U}{U}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
         "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
-        "name": "Path to Exile", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wrath of God", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Seething Song", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Shriekmaw", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lightning Greaves", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Firestorm", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Skullclamp", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Naturalize", 
+        "name": "Vengevine", 
         "colors": [
             "Green"
         ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Land Tax", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Knight of Glory", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
+        "mana_cost": "{2}{G}{G}", 
         "types": [
             "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bonesplitter", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Kargan Dragonlord", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Armageddon", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
-            "Sorcery"
         ], 
         "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
-        "name": "Sacred Foundry", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Catastrophe", 
+        "name": "Venser, Shaper Savant", 
         "colors": [
-            "White"
+            "Blue"
         ], 
-        "mana_cost": "{4}{W}{W}", 
+        "mana_cost": "{2}{U}{U}", 
         "types": [
-            "Sorcery"
+            "Creature"
         ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Memory Jar", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
@@ -63862,78 +66865,7 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Harmonize", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Swords to Plowshares", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sphinx of the Steel Wind", 
-        "colors": [
-            "Blue", 
-            "White", 
-            "Black"
-        ], 
-        "mana_cost": "{5}{W}{U}{B}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Manriki-Gusari", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nekrataal", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mind Stone", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Arid Mesa", 
+        "name": "Verdant Catacombs", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -63943,39 +66875,32 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Emrakul, the Aeons Torn", 
-        "colors": [], 
-        "mana_cost": "{15}", 
+        "name": "Vesuvan Shapeshifter", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{3}{U}{U}", 
         "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 15
+        "converted_mana_cost": 5
     }, 
     {
         "heuristics": {}, 
-        "name": "Everflowing Chalice", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Glorious Anthem", 
+        "name": "Vindicate", 
         "colors": [
-            "White"
+            "White", 
+            "Black"
         ], 
-        "mana_cost": "{1}{W}{W}", 
+        "mana_cost": "{1}{W}{B}", 
         "types": [
-            "Enchantment"
+            "Sorcery"
         ], 
         "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
-        "name": "Wall of Blossoms", 
+        "name": "Vinelasher Kudzu", 
         "colors": [
             "Green"
         ], 
@@ -63987,742 +66912,32 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Smash to Smithereens", 
+        "name": "Void", 
         "colors": [
+            "Black", 
             "Red"
         ], 
-        "mana_cost": "{1}{R}", 
+        "mana_cost": "{3}{B}{R}", 
         "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Elves of Deep Shadow", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Elspeth, Knight-Errant", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Treachery", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Enchantment"
+            "Sorcery"
         ], 
         "converted_mana_cost": 5
     }, 
     {
         "heuristics": {}, 
-        "name": "Indrik Stomphowler", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{4}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fyndhorn Elves", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mana Drain", 
+        "name": "Voidmage Prodigy", 
         "colors": [
             "Blue"
         ], 
         "mana_cost": "{U}{U}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
         "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lightning Bolt", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
     }, 
     {
         "heuristics": null, 
-        "name": "Tropical Island", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "always_kick": {
-                "mana_cost": "{B}{B}{B}", 
-                "converted_mana_cost": 3
-            }, 
-            "always_kick_creatures": {
-                "mana_cost": "{B}{B}{B}", 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Gatekeeper of Malakir", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Kami of Ancient Law", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nearheath Pilgrim", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gruul Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gruul Turf", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tin Street Hooligan", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dark Confidant", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tezzeret, Agent of Bolas", 
-        "colors": [
-            "Blue", 
-            "Black"
-        ], 
-        "mana_cost": "{2}{U}{B}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Izzet Charm", 
-        "colors": [
-            "Blue", 
-            "Red"
-        ], 
-        "mana_cost": "{U}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Qasali Pridemage", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{G}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gloom Surgeon", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Griselbrand", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}{B}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Golgari Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "phyrexian_always_pays_life": {
-                "colors": [], 
-                "mana_cost": "{2}", 
-                "converted_mana_cost": 2
-            }
-        }, 
-        "name": "Porcelain Legionnaire", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W/P}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Phyrexian Obliterator", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}{B}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Force of Will", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chain Lightning", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Slaughter Pact", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Consecrated Sphinx", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {
-            "always_kick": {
-                "colors": [
-                    "White", 
-                    "Green", 
-                    "Red"
-                ], 
-                "mana_cost": "{2}{W}{R}{G}", 
-                "converted_mana_cost": 5
-            }, 
-            "off_color_kicker_is_gold": {
-                "colors": [
-                    "White", 
-                    "Green", 
-                    "Red"
-                ]
-            }, 
-            "always_kick_creatures": {
-                "colors": [
-                    "White", 
-                    "Green", 
-                    "Red"
-                ], 
-                "mana_cost": "{2}{W}{R}{G}", 
-                "converted_mana_cost": 5
-            }
-        }, 
-        "name": "Thornscape Battlemage", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Moat", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Palinchron", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{5}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Golgari Rot Farm", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "suspend_as_cmc": {
-                "mana_cost": "{R}", 
-                "converted_mana_cost": 1
-            }
-        }, 
-        "name": "Greater Gargadon", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{9}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 10
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Tundra", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thelonite Hermit", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fire // Ice", 
-        "colors": [
-            "Blue", 
-            "Red"
-        ], 
-        "mana_cost": "{1}{R} // {1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": -1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thundermaw Hellkite", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sword of Fire and Ice", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Worn Powerstone", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chaos Warp", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Arbor Elf", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sol Ring", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Force Spike", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "White", 
-                    "Green"
-                ]
-            }
-        }, 
-        "name": "Loam Lion", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Enchantment", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Awakening Zone", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Llanowar Elves", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cursed Scroll", 
-        "colors": [], 
-        "mana_cost": "{1}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Oracle of Mul Daya", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Baneslayer Angel", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Okiba-Gang Shinobi", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "always_kick": {
-                "mana_cost": "{2}{U}{U}", 
-                "converted_mana_cost": 4
-            }, 
-            "always_kick_creatures": {
-                "mana_cost": "{2}{U}{U}", 
-                "converted_mana_cost": 4
-            }
-        }, 
-        "name": "Into the Roil", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "off_color_flashback_is_gold": {
-                "colors": [
-                    "Green", 
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Ancient Grudge", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hymn to Tourach", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gaea's Cradle", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hellrider", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Bayou", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Green"
-                ]
-            }
-        }, 
-        "name": "Treetop Village", 
+        "name": "Volcanic Island", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -64748,187 +66963,32 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Library of Alexandria", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Restock", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Azorius Chancery", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "The Abyss", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sheoldred, Whispering One", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{5}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Frost Titan", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Black Knight", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Primeval Titan", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{4}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ancient Tomb", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mystical Tutor", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thoughtseize", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Magma Jet", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "off_color_flashback_is_gold": {
-                "colors": [
-                    "White", 
-                    "Black"
-                ]
-            }
-        }, 
-        "name": "Unburial Rites", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Pernicious Deed", 
+        "name": "Vraska the Unseen", 
         "colors": [
             "Black", 
             "Green"
         ], 
-        "mana_cost": "{1}{B}{G}", 
+        "mana_cost": "{3}{B}{G}", 
         "types": [
-            "Enchantment"
+            "Planeswalker"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Wake Thrasher", 
+        "colors": [
+            "Blue"
+        ], 
+        "mana_cost": "{2}{U}", 
+        "types": [
+            "Creature"
         ], 
         "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
-        "name": "Wooded Foothills", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vinelasher Kudzu", 
+        "name": "Wall of Blossoms", 
         "colors": [
             "Green"
         ], 
@@ -64940,484 +67000,19 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Hypnotic Specter", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Arc Trail", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thawing Glaciers", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Voidmage Prodigy", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Agony Warp", 
-        "colors": [
-            "Blue", 
-            "Black"
-        ], 
-        "mana_cost": "{U}{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Keldon Marauders", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Jace Beleren", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}{U}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Volcanic Island", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Stormblood Berserker", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Forbid", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sword of Light and Shadow", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Orcish Lumberjack", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Blightsteel Colossus", 
-        "colors": [], 
-        "mana_cost": "{12}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 12
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Orzhov Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Tribal", 
-                    "Enchantment", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Bitterblossom", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Tribal", 
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Electrolyze", 
-        "colors": [
-            "Blue", 
-            "Red"
-        ], 
-        "mana_cost": "{1}{U}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Boros Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "All Suns' Dawn", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{4}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ravenous Baboons", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Yavimaya Elder", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Corpse Dance", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sneak Attack", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Empty the Warrens", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Winter Orb", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Molten Rain", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Void", 
-        "colors": [
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{3}{B}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Batterskull", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cloudgoat Ranger", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hero of Bladehold", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tolarian Academy", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Cold-Eyed Selkie", 
-        "colors": [
-            "Blue", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G/U}{G/U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Student of Warfare", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Noble Hierarch", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mana Tithe", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Journey to Nowhere", 
+        "name": "Wall of Omens", 
         "colors": [
             "White"
         ], 
         "mana_cost": "{1}{W}", 
         "types": [
-            "Enchantment"
+            "Creature"
         ], 
         "converted_mana_cost": 2
     }, 
     {
         "heuristics": {}, 
-        "name": "Grim Monolith", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bane of the Living", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ink-Eyes, Servant of Oni", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{4}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bloodbraid Elf", 
-        "colors": [
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Stomping Ground", 
+        "name": "Wasteland", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -65427,402 +67022,25 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Myr Battlesphere", 
+        "name": "Watery Grave", 
         "colors": [], 
-        "mana_cost": "{7}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vengevine", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mana Crypt", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
+            "Land"
         ], 
         "converted_mana_cost": 0
     }, 
     {
-        "heuristics": {
-            "phyrexian_always_pays_life": {
-                "colors": [], 
-                "mana_cost": "{3}", 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Phyrexian Metamorph", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U/P}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
         "heuristics": {}, 
-        "name": "Rancor", 
+        "name": "Weathered Wayfarer", 
         "colors": [
-            "Green"
+            "White"
         ], 
-        "mana_cost": "{G}", 
+        "mana_cost": "{W}", 
         "types": [
-            "Enchantment"
+            "Creature"
         ], 
         "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Flooded Strand", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sword of Feast and Famine", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thran Dynamo", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Karn Liberated", 
-        "colors": [], 
-        "mana_cost": "{7}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Upheaval", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tooth and Nail", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{5}{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lodestone Golem", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Llanowar Wastes", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "assume_on_color_cmc_for_mono_color_hybrids": {
-                "converted_mana_cost": 3
-            }, 
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Spectral Procession", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2/W}{2/W}{2/W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Oblivion Ring", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ulamog, the Infinite Gyre", 
-        "colors": [], 
-        "mana_cost": "{11}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 11
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Broodmate Dragon", 
-        "colors": [
-            "Black", 
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{3}{B}{R}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ajani Goldmane", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}{W}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Go for the Throat", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Godless Shrine", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Strangleroot Geist", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dimir Aqueduct", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Master of the Wild Hunt", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Yawgmoth's Will", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Shivan Reef", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fireblast", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{4}{R}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Sorcery", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Call of the Herd", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Demonic Tutor", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Obstinate Baloth", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sword of Body and Mind", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Knight of the Reliquary", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Pyroclasm", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Man-o'-War", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
     }, 
     {
         "heuristics": {}, 
@@ -65835,79 +67053,6 @@ mtgo_cube_rtr_data_array = [
             "Sorcery"
         ], 
         "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Exploration", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Hallowed Fountain", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Brushland", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Sphinx's Revelation", 
-        "colors": [
-            "Blue", 
-            "White"
-        ], 
-        "mana_cost": "{X}{W}{U}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Faith's Fetters", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Damnation", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
@@ -65934,888 +67079,6 @@ mtgo_cube_rtr_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
-        "name": "Vesuvan Shapeshifter", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wall of Omens", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Stillmoon Cavalier", 
-        "colors": [
-            "White", 
-            "Black"
-        ], 
-        "mana_cost": "{1}{W/B}{W/B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ravages of War", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Isamaru, Hound of Konda", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gravecrawler", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Garruk Wildspeaker", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Underground River", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Brainstorm", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Channel", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}{G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "White"
-                ]
-            }
-        }, 
-        "name": "Windbrisk Heights", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lightning Mauler", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Phyrexian Arena", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Shadowmage Infiltrator", 
-        "colors": [
-            "Blue", 
-            "Black"
-        ], 
-        "mana_cost": "{1}{U}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Firespout", 
-        "colors": [
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{2}{R/G}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lightning Helix", 
-        "colors": [
-            "White", 
-            "Red"
-        ], 
-        "mana_cost": "{R}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Torch Fiend", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sun Titan", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{4}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Karplusan Forest", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tendrils of Agony", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Selesnya Signet", 
-        "colors": [], 
-        "mana_cost": "{2}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Diregraf Ghoul", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Joraga Treespeaker", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Bloodghast", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Angel of Despair", 
-        "colors": [
-            "White", 
-            "Black"
-        ], 
-        "mana_cost": "{3}{W}{W}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Metalworker", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "Green", 
-                    "Red"
-                ]
-            }, 
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Green", 
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Flinthoof Boar", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Phyrexian Rager", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sphinx of Jwar Isle", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mox Ruby", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Time Spiral", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{4}{U}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Black Lotus", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Goblin Guide", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thalia, Guardian of Thraben", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Windswept Heath", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mox Emerald", 
-        "colors": [], 
-        "mana_cost": "{0}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Timetwister", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Wildfire", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{4}{R}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dreadbore", 
-        "colors": [
-            "Black", 
-            "Red"
-        ], 
-        "mana_cost": "{B}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Firemane Angel", 
-        "colors": [
-            "White", 
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Crucible of Worlds", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Devil's Play", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{X}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mother of Runes", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Lake of the Dead", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Dreg Mangler", 
-        "colors": [
-            "Black", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{B}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Zealous Conscripts", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{4}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Rakdos Carnarium", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Headhunter", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Izzet Boilerworks", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Jackal Pup", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Reckless Charge", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Simic Sky Swallower", 
-        "colors": [
-            "Blue", 
-            "Green"
-        ], 
-        "mana_cost": "{5}{G}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Skinrender", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Figure of Destiny", 
-        "colors": [
-            "White", 
-            "Red"
-        ], 
-        "mana_cost": "{R/W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Impulse", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{1}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sundering Titan", 
-        "colors": [], 
-        "mana_cost": "{8}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Selesnya Sanctuary", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Incinerate", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Stupor", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{2}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Goblin Vandal", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thragtusk", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{4}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tamiyo, the Moon Sage", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}{U}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Avalanche Riders", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Balance", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{1}{W}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Preordain", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{U}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vraska the Unseen", 
-        "colors": [
-            "Black", 
-            "Green"
-        ], 
-        "mana_cost": "{3}{B}{G}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Savannah Lions", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Jace, the Mind Sculptor", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Deranged Hermit", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{3}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": null, 
-        "name": "Taiga", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gilded Lotus", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {
-            "phyrexian_always_pays_life": {
-                "colors": [], 
-                "mana_cost": "{1}", 
-                "converted_mana_cost": 1
-            }
-        }, 
-        "name": "Dismember", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B/P}{B/P}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Marsh Flats", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
         "heuristics": {
             "caring_about_controlling_land_types_affect_color": {
                 "colors": [
@@ -66837,51 +67100,19 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Compulsive Research", 
+        "name": "Wildfire", 
         "colors": [
-            "Blue"
+            "Red"
         ], 
-        "mana_cost": "{2}{U}", 
+        "mana_cost": "{4}{R}{R}", 
         "types": [
             "Sorcery"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 6
     }, 
     {
         "heuristics": {}, 
-        "name": "Coalition Relic", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Pristine Talisman", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Nether Void", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Looter il-Kor", 
+        "name": "Willbender", 
         "colors": [
             "Blue"
         ], 
@@ -66892,102 +67123,34 @@ mtgo_cube_rtr_data_array = [
         "converted_mana_cost": 2
     }, 
     {
-        "heuristics": {}, 
-        "name": "Flametongue Kavu", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{3}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Duress", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gideon's Lawkeeper", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Chrome Mox", 
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
+        "name": "Windbrisk Heights", 
         "colors": [], 
-        "mana_cost": "{0}", 
+        "mana_cost": null, 
         "types": [
-            "Artifact"
+            "Land"
         ], 
         "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Brimstone Volley", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2}{R}", 
+        "name": "Windswept Heath", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Instant"
+            "Land"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 0
     }, 
     {
         "heuristics": {}, 
-        "name": "Exhume", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Elesh Norn, Grand Cenobite", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{5}{W}{W}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 7
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Birds of Paradise", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Ratchet Bomb", 
+        "name": "Winter Orb", 
         "colors": [], 
         "mana_cost": "{2}", 
         "types": [
@@ -66997,199 +67160,74 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Stoneforge Mystic", 
+        "name": "Wolfir Silverheart", 
         "colors": [
-            "White"
+            "Green"
         ], 
-        "mana_cost": "{1}{W}", 
+        "mana_cost": "{3}{G}{G}", 
         "types": [
             "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Gideon Jura", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}{W}", 
-        "types": [
-            "Planeswalker"
         ], 
         "converted_mana_cost": 5
     }, 
     {
         "heuristics": {}, 
-        "name": "Careful Consideration", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
+        "name": "Wooded Foothills", 
+        "colors": [], 
+        "mana_cost": null, 
         "types": [
-            "Instant"
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Woodfall Primus", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{5}{G}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Worn Powerstone", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Wrath of God", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}{W}", 
+        "types": [
+            "Sorcery"
         ], 
         "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
-        "name": "Mishra's Factory", 
+        "name": "Wurmcoil Engine", 
         "colors": [], 
-        "mana_cost": null, 
+        "mana_cost": "{6}", 
         "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sylvan Library", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Ghitu Encampment", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Animate Dead", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Akroma's Vengeance", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{4}{W}{W}", 
-        "types": [
-            "Sorcery"
+            "Artifact", 
+            "Creature"
         ], 
         "converted_mana_cost": 6
     }, 
     {
         "heuristics": {}, 
-        "name": "Kozilek, Butcher of Truth", 
-        "colors": [], 
-        "mana_cost": "{10}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 10
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Mogg War Marshal", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fact or Fiction", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{3}{U}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Inkwell Leviathan", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{7}{U}{U}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 9
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Consuming Vapors", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{3}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Masticore", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Thrun, the Last Troll", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{2}{G}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sower of Temptation", 
-        "colors": [
-            "Blue"
-        ], 
-        "mana_cost": "{2}{U}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Misty Rainforest", 
+        "name": "Yavimaya Coast", 
         "colors": [], 
         "mana_cost": null, 
         "types": [
@@ -67199,77 +67237,39 @@ mtgo_cube_rtr_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Bribery", 
+        "name": "Yavimaya Elder", 
         "colors": [
-            "Blue"
+            "Green"
         ], 
-        "mana_cost": "{3}{U}{U}", 
+        "mana_cost": "{1}{G}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Yawgmoth's Will", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
         "types": [
             "Sorcery"
         ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Zealous Conscripts", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{4}{R}", 
+        "types": [
+            "Creature"
+        ], 
         "converted_mana_cost": 5
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sorin, Lord of Innistrad", 
-        "colors": [
-            "White", 
-            "Black"
-        ], 
-        "mana_cost": "{2}{W}{B}", 
-        "types": [
-            "Planeswalker"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Tarmogoyf", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Vampire Nighthawk", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{1}{B}{B}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Trygon Predator", 
-        "colors": [
-            "Blue", 
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}{U}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fauna Shaman", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
     }
 ];
 test_names_data = {
@@ -67286,21 +67286,28 @@ test_names_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Fireball": {
+    "Razor Golem": {
         "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }, 
+            "affinity_for_basic_lands_affects_mana_cost": {
+                "colors": [
+                    "White"
+                ], 
+                "converted_mana_cost": 3
             }
         }, 
-        "name": "Fireball", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{X}{R}", 
+        "name": "Razor Golem", 
+        "colors": [], 
+        "mana_cost": "{6}", 
         "types": [
-            "Sorcery"
+            "Artifact", 
+            "Creature"
         ], 
-        "converted_mana_cost": 1
+        "converted_mana_cost": 6
     }, 
     "Midnight Haunting": {
         "heuristics": {
@@ -67354,6 +67361,22 @@ test_names_data = {
         ], 
         "converted_mana_cost": 6
     }, 
+    "Crystal Shard": {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Crystal Shard", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
     "Crimson Muckwader": {
         "heuristics": {
             "caring_about_controlling_land_types_affect_color": {
@@ -67378,39 +67401,6 @@ test_names_data = {
             "Creature"
         ], 
         "converted_mana_cost": 2
-    }, 
-    "Lashwrithe": {
-        "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Lashwrithe", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    "Crystal Shard": {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Blue"
-                ]
-            }
-        }, 
-        "name": "Crystal Shard", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
     }, 
     "Fists of Ironwood": {
         "heuristics": {}, 
@@ -67443,6 +67433,21 @@ test_names_data = {
         ], 
         "converted_mana_cost": 4
     }, 
+    "Witch-Maw Nephilim": {
+        "heuristics": {}, 
+        "name": "Witch-Maw Nephilim", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G}{W}{U}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
     "Kessig Wolf Run": {
         "heuristics": {
             "activated_ability_costs_affect_color": {
@@ -67460,7 +67465,123 @@ test_names_data = {
         ], 
         "converted_mana_cost": 0
     }, 
-    "Razor Golem": {
+    "Lashwrithe": {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Lashwrithe", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    "Dross Golem": {
+        "heuristics": {
+            "affinity_for_basic_lands_affects_mana_cost": {
+                "colors": [
+                    "Black"
+                ], 
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Dross Golem", 
+        "colors": [], 
+        "mana_cost": "{5}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    "Fireball": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Fireball", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    "Sliver Queen": {
+        "heuristics": {}, 
+        "name": "Sliver Queen", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{W}{U}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }
+};
+test_names_data_array = [
+    {
+        "heuristics": {
+            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
+                "mana_cost": "{3}{B}{B}", 
+                "converted_mana_cost": 5
+            }
+        }, 
+        "name": "Decree of Pain", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{6}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Lashwrithe", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sundering Growth", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G/W}{G/W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
         "heuristics": {
             "caring_about_controlling_land_types_affect_color": {
                 "colors": [
@@ -67483,26 +67604,130 @@ test_names_data = {
         ], 
         "converted_mana_cost": 6
     }, 
-    "Dross Golem": {
+    {
         "heuristics": {
-            "affinity_for_basic_lands_affects_mana_cost": {
-                "colors": [
-                    "Black"
-                ], 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Instant", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Midnight Haunting", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "assume_on_color_cmc_for_mono_color_hybrids": {
                 "converted_mana_cost": 3
             }
         }, 
-        "name": "Dross Golem", 
-        "colors": [], 
-        "mana_cost": "{5}", 
+        "name": "Flame Javelin", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2/R}{2/R}{2/R}", 
         "types": [
-            "Artifact", 
+            "Instant"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black", 
+                    "Red"
+                ]
+            }, 
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Black", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Crimson Muckwader", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{1}{R}", 
+        "types": [
             "Creature"
         ], 
-        "converted_mana_cost": 5
-    }
-};
-test_names_data_array = [
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Crystal Shard", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Fists of Ironwood", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Instant", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Eyes in the Skies", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{3}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Kessig Wolf Run", 
+        "colors": [], 
+        "mana_cost": null, 
+        "types": [
+            "Land"
+        ], 
+        "converted_mana_cost": 0
+    }, 
     {
         "heuristics": {
             "x_spells_are_infinite": {
@@ -67538,198 +67763,35 @@ test_names_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "White"
-                ]
-            }, 
-            "affinity_for_basic_lands_affects_mana_cost": {
-                "colors": [
-                    "White"
-                ], 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Razor Golem", 
-        "colors": [], 
-        "mana_cost": "{6}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Green", 
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Kessig Wolf Run", 
-        "colors": [], 
-        "mana_cost": null, 
-        "types": [
-            "Land"
-        ], 
-        "converted_mana_cost": 0
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Instant", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Eyes in the Skies", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{3}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
         "heuristics": {}, 
-        "name": "Fists of Ironwood", 
+        "name": "Witch-Maw Nephilim", 
         "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Blue"
-                ]
-            }
-        }, 
-        "name": "Crystal Shard", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "Black", 
-                    "Red"
-                ]
-            }, 
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Black", 
-                    "Red"
-                ]
-            }
-        }, 
-        "name": "Crimson Muckwader", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{1}{R}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "assume_on_color_cmc_for_mono_color_hybrids": {
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Flame Javelin", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2/R}{2/R}{2/R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {
-            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
-                "mana_cost": "{3}{B}{B}", 
-                "converted_mana_cost": 5
-            }
-        }, 
-        "name": "Decree of Pain", 
-        "colors": [
-            "Black"
-        ], 
-        "mana_cost": "{6}{B}{B}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Instant", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Midnight Haunting", 
-        "colors": [
-            "White"
-        ], 
-        "mana_cost": "{2}{W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    {
-        "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Lashwrithe", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Sundering Growth", 
-        "colors": [
+            "Blue", 
+            "Black", 
             "White", 
             "Green"
         ], 
-        "mana_cost": "{G/W}{G/W}", 
+        "mana_cost": "{G}{W}{U}{B}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sliver Queen", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{W}{U}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
     }
 ];
 cuesbey_all_data = {
@@ -68214,6 +68276,22 @@ cuesbey_all_data = {
             "Creature"
         ], 
         "converted_mana_cost": 3
+    }, 
+    "Sliver Queen": {
+        "heuristics": {}, 
+        "name": "Sliver Queen", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{W}{U}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
     }, 
     "Creakwood Liege": {
         "heuristics": {}, 
@@ -70186,6 +70264,21 @@ cuesbey_all_data = {
             "Creature"
         ], 
         "converted_mana_cost": 2
+    }, 
+    "Witch-Maw Nephilim": {
+        "heuristics": {}, 
+        "name": "Witch-Maw Nephilim", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G}{W}{U}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
     }, 
     "Lotus Petal": {
         "heuristics": {}, 

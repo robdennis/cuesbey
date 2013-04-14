@@ -468,7 +468,7 @@ describe('service', function() {
 
             specExpect({
                 'Creature': {
-                    'White': {
+                    'MonoWhite': {
                         'appearance': 'div',
                         'converted_mana_cost>=1': {
                             'appearance': 'table'
@@ -478,7 +478,7 @@ describe('service', function() {
             }, [{
                 'category': 'Creature',
                 'subcategories': [{
-                    'category': 'White',
+                    'category': 'MonoWhite',
                     'appearance': 'div',
                     'subcategories': [{
                         category: 'converted_mana_cost>=1',
@@ -510,7 +510,7 @@ describe('service', function() {
                     "Karn Liberated",
                     "All Is Dust"
                 ],
-                "White": [
+                "MonoWhite": [
                     "Ethersworn Canonist",
                     "Porcelain Legionnaire",
                     "Academy Rector",
@@ -612,7 +612,7 @@ describe('service', function() {
                     "Spectral Procession",
                     "Wrath of God"
                 ],
-                "Blue": [
+                "MonoBlue": [
                     "Phyrexian Metamorph",
                     "Aeon Chronicler",
                     "Æther Adept",
@@ -714,7 +714,7 @@ describe('service', function() {
                     "Tinker",
                     "Upheaval"
                 ],
-                "Black": [
+                "MonoBlack": [
                     "Abyssal Persecutor",
                     "Bane of the Living",
                     "Black Knight",
@@ -816,7 +816,7 @@ describe('service', function() {
                     "Unearth",
                     "Yawgmoth's Will"
                 ],
-                "Red": [
+                "MonoRed": [
                     "Akroma, Angel of Fury",
                     "Avalanche Riders",
                     "Ball Lightning",
@@ -918,7 +918,7 @@ describe('service', function() {
                     "Wheel of Fortune",
                     "Wildfire"
                 ],
-                "Green": [
+                "MonoGreen": [
                     "Birthing Pod",
                     "Acidic Slime",
                     "Arbor Elf",
@@ -1248,11 +1248,11 @@ describe('service', function() {
             var sortedCube = svc.sortCube(cubeContents, {
                 'Colorless/!Artifact/!Land': {},
                 'Multicolor': {},
-                'White': {},
-                'Blue': {},
-                'Black': {},
-                'Red': {},
-                'Green': {},
+                'MonoWhite': {},
+                'MonoBlue': {},
+                'MonoBlack': {},
+                'MonoRed': {},
+                'MonoGreen': {},
                 'Artifact/Colorless': {},
                 'Land': {}
             }, function(card_a, card_b) {
@@ -1299,11 +1299,11 @@ describe('service', function() {
 
             categoryExpect(0, 'Colorless/!Artifact/!Land');
             categoryExpect(1, 'Multicolor');
-            categoryExpect(2, 'White');
-            categoryExpect(3, 'Blue');
-            categoryExpect(4, 'Black');
-            categoryExpect(5, 'Red');
-            categoryExpect(6, 'Green');
+            categoryExpect(2, 'MonoWhite');
+            categoryExpect(3, 'MonoBlue');
+            categoryExpect(4, 'MonoBlack');
+            categoryExpect(5, 'MonoRed');
+            categoryExpect(6, 'MonoGreen');
             categoryExpect(7, 'Artifact/Colorless');
             categoryExpect(8, 'Land');
         });
@@ -1333,7 +1333,7 @@ describe('service', function() {
                     'Artifact': {},
                     '!Artifact': {}
                 },
-                'Black': {
+                'MonoBlack': {
                     'Instant/converted_mana_cost==1': {},
                     'Instant/converted_mana_cost!=1': {},
                     'Sorcery': {},
@@ -1365,7 +1365,7 @@ describe('service', function() {
                     ]
                 }]
             }, {
-                category: 'Black',
+                category: 'MonoBlack',
                 subcategories: [{
                     category: 'Instant/converted_mana_cost==1',
                     cards: ['Vampiric Tutor']
@@ -1450,6 +1450,9 @@ describe('service', function() {
         var devilsPlay = cubeContents["Devil's Play"];
         var souls = cubeContents["Lingering Souls"];
         var legionnaire = cubeContents["Porcelain Legionnaire"];
+        var nephilim = test_names_data['Witch-Maw Nephilim'];
+        var sliverQueen = test_names_data['Sliver Queen'];
+        var ultimatum = cubeContents['Cruel Ultimatum'];
 
         it('should handle diff categories', function() {
             expect(svc.matchesCategory('both', {_diffResult: 'both'})).toBe(true);
@@ -1462,11 +1465,13 @@ describe('service', function() {
         });
 
         it('should handle monocolor and negation', function() {
+            expect(svc.matchesCategory('MonoWhite', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('White', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('White/Blue', eliteVanguard)).toBe(false);
             expect(svc.matchesCategory('!Blue/!Black', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('!White', eliteVanguard)).toBe(false);
             // a white and black card is white
-            expect(svc.matchesCategory('White', sculler)).toBe(false);
+            expect(svc.matchesCategory('MonoWhite', sculler)).toBe(false);
         });
         it('should handle simple types and negation', function() {
 
@@ -1496,13 +1501,63 @@ describe('service', function() {
         });
 
         it('should handle colorless checks', function() {
-
             expect(svc.matchesCategory('!Colorless', eliteVanguard)).toBe(true);
             expect(svc.matchesCategory('Colorless', eliteVanguard)).toBe(false);
             expect(svc.matchesCategory('!Colorless', karn)).toBe(false);
             expect(svc.matchesCategory('Colorless', karn)).toBe(true);
             expect(svc.matchesCategory('!Colorless', dynamo)).toBe(false);
             expect(svc.matchesCategory('Colorless', dynamo)).toBe(true);
+        });
+
+        it('should handle mono vs multi vs "normal"color checks', function() {
+            expect(svc.matchesCategory('MonoWhite', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('White', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('White/Black', eliteVanguard)).toBe(false);
+            expect(svc.matchesCategory('Black/White', eliteVanguard)).toBe(false);
+            expect(svc.matchesCategory('White|Black', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('Black|White', eliteVanguard)).toBe(true);
+            expect(svc.matchesCategory('MonoWhite', sculler)).toBe(false);
+            expect(svc.matchesCategory('MonoBlack', sculler)).toBe(false);
+            expect(svc.matchesCategory('White', sculler)).toBe(true);
+            expect(svc.matchesCategory('Black', sculler)).toBe(true);
+            expect(svc.matchesCategory('White/Black', sculler)).toBe(true);
+            expect(svc.matchesCategory('Black/White', sculler)).toBe(true);
+            expect(svc.matchesCategory('White|Black', sculler)).toBe(true);
+            expect(svc.matchesCategory('Black|White', sculler)).toBe(true);
+            expect(svc.matchesCategory('White/Black', sculler)).toBe(true);
+            expect(svc.matchesCategory('Black/White/Blue', sculler)).toBe(false);
+            expect(svc.matchesCategory('White|Black', sculler)).toBe(true);
+            expect(svc.matchesCategory('Black|White', sculler)).toBe(true);
+        });
+
+        it('can handle categories like "3-color"', function() {
+            expect(svc.matchesCategory('zero-color', karn)).toBe(true);
+            expect(svc.matchesCategory('0-color', karn)).toBe(true);
+            expect(svc.matchesCategory('2 color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2  Color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2-color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2+ color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2+color', sculler)).toBe(true);
+            expect(svc.matchesCategory('2+-color', sculler)).toBe(true);
+            expect(svc.matchesCategory('tri-color', sculler)).toBe(false);
+            expect(svc.matchesCategory('5-color', sculler)).toBe(false);
+            expect(svc.matchesCategory('2+ color', ultimatum)).toBe(true);
+            expect(svc.matchesCategory('tri-color', ultimatum)).toBe(true);
+            expect(svc.matchesCategory('tri+-color', ultimatum)).toBe(true);
+            expect(svc.matchesCategory('5-color', ultimatum)).toBe(false);
+            expect(svc.matchesCategory('three-color', nephilim)).toBe(false);
+            expect(svc.matchesCategory('2-color', nephilim)).toBe(false);
+            expect(svc.matchesCategory('2+-color', nephilim)).toBe(true);
+            expect(svc.matchesCategory('4-color', nephilim)).toBe(true);
+            expect(svc.matchesCategory('quad+-color', nephilim)).toBe(true);
+            expect(svc.matchesCategory('5-color', nephilim)).toBe(false);
+            expect(svc.matchesCategory('2-color', sliverQueen)).toBe(false);
+            expect(svc.matchesCategory('2+-color', sliverQueen)).toBe(true);
+            expect(svc.matchesCategory('3+-color', sliverQueen)).toBe(true);
+            expect(svc.matchesCategory('4+-color', sliverQueen)).toBe(true);
+            expect(svc.matchesCategory('5+-color', sliverQueen)).toBe(true);
+            expect(svc.matchesCategory('5-color', sliverQueen)).toBe(true);
         });
 
         it('should distinguish between colorless and artifacts', function() {

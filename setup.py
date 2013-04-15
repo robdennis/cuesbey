@@ -4,7 +4,8 @@ __version__ = '0.0.1'
 
 # baseline requirements that the core functionality requires
 install_requires = [
-    'django==1.4.5',
+    'django==1.5.1',
+    'djangular==0.2.1',
     'jsonfield==0.9',
     'unidecode',
     'psycopg2==2.4.1',

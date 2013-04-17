@@ -2,20 +2,20 @@ from setuptools import setup, find_packages
 
 __version__ = '0.0.1'
 
-# baseline requirements that the core functionality requires
 install_requires = [
     'django==1.5.1',
     'djangular==0.2.1',
-    'jsonfield==0.9',
+    'jsonfield==0.9.13',
+    'South==0.7.6',
     'unidecode',
     'psycopg2==2.4.1',
     'django-orm-extensions',
     'logging_unterpolation',
-    'django-bitfield',
     'django-celery',
     'django-celery-with-redis',
     'redis',
-]
+    ]
+# baseline requirements that the core functionality requires
 
 # in case additional setup needs to be done on different versions of python
 extra_setup = {}

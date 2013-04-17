@@ -21,7 +21,6 @@ class HeuristicsHandler(object):
     checked = True
 
     @abc.abstractproperty
-    @property
     def key(self):
         """
         the key name of this heuristic as a key
@@ -36,6 +35,10 @@ class HeuristicsHandler(object):
             heuristic does not apply
         """
         return {}
+
+    @classmethod
+    def as_dict(cls):
+        return dict(key=cls.key, checked=cls.checked)
 
 
 class _handle_x_spells_are_infinite_mana(HeuristicsHandler):

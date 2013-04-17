@@ -6,11 +6,12 @@ from itertools import chain
 from unittest.util import sorted_list_difference, safe_repr
 
 import redis
-from django.core.serializers.python import Serializer as PythonSerializer
-from django.core.serializers.json import DjangoJSONEncoder
+
 from django.db import models, IntegrityError
 from django_orm.postgresql.fields.arrays import ArrayField
 from django_orm.postgresql.manager import Manager
+from jsonfield import JSONField
+from south.modelsinspector import add_introspection_rules
 from unidecode import unidecode
 
 from django.conf import settings
@@ -19,6 +20,12 @@ from cuesbey_main.cube_diff import (get_json_card_content, heuristics,
                                     parse_mana_cost, estimate_colors,
                                     CardFetchingError)
 from cuesbey_main.cube_diff.autolog import log
+
+# https://github.com/niwibe/django-orm-extensions/issues/13#issuecomment-6023692
+add_introspection_rules(
+    [([ArrayField], [], {'dbtype': ["_array_type", {"default": "int"}]})],
+    ["^django_orm\.postgresql\.fields\.arrays\.ArrayField"]
+)
 
 
 class CubeEncoder(json.JSONEncoder):
@@ -165,7 +172,6 @@ def retrieve_cards_from_names(names):
     #         assertExpectatations(fetched_cards+names_to_insert,
     #                              list(set(names)))
 
-
     return fetched_cards, names_to_insert
 
 
@@ -289,6 +295,7 @@ class Card(models.Model):
     power = models.CharField(max_length=200, null=True)
     toughness = models.CharField(max_length=200, null=True)
     loyalty = models.IntegerField(null=True)
+    versions = JSONField()
     objects = models.Manager()
     # this is the django-orm-extensions manager for array-specific queries
     manager = Manager()

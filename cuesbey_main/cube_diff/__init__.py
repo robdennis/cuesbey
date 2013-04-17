@@ -211,7 +211,8 @@ def _query_tutor_for_card_by_name(name):
         'power',
         'toughness',
         'loyalty',
-        ])
+        'versions',
+    ])
 
     log.debug('searching for cardname: %r', name)
 

@@ -89,6 +89,12 @@ class SimpleTest(BaseCardInserter):
         self.assert_split_card_matches('Fire//Ice', 'Fire // Ice',
                                        {'Red', 'Blue'})
 
+    def test_getting_version_info(self):
+        # supporting a slightly smaller representation of a card
+        self.assertEqual(Card.get('Demonic Tutor').first_version_id, 60)
+        # split Cards take the left side
+        self.assertEqual(Card.get('Fire//Ice').first_version_id, 27165)
+
     @unittest.expectedFailure
     def test_split_card_with_different_order(self):
         self.assert_split_card_matches('Demand // Supply', 'Supply // Demand',

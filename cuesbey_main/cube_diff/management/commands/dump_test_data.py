@@ -82,8 +82,7 @@ class Command(BaseCommand):
                 cube.serialize(all_cards, indent=4))
             )
             all_heuristics = [
-                dict(key=k)
-                for k, v in Card.get_all_heuristics().iteritems()
+                v.as_dict() for v in Card.get_all_heuristics().itervalues()
             ]
             outfile.write('cuesbey_all_heuristics = {};\n'.format(
                 cube.serialize(all_heuristics, indent=4))

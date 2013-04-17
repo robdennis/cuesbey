@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'djangular',
     'cube_diff',
     'djcelery',
+    'south',
 )
 
 LOGGING = {

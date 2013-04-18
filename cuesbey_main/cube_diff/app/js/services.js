@@ -79,6 +79,7 @@ angular.module('cube_diff.services', [])
                         'Blue/Green/2-color': {},
                         'Black/Red/2-color': {},
                         'Black/Green/2-color': {},
+                        'Red/Green/2-color': {},
                         '3+ Color': {}
 
                     }

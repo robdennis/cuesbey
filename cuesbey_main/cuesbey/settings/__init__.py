@@ -5,6 +5,7 @@ djcelery.setup_loader()
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+ALLOWED_HOST = ['*']
 
 REDIS_INFORMATION = dict(host='localhost', port=6379, db=0)
 _redis = 'redis://{host}:{port}/{db}'.format(**REDIS_INFORMATION)

@@ -1,11 +1,17 @@
 import json
 import os
+import uuid
 
+
+from django.db import transaction
+from django.db.models import F
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from celery.result import AsyncResult
 
-from cuesbey_main.cube_diff.models import Cube, Card, retrieve_cards_from_names
+from cuesbey_main.cube_diff.models import (Cube, Card,
+                                           retrieve_cards_from_names,
+                                           LinkedDiff)
 from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
@@ -77,10 +83,61 @@ def available_heuristics(request):
 
 
 def blindly_return_cube_diff(request):
-
+    # TODO: this seems like it's unnecessary
+    # but need to figure how else to serve a static html file that has
+    # things linked right
     return HttpResponse(
         open(os.path.normpath(
             os.path.join(__here__, 'app', 'index.html'))
         ).read(),
         mimetype='text/html'
     )
+
+
+@transaction.commit_on_success
+def get_diff_link_id(request):
+    """
+    The expect contents of this request is = {
+        'before': ['card_name', 'card_name'*], # duplicates allowed
+        'after': ['card_name', 'card_name'*], # duplicates allowed
+        'spec': "<spec string>",
+        'heuristics': ['checked_heuristic_key', 'checked_heuristic_key'*],
+    }
+
+    response = {
+        'cards': [{serialized card}, {serialized card}*], # duplicates allowed
+        'insert_job': 'job_id' # to get the results of async insert
+    }
+    """
+
+    if not request.is_ajax():
+        raise Http404
+
+    try:
+        incoming = json.loads(request.body)
+    except ValueError:
+        raise ValueError("problem with %r" % request.body)
+
+    link = LinkedDiff(
+        **{k: v for k, v in incoming.iteritems()
+        if k in ('before', 'after', 'spec', 'heuristics')
+    })
+    external_id = uuid.uuid4()
+    # this seems unnecessary, but just passing the attribute meant
+    # there were no dashes?
+    # TODO: perhaps a different flavor of UUID fields could be better here
+    link.external_link = external_id
+    link.save()
+
+    return HttpResponse(str(external_id),
+                        mimetype='application/json')
+
+
+def get_diff(request, link_id):
+
+    link = LinkedDiff.objects.get(external_link=link_id)
+    link.links = F('links') + 1
+    link.save()
+
+    return HttpResponse(json.dumps(link.as_dict()),
+                        mimetype='application/json')

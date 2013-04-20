@@ -3,7 +3,8 @@ from django.contrib import admin
 
 from cuesbey_main.cube_diff.views import (card_contents, poll_state,
                                           available_heuristics,
-                                          blindly_return_cube_diff)
+                                          blindly_return_cube_diff,
+                                          get_diff, get_diff_link_id)
 from cuesbey_main.cube_diff.models import Card
 
 admin.autodiscover()
@@ -16,7 +17,12 @@ urlpatterns = patterns('',
                        url(r'^djangular/', include('djangular.urls')),
                        url(r'^card_contents/?$', card_contents),
                        url(r'^heuristics/?$', available_heuristics),
+                       url(r'^get_diff/(?P<link_id>[^/]+)/?$',
+                           get_diff),
+                       url(r'^get_diff_link/$',
+                           get_diff_link_id),
                        url(r'^poll_state/$', poll_state, name="poll_state"),
+
                        # FIXME: this is ugly and probably unnecessary
                        url(r'^$', blindly_return_cube_diff),
 )

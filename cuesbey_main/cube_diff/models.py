@@ -1,6 +1,8 @@
 # encoding: utf-8
 import json
 import re
+import uuid
+
 from collections import namedtuple, Counter
 from itertools import chain
 from unittest.util import sorted_list_difference, safe_repr
@@ -13,6 +15,7 @@ from django_orm.postgresql.manager import Manager
 from jsonfield import JSONField
 from south.modelsinspector import add_introspection_rules
 from unidecode import unidecode
+from uuidfield import UUIDField
 
 from django.conf import settings
 
@@ -542,3 +545,30 @@ class User(models.Model):
     Someone who's using the site, and has cubes
     """
     name = models.CharField(max_length=200)
+
+
+class LinkedDiff(models.Model):
+    """
+    Describes a diff that was linked to you
+    """
+    external_link = UUIDField(auto=True, unique=True)
+    before = ArrayField(dbtype='text', null=True)
+    after = ArrayField(dbtype='text', null=True)
+    spec = models.CharField(primary_key=True, max_length=4096)
+    heuristics = ArrayField(dbtype='text', null=True)
+    links = models.IntegerField(default=0)
+
+    def as_dict(self):
+
+        representation = {
+            k: getattr(self, k) for k in ('before', 'after', 'spec')
+        }
+
+        representation['heuristics'] = [
+            dict(key=k, checked=k in self.heuristics)
+            #TODO: need to handle new/renamed heuristics
+            for k in Card.get_all_heuristics()
+        ]
+
+        return representation
+

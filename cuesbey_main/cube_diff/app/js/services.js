@@ -26,10 +26,9 @@ var colorList = ['White', 'Blue', 'Black', 'Red', 'Green'];
 var typeList = ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Tribal'];
 
 angular.module('cube_diff.services', [])
-    .factory('DefaultsService', function() {
-        return {
-            spec: function() {
-                var cmcSlots = {
+    .factory('DefaultsService', function(CardHeuristicService, $http) {
+
+        var cmcSlots = {
                     'appearance': 'table',
                     'cmc<=1': {},
                     'cmc==2': {},
@@ -39,54 +38,51 @@ angular.module('cube_diff.services', [])
                     'cmc==6': {},
                     'cmc>=7': {}
                 };
-                return {
-                    'MonoWhite': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-                    'MonoBlue': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-                    'MonoBlack': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-                    'MonoRed': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-                    'MonoGreen': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-                    'Colorless/!Land': {
-                        'Creature': cmcSlots,
-                        '!Creature': cmcSlots
-                    },
-
-                    'Colorless/Land': {
-                        appearance:'table'
-                    },
-                    'Multicolor': {
-                        appearance:'table',
-                        'White/Blue/2-color': {},
-                        'White/Black/2-color': {},
-                        'White/Red/2-color': {},
-                        'White/Green/2-color': {},
-                        'Blue/Black/2-color': {},
-                        'Blue/Red/2-color': {},
-                        'Blue/Green/2-color': {},
-                        'Black/Red/2-color': {},
-                        'Black/Green/2-color': {},
-                        'Red/Green/2-color': {},
-                        '3+ Color': {}
-
-                    }
-                };
+        var defaultSpec = JSON.stringify({
+            'MonoWhite': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
             },
-            beforeNames: function() {
-                return [
+            'MonoBlue': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
+            },
+            'MonoBlack': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
+            },
+            'MonoRed': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
+            },
+            'MonoGreen': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
+            },
+            'Colorless/!Land': {
+                'Creature': cmcSlots,
+                '!Creature': cmcSlots
+            },
+
+            'Colorless/Land': {
+                appearance:'table'
+            },
+            'Multicolor': {
+                appearance:'table',
+                'White/Blue/2-color': {},
+                'White/Black/2-color': {},
+                'White/Red/2-color': {},
+                'White/Green/2-color': {},
+                'Blue/Black/2-color': {},
+                'Blue/Red/2-color': {},
+                'Blue/Green/2-color': {},
+                'Black/Red/2-color': {},
+                'Black/Green/2-color': {},
+                'Red/Green/2-color': {},
+                '3+ Color': {}
+            }
+        }, null, 2);
+        var defaultBeforeNames = [
                     "Absorb",
                     "Abyssal Persecutor",
                     "Academy Rector",
@@ -807,10 +803,8 @@ angular.module('cube_diff.services', [])
                     "Yosei, the Morning Star",
                     "Zo-Zu the Punisher",
                     "Zombie Cutthroat"
-                ].join('\n');
-            },
-            afterNames: function() {
-                return [
+                ];
+        var defaultAfterNames = [
                     "Absorb",
                     "Academy Rector",
                     "Academy Ruins",
@@ -1531,7 +1525,50 @@ angular.module('cube_diff.services', [])
                     "Yosei, the Morning Star",
                     "Zo-Zu the Punisher",
                     "Zombie Cutthroat"
-                ].join('\n');
+                ];
+        var getSavedDiff = function(urlPart, callback) {
+            $http.get('/get_diff/' + urlPart).
+                success(function (data, status) {
+                    callback(data);
+                }).
+                error(function() {
+                    returnDefaults(callback)
+                });
+
+        };
+
+        var returnDefaults = function(callback) {
+            CardHeuristicService.getHeuristics(function(heuristics) {
+                callback({
+                    'spec': defaultSpec,
+                    'before': defaultBeforeNames,
+                    'after': defaultAfterNames,
+                    'heuristics': heuristics
+                });
+            });
+        };
+
+        return {
+            get: function(callback, urlPart) {
+                var match = new RegExp("^/?(.+?)/?$").exec(urlPart);
+                if (match) {
+                    getSavedDiff(match[1], callback);
+                } else {
+                    returnDefaults(callback)
+                }
+
+            },
+
+            getSavedDiff: getSavedDiff
+        }
+    })
+    .factory('ShareDiffService', function($location, $http) {
+        return {
+            share: function(data) {
+                $http.post('/get_diff_link/', data).
+                    success(function (data) {
+                        $location.path('/'+data)
+                    });
             }
         }
     })
@@ -1642,11 +1679,8 @@ angular.module('cube_diff.services', [])
             pollCardProgress : pollCardProgress,
             consumeInserts : function(jobId, onFinish, onHeartbeat) {
                 var tick = function() {
-                    console.log('about to poll with', jobId);
                     pollCardProgress(jobId, function(data, status) {
-                        console.log('got data', data);
-                        console.log('got status', status);
-                        // TODO: branching via a different isn't great
+                        // TODO: branching via a different value of isn't great
                         if (data=='"PENDING"') {
                            $timeout(tick, 500);
                         } else if (data['inserted_cards']) {

@@ -12,6 +12,7 @@ install_requires = [
     'django-orm-extensions',
     'logging_unterpolation',
     'django-celery',
+    'django-uuidfield==0.4.0',
     'django-celery-with-redis',
     'redis',
     ]

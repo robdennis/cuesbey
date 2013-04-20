@@ -5,14 +5,17 @@
 angular.module('cube_diff.controllers', []);
 
 function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
-                          CardHeuristicService, DefaultsService,
-                          NamesFromTextService, $cacheFactory) {
+                          DefaultsService, NamesFromTextService,
+                          ShareDiffService,
+                          $cacheFactory, $location) {
 
-    $scope.spec = JSON.stringify(DefaultsService.spec(), null, 2);
 
-    CardHeuristicService.getHeuristics(function(data) {
-        $scope.heuristics = data
-    });
+    DefaultsService.get(function(data) {
+        $scope.spec = data['spec'];
+        $scope.heuristics = data['heuristics'];
+        $scope.beforeTextArea = data['before'].join('\n');
+        $scope.afterTextArea = data['after'].join('\n');
+    }, $location.url());
 
     $scope.diffCache = $cacheFactory('diffCache', {});
 
@@ -27,9 +30,6 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         });
         return wasChanged;
     };
-
-    $scope.beforeTextArea = DefaultsService.beforeNames();
-    $scope.afterTextArea = DefaultsService.afterNames();
 
     var getCheckedHeuristics = function() {
         var checkedHeuristics = [];
@@ -87,8 +87,6 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
         }
     };
 
-
-
     $scope.diff = function() {
         var names = {
             before: $scope.beforeTextArea,
@@ -105,4 +103,13 @@ function CubeContentsCtrl($scope, CardContentService, CubeDiffService,
             $scope.performDiff()
         }
     };
+
+    $scope.share = function() {
+        ShareDiffService.share({
+            before: NamesFromTextService.getNames($scope.beforeTextArea),
+            after: NamesFromTextService.getNames($scope.afterTextArea),
+            heuristics: getCheckedHeuristics(),
+            spec: $scope.spec
+        })
+    }
 }

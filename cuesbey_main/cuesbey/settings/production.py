@@ -1,5 +1,7 @@
 from cuesbey.settings import *
 
+# http://stackoverflow.com/questions/15128135/django-setting-debug-false-causes-500-error
+ALLOWED_HOSTS = ['cuesbey.com']
 DEBUG = False 
 TEMPLATE_DEBUG = False
 STATIC_ROOT = '/home/ubuntu/static'

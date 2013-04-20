@@ -11,7 +11,7 @@ from celery.result import AsyncResult
 
 from cuesbey_main.cube_diff.models import (Cube, Card,
                                            retrieve_cards_from_names,
-                                           LinkedDiff)
+                                           SharedDiff)
 from tasks import async_get_cards
 
 __here__ = os.path.abspath(os.path.dirname(__file__))
@@ -118,7 +118,7 @@ def get_diff_link_id(request):
     except ValueError:
         raise ValueError("problem with %r" % request.body)
 
-    link = LinkedDiff(
+    link = SharedDiff(
         **{k: v for k, v in incoming.iteritems()
         if k in ('before', 'after', 'spec', 'heuristics')
     })
@@ -135,7 +135,7 @@ def get_diff_link_id(request):
 
 def get_diff(request, link_id):
 
-    link = LinkedDiff.objects.get(external_link=link_id)
+    link = SharedDiff.objects.get(external_link=link_id)
     link.links = F('links') + 1
     link.save()
 

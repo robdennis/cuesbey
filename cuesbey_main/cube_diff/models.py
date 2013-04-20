@@ -547,14 +547,14 @@ class User(models.Model):
     name = models.CharField(max_length=200)
 
 
-class LinkedDiff(models.Model):
+class SharedDiff(models.Model):
     """
     Describes a diff that was linked to you
     """
-    external_link = UUIDField(auto=True, unique=True)
+    external_link = UUIDField(auto=True)
     before = ArrayField(dbtype='text', null=True)
     after = ArrayField(dbtype='text', null=True)
-    spec = models.CharField(primary_key=True, max_length=4096)
+    spec = models.CharField(max_length=4096)
     heuristics = ArrayField(dbtype='text', null=True)
     links = models.IntegerField(default=0)
 

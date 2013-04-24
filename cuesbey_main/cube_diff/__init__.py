@@ -171,7 +171,7 @@ def _merge_split_cards(*split_names):
     special_cases = dict(
         name=_join_on_key('name'),
         mana_cost=_join_on_key('mana_cost'),
-        converted_mana_cost=-1,
+        converted_mana_cost=max(card['converted_mana_cost'] for card in cards),
         text=_join_on_key('text', '\n\n-----\n\n'),
     )
 
@@ -184,8 +184,18 @@ def get_json_card_content(name):
     """
     Get the card's json content
     """
-
-    if '/' in name:
+    # issue #14
+    if re.search(r'\s*/\s*'.join(['Who',  'What', 'When',
+                                   'Where', 'Why']), name, re.I):
+        original_json = _query_tutor_for_card_by_name('Who/What/When/'
+                                                      'Where/Why')
+        # this mimics how we do split cards
+        original_json['mana_cost'] = ' // '.join([
+            '{X}{W}', '{2}{R}', '{2}{U}', '{3}{B}', '{1}{G}'
+        ])
+        original_json['converted_mana_cost'] = 4
+        return original_json
+    elif '/' in name:
         return _merge_split_cards(*re.split(r'\s*/+\s*', name))
     else:
         return _query_tutor_for_card_by_name(name)

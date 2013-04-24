@@ -1452,6 +1452,7 @@ describe('service', function() {
         var legionnaire = cubeContents["Porcelain Legionnaire"];
         var nephilim = test_names_data['Witch-Maw Nephilim'];
         var sliverQueen = test_names_data['Sliver Queen'];
+        var wwwww = test_names_data['Who/What/When/Where/Why'];
         var ultimatum = cubeContents['Cruel Ultimatum'];
 
         it('should handle diff categories', function() {
@@ -1558,6 +1559,12 @@ describe('service', function() {
             expect(svc.matchesCategory('4+-color', sliverQueen)).toBe(true);
             expect(svc.matchesCategory('5+-color', sliverQueen)).toBe(true);
             expect(svc.matchesCategory('5-color', sliverQueen)).toBe(true);
+            expect(svc.matchesCategory('2-color', wwwww)).toBe(false);
+            expect(svc.matchesCategory('2+-color', wwwww)).toBe(true);
+            expect(svc.matchesCategory('3+-color', wwwww)).toBe(true);
+            expect(svc.matchesCategory('4+-color', wwwww)).toBe(true);
+            expect(svc.matchesCategory('5+-color', wwwww)).toBe(true);
+            expect(svc.matchesCategory('5-color', wwwww)).toBe(true);
         });
 
         it('should distinguish between colorless and artifacts', function() {

@@ -90,23 +90,25 @@ class SimpleTest(BaseCardInserter):
                                        {'Red', 'Blue'})
 
     def test_getting_version_info(self):
-        # supporting a slightly smaller representation of a card
-        self.assertEqual(Card.get('Demonic Tutor').first_version_id, 60)
+
+        self.assertIn('60', Card.get('Demonic Tutor').versions)
         # split Cards take the left side
-        self.assertEqual(Card.get('Fire//Ice').first_version_id, 27165)
+        self.assertIn('27165', Card.get('Fire//Ice').versions)
 
     @unittest.expectedFailure
     def test_split_card_with_different_order(self):
         self.assert_split_card_matches('Demand // Supply', 'Supply // Demand',
                                        {'Green', 'White', 'Blue'})
 
-    @unittest.expectedFailure
-    def test_greater_than_one_split_on_a_card(self):
-        self.assert_split_card_matches(
-            'Who//What// Where // When / Why',
-            'Who//What//Where//When//Why',
-            {'White', 'Blue', 'Black', 'Red', 'Green'}
-        )
+    # @unittest.expectedFailure
+    def test_who_what_when_where_why(self):
+        search_name = 'Who/What/When/Where/Why'
+        self.assertEqual([], list(Card.objects.filter(name=search_name).all()))
+        wwwww = Card.get(search_name)
+        self.assertIsInstance(wwwww, Card)
+        self.assertEqual(wwwww.name, 'Who/What/When/Where/Why')
+        self.assertEqual(wwwww.colors,
+                         {'White', 'Blue', 'Black', 'Red', 'Green'})
 
 
 class CardModelTest(BaseCardInserter):

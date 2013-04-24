@@ -31,6 +31,7 @@ describe('service', function() {
                 cuesbey_all_heuristics
             );
             ctrl = $controller("CubeContentsCtrl", {$scope: scope});
+            scope.spec = JSON.stringify({'category': 'Any', 'cards': []});
             scope.beforeTextArea = standardBefore.join('\n');
             scope.afterTextArea = standardAfter.join('\n');
             spyOn(diffService, 'getDiff').andReturn([
@@ -82,7 +83,7 @@ describe('service', function() {
             expect(scope.performDiff).toHaveBeenCalled();
         });
 
-        it('should not call out to the server in case of new text', function() {
+        it('should not call out to the server in case of remaining text', function() {
             scope.diffCache.put('before', scope.beforeTextArea);
             scope.diffCache.put('after', scope.afterTextArea);
             scope.diff();

@@ -19,6 +19,7 @@ DATABASES = {
     }
 }
 
+ADMINS = [('Rob', 'rdennis+cuesbey@gmail.com')]
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -29,30 +30,17 @@ LOGGING = {
     },
 
     'handlers': {
-        'console': {
+        'syslog': {
             'level':'DEBUG',
-            'class':'logging.StreamHandler',
-            'formatter': 'normal'
+            'class':'logging.handlers.SysLogHandler',
+            'formatter': 'normal',
+            'address': '/dev/log'
         },
     },
 
-    'loggers': {
-        'cuesbey_main': {
-            'handlers': ['console'],
-            'propagate': True,
+    'root': {
+            'handlers': ['syslog'],
             'level': 'DEBUG',
-        },
-        'cube_viewer': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG',
-        },
-        'cuesbey': {
-            'handlers': ['console'],
-            'propagate': True,
-            'level': 'DEBUG',
-        }
-
-
+            'propagate': True
     },
 }

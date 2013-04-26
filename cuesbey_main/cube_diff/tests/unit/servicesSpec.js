@@ -1431,6 +1431,13 @@ describe('service', function() {
                     '1x Wrath of God [ZEN] *GE*\n'
             )).toEqual(expected);
         });
+
+        it('should handle deckstats style formatting', function() {
+            expect(svc.getNames(
+                    '1 Elite Vanguard \n'+
+                    '2 Wrath of God\n'
+            )).toEqual(expected);
+        });
     });
 
     describe("cardCategoryServiceTest", function() {

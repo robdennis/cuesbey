@@ -1586,7 +1586,8 @@ angular.module('cube_diff.services', [])
                         //3x Llanowar Elves *F* (foil)
                         //3x Llanowar Elves *GE* (German language card)
                         //3x Llanowar Elves [M10] *F* (see a pattern?)
-                        match = /^(?:(\d+)\s*(?:x|-)\s*)?(.*?)(?:(?:\[|\*).*)?$/.exec(name);
+                        // the space after numeral handles deckstats
+                        match = /^(?:(\d+)\s*(?:x|-| )\s*)?(.*?)(?:(?:\[|\*).*)?$/.exec(name);
                         if (match) {
                             // there are potentially multiples in match[1]
                             // assume that's the case

@@ -232,7 +232,7 @@ def _query_tutor_for_card_by_name(name):
                                                      '--format',
                                                      'json',
                                                      name]).strip())
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError, ValueError) as e:
         log.exception('problem with cardname: %r', name)
         raise CardFetchingError(u'unable to fetch a card '
                                 u'with name: {!r}'.format(name))

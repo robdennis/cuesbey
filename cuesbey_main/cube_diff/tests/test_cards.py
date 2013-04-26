@@ -53,8 +53,22 @@ class SimpleTest(BaseCardInserter):
     def test_refetching_unicode_names_searched_with_ascii(self):
         # searches with ascii names sometimes return non-ascii results
         # and we want to make sure that's not a problem
+
+        for ascii_name, unicode_name in [
+            ("AEther Vial", u'Æther Vial'),
+            ("Juzam Djinn", u'Juzám Djinn'),
+            ("Jotun Grunt", u'Jötun Grunt')
+        ]:
+            # fetch
+            self.assertEqual(Card.get(unicode_name).name, unicode_name)
+            # re-fetch
+            self.assertEqual(Card.get(ascii_name).name, unicode_name)
+
+    @unittest.expectedFailure  # issue #14
+    def test_fetching_unicode_names_with_ascii_text(self):
+
         self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
-        self.assertEqual(Card.get("AEther Vial").name, u'Æther Vial')
+        self.assertEqual(Card.get("Juzam Djinn").name, u'Juzám Djinn')
 
     def test_handle_apostrophe_names(self):
 

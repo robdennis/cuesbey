@@ -226,6 +226,10 @@ def insert_cards(names, redis_conn, post_insert_hook=None):
             if fetched_name in inserted_names:
                 refetched_names.append(fetched_name)
                 continue
+        else:
+            # mitigation against isse #14 .e.g make a mismatch mapping
+            # proactively to support searching with ascii names
+            Card.add_new_mismatches({name: fetched_name}, redis_conn)
 
         if fetched_name not in content_map:
             content_map[fetched_name] = card_content
@@ -272,7 +276,8 @@ def _clean_cardname(name):
     """
     if isinstance(name, str):
         name = name.decode('utf-8')
-    cleaned_name = unidecode(name).strip()
+    cleaned_name = u''.join(c if c.isalpha() else unidecode(c)
+                            for c in name.strip())
     # log.debug(u'%s (%r) cleaned as %r', name.strip(), name, cleaned_name)
     return cleaned_name
 
@@ -375,29 +380,35 @@ class Card(models.Model):
         if redis_conn is None:
             redis_conn = cls._get_redis()
 
-        def yield_lower_mismatches():
-            # addresses issue #9
+        def yield_fixed_mismatches():
+            # addresses issue #9 and #14
+
             for bad_name, correct_name in mismatches.iteritems():
-                yield (bad_name.lower().encode('utf8'),
-                       correct_name.lower().encode('utf8'))
-                yield (bad_name.encode('utf8'),
-                       correct_name.encode('utf8'))
+                value = correct_name.encode('utf8')
+                for key in [
+                    bad_name.lower(),
+                    bad_name,
+                    unidecode(bad_name.lower()),
+                    unidecode(bad_name),
+                ]:
+                    key = key.encode('utf8')
+                    if key!=value:
+                        yield(key, value)
 
         redis_conn.hmset('_mismatched', {
-            k: v for k, v in yield_lower_mismatches()
+            k: v for k, v in yield_fixed_mismatches()
         })
         cls.get_mismatched_names_map(redis_conn)
 
     @classmethod
     def make_standard_mismatches(cls, redis_conn=None):
-        if redis_conn is None:
-            redis_conn = cls._get_redis()
-        # addresses issue #9
-        redis_conn.hmset('_mismatched', {
-            card.name.lower().encode('utf-8'): card.name.encode('utf-8')
+        """
+        simplify a number of mismatches we want to always support
+        """
+        cls.add_new_mismatches({
+            card.name: card.name
             for card in Card.objects.all()
-        })
-        cls.get_mismatched_names_map(redis_conn)
+        }, redis_conn)
 
     @classmethod
     def reset_names_inserted(cls):
@@ -462,7 +473,10 @@ class Card(models.Model):
 
     @classmethod
     def get(cls, name):
-        return get_cards_from_names(name)[0]
+        try:
+            return get_cards_from_names(name)[0]
+        except IndexError:
+            raise CardFetchingError("unable to find card with {!r}".format(name))
 
     def as_dict(self):
 

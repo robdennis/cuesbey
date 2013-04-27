@@ -10,6 +10,13 @@ from cuesbey_main.cube_diff import (parse_mana_cost, estimate_cmc,
                                     estimate_colors_from_lands)
 from cuesbey_main.cube_diff.autolog import log
 
+colors = (
+    'White',
+    'Blue',
+    'Black',
+    'Red',
+    'Green',
+)
 
 class HeuristicsHandler(object):
     """
@@ -177,17 +184,56 @@ class _handle_caring_about_land_types(HeuristicsHandler):
         land_names = "(Plains|Island|Swamp|Mountain|Forest)"
         plural_land_names = "(Plains|Islands|Swamps|Mountains|Forests)"
         controlled_lands = (
-            re.findall("as long as you control a %s" % land_names, card.text) +
+            re.findall("you control a %s" % land_names, card.text),
             re.findall("%s you control" % plural_land_names, card.text)
         )
 
         if any(controlled_lands):
-            _land_colors = estimate_colors_from_lands(chain(controlled_lands))
+            _land_colors = estimate_colors_from_lands(chain(*controlled_lands))
 
             if _land_colors == card.colors:
                 return
 
             modified_colors = card.colors | _land_colors
+
+            return {
+                cls.key: dict(colors=modified_colors)
+            }
+
+
+class _handle_caring_about_permanent_colors(HeuristicsHandler):
+    key = 'caring_about_controlling_colored_permanents_affect_color'
+
+    @classmethod
+    def get(cls, card):
+        """
+        If a card is one color, but needs gets a bonus from controlling
+        permanents or creatures of a different color or colors, that is often
+        considered a multicolor card
+        """
+
+        color_names = '({})'.format('|'.join(colors))
+
+        controlled_colors = (
+            re.findall('you control a {0}(?: or {0})?'.format(color_names),
+                       card.text, re.I),
+            re.findall('you control a {0} \w+'
+                       '(?: and a {0})?'.format(color_names),
+                       card.text, re.I),
+        )
+
+        if any(controlled_colors):
+            controlled_colors = set([
+                # each findall returns a 2 tuple, and up to 4 total, thus the
+                # double unwrapping
+                color.title() for color in chain(*chain(*controlled_colors))
+                if color
+            ])
+
+            if controlled_colors == card.colors:
+                return
+
+            modified_colors = card.colors | controlled_colors
 
             return {
                 cls.key: dict(colors=modified_colors)
@@ -467,6 +513,7 @@ _all_handlers = [
     _handle_activated_abilities,
     _handle_phyrexian_abilities,
     _handle_suspend,
+    _handle_caring_about_permanent_colors,
 ]
 
 

@@ -192,7 +192,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 5
     }, 
     "Glacial Fortress": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -2982,7 +2988,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 5
     }, 
     "Clifftop Retreat": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -3920,7 +3932,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 2
     }, 
     "Rootbound Crag": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -6002,7 +6020,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 1
     }, 
     "Sunpetal Grove": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -7904,7 +7928,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 1
     }, 
     "Woodland Cemetery": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -8584,7 +8614,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 7
     }, 
     "Isolated Chapel": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -8838,7 +8874,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 4
     }, 
     "Dragonskull Summit": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -8948,7 +8990,13 @@ mtgo_cube_og_data = {
         "converted_mana_cost": 0
     }, 
     "Hinterland Harbor": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -9498,7 +9546,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 8
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -12681,7 +12735,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 2
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -14781,7 +14841,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 1
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -15895,7 +15961,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 0
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -17586,7 +17658,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -17699,7 +17777,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -17913,7 +17997,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -17969,7 +18059,13 @@ mtgo_cube_og_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -18270,7 +18366,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 5
     }, 
     "Glacial Fortress": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -21006,7 +21108,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 5
     }, 
     "Clifftop Retreat": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -22003,7 +22111,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 1
     }, 
     "Rootbound Crag": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -22192,7 +22306,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 2
     }, 
     "Woodland Cemetery": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -24054,7 +24174,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 1
     }, 
     "Sunpetal Grove": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -26622,7 +26748,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 7
     }, 
     "Isolated Chapel": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -26905,7 +27037,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 4
     }, 
     "Dragonskull Summit": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -26994,7 +27132,13 @@ mtgo_cube_avr_data = {
         "converted_mana_cost": 0
     }, 
     "Hinterland Harbor": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -27439,7 +27583,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 8
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -30409,7 +30559,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 2
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -32380,7 +32536,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 1
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -33453,7 +33615,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 0
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -35008,7 +35176,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -35105,7 +35279,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -35951,7 +36131,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -36007,7 +36193,13 @@ mtgo_cube_avr_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -36306,7 +36498,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 5
     }, 
     "Glacial Fortress": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -39045,7 +39243,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 7
     }, 
     "Clifftop Retreat": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -40057,7 +40261,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 1
     }, 
     "Rootbound Crag": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -40234,7 +40444,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 2
     }, 
     "Woodland Cemetery": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -42082,7 +42298,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 1
     }, 
     "Sunpetal Grove": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -44695,7 +44917,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 7
     }, 
     "Isolated Chapel": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -44926,7 +45154,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 4
     }, 
     "Dragonskull Summit": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -45015,7 +45249,13 @@ mtgo_cube_m13_data = {
         "converted_mana_cost": 0
     }, 
     "Hinterland Harbor": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -45460,7 +45700,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 8
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -48344,7 +48590,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 2
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -50203,7 +50455,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 1
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -51216,7 +51474,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 0
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -52755,7 +53019,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -52852,7 +53122,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -53955,7 +54231,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -54011,7 +54293,13 @@ mtgo_cube_m13_data_array = [
         "converted_mana_cost": 5
     }, 
     {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -67273,35 +67561,21 @@ mtgo_cube_rtr_data_array = [
     }
 ];
 test_names_data = {
-    "Sundering Growth": {
-        "heuristics": {}, 
-        "name": "Sundering Growth", 
-        "colors": [
-            "White", 
-            "Green"
-        ], 
-        "mana_cost": "{G/W}{G/W}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    "Lashwrithe": {
+    "Fireball": {
         "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
             }
         }, 
-        "name": "Lashwrithe", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
+        "name": "Fireball", 
+        "colors": [
+            "Red"
         ], 
-        "converted_mana_cost": 4
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
     }, 
     "Midnight Haunting": {
         "heuristics": {
@@ -67322,6 +67596,212 @@ test_names_data = {
         ], 
         "converted_mana_cost": 3
     }, 
+    "Putrid Raptor": {
+        "heuristics": {}, 
+        "name": "Putrid Raptor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    "Assault // Battery": {
+        "heuristics": {}, 
+        "name": "Assault // Battery", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{R} // {3}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    "Sundering Growth": {
+        "heuristics": {}, 
+        "name": "Sundering Growth", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G/W}{G/W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    "Devil's Play": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Devil's Play", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    "Crystal Shard": {
+        "heuristics": {
+            "activated_ability_costs_affect_color": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Crystal Shard", 
+        "colors": [], 
+        "mana_cost": "{3}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    "Who/What/When/Where/Why": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Who/What/When/Where/Why", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{X}{W} // {2}{U} // {3}{B} // {2}{R} // {1}{G}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    "Supply // Demand": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }, 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Supply // Demand", 
+        "colors": [
+            "Blue", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{X}{G}{W} // {1}{W}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    "Slave of Bolas": {
+        "heuristics": {}, 
+        "name": "Slave of Bolas", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{U/R}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    "Sliver Queen": {
+        "heuristics": {}, 
+        "name": "Sliver Queen", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{W}{U}{B}{R}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 5
+    }, 
+    "Ghostfire": {
+        "heuristics": {}, 
+        "name": "Ghostfire", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    "Dryad Arbor": {
+        "heuristics": {}, 
+        "name": "Dryad Arbor", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": null, 
+        "types": [
+            "Land", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 0
+    }, 
+    "Lashwrithe": {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Lashwrithe", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    "Bloodhall Ooze": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Black", 
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Bloodhall Ooze", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
     "Decree of Pain": {
         "heuristics": {
             "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
@@ -67338,22 +67818,6 @@ test_names_data = {
             "Sorcery"
         ], 
         "converted_mana_cost": 8
-    }, 
-    "Flame Javelin": {
-        "heuristics": {
-            "assume_on_color_cmc_for_mono_color_hybrids": {
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Flame Javelin", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2/R}{2/R}{2/R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 6
     }, 
     "Crimson Muckwader": {
         "heuristics": {
@@ -67380,68 +67844,19 @@ test_names_data = {
         ], 
         "converted_mana_cost": 2
     }, 
-    "Razor Golem": {
-        "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "White"
-                ]
-            }, 
-            "affinity_for_basic_lands_affects_mana_cost": {
-                "colors": [
-                    "White"
-                ], 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Razor Golem", 
-        "colors": [], 
-        "mana_cost": "{6}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    "Crystal Shard": {
-        "heuristics": {
-            "activated_ability_costs_affect_color": {
-                "colors": [
-                    "Blue"
-                ]
-            }
-        }, 
-        "name": "Crystal Shard", 
-        "colors": [], 
-        "mana_cost": "{3}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 3
-    }, 
-    "Fists of Ironwood": {
-        "heuristics": {}, 
-        "name": "Fists of Ironwood", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    "Witch-Maw Nephilim": {
-        "heuristics": {}, 
-        "name": "Witch-Maw Nephilim", 
+    "Transguild Courier": {
+        "heuristics": null, 
+        "name": "Transguild Courier", 
         "colors": [
             "Blue", 
-            "Black", 
+            "Green", 
             "White", 
-            "Green"
+            "Black", 
+            "Red"
         ], 
-        "mana_cost": "{G}{W}{U}{B}", 
+        "mana_cost": "{4}", 
         "types": [
+            "Artifact", 
             "Creature"
         ], 
         "converted_mana_cost": 4
@@ -67465,25 +67880,57 @@ test_names_data = {
         ], 
         "converted_mana_cost": 4
     }, 
-    "Who/What/When/Where/Why": {
-        "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Who/What/When/Where/Why", 
+    "Witch-Maw Nephilim": {
+        "heuristics": {}, 
+        "name": "Witch-Maw Nephilim", 
         "colors": [
             "Blue", 
             "Black", 
             "White", 
-            "Green", 
-            "Red"
+            "Green"
         ], 
-        "mana_cost": "{X}{W} // {2}{U} // {3}{B} // {2}{R} // {1}{G}", 
+        "mana_cost": "{G}{W}{U}{B}", 
         "types": [
-            "Instant"
+            "Creature"
         ], 
         "converted_mana_cost": 4
+    }, 
+    "Spellskite": {
+        "heuristics": {
+            "phyrexian_always_pays_life_except_for_abilities": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Spellskite", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    "Necra Sanctuary": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Green", 
+                    "White", 
+                    "Black"
+                ]
+            }
+        }, 
+        "name": "Necra Sanctuary", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Kessig Wolf Run": {
         "heuristics": {
@@ -67502,21 +67949,134 @@ test_names_data = {
         ], 
         "converted_mana_cost": 0
     }, 
-    "Fireball": {
+    "Razor Golem": {
         "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }, 
+            "affinity_for_basic_lands_affects_mana_cost": {
+                "colors": [
+                    "White"
+                ], 
+                "converted_mana_cost": 3
             }
         }, 
-        "name": "Fireball", 
+        "name": "Razor Golem", 
+        "colors": [], 
+        "mana_cost": "{6}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    "Sensei's Divining Top": {
+        "heuristics": {}, 
+        "name": "Sensei's Divining Top", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    "Flame Javelin": {
+        "heuristics": {
+            "assume_on_color_cmc_for_mono_color_hybrids": {
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Flame Javelin", 
         "colors": [
             "Red"
         ], 
-        "mana_cost": "{X}{R}", 
+        "mana_cost": "{2/R}{2/R}{2/R}", 
         "types": [
-            "Sorcery"
+            "Instant"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    "Thornwatch Scarecrow": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "White", 
+                    "Green"
+                ]
+            }
+        }, 
+        "name": "Thornwatch Scarecrow", 
+        "colors": [], 
+        "mana_cost": "{6}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    "Skitter of Lizards": {
+        "heuristics": {}, 
+        "name": "Skitter of Lizards", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
         ], 
         "converted_mana_cost": 1
+    }, 
+    "Fists of Ironwood": {
+        "heuristics": {}, 
+        "name": "Fists of Ironwood", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{1}{G}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    "Thornscape Battlemage": {
+        "heuristics": {
+            "always_kick": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }, 
+            "off_color_kicker_is_gold": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ]
+            }, 
+            "always_kick_creatures": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }
+        }, 
+        "name": "Thornscape Battlemage", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Dross Golem": {
         "heuristics": {
@@ -67535,25 +68095,195 @@ test_names_data = {
             "Creature"
         ], 
         "converted_mana_cost": 5
-    }, 
-    "Sliver Queen": {
-        "heuristics": {}, 
-        "name": "Sliver Queen", 
-        "colors": [
-            "Blue", 
-            "Black", 
-            "White", 
-            "Green", 
-            "Red"
-        ], 
-        "mana_cost": "{W}{U}{B}{R}{G}", 
-        "types": [
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
     }
 };
 test_names_data_array = [
+    {
+        "heuristics": {
+            "phyrexian_always_pays_life_except_for_abilities": {
+                "colors": [
+                    "Blue"
+                ]
+            }
+        }, 
+        "name": "Spellskite", 
+        "colors": [], 
+        "mana_cost": "{2}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sensei's Divining Top", 
+        "colors": [], 
+        "mana_cost": "{1}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "always_kick": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }, 
+            "off_color_kicker_is_gold": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ]
+            }, 
+            "always_kick_creatures": {
+                "colors": [
+                    "White", 
+                    "Green", 
+                    "Red"
+                ], 
+                "mana_cost": "{2}{W}{R}{G}", 
+                "converted_mana_cost": 5
+            }
+        }, 
+        "name": "Thornscape Battlemage", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": "{2}{G}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }
+        }, 
+        "name": "Devil's Play", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{X}{R}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
+                "mana_cost": "{3}{B}{B}", 
+                "converted_mana_cost": 5
+            }
+        }, 
+        "name": "Decree of Pain", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{6}{B}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 8
+    }, 
+    {
+        "heuristics": {
+            "living_weapon_means_creature": {
+                "types": [
+                    "Artifact", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Lashwrithe", 
+        "colors": [], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Sundering Growth", 
+        "colors": [
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G/W}{G/W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 2
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }, 
+            "affinity_for_basic_lands_affects_mana_cost": {
+                "colors": [
+                    "White"
+                ], 
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Razor Golem", 
+        "colors": [], 
+        "mana_cost": "{6}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {
+            "token_spells_are_creatures": {
+                "types": [
+                    "Instant", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Midnight Haunting", 
+        "colors": [
+            "White"
+        ], 
+        "mana_cost": "{2}{W}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {
+            "assume_on_color_cmc_for_mono_color_hybrids": {
+                "converted_mana_cost": 3
+            }
+        }, 
+        "name": "Flame Javelin", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2/R}{2/R}{2/R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 6
+    }, 
     {
         "heuristics": {
             "caring_about_controlling_land_types_affect_color": {
@@ -67596,39 +68326,16 @@ test_names_data_array = [
         "converted_mana_cost": 3
     }, 
     {
-        "heuristics": {
-            "use_cycling_cost_as_mana_cost_for_triggered_abilities": {
-                "mana_cost": "{3}{B}{B}", 
-                "converted_mana_cost": 5
-            }
-        }, 
-        "name": "Decree of Pain", 
+        "heuristics": {}, 
+        "name": "Fists of Ironwood", 
         "colors": [
-            "Black"
+            "Green"
         ], 
-        "mana_cost": "{6}{B}{B}", 
+        "mana_cost": "{1}{G}", 
         "types": [
-            "Sorcery"
+            "Enchantment"
         ], 
-        "converted_mana_cost": 8
-    }, 
-    {
-        "heuristics": {
-            "affinity_for_basic_lands_affects_mana_cost": {
-                "colors": [
-                    "Black"
-                ], 
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Dross Golem", 
-        "colors": [], 
-        "mana_cost": "{5}", 
-        "types": [
-            "Artifact", 
-            "Creature"
-        ], 
-        "converted_mana_cost": 5
+        "converted_mana_cost": 2
     }, 
     {
         "heuristics": {
@@ -67651,50 +68358,6 @@ test_names_data_array = [
     }, 
     {
         "heuristics": {
-            "x_spells_are_infinite": {
-                "converted_mana_cost": -1
-            }
-        }, 
-        "name": "Fireball", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{X}{R}", 
-        "types": [
-            "Sorcery"
-        ], 
-        "converted_mana_cost": 1
-    }, 
-    {
-        "heuristics": {}, 
-        "name": "Fists of Ironwood", 
-        "colors": [
-            "Green"
-        ], 
-        "mana_cost": "{1}{G}", 
-        "types": [
-            "Enchantment"
-        ], 
-        "converted_mana_cost": 2
-    }, 
-    {
-        "heuristics": {
-            "assume_on_color_cmc_for_mono_color_hybrids": {
-                "converted_mana_cost": 3
-            }
-        }, 
-        "name": "Flame Javelin", 
-        "colors": [
-            "Red"
-        ], 
-        "mana_cost": "{2/R}{2/R}{2/R}", 
-        "types": [
-            "Instant"
-        ], 
-        "converted_mana_cost": 6
-    }, 
-    {
-        "heuristics": {
             "activated_ability_costs_affect_color": {
                 "colors": [
                     "Green", 
@@ -67712,62 +68375,52 @@ test_names_data_array = [
     }, 
     {
         "heuristics": {
-            "living_weapon_means_creature": {
-                "types": [
-                    "Artifact", 
-                    "Creature"
-                ]
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
             }
         }, 
-        "name": "Lashwrithe", 
-        "colors": [], 
-        "mana_cost": "{4}", 
-        "types": [
-            "Artifact"
-        ], 
-        "converted_mana_cost": 4
-    }, 
-    {
-        "heuristics": {
-            "token_spells_are_creatures": {
-                "types": [
-                    "Instant", 
-                    "Creature"
-                ]
-            }
-        }, 
-        "name": "Midnight Haunting", 
+        "name": "Fireball", 
         "colors": [
-            "White"
+            "Red"
         ], 
-        "mana_cost": "{2}{W}", 
+        "mana_cost": "{X}{R}", 
         "types": [
-            "Instant"
+            "Sorcery"
         ], 
-        "converted_mana_cost": 3
+        "converted_mana_cost": 1
     }, 
     {
         "heuristics": {
-            "caring_about_controlling_land_types_affect_color": {
-                "colors": [
-                    "White"
-                ]
-            }, 
             "affinity_for_basic_lands_affects_mana_cost": {
                 "colors": [
-                    "White"
+                    "Black"
                 ], 
                 "converted_mana_cost": 3
             }
         }, 
-        "name": "Razor Golem", 
+        "name": "Dross Golem", 
         "colors": [], 
-        "mana_cost": "{6}", 
+        "mana_cost": "{5}", 
         "types": [
             "Artifact", 
             "Creature"
         ], 
-        "converted_mana_cost": 6
+        "converted_mana_cost": 5
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Witch-Maw Nephilim", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{G}{W}{U}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
     }, 
     {
         "heuristics": {}, 
@@ -67787,16 +68440,30 @@ test_names_data_array = [
     }, 
     {
         "heuristics": {}, 
-        "name": "Sundering Growth", 
+        "name": "Dryad Arbor", 
         "colors": [
-            "White", 
             "Green"
         ], 
-        "mana_cost": "{G/W}{G/W}", 
+        "mana_cost": null, 
         "types": [
-            "Instant"
+            "Land", 
+            "Creature"
         ], 
-        "converted_mana_cost": 2
+        "converted_mana_cost": 0
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Slave of Bolas", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{U/R}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
     }, 
     {
         "heuristics": {
@@ -67819,19 +68486,152 @@ test_names_data_array = [
         "converted_mana_cost": 4
     }, 
     {
-        "heuristics": {}, 
-        "name": "Witch-Maw Nephilim", 
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Black", 
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Bloodhall Ooze", 
         "colors": [
-            "Blue", 
-            "Black", 
-            "White", 
-            "Green"
+            "Red"
         ], 
-        "mana_cost": "{G}{W}{U}{B}", 
+        "mana_cost": "{R}", 
         "types": [
             "Creature"
         ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Ghostfire", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Putrid Raptor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Assault // Battery", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{R} // {3}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
         "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "White", 
+                    "Green"
+                ]
+            }
+        }, 
+        "name": "Thornwatch Scarecrow", 
+        "colors": [], 
+        "mana_cost": "{6}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
+    {
+        "heuristics": null, 
+        "name": "Transguild Courier", 
+        "colors": [
+            "Blue", 
+            "Green", 
+            "White", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
+    }, 
+    {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Green", 
+                    "White", 
+                    "Black"
+                ]
+            }
+        }, 
+        "name": "Necra Sanctuary", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
+    }, 
+    {
+        "heuristics": {}, 
+        "name": "Skitter of Lizards", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
+    {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }, 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Supply // Demand", 
+        "colors": [
+            "Blue", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{X}{G}{W} // {1}{W}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
     }
 ];
 cuesbey_all_data = {
@@ -67992,6 +68792,18 @@ cuesbey_all_data = {
             "Creature"
         ], 
         "converted_mana_cost": 5
+    }, 
+    "Skitter of Lizards": {
+        "heuristics": {}, 
+        "name": "Skitter of Lizards", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
     }, 
     "Caves of Koilos": {
         "heuristics": {}, 
@@ -68288,6 +69100,26 @@ cuesbey_all_data = {
         ], 
         "converted_mana_cost": 1
     }, 
+    "Bloodhall Ooze": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Black", 
+                    "Green", 
+                    "Red"
+                ]
+            }
+        }, 
+        "name": "Bloodhall Ooze", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{R}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 1
+    }, 
     "Platinum Angel": {
         "heuristics": {}, 
         "name": "Platinum Angel", 
@@ -68425,7 +69257,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 4
     }, 
     "Clifftop Retreat": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Clifftop Retreat", 
         "colors": [], 
         "mana_cost": null, 
@@ -68981,6 +69819,23 @@ cuesbey_all_data = {
             "Creature"
         ], 
         "converted_mana_cost": 2
+    }, 
+    "Transguild Courier": {
+        "heuristics": null, 
+        "name": "Transguild Courier", 
+        "colors": [
+            "Blue", 
+            "Green", 
+            "White", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{4}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 4
     }, 
     "Epochrasite": {
         "heuristics": {}, 
@@ -70251,6 +71106,19 @@ cuesbey_all_data = {
         ], 
         "converted_mana_cost": 0
     }, 
+    "Dryad Arbor": {
+        "heuristics": {}, 
+        "name": "Dryad Arbor", 
+        "colors": [
+            "Green"
+        ], 
+        "mana_cost": null, 
+        "types": [
+            "Land", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 0
+    }, 
     "Mind's Desire": {
         "heuristics": {}, 
         "name": "Mind's Desire", 
@@ -71339,6 +72207,18 @@ cuesbey_all_data = {
         ], 
         "converted_mana_cost": 4
     }, 
+    "Putrid Raptor": {
+        "heuristics": {}, 
+        "name": "Putrid Raptor", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{4}{B}{B}", 
+        "types": [
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
+    }, 
     "Restock": {
         "heuristics": {}, 
         "name": "Restock", 
@@ -72078,6 +72958,19 @@ cuesbey_all_data = {
             "Creature"
         ], 
         "converted_mana_cost": 6
+    }, 
+    "Assault // Battery": {
+        "heuristics": {}, 
+        "name": "Assault // Battery", 
+        "colors": [
+            "Green", 
+            "Red"
+        ], 
+        "mana_cost": "{R} // {3}{G}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 4
     }, 
     "Ulamog, the Infinite Gyre": {
         "heuristics": {}, 
@@ -73653,7 +74546,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 0
     }, 
     "Glacial Fortress": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Glacial Fortress", 
         "colors": [], 
         "mana_cost": null, 
@@ -73755,6 +74654,26 @@ cuesbey_all_data = {
             "Instant"
         ], 
         "converted_mana_cost": 5
+    }, 
+    "Necra Sanctuary": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "Green", 
+                    "White", 
+                    "Black"
+                ]
+            }
+        }, 
+        "name": "Necra Sanctuary", 
+        "colors": [
+            "Black"
+        ], 
+        "mana_cost": "{2}{B}", 
+        "types": [
+            "Enchantment"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Mold Shambler": {
         "heuristics": {
@@ -74247,6 +75166,30 @@ cuesbey_all_data = {
             "Land"
         ], 
         "converted_mana_cost": 0
+    }, 
+    "Supply // Demand": {
+        "heuristics": {
+            "x_spells_are_infinite": {
+                "converted_mana_cost": -1
+            }, 
+            "token_spells_are_creatures": {
+                "types": [
+                    "Sorcery", 
+                    "Creature"
+                ]
+            }
+        }, 
+        "name": "Supply // Demand", 
+        "colors": [
+            "Blue", 
+            "White", 
+            "Green"
+        ], 
+        "mana_cost": "{X}{G}{W} // {1}{W}{U}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Inquisition of Kozilek": {
         "heuristics": {}, 
@@ -75980,7 +76923,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 0
     }, 
     "Rootbound Crag": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Red"
+                ]
+            }
+        }, 
         "name": "Rootbound Crag", 
         "colors": [], 
         "mana_cost": null, 
@@ -76076,7 +77025,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 3
     }, 
     "Woodland Cemetery": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Woodland Cemetery", 
         "colors": [], 
         "mana_cost": null, 
@@ -76258,6 +77213,20 @@ cuesbey_all_data = {
             "Instant"
         ], 
         "converted_mana_cost": 1
+    }, 
+    "Slave of Bolas": {
+        "heuristics": {}, 
+        "name": "Slave of Bolas", 
+        "colors": [
+            "Blue", 
+            "Black", 
+            "Red"
+        ], 
+        "mana_cost": "{3}{U/R}{B}", 
+        "types": [
+            "Sorcery"
+        ], 
+        "converted_mana_cost": 5
     }, 
     "Spinning Darkness": {
         "heuristics": {}, 
@@ -77137,7 +78106,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 2
     }, 
     "Sunpetal Grove": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Sunpetal Grove", 
         "colors": [], 
         "mana_cost": null, 
@@ -77283,6 +78258,18 @@ cuesbey_all_data = {
             "Sorcery"
         ], 
         "converted_mana_cost": 4
+    }, 
+    "Ghostfire": {
+        "heuristics": {}, 
+        "name": "Ghostfire", 
+        "colors": [
+            "Red"
+        ], 
+        "mana_cost": "{2}{R}", 
+        "types": [
+            "Instant"
+        ], 
+        "converted_mana_cost": 3
     }, 
     "Winter Orb": {
         "heuristics": {}, 
@@ -77892,6 +78879,24 @@ cuesbey_all_data = {
             "Sorcery"
         ], 
         "converted_mana_cost": 7
+    }, 
+    "Thornwatch Scarecrow": {
+        "heuristics": {
+            "caring_about_controlling_colored_permanents_affect_color": {
+                "colors": [
+                    "White", 
+                    "Green"
+                ]
+            }
+        }, 
+        "name": "Thornwatch Scarecrow", 
+        "colors": [], 
+        "mana_cost": "{6}", 
+        "types": [
+            "Artifact", 
+            "Creature"
+        ], 
+        "converted_mana_cost": 6
     }, 
     "Wrench Mind": {
         "heuristics": {}, 
@@ -78683,7 +79688,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 7
     }, 
     "Isolated Chapel": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "White"
+                ]
+            }
+        }, 
         "name": "Isolated Chapel", 
         "colors": [], 
         "mana_cost": null, 
@@ -78798,7 +79809,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 4
     }, 
     "Dragonskull Summit": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Black"
+                ]
+            }
+        }, 
         "name": "Dragonskull Summit", 
         "colors": [], 
         "mana_cost": null, 
@@ -78868,7 +79885,13 @@ cuesbey_all_data = {
         "converted_mana_cost": 0
     }, 
     "Hinterland Harbor": {
-        "heuristics": {}, 
+        "heuristics": {
+            "caring_about_controlling_land_types_affect_color": {
+                "colors": [
+                    "Green"
+                ]
+            }
+        }, 
         "name": "Hinterland Harbor", 
         "colors": [], 
         "mana_cost": null, 
@@ -78969,6 +79992,10 @@ cuesbey_all_heuristics = [
     {
         "checked": false, 
         "key": "always_kick_creatures"
+    }, 
+    {
+        "checked": true, 
+        "key": "caring_about_controlling_colored_permanents_affect_color"
     }, 
     {
         "checked": true, 

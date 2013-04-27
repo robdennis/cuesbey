@@ -1,5 +1,6 @@
 # encoding: utf-8
 import unittest
+from unittest.util import safe_repr
 
 import redis
 from django.test import TestCase
@@ -22,14 +23,14 @@ class BaseCardInserter(TestCase):
 
 
 class SimpleTest(BaseCardInserter):
+    fixtures = ['mtgo_cube_og.json', 'test_names.json']
+
     def test_create_cards_given_names(self):
 
         for name, card_type in (('Zealous Conscripts', 'Creature'),
                                 ('Shelldock Isle', 'Land'),
                                 ('Sylvan Library', 'Enchantment')):
 
-            # ensure that the card didn't already exist
-            self.assertEqual([], list(Card.objects.filter(name=name).all()))
             fetched_card = Card.get(name)
             self.assertIsInstance(fetched_card, Card)
             self.assertIn(card_type, fetched_card.types)
@@ -86,7 +87,6 @@ class SimpleTest(BaseCardInserter):
         :raise AssertionError: if the card doesn't match expectations
         """
 
-        self.assertEqual([], list(Card.objects.filter(name=search_name).all()))
         fetched_card = Card.get(search_name)
         self.assertIsInstance(fetched_card, Card)
         self.assertEqual(name, fetched_card.name)
@@ -114,11 +114,9 @@ class SimpleTest(BaseCardInserter):
         self.assert_split_card_matches('Demand // Supply', 'Supply // Demand',
                                        {'Green', 'White', 'Blue'})
 
-    # @unittest.expectedFailure
     def test_who_what_when_where_why(self):
-        search_name = 'Who/What/When/Where/Why'
-        self.assertEqual([], list(Card.objects.filter(name=search_name).all()))
-        wwwww = Card.get(search_name)
+
+        wwwww = Card.get('Who/What/When/Where/Why')
         self.assertIsInstance(wwwww, Card)
         self.assertEqual(wwwww.name, 'Who/What/When/Where/Why')
         self.assertEqual(wwwww.colors,
@@ -126,21 +124,7 @@ class SimpleTest(BaseCardInserter):
 
 
 class CardModelTest(BaseCardInserter):
-    @classmethod
-    def setUpClass(cls):
-
-        cls.cards = get_cards_from_names(
-            'Phyrexian Metamorph',
-            'Lingering Souls',
-            'Kessig Wolf Run',
-            'Tattermunge Maniac',
-            'Swords to Plowshares',
-            'Slave of Bolas',
-            'Batterskull',
-            'Crystal Shard',
-            'Spectral Procession',
-            'Abrupt Decay'
-        )
+    fixtures = ['mtgo_cube_og.json', 'test_names.json']
 
     def test_parse_mana_cost(self):
         self.assertEqual(['5'], parse_mana_cost("{5}"))
@@ -184,9 +168,13 @@ class CardHeuristicTest(BaseCardInserter):
                                    keys_that_are_not_present=()):
 
         actual = Card.get(name).heuristics
-        for k in keys_that_are_not_present:
-            self.assertNotIn(k, actual)
-        self.assertDictContainsSubset(expected_subset, actual)
+        try:
+            for k in keys_that_are_not_present:
+                self.assertNotIn(k, actual)
+            self.assertDictContainsSubset(expected_subset, actual)
+        except AssertionError as e:
+            raise AssertionError(e.message + ' problem with %s' % name)
+
 
     def test_handle_x_spells(self):
 
@@ -230,6 +218,25 @@ class CardHeuristicTest(BaseCardInserter):
                 mana_cost='{3}',
                 converted_mana_cost=3,
                 colors={'Green'}
+            )
+        ))
+
+    def test_controller_permanents_of_a_color_means_something(self):
+        self.assertHeuristicsArePresent('Bloodhall Ooze', dict(
+            caring_about_controlling_colored_permanents_affect_color=dict(
+                colors={'Black', 'Red', 'Green'}
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Thornwatch Scarecrow', dict(
+            caring_about_controlling_colored_permanents_affect_color=dict(
+                colors={'White', 'Green'}
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Necra Sanctuary', dict(
+            caring_about_controlling_colored_permanents_affect_color=dict(
+                colors={'White', 'Black', 'Green'}
             )
         ))
 

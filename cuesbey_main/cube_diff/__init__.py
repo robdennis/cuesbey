@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 import json
+import logging
 import re
 import subprocess
 
@@ -8,7 +9,8 @@ from itertools import chain
 
 from django.conf import settings
 
-from cuesbey_main.cube_diff.autolog import log
+# just use the root logger
+log = logging.getLogger()
 
 
 class CardFetchingError(Exception):

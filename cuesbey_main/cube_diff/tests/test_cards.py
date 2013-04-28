@@ -226,7 +226,8 @@ class CardHeuristicTest(BaseCardInserter):
             caring_about_controlling_colored_permanents_affects_color=dict(
                 colors={'Black', 'Red', 'Green'}
             )
-        ))
+        ), ['caring_about_spell_colors_affects_color',
+            'caring_about_controlling_land_types_affects_color'])
 
         self.assertHeuristicsArePresent('Thornwatch Scarecrow', dict(
             caring_about_controlling_colored_permanents_affects_color=dict(
@@ -496,25 +497,25 @@ class CardHeuristicTest(BaseCardInserter):
     def test_caring_about_land_types_affects_color(self):
 
         self.assertHeuristicsArePresent('Wild Nacatl', dict(
-            caring_about_controlling_land_types_affect_color=dict(
+            caring_about_controlling_land_types_affects_color=dict(
                 colors={'White', 'Red', 'Green'}
             )
         ))
 
         self.assertHeuristicsArePresent('Crimson Muckwader', dict(
-            caring_about_controlling_land_types_affect_color=dict(
+            caring_about_controlling_land_types_affects_color=dict(
                 colors={'Black', 'Red'}
             )
         ))
 
         self.assertHeuristicsArePresent('Kird Ape', dict(
-            caring_about_controlling_land_types_affect_color=dict(
+            caring_about_controlling_land_types_affects_color=dict(
                 colors={'Red', 'Green'}
             )
         ))
 
         self.assertHeuristicsArePresent('Vedalken Shackles', dict(
-            caring_about_controlling_land_types_affect_color=dict(
+            caring_about_controlling_land_types_affects_color=dict(
                 colors={'Blue'}
             )
         ))

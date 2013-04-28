@@ -52,7 +52,6 @@ class HeuristicsHandler(object):
     def find_all(cls, group, text):
 
         found = re.findall(group, text, re.I)
-        log.debug('found %r in %r using %r', found, text, group)
         return found
 
     @classmethod
@@ -75,8 +74,6 @@ class HeuristicsHandler(object):
         match = re.search(search_string, text, re.I | re.DOTALL)
         if not match:
             return set()
-
-        log.debug('going to search for lands in %r', match.group())
 
         return estimate_colors_from_lands(
             cls.find_all(cls.all_land_names, match.group())
@@ -115,8 +112,6 @@ class HeuristicsHandler(object):
         :return: the associated colors
         :rtype: set
         """
-
-        log.debug('looking for colors with %r in %r', search_strings, text)
 
         return {
             found_color
@@ -270,7 +265,7 @@ class _handle_living_weapon(HeuristicsHandler):
 
 
 class _handle_caring_about_land_types(HeuristicsHandler):
-    key = 'caring_about_controlling_land_types_affect_color'
+    key = 'caring_about_controlling_land_types_affects_color'
 
     @classmethod
     def get(cls, card):
@@ -285,7 +280,7 @@ class _handle_caring_about_land_types(HeuristicsHandler):
              "%s you control.*$" % cls.plural_land_names], card.text
         )
 
-        if _land_colors and _land_colors == card.colors:
+        if not _land_colors or _land_colors == card.colors:
             return
 
         modified_colors = card.colors | _land_colors
@@ -311,7 +306,7 @@ class _handle_caring_about_permanent_colors(HeuristicsHandler):
              '%s.*?you control.*$' % cls.color_names], card.text
         )
 
-        if _found_colors and _found_colors == card.colors:
+        if not _found_colors or _found_colors == card.colors:
             return
 
         modified_colors = card.colors | _found_colors
@@ -337,7 +332,7 @@ class _handle_caring_about_spell_colors(HeuristicsHandler):
              'you cast a %s.*$' % cls.color_names], card.text
         )
 
-        if _found_colors and _found_colors == card.colors:
+        if not _found_colors or _found_colors == card.colors:
             return
 
         modified_colors = card.colors | _found_colors

@@ -10,13 +10,6 @@ from cuesbey_main.cube_diff import (parse_mana_cost, estimate_cmc,
                                     estimate_colors_from_lands)
 from cuesbey_main.cube_diff.autolog import log
 
-colors = (
-    'White',
-    'Blue',
-    'Black',
-    'Red',
-    'Green',
-)
 
 class HeuristicsHandler(object):
     """
@@ -26,6 +19,14 @@ class HeuristicsHandler(object):
     __meta__ = abc.ABCMeta
 
     checked = True
+
+    lands = ('Plains', 'Island', 'Swamp', 'Mountain', 'Forest')
+    plural_lands = ('Plains', 'Islands', 'Swamps', 'Mountains', 'Forests')
+    all_lands = lands + plural_lands
+    land_names = "(%s)" % '|'.join(lands)
+    plural_land_names = "(%s)" % '|'.join(plural_lands)
+    all_land_names = "(%s)" % '|'.join(all_lands)
+    color_names = '(white|blue|black|red|green)'
 
     @abc.abstractproperty
     def key(self):
@@ -46,6 +47,103 @@ class HeuristicsHandler(object):
     @classmethod
     def as_dict(cls):
         return dict(key=cls.key, checked=cls.checked)
+
+    @classmethod
+    def find_all(cls, group, text):
+
+        found = re.findall(group, text, re.I)
+        log.debug('found %r in %r using %r', found, text, group)
+        return found
+
+    @classmethod
+    def find_all_in_multiple(cls, groups, text):
+
+        return set(chain(cls.find_all(group, text) for group in groups))
+
+    @classmethod
+    def get_colors_from_found_lands(cls, search_string, text):
+        """
+        return the colors associated with lands found in the text
+
+        :param search_string: the regex match that you expect has one or more
+            instances of a basic land types
+        :param text: the text to search from
+        :return: the associated colors
+        :rtype: set
+        """
+
+        match = re.search(search_string, text, re.I | re.DOTALL)
+        if not match:
+            return set()
+
+        log.debug('going to search for lands in %r', match.group())
+
+        return estimate_colors_from_lands(
+            cls.find_all(cls.all_land_names, match.group())
+        )
+
+    @classmethod
+    def get_colors_found(cls, search_string, text):
+        """
+        return the colors we found found in the text
+
+        :param search_string: the regex match that you expect has one or more
+            references to colors
+        :param text: the text to search from
+        :return: the associated colors
+        :rtype: set
+        """
+
+        match = re.search(search_string, text, re.I | re.DOTALL)
+
+        if not match:
+            return set()
+
+        return {
+            found.title()
+            for found in cls.find_all(cls.color_names, match.group())
+        }
+
+    @classmethod
+    def get_all_colors_found_from_multiple(cls, search_strings, text):
+        """
+        get all the colors associated with any of the provided search strings
+
+        :param search_strings: multiple regex matches that you has one or more
+            references to colors
+        :param text: the text to search from
+        :return: the associated colors
+        :rtype: set
+        """
+
+        log.debug('looking for colors with %r in %r', search_strings, text)
+
+        return {
+            found_color
+            for search in search_strings
+            for found_color in cls.get_colors_found(search, text)
+        }
+
+    @classmethod
+    def get_all_colors_found_from_lands_in_multiple(cls, search_strings,
+                                                    text):
+        """
+        get all the colors (as estimated from lands) associated with any of
+        the provided search strings
+
+        :param search_strings: multiple regex matches that you has one or more
+            references to colors
+        :param text: the text to search from
+        :return: the associated colors
+        :rtype: set
+        """
+
+        return {
+            found_color
+            for search in search_strings
+            for found_color in cls.get_colors_from_found_lands(search, text)
+        }
+
 
 
 class _handle_x_spells_are_infinite_mana(HeuristicsHandler):
@@ -181,28 +279,24 @@ class _handle_caring_about_land_types(HeuristicsHandler):
         boost, it's fair to say that only decks in both colors will want this
         card
         """
-        land_names = "(Plains|Island|Swamp|Mountain|Forest)"
-        plural_land_names = "(Plains|Islands|Swamps|Mountains|Forests)"
-        controlled_lands = (
-            re.findall("you control a %s" % land_names, card.text),
-            re.findall("%s you control" % plural_land_names, card.text)
+
+        _land_colors = cls.get_all_colors_found_from_lands_in_multiple(
+            ["you control a %s.*$" % cls.land_names,
+             "%s you control.*$" % cls.plural_land_names], card.text
         )
 
-        if any(controlled_lands):
-            _land_colors = estimate_colors_from_lands(chain(*controlled_lands))
+        if _land_colors and _land_colors == card.colors:
+            return
 
-            if _land_colors == card.colors:
-                return
+        modified_colors = card.colors | _land_colors
 
-            modified_colors = card.colors | _land_colors
-
-            return {
-                cls.key: dict(colors=modified_colors)
-            }
+        return {
+            cls.key: dict(colors=modified_colors)
+        }
 
 
 class _handle_caring_about_permanent_colors(HeuristicsHandler):
-    key = 'caring_about_controlling_colored_permanents_affect_color'
+    key = 'caring_about_controlling_colored_permanents_affects_color'
 
     @classmethod
     def get(cls, card):
@@ -212,32 +306,45 @@ class _handle_caring_about_permanent_colors(HeuristicsHandler):
         considered a multicolor card
         """
 
-        color_names = '({})'.format('|'.join(colors))
-
-        controlled_colors = (
-            re.findall('you control a {0}(?: or {0})?'.format(color_names),
-                       card.text, re.I),
-            re.findall('you control a {0} \w+'
-                       '(?: and a {0})?'.format(color_names),
-                       card.text, re.I),
+        _found_colors = cls.get_all_colors_found_from_multiple(
+            ['you control a %s.*$' % cls.color_names,
+             '%s.*?you control.*$' % cls.color_names], card.text
         )
 
-        if any(controlled_colors):
-            controlled_colors = set([
-                # each findall returns a 2 tuple, and up to 4 total, thus the
-                # double unwrapping
-                color.title() for color in chain(*chain(*controlled_colors))
-                if color
-            ])
+        if _found_colors and _found_colors == card.colors:
+            return
 
-            if controlled_colors == card.colors:
-                return
+        modified_colors = card.colors | _found_colors
 
-            modified_colors = card.colors | controlled_colors
+        return {
+            cls.key: dict(colors=modified_colors)
+        }
 
-            return {
-                cls.key: dict(colors=modified_colors)
-            }
+
+class _handle_caring_about_spell_colors(HeuristicsHandler):
+    key = 'caring_about_spell_colors_affects_color'
+
+    @classmethod
+    def get(cls, card):
+        """
+        If a card is one color, but needs gets a bonus from controlling
+        permanents or creatures of a different color or colors, that is often
+        considered a multicolor card
+        """
+
+        _found_colors = cls.get_all_colors_found_from_multiple(
+            ['%s.* spells you cast.*$' % cls.color_names,
+             'you cast a %s.*$' % cls.color_names], card.text
+        )
+
+        if _found_colors and _found_colors == card.colors:
+            return
+
+        modified_colors = card.colors | _found_colors
+
+        return {
+            cls.key: dict(colors=modified_colors)
+        }
 
 
 class _handle_phyrexian(HeuristicsHandler):
@@ -513,6 +620,7 @@ _all_handlers = [
     _handle_activated_abilities,
     _handle_phyrexian_abilities,
     _handle_suspend,
+    _handle_caring_about_spell_colors,
     _handle_caring_about_permanent_colors,
 ]
 
@@ -527,7 +635,7 @@ def get_heuristics(card):
         for handler in _all_handlers:
             h.update(handler.get(card) or {})
     except:
-        log.error('error getting heuristics for card: %r', card)
+        log.exception('error getting heuristics for card: %r', card)
         raise
 
     return h

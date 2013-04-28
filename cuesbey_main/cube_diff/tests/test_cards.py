@@ -221,22 +221,47 @@ class CardHeuristicTest(BaseCardInserter):
             )
         ))
 
-    def test_controller_permanents_of_a_color_means_something(self):
+    def test_controlling_permanents_of_a_color_means_something(self):
         self.assertHeuristicsArePresent('Bloodhall Ooze', dict(
-            caring_about_controlling_colored_permanents_affect_color=dict(
+            caring_about_controlling_colored_permanents_affects_color=dict(
                 colors={'Black', 'Red', 'Green'}
             )
         ))
 
         self.assertHeuristicsArePresent('Thornwatch Scarecrow', dict(
-            caring_about_controlling_colored_permanents_affect_color=dict(
+            caring_about_controlling_colored_permanents_affects_color=dict(
                 colors={'White', 'Green'}
             )
         ))
 
         self.assertHeuristicsArePresent('Necra Sanctuary', dict(
-            caring_about_controlling_colored_permanents_affect_color=dict(
+            caring_about_controlling_colored_permanents_affects_color=dict(
                 colors={'White', 'Black', 'Green'}
+            )
+        ))
+
+    def test_handle_color_affected_by_spells(self):
+        self.assertHeuristicsArePresent('Shrine of Burning Rage', dict(
+            caring_about_spell_colors_affects_color=dict(
+                colors={'Red'}
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Nightscape Familiar', dict(
+            caring_about_spell_colors_affects_color=dict(
+                colors={'Blue', 'Black', 'Red'}
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Sapphire Medallion', dict(
+            caring_about_spell_colors_affects_color=dict(
+                colors={'Blue'}
+            )
+        ))
+
+        self.assertHeuristicsArePresent('Quirion Dryad', dict(
+            caring_about_spell_colors_affects_color=dict(
+                colors={'White', 'Blue', 'Black', 'Red', 'Green'}
             )
         ))
 

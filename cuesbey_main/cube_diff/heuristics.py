@@ -26,7 +26,8 @@ class HeuristicsHandler(object):
     land_names = "(%s)" % '|'.join(lands)
     plural_land_names = "(%s)" % '|'.join(plural_lands)
     all_land_names = "(%s)" % '|'.join(all_lands)
-    color_names = '(white|blue|black|red|green)'
+    color_names = '(?:\W|^)(white|blue|black|red|green)\W'
+    ungrouped_color_names = '(?:white|blue|black|red|green)'
 
     @abc.abstractproperty
     def key(self):
@@ -50,14 +51,8 @@ class HeuristicsHandler(object):
 
     @classmethod
     def find_all(cls, group, text):
-
         found = re.findall(group, text, re.I)
         return found
-
-    @classmethod
-    def find_all_in_multiple(cls, groups, text):
-
-        return set(chain(cls.find_all(group, text) for group in groups))
 
     @classmethod
     def get_colors_from_found_lands(cls, search_string, text):
@@ -91,7 +86,7 @@ class HeuristicsHandler(object):
         :rtype: set
         """
 
-        match = re.search(search_string, text, re.I | re.DOTALL)
+        match = re.search(re.escape(search_string), text, re.I | re.DOTALL)
 
         if not match:
             return set()
@@ -112,6 +107,8 @@ class HeuristicsHandler(object):
         :return: the associated colors
         :rtype: set
         """
+
+        search_strings = list(search_strings)
 
         return {
             found_color
@@ -277,7 +274,7 @@ class _handle_caring_about_land_types(HeuristicsHandler):
 
         _land_colors = cls.get_all_colors_found_from_lands_in_multiple(
             ["you control a %s.*$" % cls.land_names,
-             "%s you control.*$" % cls.plural_land_names], card.text
+             "%s[^.]+?you control.*$" % cls.plural_land_names], card.text
         )
 
         if not _land_colors or _land_colors == card.colors:
@@ -300,10 +297,15 @@ class _handle_caring_about_permanent_colors(HeuristicsHandler):
         permanents or creatures of a different color or colors, that is often
         considered a multicolor card
         """
-
+        colors = cls.ungrouped_color_names
         _found_colors = cls.get_all_colors_found_from_multiple(
-            ['you control a %s.*$' % cls.color_names,
-             '%s.*?you control.*$' % cls.color_names], card.text
+            chain(
+                re.findall('(you control a\W%s\W+?.*?\.)' % colors,
+                           card.text, re.I),
+                re.findall('((?:\W|^).*%s\W[^.]*?you control.*?\.)' % colors,
+                           card.text, re.I)
+            ),
+            card.text
         )
 
         if not _found_colors or _found_colors == card.colors:
@@ -326,11 +328,13 @@ class _handle_caring_about_spell_colors(HeuristicsHandler):
         permanents or creatures of a different color or colors, that is often
         considered a multicolor card
         """
-
+        colors = cls.ungrouped_color_names
         _found_colors = cls.get_all_colors_found_from_multiple(
-            ['%s.* spells you cast.*$' % cls.color_names,
-             'you cast a %s.*$' % cls.color_names], card.text
-        )
+            chain(
+                re.findall('(you cast a\W%s\W+?.*?\.)' % colors, card.text, re.I),
+                re.findall('((?:\W|^).*%s\W[^.]*you cast.*?\.)' % colors,
+                           card.text, re.I)
+        ), card.text)
 
         if not _found_colors or _found_colors == card.colors:
             return

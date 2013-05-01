@@ -108,8 +108,6 @@ class HeuristicsHandler(object):
         :rtype: set
         """
 
-        search_strings = list(search_strings)
-
         return {
             found_color
             for search in search_strings
@@ -300,9 +298,9 @@ class _handle_caring_about_permanent_colors(HeuristicsHandler):
         colors = cls.ungrouped_color_names
         _found_colors = cls.get_all_colors_found_from_multiple(
             chain(
-                re.findall('(you control a\W%s\W+?.*?\.)' % colors,
+                re.findall(r'(you control a\W%s\W+?.*?\.)' % colors,
                            card.text, re.I),
-                re.findall('((?:\W|^).*%s\W[^.]*?you control.*?\.)' % colors,
+                re.findall(r'((?:\W|^)[^\.\n]*%s\W[^\.\n]*?you control[^.\n]*?\.)' % colors,
                            card.text, re.I)
             ),
             card.text
@@ -331,8 +329,8 @@ class _handle_caring_about_spell_colors(HeuristicsHandler):
         colors = cls.ungrouped_color_names
         _found_colors = cls.get_all_colors_found_from_multiple(
             chain(
-                re.findall('(you cast a\W%s\W+?.*?\.)' % colors, card.text, re.I),
-                re.findall('((?:\W|^).*%s\W[^.]*you cast.*?\.)' % colors,
+                re.findall(r'(you cast a\W%s\W+?.*?\.)' % colors, card.text, re.I),
+                re.findall(r'((?:\W|^)[^\.\n]*%s\W[^\.\n]*?you cast[^.\n]*?\.)' % colors,
                            card.text, re.I)
         ), card.text)
 

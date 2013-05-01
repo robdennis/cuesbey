@@ -241,6 +241,13 @@ class CardHeuristicTest(BaseCardInserter):
              'caring_about_controlling_land_types_affects_color',
              'caring_about_controlling_colored_permanents_affects_color'])
 
+        self.assertHeuristicsArePresent(
+            'Knight of Glory', {},
+            ['caring_about_spell_colors_affects_color',
+             'caring_about_controlling_land_types_affects_color',
+             'caring_about_controlling_colored_permanents_affects_color'])
+
+
         self.assertHeuristicsArePresent('Thornwatch Scarecrow', dict(
             caring_about_controlling_colored_permanents_affects_color=dict(
                 colors={'White', 'Green'}

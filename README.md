@@ -1,3 +1,5 @@
+2014-06-05 Update - cuesbey still works, is still useful, but it's not being used enough to justify the hosting/bandwidth expense. This project will continue to be open source, feel free to contact me on twitter @cuesbey if this was something you missed.
+
 Hello everyone,
 
 I'm a full-time software developer who's been working on a cube-related software development projet for awhile now. This has both been to keep my skills up, and because I think the cube community has a number of "user stories" that I don't think are currently being addressed by the tools we have available.
